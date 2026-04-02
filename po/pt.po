@@ -1,0 +1,375 @@
+# Portuguese translations for switcheroo package.
+# Copyright (C) 2023 THE switcheroo'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the switcheroo package.
+# Automatically generated, 2023.
+# Juliano de Souza Camargo <julianosc@protonmail.com>, 2023-2024.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: switcheroo\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-12-27 08:05-0500\n"
+"PO-Revision-Date: 2024-01-01 14:14-0300\n"
+"Last-Translator: Juliano de Souza Camargo <julianosc@protonmail.com>\n"
+"Language-Team: Portuguese <>\n"
+"Language: pt\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+"X-Generator: Gtranslator 45.3\n"
+
+#: ../data/resources/blueprints/help-overlay.blp:11
+msgctxt "shortcut window"
+msgid "General"
+msgstr "Geral"
+
+#: ../data/resources/blueprints/help-overlay.blp:14
+msgctxt "shortcut window"
+msgid "Show Shortcuts"
+msgstr "Mostrar atalhos"
+
+#: ../data/resources/blueprints/help-overlay.blp:19
+msgctxt "shortcut window"
+msgid "Quit"
+msgstr "Sair"
+
+#: ../data/resources/blueprints/help-overlay.blp:24
+msgctxt "shortcut window"
+msgid "New Window"
+msgstr "Nova janela"
+
+#: ../data/resources/blueprints/help-overlay.blp:29
+msgctxt "shortcut window"
+msgid "Clear Window"
+msgstr "Limpar janela"
+
+#: ../data/resources/blueprints/help-overlay.blp:34
+msgctxt "shortcut window"
+msgid "Show Less Popular Datatypes"
+msgstr "Mostrar tipo de dados menos populares"
+
+#: ../data/resources/blueprints/help-overlay.blp:39
+msgctxt "shortcut window"
+msgid "Paste From Clipboard"
+msgstr "Colar da área de transferência"
+
+#: ../data/resources/blueprints/help-overlay.blp:44
+msgctxt "shortcut window"
+msgid "Add Images"
+msgstr "Adicionar imagens"
+
+#: ../data/resources/blueprints/image-rest.blp:21
+msgid "Show All"
+msgstr "Mostrar todas"
+
+#: ../data/resources/blueprints/window.blp:9
+#: ../data/resources/blueprints/window.blp:21
+#: ../data/resources/blueprints/window.blp:57 ../src/main.rs:30
+#: ../src/widgets/about_window.rs:24
+msgid "Switcheroo"
+msgstr "Switcheroo"
+
+#: ../data/resources/blueprints/window.blp:15
+msgid "Drop Here to Open"
+msgstr "Solta aqui para abrir"
+
+#: ../data/resources/blueprints/window.blp:40
+msgid "Primary Menu"
+msgstr "Menu principal"
+
+#: ../data/resources/blueprints/window.blp:58
+msgid "Drag and drop images here"
+msgstr "Arrastar e largar imagens aqui"
+
+#: ../data/resources/blueprints/window.blp:69
+msgid "_Open Images…"
+msgstr "_Abrir imagens..."
+
+#: ../data/resources/blueprints/window.blp:122
+msgid "Export Format"
+msgstr "Formato a exportar"
+
+#: ../data/resources/blueprints/window.blp:127
+msgid "Save as multi-page PDF"
+msgstr "Gravar como PDF multi-páginas"
+
+#: ../data/resources/blueprints/window.blp:137
+msgid "Save To ZIP"
+msgstr "Gravar num ZIP"
+
+#: ../data/resources/blueprints/window.blp:150
+msgid "Quality"
+msgstr "Qualidade"
+
+#: ../data/resources/blueprints/window.blp:170
+msgid "Background Color"
+msgstr "Cor de fundo"
+
+#: ../data/resources/blueprints/window.blp:171
+msgid "Replaces original transparency layer"
+msgstr "Repõe a camada de transparência original"
+
+#: ../data/resources/blueprints/window.blp:185
+msgid "Pixel Density Per Inch"
+msgstr "Densidade de pixel por polegada"
+
+#: ../data/resources/blueprints/window.blp:197
+msgid "Resize"
+msgstr "Redimensionar"
+
+#: ../data/resources/blueprints/window.blp:202
+#: ../data/resources/blueprints/window.blp:203
+#: ../data/resources/blueprints/window.blp:210
+#: ../data/resources/blueprints/window.blp:212
+#: ../data/resources/blueprints/window.blp:233
+msgid "Width"
+msgstr "Largura"
+
+#: ../data/resources/blueprints/window.blp:220
+msgid "Preserve aspect ratio"
+msgstr "Preservar proporção"
+
+#: ../data/resources/blueprints/window.blp:225
+#: ../data/resources/blueprints/window.blp:226
+#: ../data/resources/blueprints/window.blp:234
+msgid "Height"
+msgstr "Altura"
+
+#: ../data/resources/blueprints/window.blp:245
+msgid "Choose between resizing with percentages or using exact pixels"
+msgstr "Escolhe entre redimensionar com percentagens ou pixels exatos"
+
+#: ../data/resources/blueprints/window.blp:249
+msgid "%"
+msgstr "%"
+
+#: ../data/resources/blueprints/window.blp:249
+msgid "px"
+msgstr "px"
+
+#: ../data/resources/blueprints/window.blp:258
+msgid "Resize Algorithm"
+msgstr "Algoritmo de redimensionamento"
+
+#: ../data/resources/blueprints/window.blp:264
+msgid "Default"
+msgstr "Predefinição"
+
+#: ../data/resources/blueprints/window.blp:268
+msgid "Pixel Art"
+msgstr "Arte pixel"
+
+#: ../data/resources/blueprints/window.blp:282
+msgid "_Convert"
+msgstr "_Converter"
+
+#: ../data/resources/blueprints/window.blp:308
+msgid "Could not Load Image"
+msgstr "Não foi possível carregar a imagem"
+
+#: ../data/resources/blueprints/window.blp:309
+msgid "This image could be corrupted or may use an unsupported file format."
+msgstr ""
+"Esta imagem pode estar corrompida ou pode usar um formato de ficheiro sem "
+"suporte."
+
+#: ../data/resources/blueprints/window.blp:321
+msgid "Converting"
+msgstr "Convertendo"
+
+#: ../data/resources/blueprints/window.blp:322
+msgid "This could take a while"
+msgstr "Isto pode levar algum tempo"
+
+#: ../data/resources/blueprints/window.blp:332 ../src/window.rs:764
+msgid "Loading…"
+msgstr "A carregar..."
+
+#: ../data/resources/blueprints/window.blp:338 ../src/window.rs:440
+#: ../src/window.rs:1363
+msgid "_Cancel"
+msgstr "_Cancelar"
+
+#: ../data/resources/blueprints/window.blp:362
+msgid "All Images"
+msgstr "Todas as imagens"
+
+#: ../data/resources/blueprints/window.blp:436
+msgid "Paste From Clipboard"
+msgstr "Colar da área de transferência"
+
+#: ../data/resources/blueprints/window.blp:441
+msgid "New Window"
+msgstr "Nova janela"
+
+#: ../data/resources/blueprints/window.blp:446
+msgid "Clear Window"
+msgstr "Limpar janela"
+
+#: ../data/resources/blueprints/window.blp:453
+msgid "Show Less Popular Datatypes"
+msgstr "Mostrar tipo de dados menos populares"
+
+#: ../data/resources/blueprints/window.blp:460
+msgid "Keyboard Shortcuts"
+msgstr "Teclas de atalho"
+
+#: ../data/resources/blueprints/window.blp:465
+msgid "About Switcheroo"
+msgstr "Acerca do Switcheroo"
+
+#: ../src/file_chooser.rs:39
+msgid "Unsupported filetype"
+msgstr "Tipo de ficheiro não suportado"
+
+#: ../src/file_chooser.rs:77
+msgid "Images"
+msgstr "Imagens"
+
+#: ../src/file_chooser.rs:80
+msgid "_Select Images"
+msgstr "_Selecionar imagens"
+
+#: ../src/file_chooser.rs:159
+msgid "Unspecified filetype"
+msgstr "Tipo de ficheiro não especificado"
+
+#: ../src/file_chooser.rs:164
+msgid "Unknown filetype"
+msgstr "Tipo de ficheiro desconhecido"
+
+#: ../src/file_chooser.rs:169
+msgid "Used the wrong filetype"
+msgstr "Usou o tipo de ficheiro errado"
+
+#: ../src/magick.rs:156
+msgid "Pasted Image"
+msgstr "Imagem colada"
+
+#: ../src/magick.rs:364
+msgid "Unknown IO error happened"
+msgstr "Ocorreu um erro de IO desconhecido"
+
+#. Translators: Replace "translator-credits" with your names, one name per line
+#: ../src/widgets/about_window.rs:28
+msgid "translator-credits"
+msgstr "Juliano de Souza Camargo <julianosc@pm.me>"
+
+#: ../src/widgets/about_window.rs:35
+msgid "Code and Design Borrowed from"
+msgstr "Código e design emprestado de"
+
+#: ../src/widgets/about_window.rs:47
+msgid "Sample Image from"
+msgstr "Imagem amostrada de"
+
+#: ../src/window.rs:413
+msgid "Unable to access dropped files"
+msgstr "Impossível aceder aos ficheiros largados"
+
+#: ../src/window.rs:436 ../src/window.rs:1358
+msgid "Stop converting?"
+msgstr "Parar de converter?"
+
+#: ../src/window.rs:437 ../src/window.rs:1359
+msgid "You will lose all progress."
+msgstr "Perde todo o progresso."
+
+#: ../src/window.rs:441 ../src/window.rs:1363
+msgid "_Stop"
+msgstr "_Parar"
+
+#: ../src/window.rs:477
+msgid "Collecting files"
+msgstr "A recolher ficheiros"
+
+#: ../src/window.rs:1286
+msgid "Error While Processing"
+msgstr "Erro enquanto processa"
+
+#: ../src/window.rs:1307
+msgid "_Close"
+msgstr "Fe_Char"
+
+#: ../src/window.rs:1308
+msgid "_Copy to Clipboard"
+msgstr "_Copiar para área de transferência"
+
+#: ../src/window.rs:1316
+msgid "Error copied to clipboard"
+msgstr "Erro copiado para a área de transferência"
+
+#: ../src/window.rs:1331
+msgid "Image converted"
+msgstr "Imagem convertida"
+
+#: ../src/window.rs:1332
+msgid "Open"
+msgstr "Abrir"
+
+#: ../src/window.rs:1385
+msgid "Converting Cancelled"
+msgstr "Conversão cancelada"
+
+#~ msgid "Image Converter"
+#~ msgstr "Conversor de imagem"
+
+#~ msgid "Convert and manipulate images"
+#~ msgstr "Converte e manipula imagens"
+
+#, fuzzy
+#~ msgid "converter;image;convert;converting;processing"
+#~ msgstr "imagem;converter;conversor;processando"
+
+#~ msgid "Shows less popular datatypes in the menu"
+#~ msgstr "Mostrar tipo de dados menos populares no menu"
+
+#~ msgid "Window width"
+#~ msgstr "Largura da janela"
+
+#~ msgid "Image quality"
+#~ msgstr "Qualidade de imagem"
+
+#~ msgid "Image density per inch"
+#~ msgstr "Densidade de imagem por polegada"
+
+#~ msgid "Window height"
+#~ msgstr "Altura da janela"
+
+#~ msgid "Window maximized state"
+#~ msgstr "Estado da janela maximizada"
+
+#~ msgid "Output format"
+#~ msgstr "Formato de saída"
+
+#~ msgid "Compression format"
+#~ msgstr "Formato de compressão"
+
+#~ msgid "Khaleel Al-Adhami"
+#~ msgstr "Khaleel Al-Adhami"
+
+#~ msgid "Convert between different image filetypes and resize them easily."
+#~ msgstr ""
+#~ "Converte entre diferentes tipos de ficheiro e redimensione-os facilmente."
+
+#~ msgid "image"
+#~ msgstr "imagem"
+
+#~ msgid "convert"
+#~ msgstr "converter"
+
+#~ msgid "converting"
+#~ msgstr "convertendo"
+
+#~ msgid "processing"
+#~ msgstr "processando"
+
+#~ msgid "Converting sample image from PNG to HEIF"
+#~ msgstr "Convertendo imagem amostrada de PNG para HEIF"
+
+#~ msgid "Converting multiple sample images from SVG to HEIF"
+#~ msgstr "Convertendo múltiplas imagens amostradas de SVG para HEIF"
+
+#~ msgid "Click “Open Images…” or drag images here."
+#~ msgstr "Clica “Abrir imagens...” ou solta aqui as imagens."

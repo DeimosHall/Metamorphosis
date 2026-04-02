@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop-application">
+    <id>@app-id@</id>
+
+    <name>Switcheroo</name>
+    <developer id="io.gitlab.adhami3310">
+        <name translate="no">Khaleel Al-Adhami</name>
+    </developer>
+    <summary>Convert and manipulate images</summary>
+
+    <metadata_license>CC-BY-SA-4.0</metadata_license>
+    <project_license>GPL-3.0-only</project_license>
+
+    <description>
+        <p>
+            Convert between different image filetypes and resize them easily.
+        </p>
+    </description>
+
+    <translation type="gettext">@gettext-package@</translation>
+
+    <requires>
+        <display_length compare="ge">360</display_length>
+        <internet>offline-only</internet>
+    </requires>
+
+    <recommends>
+        <control>pointing</control>
+        <control>keyboard</control>
+        <control>touch</control>
+    </recommends>
+
+    <branding>
+        <color type="primary" scheme_preference="light">#f18e57</color>
+        <color type="primary" scheme_preference="dark">#980e8c</color>
+    </branding>
+
+    <screenshots>
+        <screenshot type="default">
+            <image>
+                https://gitlab.com/adhami3310/Switcheroo/-/raw/main/data/resources/screenshots/0.png</image>
+            <caption>Converting sample image from PNG to HEIF</caption>
+        </screenshot>
+        <screenshot>
+            <image>
+                https://gitlab.com/adhami3310/Switcheroo/-/raw/main/data/resources/screenshots/1.png</image>
+            <caption>Converting multiple sample images from SVG to HEIF</caption>
+        </screenshot>
+    </screenshots>
+
+    <launchable type="desktop-id">@app-id@.desktop</launchable>
+
+    <url type="homepage">https://apps.gnome.org/Converter/</url>
+    <url type="donation">https://opencollective.com/switcheroo</url>
+    <url type="bugtracker">https://gitlab.com/adhami3310/Switcheroo/-/issues</url>
+    <url type="help">https://gitlab.com/adhami3310/Switcheroo/-/issues</url>
+    <url type="vcs-browser">https://gitlab.com/adhami3310/Switcheroo</url>
+    <url type="translate">https://gitlab.com/adhami3310/Switcheroo/-/tree/main/po</url>
+    <url type="contribute">https://gitlab.com/adhami3310/Switcheroo</url>
+    <url type="contact">https://matrix.to/#/@khaleela:gnome.org</url>
+
+    <update_contact>khaleel.aladhami@gmail.com</update_contact>
+
+    <content_rating type="oars-1.1" />
+
+    <releases>
+        <release version="2.5.2" date="2026-01-21">
+            <description translate="no">
+                <p>Fix crash when checking for sandboxed environments in non-sandboxed environments.</p>
+            </description>
+        </release>
+        <release version="2.5.1" date="2025-11-20">
+            <description translate="no">
+                <p>Fix wrong check to ghostscript.</p>
+            </description>
+        </release>
+        <release version="2.5.0" date="2025-11-17">
+            <description translate="no">
+                <p>Update runtime to GNOME 49 and simplify dependencies.</p>
+            </description>
+        </release>
+        <release version="2.4.0" date="2025-04-17">
+            <description translate="no">
+                <p>Update runtime to GNOME 48 and fix various bugs.</p>
+                <ul>
+                    <li>Remove hidden formats logic to improve discoverability.</li>
+                    <li>Fix broken inspiration links.</li>
+                    <li>Fix panic when handling files without extenstions.</li>
+                    <li>Exit gracefully when drag-and-dropped unsupported files.</li>
+                    <li>Keep input images unique instead of duplicating them.</li>
+                    <li>Display helpful message when ghostscript or zip isn't available.</li>
+                    <li>Support HEIC and HEIF images with animations.</li>
+                    <li>Only load previews for a few files and with a maximum pixel count.</li>
+                    <li>Do not produce alpha channel when not necessary.</li>
+                    <li>Rewrite bactch naming logic to produce fewer errors.</li>
+                </ul>
+                <p>Dependencies have been updated to the latest versions.</p>
+            </description>
+        </release>
+        <release version="2.3.1" date="2025-02-03">
+            <description translate="no">
+                <p>Fix open image after conversion panic.</p>
+            </description>
+        </release>
+        <release version="2.3.0" date="2025-02-03">
+            <description translate="no">
+                <p>Update runtime to GNOME 47.</p>
+            </description>
+        </release>
+        <release version="2.2.0" date="2024-04-19">
+            <description translate="no">
+                <p>Update runtime to GNOME 46.</p>
+            </description>
+        </release>
+        <release version="2.1.0" date="2024-03-13">
+            <description translate="no">
+                <p>Support for saving images as a single PDF.</p>
+            </description>
+        </release>
+        <release version="2.0.1" date="2023-11-26">
+            <description translate="no">
+                <p>Updated a few translations and screenshots.</p>
+            </description>
+        </release>
+        <release version="2.0.0" date="2023-11-18">
+            <description translate="no">
+                <p>Converter has been renamed to Switcheroo!</p>
+                <p>Various design changes to enhance user experience.</p>
+            </description>
+        </release>
+        <release version="1.6.1" date="2023-05-23">
+            <description translate="no">
+                <p>Fix variety of bugs and rework UI.</p>
+            </description>
+        </release>
+        <release version="1.6.0" date="2023-05-21">
+            <description translate="no">
+                <p>Rust rewrite.</p>
+            </description>
+        </release>
+    </releases>
+</component>

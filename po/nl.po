@@ -1,0 +1,582 @@
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+#
+# Heimen Stoffels <vistausss@fastmail.com>, 2022.
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-12-27 08:05-0500\n"
+"PO-Revision-Date: 2023-05-22 09:53+0200\n"
+"Last-Translator: Philip Goto <philip.goto@gmail.com>\n"
+"Language-Team: Dutch\n"
+"Language: nl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.1.1\n"
+
+#: ../data/resources/blueprints/help-overlay.blp:11
+msgctxt "shortcut window"
+msgid "General"
+msgstr "Algemeen"
+
+#: ../data/resources/blueprints/help-overlay.blp:14
+msgctxt "shortcut window"
+msgid "Show Shortcuts"
+msgstr "Sneltoetsen tonen"
+
+#: ../data/resources/blueprints/help-overlay.blp:19
+msgctxt "shortcut window"
+msgid "Quit"
+msgstr "Sluiten"
+
+#: ../data/resources/blueprints/help-overlay.blp:24
+msgctxt "shortcut window"
+msgid "New Window"
+msgstr ""
+
+#: ../data/resources/blueprints/help-overlay.blp:29
+msgctxt "shortcut window"
+msgid "Clear Window"
+msgstr ""
+
+#: ../data/resources/blueprints/help-overlay.blp:34
+#, fuzzy
+msgctxt "shortcut window"
+msgid "Show Less Popular Datatypes"
+msgstr "Minder gebruikte formaten tonen"
+
+#: ../data/resources/blueprints/help-overlay.blp:39
+#, fuzzy
+msgctxt "shortcut window"
+msgid "Paste From Clipboard"
+msgstr "_Kopiëren naar klembord"
+
+#: ../data/resources/blueprints/help-overlay.blp:44
+#, fuzzy
+msgctxt "shortcut window"
+msgid "Add Images"
+msgstr "Geplakte afbeelding"
+
+#: ../data/resources/blueprints/image-rest.blp:21
+msgid "Show All"
+msgstr ""
+
+#: ../data/resources/blueprints/window.blp:9
+#: ../data/resources/blueprints/window.blp:21
+#: ../data/resources/blueprints/window.blp:57 ../src/main.rs:30
+#: ../src/widgets/about_window.rs:24
+msgid "Switcheroo"
+msgstr ""
+
+#: ../data/resources/blueprints/window.blp:15
+msgid "Drop Here to Open"
+msgstr "Sleep hierheen om te openen"
+
+#: ../data/resources/blueprints/window.blp:40
+msgid "Primary Menu"
+msgstr ""
+
+#: ../data/resources/blueprints/window.blp:58
+msgid "Drag and drop images here"
+msgstr ""
+
+#: ../data/resources/blueprints/window.blp:69
+msgid "_Open Images…"
+msgstr "Afbeeldingen _openen…"
+
+#: ../data/resources/blueprints/window.blp:122
+#, fuzzy
+msgid "Export Format"
+msgstr "Uitvoerformaat"
+
+#: ../data/resources/blueprints/window.blp:127
+msgid "Save as multi-page PDF"
+msgstr ""
+
+#: ../data/resources/blueprints/window.blp:137
+msgid "Save To ZIP"
+msgstr ""
+
+#: ../data/resources/blueprints/window.blp:150
+msgid "Quality"
+msgstr "Kwaliteit"
+
+#: ../data/resources/blueprints/window.blp:170
+msgid "Background Color"
+msgstr "Achtergrondkleur"
+
+#: ../data/resources/blueprints/window.blp:171
+msgid "Replaces original transparency layer"
+msgstr ""
+
+#: ../data/resources/blueprints/window.blp:185
+#, fuzzy
+msgid "Pixel Density Per Inch"
+msgstr "Pixeldichtheid per inch"
+
+#: ../data/resources/blueprints/window.blp:197
+msgid "Resize"
+msgstr "Grootte aanpassen"
+
+#: ../data/resources/blueprints/window.blp:202
+#: ../data/resources/blueprints/window.blp:203
+#: ../data/resources/blueprints/window.blp:210
+#: ../data/resources/blueprints/window.blp:212
+#: ../data/resources/blueprints/window.blp:233
+msgid "Width"
+msgstr "Breedte"
+
+#: ../data/resources/blueprints/window.blp:220
+#, fuzzy
+msgid "Preserve aspect ratio"
+msgstr "Beeldverhouding behouden"
+
+#: ../data/resources/blueprints/window.blp:225
+#: ../data/resources/blueprints/window.blp:226
+#: ../data/resources/blueprints/window.blp:234
+msgid "Height"
+msgstr "Hoogte"
+
+#: ../data/resources/blueprints/window.blp:245
+msgid "Choose between resizing with percentages or using exact pixels"
+msgstr ""
+
+#: ../data/resources/blueprints/window.blp:249
+msgid "%"
+msgstr ""
+
+#: ../data/resources/blueprints/window.blp:249
+msgid "px"
+msgstr ""
+
+#: ../data/resources/blueprints/window.blp:258
+#, fuzzy
+msgid "Resize Algorithm"
+msgstr "De algoritmen zijn gemaakt door"
+
+#: ../data/resources/blueprints/window.blp:264
+msgid "Default"
+msgstr ""
+
+#: ../data/resources/blueprints/window.blp:268
+#, fuzzy
+msgid "Pixel Art"
+msgstr "Pixels"
+
+#: ../data/resources/blueprints/window.blp:282
+msgid "_Convert"
+msgstr "_Converteren"
+
+#: ../data/resources/blueprints/window.blp:308
+msgid "Could not Load Image"
+msgstr "Afbeelding kon niet worden geladen"
+
+#: ../data/resources/blueprints/window.blp:309
+msgid "This image could be corrupted or may use an unsupported file format."
+msgstr "De afbeelding is beschadigd of het bestandstype wordt niet ondersteund"
+
+#: ../data/resources/blueprints/window.blp:321
+#, fuzzy
+msgid "Converting"
+msgstr "Bezig met converteren…"
+
+#: ../data/resources/blueprints/window.blp:322
+#, fuzzy
+msgid "This could take a while"
+msgstr "Dit kan even duren"
+
+#: ../data/resources/blueprints/window.blp:332 ../src/window.rs:764
+msgid "Loading…"
+msgstr "Bezig met laden…"
+
+#: ../data/resources/blueprints/window.blp:338 ../src/window.rs:440
+#: ../src/window.rs:1363
+msgid "_Cancel"
+msgstr "_Annuleren"
+
+#: ../data/resources/blueprints/window.blp:362
+msgid "All Images"
+msgstr ""
+
+#: ../data/resources/blueprints/window.blp:436
+msgid "Paste From Clipboard"
+msgstr ""
+
+#: ../data/resources/blueprints/window.blp:441
+msgid "New Window"
+msgstr ""
+
+#: ../data/resources/blueprints/window.blp:446
+msgid "Clear Window"
+msgstr ""
+
+#: ../data/resources/blueprints/window.blp:453
+msgid "Show Less Popular Datatypes"
+msgstr "Minder gebruikte formaten tonen"
+
+#: ../data/resources/blueprints/window.blp:460
+msgid "Keyboard Shortcuts"
+msgstr "Sneltoetsen"
+
+#: ../data/resources/blueprints/window.blp:465
+msgid "About Switcheroo"
+msgstr ""
+
+#: ../src/file_chooser.rs:39
+#, fuzzy
+msgid "Unsupported filetype"
+msgstr "Ondersteunde bestanden"
+
+#: ../src/file_chooser.rs:77
+#, fuzzy
+msgid "Images"
+msgstr "Geplakte afbeelding"
+
+#: ../src/file_chooser.rs:80
+#, fuzzy
+msgid "_Select Images"
+msgstr "Kies een afbeelding"
+
+#: ../src/file_chooser.rs:159
+msgid "Unspecified filetype"
+msgstr ""
+
+#: ../src/file_chooser.rs:164
+msgid "Unknown filetype"
+msgstr ""
+
+#: ../src/file_chooser.rs:169
+msgid "Used the wrong filetype"
+msgstr ""
+
+#: ../src/magick.rs:156
+msgid "Pasted Image"
+msgstr "Geplakte afbeelding"
+
+#: ../src/magick.rs:364
+msgid "Unknown IO error happened"
+msgstr "Er is een onbekende in-/uitvoerfout opgetreden"
+
+#. Translators: Replace "translator-credits" with your names, one name per line
+#: ../src/widgets/about_window.rs:28
+msgid "translator-credits"
+msgstr ""
+
+#: ../src/widgets/about_window.rs:35
+msgid "Code and Design Borrowed from"
+msgstr "Code en ontwerp afgeleid van"
+
+#: ../src/widgets/about_window.rs:47
+msgid "Sample Image from"
+msgstr "Voorbeeldfoto afkomstig van"
+
+#: ../src/window.rs:413
+msgid "Unable to access dropped files"
+msgstr "Geen toegang tot hierheen gesleepte bestanden"
+
+#: ../src/window.rs:436 ../src/window.rs:1358
+msgid "Stop converting?"
+msgstr "Stoppen met conversie?"
+
+#: ../src/window.rs:437 ../src/window.rs:1359
+msgid "You will lose all progress."
+msgstr "Alle voortgang zal verloren gaan"
+
+#: ../src/window.rs:441 ../src/window.rs:1363
+msgid "_Stop"
+msgstr "_Stoppen"
+
+#: ../src/window.rs:477
+msgid "Collecting files"
+msgstr "Bestanden verzamelen"
+
+#: ../src/window.rs:1286
+#, fuzzy
+msgid "Error While Processing"
+msgstr "Fout bij verwerken"
+
+#: ../src/window.rs:1307
+msgid "_Close"
+msgstr ""
+
+#: ../src/window.rs:1308
+#, fuzzy
+msgid "_Copy to Clipboard"
+msgstr "_Kopiëren naar klembord"
+
+#: ../src/window.rs:1316
+msgid "Error copied to clipboard"
+msgstr "Fout gekopieerd naar klembord"
+
+#: ../src/window.rs:1331
+msgid "Image converted"
+msgstr "De afbeelding is geconverteerd"
+
+#: ../src/window.rs:1332
+msgid "Open"
+msgstr "Openen"
+
+#: ../src/window.rs:1385
+msgid "Converting Cancelled"
+msgstr "Conversie geannuleerd"
+
+#~ msgid "Image Converter"
+#~ msgstr "Afbeeldingsconverter"
+
+#~ msgid "Convert and manipulate images"
+#~ msgstr "Converteer en bewerk afbeeldingen"
+
+#, fuzzy
+#~ msgid "converter;image;convert;converting;processing"
+#~ msgstr ""
+#~ "image;convert;converting;processing;afbeelding;converteren;conversie;"
+#~ "verwerking;bewerken;"
+
+#~ msgid "Shows less popular datatypes in the menu"
+#~ msgstr "Minder gebruikte formaten tonen in menu"
+
+#~ msgid "Window width"
+#~ msgstr "Vensterbreedte"
+
+#~ msgid "Image quality"
+#~ msgstr "Afbeeldingskwaliteit"
+
+#~ msgid "Image density per inch"
+#~ msgstr "Pixeldichtheid per inch"
+
+#~ msgid "Window height"
+#~ msgstr "Vensterhoogte"
+
+#~ msgid "Window maximized state"
+#~ msgstr "Maximalisatiestaat van venster"
+
+#~ msgid "Output format"
+#~ msgstr "Uitvoerformaat"
+
+#~ msgid "Compression format"
+#~ msgstr "Compressieformaat"
+
+#~ msgid "Khaleel Al-Adhami"
+#~ msgstr "Khaleel Al-Adhami"
+
+#~ msgid "Convert between different image filetypes and resize them easily."
+#~ msgstr ""
+#~ "Converteer tussen verschillende afbeeldingsformaten en verander eenvoudig "
+#~ "de grootte"
+
+#~ msgid "image"
+#~ msgstr "Afbeelding"
+
+#~ msgid "convert"
+#~ msgstr "Converteren"
+
+#~ msgid "converting"
+#~ msgstr "Bezig met converteren…"
+
+#~ msgid "processing"
+#~ msgstr "Bezig met verwerken…"
+
+#, fuzzy
+#~ msgid "Converting sample image from PNG to HEIF"
+#~ msgstr "Voorbeeldafbeelding converteren van PNG naar WebP"
+
+#, fuzzy
+#~ msgid "Converting multiple sample images from SVG to HEIF"
+#~ msgstr "Voorbeeldafbeelding converteren van PNG naar WebP"
+
+#~ msgid "Rust rewrite."
+#~ msgstr "Herschreven in Rust"
+
+#~ msgid "Click “Open Images…” or drag images here."
+#~ msgstr "Druk op ‘Afbeeldingen openen…’ of sleep afbeeldingen hierheen"
+
+#, fuzzy
+#~ msgctxt "shortcut window"
+#~ msgid "Open New Images"
+#~ msgstr "Afbeelding openen"
+
+#~ msgid "Converting…"
+#~ msgstr "Bezig met converteren…"
+
+#~ msgid "_Dismiss"
+#~ msgstr "_Afwijzen"
+
+#~ msgid "Converter"
+#~ msgstr "Converter"
+
+#~ msgid "Properties"
+#~ msgstr "Eigenschappen"
+
+#~ msgid "Image Type"
+#~ msgstr "Afbeeldingstype"
+
+#~ msgid "Image Size"
+#~ msgstr "Afbeeldingsgrootte"
+
+#~ msgid "DPI"
+#~ msgstr "DPI"
+
+#~ msgid "Percentage"
+#~ msgstr "Percentage"
+
+#~ msgid "Exact Pixels"
+#~ msgstr "Pixelverhouding"
+
+#~ msgid "Point"
+#~ msgstr "Punt"
+
+#~ msgid "Quadratic"
+#~ msgstr "Kwadratisch"
+
+#~ msgid "Cubic"
+#~ msgstr "Kubisch"
+
+#~ msgid "Mitchell"
+#~ msgstr "Mitchell"
+
+#~ msgid "Gaussian"
+#~ msgstr "Gaussisch"
+
+#~ msgid "Lanczos"
+#~ msgstr "Lanczos"
+
+#~ msgid "Open Files…"
+#~ msgstr "Bestanden openen…"
+
+#~ msgid "Paste Image…"
+#~ msgstr "Afbeelding plakken…"
+
+#~ msgid "About Converter"
+#~ msgstr "Over Converter"
+
+#~ msgid "Options"
+#~ msgstr "Opties"
+
+#~ msgid "Convert to"
+#~ msgstr "Converteren naar"
+
+#~ msgid "Output as"
+#~ msgstr "Exporteren als"
+
+#~ msgid "Scale Preserving Ratio"
+#~ msgstr "Beeldverhouding"
+
+#~ msgid "Dimension"
+#~ msgstr "Afmetingen"
+
+#~ msgid "Width in Pixels"
+#~ msgstr "Breedte (in pixels)"
+
+#~ msgid "Height in Pixels"
+#~ msgstr "Lengte (in pixels)"
+
+#~ msgid "Filter"
+#~ msgstr "Filteren"
+
+#~ msgid "Size"
+#~ msgstr "Grootte"
+
+#~ msgid "Minimum Pixels"
+#~ msgstr "Minimumaantal pixels"
+
+#~ msgid "Maximum Pixels"
+#~ msgstr "Maximumaantal pixels"
+
+#~ msgid "Ratio"
+#~ msgstr "Verhouding"
+
+#~ msgid "Width Percentage Scale"
+#~ msgstr "Breedtepercentage"
+
+#~ msgid "Height Percentage Scale"
+#~ msgstr "Lengtepercentage"
+
+#~ msgid "Ratio Width"
+#~ msgstr "Beeldverhoudingsbreedte"
+
+#~ msgid "Ratio Height"
+#~ msgstr "Beeldverhoudingshoogte"
+
+#~ msgid "Overview"
+#~ msgstr "Overzicht"
+
+#, fuzzy
+#~ msgid "More options"
+#~ msgstr "Meer opties"
+
+#~ msgid "Fix various bugs."
+#~ msgstr "Enkele fouten opgelost"
+
+#~ msgid "More Options"
+#~ msgstr "Meer opties"
+
+#~ msgid "Convert"
+#~ msgstr "Converteren"
+
+#~ msgid "Convert and Manipulate images"
+#~ msgstr "Converteer en bewerk afbeeldingen"
+
+#~ msgid ""
+#~ "A simple and easy-to-use Flatpak application built with libadwaita for "
+#~ "converting and manipulating images."
+#~ msgstr ""
+#~ "Een eenvoudige en gemakkelijk te gebruiken Flatpak-app gebouwd met "
+#~ "LibAdwaita voor het converteren en bewerken van afbeeldingen"
+
+#, python-brace-format
+#~ msgid "’{input_ext}’ is not supported"
+#~ msgstr "‘{input_ext}’ wordt niet ondersteund"
+
+#~ msgid "No file extension was specified"
+#~ msgstr "Er is geen bestandsextensie opgegeven"
+
+#, python-brace-format
+#~ msgid "’{file_ext}’ is of the wrong format"
+#~ msgstr "‘{file_ext}’ is geen geldig formaat"
+
+#~ msgid "Select output location"
+#~ msgstr "Kies een opslaglocatie"
+
+#~ msgid ""
+#~ "Jürgen Benvenuti <gastornis@posteo.org>\n"
+#~ "Irénée Thirion <irenee.thirion@e.email>\n"
+#~ "Mattia Borda <mattiagiovanni.borda@icloud.com>\n"
+#~ "Heimen Stoffels\n"
+#~ "Sergio <sergiovg01@outlook.com>\n"
+#~ "Åke Engelbrektson <eson@svenskasprakfiler.se>\n"
+#~ "Sabri Ünal <libreajans@gmail.com>\n"
+#~ "Azat Zinnetullin"
+#~ msgstr ""
+#~ "Jürgen Benvenuti <gastornis@posteo.org>\n"
+#~ "Irénée Thirion <irenee.thirion@e.email>\n"
+#~ "Mattia Borda <mattiagiovanni.borda@icloud.com>\n"
+#~ "Heimen Stoffels\n"
+#~ "Sergio <sergiovg01@outlook.com>\n"
+#~ "Åke Engelbrektson <eson@svenskasprakfiler.se>\n"
+#~ "Sabri Ünal <libreajans@gmail.com>\n"
+#~ "Azat Zinnetullin"
+
+#~ msgid "Added AVIF and JXL support."
+#~ msgstr "Nieuw: avif- en jxl-ondersteuning."
+
+#~ msgid "Datatype"
+#~ msgstr "Gegevenstype"
+
+#~ msgid ""
+#~ "Converter allows you to convert and manipulate a given image. It is a "
+#~ "front-end for ImageMagick."
+#~ msgstr ""
+#~ "Met Convertering - een frontend voor ImageMagick - kun je afbeeldingen "
+#~ "converteren en bewerken."
+
+#~ msgid "Save Location"
+#~ msgstr "Opslaglocatie"
+
+#~ msgid "(None)"
+#~ msgstr "(geen)"
+
+#~ msgid "Save location is missing."
+#~ msgstr "Er is geen opslaglocatie gekozen."

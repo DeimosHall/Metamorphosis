@@ -1,0 +1,315 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# Irénée THIRION <irenee.thirion@e.email>, 2023.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: unnamed project\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-12-27 08:05-0500\n"
+"PO-Revision-Date: 2023-12-27 16:33+0100\n"
+"Last-Translator: Irénée THIRION <irenee.thirion@e.email>\n"
+"Language-Team: French <gnomefr@traduc.org>\n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1)\n"
+"X-Generator: Gtranslator 45.3\n"
+
+#: ../data/resources/blueprints/help-overlay.blp:11
+msgctxt "shortcut window"
+msgid "General"
+msgstr "Général"
+
+#: ../data/resources/blueprints/help-overlay.blp:14
+msgctxt "shortcut window"
+msgid "Show Shortcuts"
+msgstr "Afficher les raccourcis"
+
+#: ../data/resources/blueprints/help-overlay.blp:19
+msgctxt "shortcut window"
+msgid "Quit"
+msgstr "Quitter"
+
+#: ../data/resources/blueprints/help-overlay.blp:24
+msgctxt "shortcut window"
+msgid "New Window"
+msgstr "Nouvelle fenêtre"
+
+#: ../data/resources/blueprints/help-overlay.blp:29
+msgctxt "shortcut window"
+msgid "Clear Window"
+msgstr "Vider le contenu de la fenêtre"
+
+#: ../data/resources/blueprints/help-overlay.blp:34
+msgctxt "shortcut window"
+msgid "Show Less Popular Datatypes"
+msgstr "Afficher les données moins populaires"
+
+#: ../data/resources/blueprints/help-overlay.blp:39
+msgctxt "shortcut window"
+msgid "Paste From Clipboard"
+msgstr "Copier depuis le presse-papiers"
+
+#: ../data/resources/blueprints/help-overlay.blp:44
+msgctxt "shortcut window"
+msgid "Add Images"
+msgstr "Ajouter des images"
+
+#: ../data/resources/blueprints/image-rest.blp:21
+msgid "Show All"
+msgstr "Afficher tout"
+
+#: ../data/resources/blueprints/window.blp:9
+#: ../data/resources/blueprints/window.blp:21
+#: ../data/resources/blueprints/window.blp:57 ../src/main.rs:30
+#: ../src/widgets/about_window.rs:24
+msgid "Switcheroo"
+msgstr "Switcheroo"
+
+#: ../data/resources/blueprints/window.blp:15
+msgid "Drop Here to Open"
+msgstr "Faites glisser une image ici pour ouvrir"
+
+#: ../data/resources/blueprints/window.blp:40
+msgid "Primary Menu"
+msgstr "Menu principal"
+
+#: ../data/resources/blueprints/window.blp:58
+msgid "Drag and drop images here"
+msgstr "Glissez et déposez des images ici"
+
+#: ../data/resources/blueprints/window.blp:69
+msgid "_Open Images…"
+msgstr "_Ouvrir des images…"
+
+#: ../data/resources/blueprints/window.blp:122
+msgid "Export Format"
+msgstr "Format d’exportation"
+
+#: ../data/resources/blueprints/window.blp:127
+msgid "Save as multi-page PDF"
+msgstr "Enregistrer en PDF multi-pages"
+
+#: ../data/resources/blueprints/window.blp:137
+msgid "Save To ZIP"
+msgstr "Enregistrer en ZIP"
+
+#: ../data/resources/blueprints/window.blp:150
+msgid "Quality"
+msgstr "Qualité"
+
+#: ../data/resources/blueprints/window.blp:170
+msgid "Background Color"
+msgstr "Couleur d’arrière-plan"
+
+#: ../data/resources/blueprints/window.blp:171
+msgid "Replaces original transparency layer"
+msgstr "Remplace la couche de transparence d’origine"
+
+#: ../data/resources/blueprints/window.blp:185
+msgid "Pixel Density Per Inch"
+msgstr "Densité de Pixels par pouce"
+
+#: ../data/resources/blueprints/window.blp:197
+msgid "Resize"
+msgstr "Redimentionner"
+
+#: ../data/resources/blueprints/window.blp:202
+#: ../data/resources/blueprints/window.blp:203
+#: ../data/resources/blueprints/window.blp:210
+#: ../data/resources/blueprints/window.blp:212
+#: ../data/resources/blueprints/window.blp:233
+msgid "Width"
+msgstr "Largeur"
+
+#: ../data/resources/blueprints/window.blp:220
+msgid "Preserve aspect ratio"
+msgstr "Préserver le ratio largeur/hauteur"
+
+#: ../data/resources/blueprints/window.blp:225
+#: ../data/resources/blueprints/window.blp:226
+#: ../data/resources/blueprints/window.blp:234
+msgid "Height"
+msgstr "Hauteur"
+
+#: ../data/resources/blueprints/window.blp:245
+msgid "Choose between resizing with percentages or using exact pixels"
+msgstr ""
+"Choisissez entre un redimensionnement en utilisant des pourcentages ou un "
+"nombre précis de pixels"
+
+#: ../data/resources/blueprints/window.blp:249
+msgid "%"
+msgstr "%"
+
+#: ../data/resources/blueprints/window.blp:249
+msgid "px"
+msgstr "px"
+
+#: ../data/resources/blueprints/window.blp:258
+msgid "Resize Algorithm"
+msgstr "Algorithme de redimensionnement"
+
+#: ../data/resources/blueprints/window.blp:264
+msgid "Default"
+msgstr "Par défaut"
+
+#: ../data/resources/blueprints/window.blp:268
+msgid "Pixel Art"
+msgstr "Pixel Art"
+
+#: ../data/resources/blueprints/window.blp:282
+msgid "_Convert"
+msgstr "_Convertir"
+
+#: ../data/resources/blueprints/window.blp:308
+msgid "Could not Load Image"
+msgstr "Impossible de charger l’image"
+
+#: ../data/resources/blueprints/window.blp:309
+msgid "This image could be corrupted or may use an unsupported file format."
+msgstr ""
+"Cette image est peut-être corrompue ou utilise un format de fichier non pris "
+"en charge."
+
+#: ../data/resources/blueprints/window.blp:321
+msgid "Converting"
+msgstr "Conversion"
+
+#: ../data/resources/blueprints/window.blp:322
+msgid "This could take a while"
+msgstr "Cela peut prendre du temps"
+
+#: ../data/resources/blueprints/window.blp:332 ../src/window.rs:764
+msgid "Loading…"
+msgstr "Chargement…"
+
+#: ../data/resources/blueprints/window.blp:338 ../src/window.rs:440
+#: ../src/window.rs:1363
+msgid "_Cancel"
+msgstr "_Annuler"
+
+#: ../data/resources/blueprints/window.blp:362
+msgid "All Images"
+msgstr "Toutes les images"
+
+#: ../data/resources/blueprints/window.blp:436
+msgid "Paste From Clipboard"
+msgstr "Copier depuis le presse-papiers"
+
+#: ../data/resources/blueprints/window.blp:441
+msgid "New Window"
+msgstr "Nouvelle fenêtre"
+
+#: ../data/resources/blueprints/window.blp:446
+msgid "Clear Window"
+msgstr "Vider le contenu de la fenêtre"
+
+#: ../data/resources/blueprints/window.blp:453
+msgid "Show Less Popular Datatypes"
+msgstr "Afficher les données moins populaires"
+
+#: ../data/resources/blueprints/window.blp:460
+msgid "Keyboard Shortcuts"
+msgstr "Raccourcis clavier"
+
+#: ../data/resources/blueprints/window.blp:465
+msgid "About Switcheroo"
+msgstr "À propos de Switcheroo"
+
+#: ../src/file_chooser.rs:39
+msgid "Unsupported filetype"
+msgstr "Type de fichier non pris en charge"
+
+#: ../src/file_chooser.rs:77
+msgid "Images"
+msgstr "Images"
+
+#: ../src/file_chooser.rs:80
+msgid "_Select Images"
+msgstr "_Sélectionnez des images"
+
+#: ../src/file_chooser.rs:159
+msgid "Unspecified filetype"
+msgstr "Type de fichier non spécifié"
+
+#: ../src/file_chooser.rs:164
+msgid "Unknown filetype"
+msgstr "Type de fichier inconnu"
+
+#: ../src/file_chooser.rs:169
+msgid "Used the wrong filetype"
+msgstr "Mauvais type de fichier utilisé"
+
+#: ../src/magick.rs:156
+msgid "Pasted Image"
+msgstr "Image collée"
+
+#: ../src/magick.rs:364
+msgid "Unknown IO error happened"
+msgstr "Une erreur d'entrée-sortie inconnue s'est produite"
+
+#. Translators: Replace "translator-credits" with your names, one name per line
+#: ../src/widgets/about_window.rs:28
+msgid "translator-credits"
+msgstr "Irénée Thirion"
+
+#: ../src/widgets/about_window.rs:35
+msgid "Code and Design Borrowed from"
+msgstr "Code et Design empruntés à"
+
+#: ../src/widgets/about_window.rs:47
+msgid "Sample Image from"
+msgstr "Image échantillon par"
+
+#: ../src/window.rs:413
+msgid "Unable to access dropped files"
+msgstr "Impossible d'accéder au fichiers déposés"
+
+#: ../src/window.rs:436 ../src/window.rs:1358
+msgid "Stop converting?"
+msgstr "Arrêter la conversion ?"
+
+#: ../src/window.rs:437 ../src/window.rs:1359
+msgid "You will lose all progress."
+msgstr "Vous perdrez toute la progression."
+
+#: ../src/window.rs:441 ../src/window.rs:1363
+msgid "_Stop"
+msgstr "_Arrêter"
+
+#: ../src/window.rs:477
+msgid "Collecting files"
+msgstr "Récupération des fichiers"
+
+#: ../src/window.rs:1286
+msgid "Error While Processing"
+msgstr "Erreur lors du traitement"
+
+#: ../src/window.rs:1307
+msgid "_Close"
+msgstr "_Fermer"
+
+#: ../src/window.rs:1308
+msgid "_Copy to Clipboard"
+msgstr "_Copier vers le presse-papiers"
+
+#: ../src/window.rs:1316
+msgid "Error copied to clipboard"
+msgstr "Erreur copiée vers le presse-papier"
+
+#: ../src/window.rs:1331
+msgid "Image converted"
+msgstr "Image convertie"
+
+#: ../src/window.rs:1332
+msgid "Open"
+msgstr "Ouvrir"
+
+#: ../src/window.rs:1385
+msgid "Converting Cancelled"
+msgstr "Conversion annulée"

@@ -1,0 +1,527 @@
+# Italian translation for Converter.
+# Copyright (C) 2022 Khaleel Al-Adhami
+# This file is distributed under the same license as the Converter package.
+# Mattia Borda <mattiagiovanni.borda@icloud.com>, 2022.
+# Albano Battistella <albano.battistella@hotmail.com>, 2023.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-12-27 08:05-0500\n"
+"PO-Revision-Date: 2026-03-16 20:45+0100\n"
+"Last-Translator: Albano Battistella\n"
+"Language-Team: italian\n"
+"Language: it\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.9\n"
+
+#: ../data/resources/blueprints/help-overlay.blp:11
+msgctxt "shortcut window"
+msgid "General"
+msgstr "Generali"
+
+#: ../data/resources/blueprints/help-overlay.blp:14
+msgctxt "shortcut window"
+msgid "Show Shortcuts"
+msgstr "Mostra scorciatoie da tastiera"
+
+#: ../data/resources/blueprints/help-overlay.blp:19
+msgctxt "shortcut window"
+msgid "Quit"
+msgstr "Esci"
+
+#: ../data/resources/blueprints/help-overlay.blp:24
+msgctxt "shortcut window"
+msgid "New Window"
+msgstr "Nuova finestra"
+
+#: ../data/resources/blueprints/help-overlay.blp:29
+msgctxt "shortcut window"
+msgid "Clear Window"
+msgstr "Cancella finestra"
+
+#: ../data/resources/blueprints/help-overlay.blp:34
+msgctxt "shortcut window"
+msgid "Show Less Popular Datatypes"
+msgstr "Mostra tipo di dati meno diffusi"
+
+#: ../data/resources/blueprints/help-overlay.blp:39
+msgctxt "shortcut window"
+msgid "Paste From Clipboard"
+msgstr "Incolla dagli  appunti"
+
+#: ../data/resources/blueprints/help-overlay.blp:44
+msgctxt "shortcut window"
+msgid "Add Images"
+msgstr "Aggiungi immagini"
+
+#: ../data/resources/blueprints/image-rest.blp:21
+msgid "Show All"
+msgstr "Mostra tutto"
+
+#: ../data/resources/blueprints/window.blp:9
+#: ../data/resources/blueprints/window.blp:21
+#: ../data/resources/blueprints/window.blp:57 ../src/main.rs:30
+#: ../src/widgets/about_window.rs:24
+msgid "Switcheroo"
+msgstr "Switcheroo"
+
+#: ../data/resources/blueprints/window.blp:15
+msgid "Drop Here to Open"
+msgstr "Rilascia qui per aprire"
+
+#: ../data/resources/blueprints/window.blp:40
+msgid "Primary Menu"
+msgstr "Menu principale"
+
+#: ../data/resources/blueprints/window.blp:58
+msgid "Drag and drop images here"
+msgstr "Trascina e rilascia le immagini qui"
+
+#: ../data/resources/blueprints/window.blp:69
+msgid "_Open Images…"
+msgstr "_Apri immagini…"
+
+#: ../data/resources/blueprints/window.blp:122
+msgid "Export Format"
+msgstr "Formato di esportazione"
+
+#: ../data/resources/blueprints/window.blp:127
+msgid "Save as multi-page PDF"
+msgstr "Salva come PDF multipagina"
+
+#: ../data/resources/blueprints/window.blp:137
+msgid "Save To ZIP"
+msgstr "Salva in formato ZIP"
+
+#: ../data/resources/blueprints/window.blp:150
+msgid "Quality"
+msgstr "Qualità"
+
+#: ../data/resources/blueprints/window.blp:170
+msgid "Background Color"
+msgstr "Colore di sfondo"
+
+#: ../data/resources/blueprints/window.blp:171
+msgid "Replaces original transparency layer"
+msgstr "Sostituisce il livello di trasparenza originale"
+
+#: ../data/resources/blueprints/window.blp:185
+msgid "Pixel Density Per Inch"
+msgstr "Densità di pixel per Inch"
+
+#: ../data/resources/blueprints/window.blp:197
+msgid "Resize"
+msgstr "Ridimensiona"
+
+#: ../data/resources/blueprints/window.blp:202
+#: ../data/resources/blueprints/window.blp:203
+#: ../data/resources/blueprints/window.blp:210
+#: ../data/resources/blueprints/window.blp:212
+#: ../data/resources/blueprints/window.blp:233
+msgid "Width"
+msgstr "Larghezza"
+
+#: ../data/resources/blueprints/window.blp:220
+msgid "Preserve aspect ratio"
+msgstr "Mantieni proporzioni"
+
+#: ../data/resources/blueprints/window.blp:225
+#: ../data/resources/blueprints/window.blp:226
+#: ../data/resources/blueprints/window.blp:234
+msgid "Height"
+msgstr "Altezza"
+
+#: ../data/resources/blueprints/window.blp:245
+msgid "Choose between resizing with percentages or using exact pixels"
+msgstr "Scegli tra il ridimensionamento con percentuali o l'utilizzo di pixel esatti"
+
+#: ../data/resources/blueprints/window.blp:249
+msgid "%"
+msgstr ""
+
+#: ../data/resources/blueprints/window.blp:249
+msgid "px"
+msgstr ""
+
+#: ../data/resources/blueprints/window.blp:258
+msgid "Resize Algorithm"
+msgstr "Algoritmo di ridimensionamento"
+
+#: ../data/resources/blueprints/window.blp:264
+msgid "Default"
+msgstr "Predefinito"
+
+#: ../data/resources/blueprints/window.blp:268
+msgid "Pixel Art"
+msgstr "Pixel Art"
+
+#: ../data/resources/blueprints/window.blp:282
+msgid "_Convert"
+msgstr "Converti"
+
+#: ../data/resources/blueprints/window.blp:308
+msgid "Could not Load Image"
+msgstr "Impossibile caricare l'immagine"
+
+#: ../data/resources/blueprints/window.blp:309
+msgid "This image could be corrupted or may use an unsupported file format."
+msgstr "Questa immagine potrebbe essere danneggiata o in un formato non supportato."
+
+#: ../data/resources/blueprints/window.blp:321
+msgid "Converting"
+msgstr "conversione in corso"
+
+#: ../data/resources/blueprints/window.blp:322
+msgid "This could take a while"
+msgstr "L'operazione potrebbe richiedere del tempo"
+
+#: ../data/resources/blueprints/window.blp:332 ../src/window.rs:764
+msgid "Loading…"
+msgstr "Caricamento…"
+
+#: ../data/resources/blueprints/window.blp:338 ../src/window.rs:440
+#: ../src/window.rs:1363
+msgid "_Cancel"
+msgstr "Annulla"
+
+#: ../data/resources/blueprints/window.blp:362
+msgid "All Images"
+msgstr "Tutte le immagini"
+
+#: ../data/resources/blueprints/window.blp:436
+msgid "Paste From Clipboard"
+msgstr "Incolla dagli appunti"
+
+#: ../data/resources/blueprints/window.blp:441
+msgid "New Window"
+msgstr "NUova finestra"
+
+#: ../data/resources/blueprints/window.blp:446
+msgid "Clear Window"
+msgstr "Cancella finestra"
+
+#: ../data/resources/blueprints/window.blp:453
+msgid "Show Less Popular Datatypes"
+msgstr "Mostra tipi di immagini meno popolari"
+
+#: ../data/resources/blueprints/window.blp:460
+msgid "Keyboard Shortcuts"
+msgstr "Scorciatoie da tastiera"
+
+#: ../data/resources/blueprints/window.blp:465
+msgid "About Switcheroo"
+msgstr "Informazioni su Switcheroo"
+
+#: ../src/file_chooser.rs:39
+msgid "Unsupported filetype"
+msgstr "Tipo di file non supportato"
+
+#: ../src/file_chooser.rs:77
+msgid "Images"
+msgstr "Immagini"
+
+#: ../src/file_chooser.rs:80
+msgid "_Select Images"
+msgstr "_Seleziona immagini"
+
+#: ../src/file_chooser.rs:159
+msgid "Unspecified filetype"
+msgstr "Tipo di file non specificato"
+
+#: ../src/file_chooser.rs:164
+msgid "Unknown filetype"
+msgstr "Tipo di file sconosciuto"
+
+#: ../src/file_chooser.rs:169
+msgid "Used the wrong filetype"
+msgstr "Utilizzato il tipo di file sbagliato"
+
+#: ../src/magick.rs:156
+#, fuzzy
+msgid "Pasted Image"
+msgstr "Immagine incollata"
+
+#: ../src/magick.rs:364
+msgid "Unknown IO error happened"
+msgstr "Si è verificato un errore IO sconosciuto"
+
+#. Translators: Replace "translator-credits" with your names, one name per line
+#: ../src/widgets/about_window.rs:28
+msgid "translator-credits"
+msgstr "Albano Battistella"
+
+#: ../src/widgets/about_window.rs:35
+msgid "Code and Design Borrowed from"
+msgstr "Codice e design presi in prestito da"
+
+#: ../src/widgets/about_window.rs:47
+msgid "Sample Image from"
+msgstr "Immagine di esempio di"
+
+#: ../src/window.rs:413
+msgid "Unable to access dropped files"
+msgstr "Impossibile accedere ai file rilasciati"
+
+#: ../src/window.rs:436 ../src/window.rs:1358
+msgid "Stop converting?"
+msgstr "Interrompere la conversione?"
+
+#: ../src/window.rs:437 ../src/window.rs:1359
+msgid "You will lose all progress."
+msgstr "Perderai tutti i progressi."
+
+#: ../src/window.rs:441 ../src/window.rs:1363
+msgid "_Stop"
+msgstr "Interrompi"
+
+#: ../src/window.rs:477
+msgid "Collecting files"
+msgstr "Raccolta di file"
+
+#: ../src/window.rs:1286
+msgid "Error While Processing"
+msgstr "Errore durante l'elaborazione"
+
+#: ../src/window.rs:1307
+msgid "_Close"
+msgstr "_Chiudi"
+
+#: ../src/window.rs:1308
+msgid "_Copy to Clipboard"
+msgstr "_Copia negli appunti"
+
+#: ../src/window.rs:1316
+msgid "Error copied to clipboard"
+msgstr "Errore copiato negli appunti"
+
+#: ../src/window.rs:1331
+msgid "Image converted"
+msgstr "Immagine convertita"
+
+#: ../src/window.rs:1332
+msgid "Open"
+msgstr "Apri"
+
+#: ../src/window.rs:1385
+msgid "Converting Cancelled"
+msgstr "Conversione annullata"
+
+#~ msgid "Image Converter"
+#~ msgstr "Convertitore di immagini"
+
+#~ msgid "Convert and manipulate images"
+#~ msgstr "Converti e manipola immagini"
+
+#~ msgid "converter;image;convert;converting;processing"
+#~ msgstr "convertitore;immagine;convertire;conversione;elaborazione"
+
+#~ msgid "Shows less popular datatypes in the menu"
+#~ msgstr "Mostra tipi di immagini meno popolari nel menu"
+
+#~ msgid "Window width"
+#~ msgstr "Larghezza finestra"
+
+#~ msgid "Image quality"
+#~ msgstr "Qualità immagine"
+
+#~ msgid "Image density per inch"
+#~ msgstr "Densità dell'immagine per inch"
+
+#~ msgid "Window height"
+#~ msgstr "Altezza finestra"
+
+#~ msgid "Window maximized state"
+#~ msgstr "Stato ingrandito della finestra"
+
+#~ msgid "Output format"
+#~ msgstr "Formato di output"
+
+#~ msgid "Compression format"
+#~ msgstr "Formato di compressione"
+
+#~ msgid "Khaleel Al-Adhami"
+#~ msgstr "Khaleel Al-Adhami"
+
+#~ msgid "Convert between different image filetypes and resize them easily."
+#~ msgstr "Converti tra diversi tipi di file immagine e ridimensionali facilmente."
+
+#~ msgid "image"
+#~ msgstr "immagine"
+
+#~ msgid "convert"
+#~ msgstr "converti"
+
+#~ msgid "converting"
+#~ msgstr "conversione"
+
+#~ msgid "processing"
+#~ msgstr "elaborazione"
+
+#~ msgid "Converting sample image from PNG to HEIF"
+#~ msgstr "Conversione dell'immagine di esempio da PNG a HEIF"
+
+#~ msgid "Converting multiple sample images from SVG to HEIF"
+#~ msgstr "Conversione di più immagini campione da SVG a HEIF"
+
+#~ msgid "Click “Open Images…” or drag images here."
+#~ msgstr "Fai clic su “Apri immagini…” o trascina le immagini qui."
+
+#~ msgctxt "shortcut window"
+#~ msgid "Open New Images"
+#~ msgstr "Apri nuove immagini"
+
+#~ msgid "Converting…"
+#~ msgstr "Conversione…"
+
+#~ msgid "_Dismiss"
+#~ msgstr "Chiudi"
+
+#~ msgid "Converter"
+#~ msgstr "Converter"
+
+#~ msgid "Properties"
+#~ msgstr "Proprietà"
+
+#~ msgid "Image Type"
+#~ msgstr "Tipo di immagine"
+
+#~ msgid "Image Size"
+#~ msgstr "Dimensione dell'immagine"
+
+#~ msgid "DPI"
+#~ msgstr "DPI"
+
+#~ msgid "Percentage"
+#~ msgstr "Percentuale"
+
+#~ msgid "Exact Pixels"
+#~ msgstr "Pixel esatti"
+
+#~ msgid "Open Files…"
+#~ msgstr "Apri file…"
+
+#~ msgid "Paste Image…"
+#~ msgstr "Incolla immagine…"
+
+#~ msgid "About Converter"
+#~ msgstr "Informazioni su Converter"
+
+#~ msgid "Overview"
+#~ msgstr "Anteprima"
+
+#~ msgid "More options"
+#~ msgstr "Altre opzioni"
+
+#~ msgid "Options"
+#~ msgstr "Opzioni"
+
+#~ msgid "Convert to"
+#~ msgstr "Converti in"
+
+#~ msgid "More Options"
+#~ msgstr "Altre opzioni"
+
+#~ msgid "Scale Preserving Ratio"
+#~ msgstr "Ridimensiona mantenendo proporzioni"
+
+#~ msgid "Dimension"
+#~ msgstr "Dimensione"
+
+#~ msgid "Width in Pixels"
+#~ msgstr "Larghezza (pixel)"
+
+#~ msgid "Height in Pixels"
+#~ msgstr "Altezza (pixel)"
+
+#~ msgid "Filter"
+#~ msgstr "Filtro"
+
+#~ msgid "Size"
+#~ msgstr "Dimensione"
+
+#~ msgid "Minimum Pixels"
+#~ msgstr "Pixel minimi"
+
+#~ msgid "Maximum Pixels"
+#~ msgstr "Pixel massimi"
+
+#~ msgid "Ratio"
+#~ msgstr "Fattore"
+
+#~ msgid "Width Percentage Scale"
+#~ msgstr "Percentuale larghezza"
+
+#~ msgid "Height Percentage Scale"
+#~ msgstr "Percentuale altezza"
+
+#~ msgid "Convert"
+#~ msgstr "Converti"
+
+#~ msgid "Convert and Manipulate images"
+#~ msgstr "Converti e manipola immagini"
+
+#~ msgid "A simple and easy-to-use Flatpak application built with libadwaita for converting and manipulating images."
+#~ msgstr "Un'applicazione Flatpak semplice e facile da usare creata con libadwaita per la conversione e manipolazione di immagini."
+
+#~ msgid "Made UI adjustments."
+#~ msgstr "Apportate modifiche all'interfaccia utente."
+
+#~ msgid "’{input_ext}’ is not supported"
+#~ msgstr "'{input_ext}' non è supportato"
+
+#~ msgid "No file extension was specified"
+#~ msgstr "Non è stata specificata alcuna estensione"
+
+#~ msgid "’{file_ext}’ is of the wrong format"
+#~ msgstr "’{file_ext}’ non è un formato corretto"
+
+#~ msgid "Select output location"
+#~ msgstr "Seleziona posizione del risultato"
+
+#~ msgid ""
+#~ "Jürgen Benvenuti <gastornis@posteo.org>\n"
+#~ "Irénée Thirion <irenee.thirion@e.email>\n"
+#~ "Mattia Borda <mattiagiovanni.borda@icloud.com>\n"
+#~ "Heimen Stoffels\n"
+#~ "Sergio <sergiovg01@outlook.com>\n"
+#~ "Åke Engelbrektson <eson@svenskasprakfiler.se>\n"
+#~ "Sabri Ünal <libreajans@gmail.com>\n"
+#~ "Azat Zinnetullin"
+#~ msgstr ""
+#~ "Jürgen Benvenuti <gastornis@posteo.org>\n"
+#~ "Irénée Thirion <irenee.thirion@e.email>\n"
+#~ "Mattia Borda <mattiagiovanni.borda@icloud.com>\n"
+#~ "Heimen Stoffels\n"
+#~ "Sergio <sergiovg01@outlook.com>\n"
+#~ "Åke Engelbrektson <eson@svenskasprakfiler.se>\n"
+#~ "Sabri Ünal <libreajans@gmail.com>\n"
+#~ "Azat Zinnetullin"
+
+#~ msgid "Added AVIF and JXL support."
+#~ msgstr "Aggiunto supporto per AVIF e JXL."
+
+#~ msgid "Datatype"
+#~ msgstr "Tipo di immagine"
+
+#~ msgid "Converter allows you to convert and manipulate a given image. It is a front-end for ImageMagick."
+#~ msgstr "Converter permette di convertire e manipolare un'immagine. È un'interfaccia grafica di ImageMagick."
+
+#~ msgid "Save Location"
+#~ msgstr "Posizione di salvataggio"
+
+#~ msgid "(None)"
+#~ msgstr "(Nessuna)"
+
+#~ msgid "Save location is missing."
+#~ msgstr "Non è stata impostata una posizione dove salvare il risultato."
+
+#~ msgid "Added \"Open With\" functionality."
+#~ msgstr "Aggiunta funzione \"Apri con\"."
+
+#~ msgid "Adjust DPI"
+#~ msgstr "Regola DPI"
