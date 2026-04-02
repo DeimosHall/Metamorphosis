@@ -71,8 +71,8 @@ msgstr "Mostrar todo"
 #: ../data/resources/blueprints/window.blp:21
 #: ../data/resources/blueprints/window.blp:57 ../src/main.rs:30
 #: ../src/widgets/about_window.rs:24
-msgid "Switcheroo"
-msgstr "Switcheroo"
+msgid "Metamorphosis"
+msgstr "Metamorphosis"
 
 #: ../data/resources/blueprints/window.blp:15
 msgid "Drop Here to Open"
@@ -222,8 +222,8 @@ msgid "Keyboard Shortcuts"
 msgstr "Atajos de teclado"
 
 #: ../data/resources/blueprints/window.blp:465
-msgid "About Switcheroo"
-msgstr "Acerca de Switcheroo"
+msgid "About Metamorphosis"
+msgstr "Acerca de Metamorphosis"
 
 #: ../src/file_chooser.rs:39
 msgid "Unsupported filetype"
@@ -378,8 +378,8 @@ msgstr "Conversión cancelada"
 #~ msgid "Converting multiple sample images from SVG to HEIF"
 #~ msgstr "Conversión de varias imágenes de muestra de SVG a HEIF"
 
-#~ msgid "Converter has been renamed to Switcheroo!"
-#~ msgstr "¡Converter ha pasado a llamarse Switcheroo!"
+#~ msgid "Converter has been renamed to Metamorphosis!"
+#~ msgstr "¡Converter ha pasado a llamarse Metamorphosis!"
 
 #~ msgid "Fix variety of bugs and rework UI."
 #~ msgstr ""

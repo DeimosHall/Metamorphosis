@@ -1,11 +1,11 @@
-# Croatian translation for Switcheroo.
+# Croatian translation for Metamorphosis.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the switcheroo package.
+# This file is distributed under the same license as the metamorphosis package.
 # Milo Ivir <mail@milotype.de> 2024., 2025.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: switcheroo\n"
+"Project-Id-Version: metamorphosis\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-04-16 23:34-0700\n"
 "PO-Revision-Date: 2025-10-28 00:21+0100\n"
@@ -19,67 +19,67 @@ msgstr ""
 "n%10<=4 && (n%100<12 || n%100>14) ? 1 : 2);\n"
 "X-Generator: Poedit 3.8\n"
 
-#: data/io.gitlab.adhami3310.Converter.desktop.in.in:2
-#: data/io.gitlab.adhami3310.Converter.metainfo.xml.in.in:5
+#: data/io.dev.deimoshall.Metamorphosis.desktop.in.in:2
+#: data/io.dev.deimoshall.Metamorphosis.metainfo.xml.in.in:5
 #: data/resources/blueprints/window.blp:9
 #: data/resources/blueprints/window.blp:21
 #: data/resources/blueprints/window.blp:57 src/main.rs:41
 #: src/widgets/about_window.rs:21
-msgid "Switcheroo"
-msgstr "Switcheroo"
+msgid "Metamorphosis"
+msgstr "Metamorphosis"
 
-#: data/io.gitlab.adhami3310.Converter.desktop.in.in:3
+#: data/io.dev.deimoshall.Metamorphosis.desktop.in.in:3
 msgid "Image Converter"
 msgstr "Konverter slika"
 
-#: data/io.gitlab.adhami3310.Converter.desktop.in.in:4
-#: data/io.gitlab.adhami3310.Converter.metainfo.xml.in.in:11
+#: data/io.dev.deimoshall.Metamorphosis.desktop.in.in:4
+#: data/io.dev.deimoshall.Metamorphosis.metainfo.xml.in.in:11
 msgid "Convert and manipulate images"
 msgstr "Konvertiraj i uredi slike"
 
-#: data/io.gitlab.adhami3310.Converter.desktop.in.in:10
+#: data/io.dev.deimoshall.Metamorphosis.desktop.in.in:10
 msgid "converter;image;convert;converting;processing"
 msgstr "konverter;slika;konvertiraj;konvertiranje;obrada"
 
-#: data/io.gitlab.adhami3310.Converter.gschema.xml.in:26
+#: data/io.dev.deimoshall.Metamorphosis.gschema.xml.in:26
 msgid "Window width"
 msgstr "Širina prozora"
 
-#: data/io.gitlab.adhami3310.Converter.gschema.xml.in:30
+#: data/io.dev.deimoshall.Metamorphosis.gschema.xml.in:30
 msgid "Image quality"
 msgstr "Kvaliteta slike"
 
-#: data/io.gitlab.adhami3310.Converter.gschema.xml.in:34
+#: data/io.dev.deimoshall.Metamorphosis.gschema.xml.in:34
 msgid "Image density per inch"
 msgstr "Broj piksela po inču"
 
-#: data/io.gitlab.adhami3310.Converter.gschema.xml.in:38
+#: data/io.dev.deimoshall.Metamorphosis.gschema.xml.in:38
 msgid "Window height"
 msgstr "Visina prozora"
 
-#: data/io.gitlab.adhami3310.Converter.gschema.xml.in:42
+#: data/io.dev.deimoshall.Metamorphosis.gschema.xml.in:42
 msgid "Window maximized state"
 msgstr "Stanje rasklopljenog prozora"
 
-#: data/io.gitlab.adhami3310.Converter.gschema.xml.in:46
+#: data/io.dev.deimoshall.Metamorphosis.gschema.xml.in:46
 msgid "Output format"
 msgstr "Format rezultata"
 
-#: data/io.gitlab.adhami3310.Converter.gschema.xml.in:50
+#: data/io.dev.deimoshall.Metamorphosis.gschema.xml.in:50
 msgid "Compression format"
 msgstr "Format komprimiranja"
 
-#: data/io.gitlab.adhami3310.Converter.metainfo.xml.in.in:17
+#: data/io.dev.deimoshall.Metamorphosis.metainfo.xml.in.in:17
 msgid "Convert between different image filetypes and resize them easily."
 msgstr ""
 "Konvertiraj u različite vrste slikovnih datoteka i jednostavno promijeni "
 "njihovu veličinu."
 
-#: data/io.gitlab.adhami3310.Converter.metainfo.xml.in.in:43
+#: data/io.dev.deimoshall.Metamorphosis.metainfo.xml.in.in:43
 msgid "Converting sample image from PNG to HEIF"
 msgstr "Konvertiranje slike iz PNG u HEIF format"
 
-#: data/io.gitlab.adhami3310.Converter.metainfo.xml.in.in:48
+#: data/io.dev.deimoshall.Metamorphosis.metainfo.xml.in.in:48
 msgid "Converting multiple sample images from SVG to HEIF"
 msgstr "Konvertiranje više slika iz SVG u HEIF format"
 
@@ -267,8 +267,8 @@ msgid "Keyboard Shortcuts"
 msgstr "Tipkovni prečaci"
 
 #: data/resources/blueprints/window.blp:458
-msgid "About Switcheroo"
-msgstr "O aplikaciji Switcheroo"
+msgid "About Metamorphosis"
+msgstr "O aplikaciji Metamorphosis"
 
 #: src/file_chooser.rs:39 src/window.rs:2203
 msgid "Unsupported filetype"

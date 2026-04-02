@@ -1,12 +1,12 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the switcheroo package.
+# This file is distributed under the same license as the metamorphosis package.
 # Wolf-Wolf https://gitlab.com/wolf-wolf, 2024.
 #
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: switcheroo\n"
+"Project-Id-Version: metamorphosis\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-07-17 15:48-0400\n"
 "PO-Revision-Date: 2024-07-17 15:48+CET\n"
@@ -17,69 +17,69 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: data/io.gitlab.adhami3310.Converter.desktop.in.in:3
-#: data/io.gitlab.adhami3310.Converter.metainfo.xml.in.in:5
+#: data/io.dev.deimoshall.Metamorphosis.desktop.in.in:3
+#: data/io.dev.deimoshall.Metamorphosis.metainfo.xml.in.in:5
 #: data/resources/blueprints/window.blp:9
 #: data/resources/blueprints/window.blp:21
 #: data/resources/blueprints/window.blp:57 src/main.rs:30
 #: src/widgets/about_window.rs:24
-msgid "Switcheroo"
-msgstr "Switcheroo"
+msgid "Metamorphosis"
+msgstr "Metamorphosis"
 
-#: data/io.gitlab.adhami3310.Converter.desktop.in.in:4
+#: data/io.dev.deimoshall.Metamorphosis.desktop.in.in:4
 msgid "Image Converter"
 msgstr "Převodník obrázků"
 
-#: data/io.gitlab.adhami3310.Converter.desktop.in.in:5
-#: data/io.gitlab.adhami3310.Converter.metainfo.xml.in.in:11
+#: data/io.dev.deimoshall.Metamorphosis.desktop.in.in:5
+#: data/io.dev.deimoshall.Metamorphosis.metainfo.xml.in.in:11
 msgid "Convert and manipulate images"
 msgstr "Převést a manipulovat obrázky"
 
-#: data/io.gitlab.adhami3310.Converter.desktop.in.in:11
+#: data/io.dev.deimoshall.Metamorphosis.desktop.in.in:11
 msgid "converter;image;convert;converting;processing"
 msgstr "converter;image;convert;converting;processing"
 
-#: data/io.gitlab.adhami3310.Converter.gschema.xml.in:26
+#: data/io.dev.deimoshall.Metamorphosis.gschema.xml.in:26
 msgid "Shows less popular datatypes in the menu"
 msgstr "Zobrazit méně populární datové typy v menu"
 
-#: data/io.gitlab.adhami3310.Converter.gschema.xml.in:30
+#: data/io.dev.deimoshall.Metamorphosis.gschema.xml.in:30
 msgid "Window width"
 msgstr "Šířka okna"
 
-#: data/io.gitlab.adhami3310.Converter.gschema.xml.in:34
+#: data/io.dev.deimoshall.Metamorphosis.gschema.xml.in:34
 msgid "Image quality"
 msgstr "Kvalita obrázku"
 
-#: data/io.gitlab.adhami3310.Converter.gschema.xml.in:38
+#: data/io.dev.deimoshall.Metamorphosis.gschema.xml.in:38
 msgid "Image density per inch"
 msgstr "Hustota obrázku na palec"
 
-#: data/io.gitlab.adhami3310.Converter.gschema.xml.in:42
+#: data/io.dev.deimoshall.Metamorphosis.gschema.xml.in:42
 msgid "Window height"
 msgstr "Výška okna"
 
-#: data/io.gitlab.adhami3310.Converter.gschema.xml.in:46
+#: data/io.dev.deimoshall.Metamorphosis.gschema.xml.in:46
 msgid "Window maximized state"
 msgstr "Stav maximalizovaného okna"
 
-#: data/io.gitlab.adhami3310.Converter.gschema.xml.in:50
+#: data/io.dev.deimoshall.Metamorphosis.gschema.xml.in:50
 msgid "Output format"
 msgstr "Výstupní formát"
 
-#: data/io.gitlab.adhami3310.Converter.gschema.xml.in:54
+#: data/io.dev.deimoshall.Metamorphosis.gschema.xml.in:54
 msgid "Compression format"
 msgstr "Formát pro kompresi"
 
-#: data/io.gitlab.adhami3310.Converter.metainfo.xml.in.in:17
+#: data/io.dev.deimoshall.Metamorphosis.metainfo.xml.in.in:17
 msgid "Convert between different image filetypes and resize them easily."
 msgstr "Převádějte mezi různými typy obrázků a měňte jejich velikost jednoduše."
 
-#: data/io.gitlab.adhami3310.Converter.metainfo.xml.in.in:42
+#: data/io.dev.deimoshall.Metamorphosis.metainfo.xml.in.in:42
 msgid "Converting sample image from PNG to HEIF"
 msgstr "Převádění ukázkového obrázku z PNG do HEIF"
 
-#: data/io.gitlab.adhami3310.Converter.metainfo.xml.in.in:46
+#: data/io.dev.deimoshall.Metamorphosis.metainfo.xml.in.in:46
 msgid "Converting multiple sample images from SVG to HEIF"
 msgstr "Převádění ukázkového obrázku z SVG do HEIF"
 
@@ -276,8 +276,8 @@ msgid "Keyboard Shortcuts"
 msgstr "Klávesové zkratky"
 
 #: data/resources/blueprints/window.blp:465
-msgid "About Switcheroo"
-msgstr "O aplikaci Switcheroo"
+msgid "About Metamorphosis"
+msgstr "O aplikaci Metamorphosis"
 
 #: src/file_chooser.rs:39
 msgid "Unsupported filetype"

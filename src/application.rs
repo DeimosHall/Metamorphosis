@@ -1,4 +1,4 @@
-use glib::{ExitCode, clone};
+use glib::{clone, ExitCode};
 use log::{debug, error, info};
 
 use gettextrs::gettext;
@@ -22,7 +22,7 @@ mod imp {
 
     #[glib::object_subclass]
     impl ObjectSubclass for App {
-        const NAME: &'static str = "SwitcherooApp";
+        const NAME: &'static str = "MetamorphosisApp";
         type Type = super::App;
         type ParentType = adw::Application;
 
@@ -130,7 +130,7 @@ impl Default for App {
         glib::Object::builder::<Self>()
             .property("application-id", Some(APP_ID))
             .property("flags", gio::ApplicationFlags::HANDLES_OPEN)
-            .property("resource-base-path", "/io/gitlab/adhami3310/Converter/")
+            .property("resource-base-path", "/io/dev/deimoshall/Metamorphosis/")
             .build()
     }
 }
@@ -181,7 +181,7 @@ impl App {
     }
 
     pub fn run(&self) -> ExitCode {
-        info!("Switcheroo ({APP_ID})");
+        info!("Metamorphosis ({APP_ID})");
         info!("Version: {VERSION} ({PROFILE})");
         info!("Datadir: {PKGDATADIR}");
 

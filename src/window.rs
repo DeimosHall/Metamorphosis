@@ -13,7 +13,7 @@ use crate::magick::{
     JobFile, MagickConvertJob, ResizeArgument, count_frames, generate_job, wait_for_child,
 };
 use crate::temp::{clean_dir, create_temporary_dir, get_temp_file_path};
-use crate::widgets::about_window::SwitcherooAbout;
+use crate::widgets::about_window::MetamorphosisAbout;
 use crate::widgets::image_rest::ImageRest;
 use crate::widgets::image_thumbnail::ImageThumbnail;
 use crate::{ZIP_BINARY_NAME, runtime};
@@ -89,7 +89,7 @@ mod imp {
 
     #[derive(Debug, CompositeTemplate, Derivative)]
     #[derivative(Default)]
-    #[template(resource = "/io/gitlab/adhami3310/Converter/blueprints/window.ui")]
+    #[template(resource = "/io/dev/deimoshall/Metamorphosis/blueprints/window.ui")]
     pub struct AppWindow {
         #[template_child]
         pub toast_overlay: TemplateChild<adw::ToastOverlay>,
@@ -552,7 +552,7 @@ impl AppWindow {
     }
 
     fn show_about(&self) {
-        SwitcherooAbout::show(self);
+        MetamorphosisAbout::show(self);
     }
 
     fn show_help_overlay(&self) {

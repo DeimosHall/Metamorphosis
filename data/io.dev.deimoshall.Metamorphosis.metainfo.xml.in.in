@@ -2,11 +2,11 @@
 <component type="desktop-application">
     <id>@app-id@</id>
 
-    <name>Switcheroo</name>
-    <developer id="io.gitlab.adhami3310">
-        <name translate="no">Khaleel Al-Adhami</name>
+    <name>Metamorphosis</name>
+    <developer id="io.dev.deimoshall">
+        <name translate="no">Deimos Hall</name>
     </developer>
-    <summary>Convert and manipulate images</summary>
+    <summary>Edit EXIF metadata</summary>
 
     <metadata_license>CC-BY-SA-4.0</metadata_license>
     <project_license>GPL-3.0-only</project_license>
@@ -38,28 +38,28 @@
     <screenshots>
         <screenshot type="default">
             <image>
-                https://gitlab.com/adhami3310/Switcheroo/-/raw/main/data/resources/screenshots/0.png</image>
+                https://gitlab.com/deimoshall/Metamorphosis/-/raw/main/data/resources/screenshots/0.png</image>
             <caption>Converting sample image from PNG to HEIF</caption>
         </screenshot>
         <screenshot>
             <image>
-                https://gitlab.com/adhami3310/Switcheroo/-/raw/main/data/resources/screenshots/1.png</image>
+                https://gitlab.com/deimoshall/Metamorphosis/-/raw/main/data/resources/screenshots/1.png</image>
             <caption>Converting multiple sample images from SVG to HEIF</caption>
         </screenshot>
     </screenshots>
 
     <launchable type="desktop-id">@app-id@.desktop</launchable>
 
-    <url type="homepage">https://apps.gnome.org/Converter/</url>
-    <url type="donation">https://opencollective.com/switcheroo</url>
-    <url type="bugtracker">https://gitlab.com/adhami3310/Switcheroo/-/issues</url>
-    <url type="help">https://gitlab.com/adhami3310/Switcheroo/-/issues</url>
-    <url type="vcs-browser">https://gitlab.com/adhami3310/Switcheroo</url>
-    <url type="translate">https://gitlab.com/adhami3310/Switcheroo/-/tree/main/po</url>
-    <url type="contribute">https://gitlab.com/adhami3310/Switcheroo</url>
-    <url type="contact">https://matrix.to/#/@khaleela:gnome.org</url>
+    <url type="homepage">https://apps.gnome.org/Metamorphosis/</url>
+    <url type="donation">https://opencollective.com/metamorphosis</url>
+    <url type="bugtracker">https://gitlab.com/deimoshall/Metamorphosis/-/issues</url>
+    <url type="help">https://gitlab.com/deimoshall/Metamorphosis/-/issues</url>
+    <url type="vcs-browser">https://gitlab.com/deimoshall/Metamorphosis</url>
+    <url type="translate">https://gitlab.com/deimoshall/Metamorphosis/-/tree/main/po</url>
+    <url type="contribute">https://gitlab.com/deimoshall/Metamorphosis</url>
+    <url type="contact">https://matrix.to/#/@deimos:gnome.org</url>
 
-    <update_contact>khaleel.aladhami@gmail.com</update_contact>
+    <update_contact>deimos@deimoshall.io</update_contact>
 
     <content_rating type="oars-1.1" />
 

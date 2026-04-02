@@ -1,12 +1,12 @@
 {
-    "app-id": "io.gitlab.adhami3310.Converter",
+    "app-id": "io.dev.deimoshall.Metamorphosis",
     "runtime": "org.gnome.Platform",
     "runtime-version": "49",
     "sdk": "org.gnome.Sdk",
     "sdk-extensions": [
         "org.freedesktop.Sdk.Extension.rust-stable"
     ],
-    "command": "switcheroo",
+    "command": "metamorphosis",
     "finish-args": [
         "--share=ipc",
         "--socket=fallback-x11",
@@ -106,7 +106,7 @@
             ]
         },
         {
-            "name": "switcheroo",
+            "name": "metamorphosis",
             "builddir": true,
             "buildsystem": "meson",
             "run-test": true,

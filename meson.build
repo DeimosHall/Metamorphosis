@@ -1,4 +1,4 @@
-project('switcheroo',
+project('metamorphosis',
   'rust',
   version: '2.5.2',
   meson_version: '>= 0.59.0',
@@ -8,7 +8,7 @@ project('switcheroo',
 i18n = import('i18n')
 gnome = import('gnome')
 
-base_id = 'io.gitlab.adhami3310.Converter'
+base_id = 'io.dev.deimoshall.Metamorphosis'
 
 dependency('gtk4', version: '>= 4.6.0')
 dependency('libadwaita-1')

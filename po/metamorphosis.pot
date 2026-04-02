@@ -1,12 +1,12 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the switcheroo package.
+# This file is distributed under the same license as the metamorphosis package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: switcheroo\n"
+"Project-Id-Version: metamorphosis\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-11-20 15:54-0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
@@ -17,69 +17,69 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: data/io.gitlab.adhami3310.Converter.desktop.in.in:2
-#: data/io.gitlab.adhami3310.Converter.metainfo.xml.in.in:5
+#: data/io.dev.deimoshall.Metamorphosis.desktop.in.in:2
+#: data/io.dev.deimoshall.Metamorphosis.metainfo.xml.in.in:5
 #: data/resources/blueprints/window.blp:9
 #: data/resources/blueprints/window.blp:21
 #: data/resources/blueprints/window.blp:58 src/main.rs:45
-msgid "Switcheroo"
+msgid "Metamorphosis"
 msgstr ""
 
-#: data/io.gitlab.adhami3310.Converter.desktop.in.in:3
+#: data/io.dev.deimoshall.Metamorphosis.desktop.in.in:3
 msgid "Image Converter"
 msgstr ""
 
-#: data/io.gitlab.adhami3310.Converter.desktop.in.in:4
-#: data/io.gitlab.adhami3310.Converter.metainfo.xml.in.in:9
+#: data/io.dev.deimoshall.Metamorphosis.desktop.in.in:4
+#: data/io.dev.deimoshall.Metamorphosis.metainfo.xml.in.in:9
 msgid "Convert and manipulate images"
 msgstr ""
 
-#: data/io.gitlab.adhami3310.Converter.desktop.in.in:10
+#: data/io.dev.deimoshall.Metamorphosis.desktop.in.in:10
 msgid "converter;image;convert;converting;processing"
 msgstr ""
 
-#: data/io.gitlab.adhami3310.Converter.desktop.in.in:20
+#: data/io.dev.deimoshall.Metamorphosis.desktop.in.in:20
 #: data/resources/blueprints/window.blp:480
 msgid "New Window"
 msgstr ""
 
-#: data/io.gitlab.adhami3310.Converter.gschema.xml.in:26
+#: data/io.dev.deimoshall.Metamorphosis.gschema.xml.in:26
 msgid "Window width"
 msgstr ""
 
-#: data/io.gitlab.adhami3310.Converter.gschema.xml.in:30
+#: data/io.dev.deimoshall.Metamorphosis.gschema.xml.in:30
 msgid "Image quality"
 msgstr ""
 
-#: data/io.gitlab.adhami3310.Converter.gschema.xml.in:34
+#: data/io.dev.deimoshall.Metamorphosis.gschema.xml.in:34
 msgid "Image density per inch"
 msgstr ""
 
-#: data/io.gitlab.adhami3310.Converter.gschema.xml.in:38
+#: data/io.dev.deimoshall.Metamorphosis.gschema.xml.in:38
 msgid "Window height"
 msgstr ""
 
-#: data/io.gitlab.adhami3310.Converter.gschema.xml.in:42
+#: data/io.dev.deimoshall.Metamorphosis.gschema.xml.in:42
 msgid "Window maximized state"
 msgstr ""
 
-#: data/io.gitlab.adhami3310.Converter.gschema.xml.in:46
+#: data/io.dev.deimoshall.Metamorphosis.gschema.xml.in:46
 msgid "Output format"
 msgstr ""
 
-#: data/io.gitlab.adhami3310.Converter.gschema.xml.in:50
+#: data/io.dev.deimoshall.Metamorphosis.gschema.xml.in:50
 msgid "Compression format"
 msgstr ""
 
-#: data/io.gitlab.adhami3310.Converter.metainfo.xml.in.in:15
+#: data/io.dev.deimoshall.Metamorphosis.metainfo.xml.in.in:15
 msgid "Convert between different image filetypes and resize them easily."
 msgstr ""
 
-#: data/io.gitlab.adhami3310.Converter.metainfo.xml.in.in:42
+#: data/io.dev.deimoshall.Metamorphosis.metainfo.xml.in.in:42
 msgid "Converting sample image from PNG to HEIF"
 msgstr ""
 
-#: data/io.gitlab.adhami3310.Converter.metainfo.xml.in.in:47
+#: data/io.dev.deimoshall.Metamorphosis.metainfo.xml.in.in:47
 msgid "Converting multiple sample images from SVG to HEIF"
 msgstr ""
 
@@ -263,7 +263,7 @@ msgid "Keyboard Shortcuts"
 msgstr ""
 
 #: data/resources/blueprints/window.blp:497
-msgid "About Switcheroo"
+msgid "About Metamorphosis"
 msgstr ""
 
 #: src/file_chooser.rs:39 src/window.rs:2136

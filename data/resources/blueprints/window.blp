@@ -6,7 +6,7 @@ template $AppWindow: Adw.ApplicationWindow {
   default-height: 750;
   width-request: 300;
   height-request: 300;
-  title: _("Switcheroo");
+  title: _("Metamorphosis");
 
   Box {
     orientation: vertical;
@@ -18,7 +18,7 @@ template $AppWindow: Adw.ApplicationWindow {
         Adw.NavigationView navigation {
           Adw.NavigationPage {
             tag: "main";
-            title: _("Switcheroo");
+            title: _("Metamorphosis");
 
             child: Adw.ToolbarView {
               [top]
@@ -54,8 +54,8 @@ template $AppWindow: Adw.ApplicationWindow {
                     name: "stack_welcome_page";
 
                     child: Adw.StatusPage {
-                      icon-name: "io.gitlab.adhami3310.Converter";
-                      title: _("Switcheroo");
+                      icon-name: "io.dev.deimoshall.Metamorphosis";
+                      title: _("Metamorphosis");
                       description: _("Drag and drop images here");
                       hexpand: true;
                       vexpand: true;
@@ -496,7 +496,7 @@ menu primary_menu {
     }
 
     item {
-      label: _("About Switcheroo");
+      label: _("About Metamorphosis");
       action: "win.about";
     }
   }

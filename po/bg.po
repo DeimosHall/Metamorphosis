@@ -1,12 +1,12 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the switcheroo package.
+# This file is distributed under the same license as the metamorphosis package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # twlvnn <kraft_werk@tutanota.com>, 2024.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: switcheroo\n"
+"Project-Id-Version: metamorphosis\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-04-19 13:36-0400\n"
 "PO-Revision-Date: 2024-04-28 19:24+0200\n"
@@ -19,70 +19,70 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
 "X-Generator: Gtranslator 46.0\n"
 
-#: data/io.gitlab.adhami3310.Converter.desktop.in.in:3
-#: data/io.gitlab.adhami3310.Converter.metainfo.xml.in.in:5
+#: data/io.dev.deimoshall.Metamorphosis.desktop.in.in:3
+#: data/io.dev.deimoshall.Metamorphosis.metainfo.xml.in.in:5
 #: data/resources/blueprints/window.blp:9
 #: data/resources/blueprints/window.blp:21
 #: data/resources/blueprints/window.blp:57 src/main.rs:30
 #: src/widgets/about_window.rs:24
-msgid "Switcheroo"
-msgstr "Switcheroo"
+msgid "Metamorphosis"
+msgstr "Metamorphosis"
 
-#: data/io.gitlab.adhami3310.Converter.desktop.in.in:4
+#: data/io.dev.deimoshall.Metamorphosis.desktop.in.in:4
 msgid "Image Converter"
 msgstr "Преобразувател на изображения"
 
-#: data/io.gitlab.adhami3310.Converter.desktop.in.in:5
-#: data/io.gitlab.adhami3310.Converter.metainfo.xml.in.in:11
+#: data/io.dev.deimoshall.Metamorphosis.desktop.in.in:5
+#: data/io.dev.deimoshall.Metamorphosis.metainfo.xml.in.in:11
 msgid "Convert and manipulate images"
 msgstr "Преобразувайте и манипулирайте изображения"
 
-#: data/io.gitlab.adhami3310.Converter.desktop.in.in:11
+#: data/io.dev.deimoshall.Metamorphosis.desktop.in.in:11
 msgid "converter;image;convert;converting;processing"
 msgstr "преобразувател;изображение;преобразуване;обработване"
 
-#: data/io.gitlab.adhami3310.Converter.gschema.xml.in:26
+#: data/io.dev.deimoshall.Metamorphosis.gschema.xml.in:26
 msgid "Shows less popular datatypes in the menu"
 msgstr "Показва по-малко популярни типове данни в менюто"
 
-#: data/io.gitlab.adhami3310.Converter.gschema.xml.in:30
+#: data/io.dev.deimoshall.Metamorphosis.gschema.xml.in:30
 msgid "Window width"
 msgstr "Широчина на прозореца"
 
-#: data/io.gitlab.adhami3310.Converter.gschema.xml.in:34
+#: data/io.dev.deimoshall.Metamorphosis.gschema.xml.in:34
 msgid "Image quality"
 msgstr "Качество на изображението"
 
-#: data/io.gitlab.adhami3310.Converter.gschema.xml.in:38
+#: data/io.dev.deimoshall.Metamorphosis.gschema.xml.in:38
 msgid "Image density per inch"
 msgstr "Плътност на изображението на инч"
 
-#: data/io.gitlab.adhami3310.Converter.gschema.xml.in:42
+#: data/io.dev.deimoshall.Metamorphosis.gschema.xml.in:42
 msgid "Window height"
 msgstr "Височина на прозореца"
 
-#: data/io.gitlab.adhami3310.Converter.gschema.xml.in:46
+#: data/io.dev.deimoshall.Metamorphosis.gschema.xml.in:46
 msgid "Window maximized state"
 msgstr "Максимизирано състояние на прозорец"
 
-#: data/io.gitlab.adhami3310.Converter.gschema.xml.in:50
+#: data/io.dev.deimoshall.Metamorphosis.gschema.xml.in:50
 msgid "Output format"
 msgstr "Тип на изходния файл"
 
-#: data/io.gitlab.adhami3310.Converter.gschema.xml.in:54
+#: data/io.dev.deimoshall.Metamorphosis.gschema.xml.in:54
 msgid "Compression format"
 msgstr "Тип на компресията"
 
-#: data/io.gitlab.adhami3310.Converter.metainfo.xml.in.in:17
+#: data/io.dev.deimoshall.Metamorphosis.metainfo.xml.in.in:17
 msgid "Convert between different image filetypes and resize them easily."
 msgstr ""
 "Преобразувайте и лесно преоразмерявайте между различни видове изображения."
 
-#: data/io.gitlab.adhami3310.Converter.metainfo.xml.in.in:42
+#: data/io.dev.deimoshall.Metamorphosis.metainfo.xml.in.in:42
 msgid "Converting sample image from PNG to HEIF"
 msgstr "Преобразуване на примерни изображения от PNG в HEIF"
 
-#: data/io.gitlab.adhami3310.Converter.metainfo.xml.in.in:46
+#: data/io.dev.deimoshall.Metamorphosis.metainfo.xml.in.in:46
 msgid "Converting multiple sample images from SVG to HEIF"
 msgstr "Преобразуване на н примерни изображения от SVG в HEIF"
 
@@ -280,8 +280,8 @@ msgid "Keyboard Shortcuts"
 msgstr "Клавишни комбинации"
 
 #: data/resources/blueprints/window.blp:465
-msgid "About Switcheroo"
-msgstr "Относно „Switcheroo“"
+msgid "About Metamorphosis"
+msgstr "Относно „Metamorphosis“"
 
 #: src/file_chooser.rs:39
 msgid "Unsupported filetype"

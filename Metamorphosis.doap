@@ -1,0 +1,37 @@
+<Project
+		xmlns="http://usefulinc.com/ns/doap#"
+		xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+		xmlns:foaf="http://xmlns.com/foaf/0.1/"
+		xmlns:gnome="http://api.gnome.org/doap-extensions#">
+
+	<name xml:lang="en">Metamorphosis</name>
+	<shortdesc xml:lang="en">Edit exif metadata of images and videos</shortdesc>
+
+	<homepage rdf:resource="https://github.com/DeimosHall/Metamorphosis"/>
+	<download-page rdf:resource="https://flathub.org/apps/details/io.dev.deimoshall.Metamorphosis"/>
+	<bug-database rdf:resource="https://github.com/DeimosHall/Metamorphosis/issues"/>
+
+	<programming-language>Rust</programming-language>
+	<platform>GTK 4</platform>
+	<platform>Libadwaita</platform>
+
+	<repository>
+		<GitRepository>
+			<location rdf:resource="https://github.com/DeimosHall/Metamorphosis.git"/>
+			<browse rdf:resource="https://github.com/DeimosHall/Metamorphosis"/>
+		</GitRepository>
+	</repository>
+
+	<maintainer>
+		<foaf:Person>
+			<foaf:name>Deimos Hall</foaf:name>
+            <foaf:mbox rdf:resource="mailto:deimoshall.dev@proton.me" />
+			<foaf:account>
+				<foaf:OnlineAccount>
+					<foaf:accountServiceHomepage rdf:resource="https://github.com"/>
+					<foaf:accountName>DeimosHall</foaf:accountName>
+				</foaf:OnlineAccount>
+			</foaf:account>
+		</foaf:Person>
+	</maintainer>
+</Project>

@@ -967,6 +967,31 @@ dependencies = [
 ]
 
 [[package]]
+name = "metamorphosis"
+version = "0.1.0"
+dependencies = [
+ "ashpd",
+ "async-channel",
+ "derivative",
+ "fdlimit",
+ "futures",
+ "gettext-rs",
+ "glib",
+ "gtk4",
+ "gtk4-macros",
+ "itertools",
+ "libadwaita",
+ "log",
+ "once_cell",
+ "pretty_env_logger",
+ "rand",
+ "regex",
+ "shared_child",
+ "tempfile",
+ "tokio",
+]
+
+[[package]]
 name = "mio"
 version = "1.1.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1364,31 +1389,6 @@ name = "stable_deref_trait"
 version = "1.2.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "6ce2be8dc25455e1f91df71bfa12ad37d7af1092ae736f3a6cd0e37bc7810596"
-
-[[package]]
-name = "switcheroo"
-version = "2.5.2"
-dependencies = [
- "ashpd",
- "async-channel",
- "derivative",
- "fdlimit",
- "futures",
- "gettext-rs",
- "glib",
- "gtk4",
- "gtk4-macros",
- "itertools",
- "libadwaita",
- "log",
- "once_cell",
- "pretty_env_logger",
- "rand",
- "regex",
- "shared_child",
- "tempfile",
- "tokio",
-]
 
 [[package]]
 name = "syn"

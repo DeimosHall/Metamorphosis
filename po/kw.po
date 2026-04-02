@@ -1,12 +1,12 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the switcheroo package.
+# This file is distributed under the same license as the metamorphosis package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # Flynn Peck <cirilla@tuta.io>, 2026.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: switcheroo\n"
+"Project-Id-Version: metamorphosis\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-11-20 15:54-0800\n"
 "PO-Revision-Date: 2026-01-05 16:01+0000\n"
@@ -19,69 +19,69 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Gtranslator 49.0\n"
 
-#: data/io.gitlab.adhami3310.Converter.desktop.in.in:2
-#: data/io.gitlab.adhami3310.Converter.metainfo.xml.in.in:5
+#: data/io.dev.deimoshall.Metamorphosis.desktop.in.in:2
+#: data/io.dev.deimoshall.Metamorphosis.metainfo.xml.in.in:5
 #: data/resources/blueprints/window.blp:9
 #: data/resources/blueprints/window.blp:21
 #: data/resources/blueprints/window.blp:58 src/main.rs:45
-msgid "Switcheroo"
-msgstr "Switcheroo"
+msgid "Metamorphosis"
+msgstr "Metamorphosis"
 
-#: data/io.gitlab.adhami3310.Converter.desktop.in.in:3
+#: data/io.dev.deimoshall.Metamorphosis.desktop.in.in:3
 msgid "Image Converter"
 msgstr "Treylyer Avenyow"
 
-#: data/io.gitlab.adhami3310.Converter.desktop.in.in:4
-#: data/io.gitlab.adhami3310.Converter.metainfo.xml.in.in:9
+#: data/io.dev.deimoshall.Metamorphosis.desktop.in.in:4
+#: data/io.dev.deimoshall.Metamorphosis.metainfo.xml.in.in:9
 msgid "Convert and manipulate images"
 msgstr "Treyla ha handla avenyow"
 
-#: data/io.gitlab.adhami3310.Converter.desktop.in.in:10
+#: data/io.dev.deimoshall.Metamorphosis.desktop.in.in:10
 msgid "converter;image;convert;converting;processing"
 msgstr "treylyer;aven;treylya;treylyans;argerdh"
 
-#: data/io.gitlab.adhami3310.Converter.desktop.in.in:20
+#: data/io.dev.deimoshall.Metamorphosis.desktop.in.in:20
 #: data/resources/blueprints/window.blp:480
 msgid "New Window"
 msgstr "Fenester Nowydh"
 
-#: data/io.gitlab.adhami3310.Converter.gschema.xml.in:26
+#: data/io.dev.deimoshall.Metamorphosis.gschema.xml.in:26
 msgid "Window width"
 msgstr "Lester fenester"
 
-#: data/io.gitlab.adhami3310.Converter.gschema.xml.in:30
+#: data/io.dev.deimoshall.Metamorphosis.gschema.xml.in:30
 msgid "Image quality"
 msgstr "Kwalita aven"
 
-#: data/io.gitlab.adhami3310.Converter.gschema.xml.in:34
+#: data/io.dev.deimoshall.Metamorphosis.gschema.xml.in:34
 msgid "Image density per inch"
 msgstr "Tewder aven dre meusva"
 
-#: data/io.gitlab.adhami3310.Converter.gschema.xml.in:38
+#: data/io.dev.deimoshall.Metamorphosis.gschema.xml.in:38
 msgid "Window height"
 msgstr "Ughelder fenester"
 
-#: data/io.gitlab.adhami3310.Converter.gschema.xml.in:42
+#: data/io.dev.deimoshall.Metamorphosis.gschema.xml.in:42
 msgid "Window maximized state"
 msgstr "Studh fenester kowlvoghhys"
 
-#: data/io.gitlab.adhami3310.Converter.gschema.xml.in:46
+#: data/io.dev.deimoshall.Metamorphosis.gschema.xml.in:46
 msgid "Output format"
 msgstr "Furvas Eskorrans"
 
-#: data/io.gitlab.adhami3310.Converter.gschema.xml.in:50
+#: data/io.dev.deimoshall.Metamorphosis.gschema.xml.in:50
 msgid "Compression format"
 msgstr "Furvas gwaskyans"
 
-#: data/io.gitlab.adhami3310.Converter.metainfo.xml.in.in:15
+#: data/io.dev.deimoshall.Metamorphosis.metainfo.xml.in.in:15
 msgid "Convert between different image filetypes and resize them easily."
 msgstr "Treylya tredh eghennow avenyow dyffrans ha chanjya aga braster i yn es"
 
-#: data/io.gitlab.adhami3310.Converter.metainfo.xml.in.in:42
+#: data/io.dev.deimoshall.Metamorphosis.metainfo.xml.in.in:42
 msgid "Converting sample image from PNG to HEIF"
 msgstr "Treylya aven sampel dhyworth PNG dhe HEIF"
 
-#: data/io.gitlab.adhami3310.Converter.metainfo.xml.in.in:47
+#: data/io.dev.deimoshall.Metamorphosis.metainfo.xml.in.in:47
 msgid "Converting multiple sample images from SVG to HEIF"
 msgstr "Treylya avenyow sampel liesek dhyworth SVG dhe HEIF"
 
@@ -266,8 +266,8 @@ msgid "Keyboard Shortcuts"
 msgstr "Kesunyansow Bysowek"
 
 #: data/resources/blueprints/window.blp:497
-msgid "About Switcheroo"
-msgstr "A-dro Switcheroo"
+msgid "About Metamorphosis"
+msgstr "A-dro Metamorphosis"
 
 #: src/file_chooser.rs:39 src/window.rs:2136
 msgid "Unsupported filetype"
