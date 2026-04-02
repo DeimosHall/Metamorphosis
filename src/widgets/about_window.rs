@@ -20,20 +20,20 @@ impl MetamorphosisAbout {
         about.set_developers(DEVELOPERS);
         about.set_translator_credits(&gettext("translator-credits"));
 
-        about.add_other_app(
-            "io.dev.deimoshall.Impression",
-            // Translators: Metainfo for the app Impression. <https://gitlab.com/deimoshall/Impression>
-            &gettext("Impression"),
-            // Translators: Metainfo for the app Impression. <https://gitlab.com/deimoshall/Impression>
-            &gettext("Create bootable drives"),
-        );
-        about.add_other_app(
-            "io.dev.deimoshall.Footage",
-            // Translators: Metainfo for the app Footage. <https://gitlab.com/deimoshall/Footage>
-            &gettext("Footage"),
-            // Translators: Metainfo for the app Footage. <https://gitlab.com/deimoshall/Footage>
-            &gettext("Polish your videos"),
-        );
+        // about.add_other_app(
+        //     "io.dev.deimoshall.Impression",
+        //     // Translators: Metainfo for the app Impression. <https://gitlab.com/deimoshall/Impression>
+        //     &gettext("Impression"),
+        //     // Translators: Metainfo for the app Impression. <https://gitlab.com/deimoshall/Impression>
+        //     &gettext("Create bootable drives"),
+        // );
+        // about.add_other_app(
+        //     "io.dev.deimoshall.Footage",
+        //     // Translators: Metainfo for the app Footage. <https://gitlab.com/deimoshall/Footage>
+        //     &gettext("Footage"),
+        //     // Translators: Metainfo for the app Footage. <https://gitlab.com/deimoshall/Footage>
+        //     &gettext("Polish your videos"),
+        // );
         about.add_acknowledgement_section(
             Some(&gettext("Code and Design Borrowed from")),
             &[
@@ -44,6 +44,7 @@ impl MetamorphosisAbout {
                 "Bottles https://github.com/bottlesdevs/Bottles",
                 "Loupe https://gitlab.gnome.org/GNOME/loupe",
                 "Totem https://gitlab.gnome.org/GNOME/totem",
+                "Switcheroo https://gitlab.com/adhami3310/Switcheroo",
             ],
         );
         about.add_acknowledgement_section(
