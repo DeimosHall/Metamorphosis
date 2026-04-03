@@ -10,7 +10,7 @@ use crate::window::AppWindow;
 
 mod imp {
 
-    use crate::window::FileOperations;
+    use crate::ui::operations::FileOperations;
 
     use super::*;
     use adw::subclass::prelude::AdwApplicationImpl;

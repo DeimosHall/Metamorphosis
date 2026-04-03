@@ -13,6 +13,11 @@ use crate::magick::{
     JobFile, MagickConvertJob, ResizeArgument, count_frames, generate_job, wait_for_child,
 };
 use crate::temp::{clean_dir, create_temporary_dir, get_temp_file_path};
+use crate::ui::convert::{ConvertArguments, ConvertOperations};
+use crate::ui::navigation::StackNavigation;
+use crate::ui::operations::FileOperations;
+use crate::ui::settings::SettingsStore;
+use crate::ui::ui::WindowUI;
 use crate::widgets::about_window::MetamorphosisAbout;
 use crate::widgets::image_rest::ImageRest;
 use crate::widgets::image_thumbnail::ImageThumbnail;
@@ -1173,71 +1178,6 @@ impl AppWindow {
 
         self.switch_to_stack_converting();
     }
-}
-
-pub trait FileOperations {
-    fn add_dialog(&self);
-    fn open_files(&self, files: Vec<Option<InputFile>>);
-    fn save_error(&self, error: Option<&str>);
-    fn save_files(&self);
-    fn open_load(&self);
-    fn open_error(&self, error: Option<&str>);
-    fn add_success_wrapper(&self, files: Vec<InputFile>);
-}
-
-trait StackNavigation {
-    fn switch_to_stack_convert(&self);
-    fn switch_to_stack_converting(&self);
-    fn switch_to_stack_welcome(&self);
-    fn switch_to_stack_invalid_image(&self);
-    fn switch_to_stack_loading(&self);
-    fn switch_back_from_loading(&self);
-    fn switch_to_stack_loading_generally(&self);
-}
-
-pub trait WindowUI {
-    fn update_options(&self);
-    fn update_output_options(&self);
-    fn update_compression_options(&self);
-    fn update_advanced_options(&self);
-    fn update_width_from_height(&self);
-    fn update_height_from_width(&self);
-    fn update_resize(&self);
-    fn update_full_image_container(&self);
-    fn update_image_container(&self, count: usize, remaining_visible: bool);
-}
-
-trait ConvertArguments {
-    fn get_quality_argument(&self) -> usize;
-    fn get_dpi_argument(&self) -> usize;
-    fn get_bgcolor_argument(&self) -> Color;
-    fn get_filter_argument(&self) -> Option<ResizeFilter>;
-    fn get_resize_argument(&self) -> ResizeArgument;
-}
-trait ConvertOperations {
-    fn convert_start_wrapper(&self, save_format: OutputType, path: String);
-    fn move_output(
-        &self,
-        save_format: OutputType,
-        path: String,
-        output_files: Vec<String>,
-        dir_path: String,
-    );
-    fn convert_failed(&self, error_message: String, temp_dir_path: String);
-    fn convert_success(&self, temp_dir_path: String, path: String, save_format: OutputType);
-    fn convert_clean(&self, temp_dir_path: String);
-    fn convert_cancel(&self);
-}
-
-trait SettingsStore {
-    fn save_window_size(&self) -> Result<(), glib::BoolError>;
-    fn load_window_size(&self);
-    fn save_options(&self) -> Result<(), glib::BoolError>;
-    fn load_options(&self);
-    fn save_selected_output(&self) -> Result<(), glib::BoolError>;
-    fn load_selected_output(&self) -> FileType;
-    fn save_selected_compression(&self) -> Result<(), glib::BoolError>;
-    fn load_selected_compression(&self) -> CompressionType;
 }
 
 impl ConvertOperations for AppWindow {

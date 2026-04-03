@@ -8,6 +8,7 @@ mod filetypes;
 mod input_file;
 mod magick;
 mod temp;
+mod ui;
 mod widgets;
 mod window;
 
