@@ -12,6 +12,7 @@ use crate::input_file::InputFile;
 use crate::magick::{
     JobFile, MagickConvertJob, ResizeArgument, count_frames, generate_job, wait_for_child,
 };
+use crate::services::exif_service::ExifService;
 use crate::temp::{clean_dir, create_temporary_dir, get_temp_file_path};
 use crate::widgets::about_window::MetamorphosisAbout;
 use crate::widgets::image_rest::ImageRest;
@@ -292,6 +293,15 @@ impl AppWindow {
                     self,
                     move |_, _, _| {
                         window.clear();
+                    }
+                ))
+                .build(),
+            gio::ActionEntry::builder("exif")
+                .activate(clone!(
+                    #[weak(rename_to=window)]
+                    self,
+                    move |_, _, _| {
+                        window.test_exiftool();
                     }
                 ))
                 .build(),
@@ -718,6 +728,18 @@ impl AppWindow {
                 }
             }
         ));
+    }
+    
+    fn test_exiftool(&self) {
+        println!("Testing exiftool");
+        let paths = self.files().iter().map(|f| f.path()).collect_vec();
+        std::thread::spawn(|| {
+            ExifService::exiftool_version();
+            for path in paths {
+                println!("File: {}", path);
+                ExifService::read_all(path);
+            } 
+        });
     }
 
     fn remove_file(&self, i: u32) {
