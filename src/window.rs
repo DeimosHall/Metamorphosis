@@ -122,6 +122,10 @@ mod imp {
         pub supported_output_filetypes: TemplateChild<gtk::StringList>,
         #[template_child]
         pub progress_bar: TemplateChild<gtk::ProgressBar>,
+        #[template_child]
+        pub create_date_entry: TemplateChild<gtk::Entry>,
+        #[template_child]
+        pub apply_date_button: TemplateChild<gtk::Button>,
 
         #[template_child]
         pub output_filetype: TemplateChild<adw::ComboRow>,
@@ -528,6 +532,15 @@ impl AppWindow {
                 &gettext("New transparency layer color: {}").replace("{}", &y),
             )]);
         });
+
+        imp.apply_date_button.connect_clicked(clone!(
+            #[weak(rename_to=this)]
+            self,
+            move |_| {
+                // this.apply
+            }
+        ));
+
         self.load_options();
     }
 
@@ -729,18 +742,22 @@ impl AppWindow {
             }
         ));
     }
-    
+
     fn test_exiftool(&self) {
         println!("Testing exiftool");
         let paths = self.files().iter().map(|f| f.path()).collect_vec();
-        std::thread::spawn(|| {
-            ExifService::exiftool_version();
-            for path in paths {
-                println!("File: {}", path);
-                // ExifService::read_all(path);
-                println!("Create Date: {:?}", ExifService::create_date(path));
-            } 
-        });
+        glib::spawn_future_local(clone!(
+            #[weak(rename_to=this)]
+            self,
+            async move {
+                // ExifService::exiftool_version().await;
+                for path in paths {
+                    println!("File: {}", path);
+                    // ExifService::read_all(path);
+                    println!("Create Date: {:?}", ExifService::create_date(path).await);
+                }
+            }
+        ));
     }
 
     fn remove_file(&self, i: u32) {
@@ -843,6 +860,8 @@ impl AppWindow {
 
         self.update_options();
         self.switch_back_from_loading();
+        self.load_create_date();
+        
         self.imp()
             .all_images_stack
             .set_visible_child_name("all_images");
@@ -1228,6 +1247,8 @@ pub trait WindowUI {
     fn update_resize(&self);
     fn update_full_image_container(&self);
     fn update_image_container(&self, count: usize, remaining_visible: bool);
+    fn load_create_date(&self);
+    fn apply_create_date(&self);
 }
 
 trait ConvertArguments {
@@ -2002,6 +2023,25 @@ impl WindowUI for AppWindow {
         }
 
         imp.image_container.invalidate_filter();
+    }
+
+    fn load_create_date(&self) {
+        let files = self.files();
+        let path = files.first().unwrap().path();
+        
+        glib::spawn_future_local(clone!(
+            #[weak(rename_to=this)]
+            self,
+            async move {
+                if let Some(date) = ExifService::create_date(path).await {
+                    this.imp().create_date_entry.set_text(&date);
+                }
+            }
+        ));
+    }
+    
+    fn apply_create_date(&self) {
+        todo!()
     }
 }
 

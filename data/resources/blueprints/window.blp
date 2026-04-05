@@ -112,6 +112,36 @@ template $AppWindow: Adw.ApplicationWindow {
                               selection-mode: none;
                             }
                           }
+                          
+                          Adw.PreferencesGroup {
+                            Adw.ActionRow create_date_row {
+                              title: _("Create Date");
+                              subtitle: _("EXIF CreateDate");
+          
+                              Entry create_date_entry {
+                                placeholder-text: _("YYYY:MM:DD HH:MM:SS");
+                                width-chars: 20;
+                                valign: center;
+                              }
+                            }
+                          }
+                          
+                          Adw.PreferencesGroup {
+                            valign: end;
+                            halign: center;
+                            
+                            Button apply_date_button {
+                              label: _("Apply");
+                              halign: start;
+                              valign: center;
+        
+                              styles [
+                                "suggested-action",
+                                "pill",
+                                "long",
+                              ]
+                            }
+                          }
 
                           Adw.PreferencesGroup {
                             Adw.ComboRow output_filetype {
