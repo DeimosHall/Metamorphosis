@@ -737,7 +737,8 @@ impl AppWindow {
             ExifService::exiftool_version();
             for path in paths {
                 println!("File: {}", path);
-                ExifService::read_all(path);
+                // ExifService::read_all(path);
+                println!("Create Date: {:?}", ExifService::create_date(path));
             } 
         });
     }

@@ -17,4 +17,17 @@ impl ExifService {
         let exif_data: ExifData = exiftool.read_metadata(path, &["-g2"]).unwrap();
         println!("Parsed data: \n{:#?}", exif_data);
     }
+    
+    /// Get "Create Date" tag value
+    /// 
+    /// Output Example: Some("2026:03:31 22:02:24")
+    pub fn create_date(path: String) -> Option<String> {
+        let exiftool = ExifTool::with_executable(Path::new("/app/exiftool")).unwrap();
+        let path = Path::new(path.as_str());
+        exiftool.read_tag(path, "CreateDate", &[]).ok()?
+    }
+    
+    pub fn set_create_date(path: String) {
+        todo!()
+    }
 }
