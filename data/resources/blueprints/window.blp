@@ -142,211 +142,213 @@ template $AppWindow: Adw.ApplicationWindow {
                               ]
                             }
                           }
-
-                          Adw.PreferencesGroup {
-                            Adw.ComboRow output_filetype {
-                              title: _("Export Format");
-
-                              model: StringList supported_output_filetypes {};
-
-                              styles ["output-filetype-drop" ]
-                            }
-
-                            Adw.ActionRow single_pdf {
-                              title: _("Save as multi-page PDF");
-                              activatable-widget: single_pdf_value;
-
-                              Switch single_pdf_value {
-                                active: false;
-                                valign: center;
-                              }
-                            }
-
-                            Adw.ActionRow output_compression {
-                              title: _("Save To ZIP");
-                              activatable-widget: output_compression_value;
-
-                              Switch output_compression_value {
-                                active: false;
-                                valign: center;
-                              }
-                            }
-                          }
-
-                          Adw.PreferencesGroup {
-                            Adw.ActionRow quality_row {
-                              title: _("Quality");
-
-                              Scale quality {
-                                adjustment: Adjustment percentage {
-                                  lower: 1;
-                                  upper: 100;
-                                  step-increment: 1;
-                                };
-
-                                accessibility {
-                                  labelled-by: quality_row;
-                                }
-
-                                hexpand: true;
-                                vexpand: true;
-                                digits: 0;
-                                draw-value: true;
-                                value-pos: right;
-                              }
-                            }
-
-                            Adw.ActionRow bgcolor_row {
-                              title: _("Background Color");
-                              subtitle: _("Replaces original transparency layer");
-                              activatable-widget: bgcolor;
-
-                              ColorDialogButton bgcolor {
-                                valign: center;
-                                rgba: "#00000000";
-
-                                dialog: ColorDialog {
-                                  with-alpha: true;
-                                };
-                              }
-                            }
-
-                            Adw.ActionRow dpi_row {
-                              title: _("Pixel Density Per Inch");
-                              activatable-widget: dpi_value;
-
-                              Adw.Bin {
-                                Entry dpi_value {
-                                  valign: center;
-                                }
-                              }
-                            }
-
-                            Adw.ActionRow resize_amount_row {
-                              title: _("Resize");
-
-                              Box {
-                                spacing: 5;
-
-                                Entry resize_width_value {
-                                  valign: center;
-                                  placeholder-text: _("Width");
-                                  tooltip-text: _("Width");
-                                  input-purpose: digits;
-                                  max-width-chars: 8;
-                                  hexpand: false;
-                                }
-
-                                Entry resize_scale_width_value {
-                                  valign: center;
-                                  placeholder-text: _("Width");
-                                  input-purpose: digits;
-                                  tooltip-text: _("Width");
-                                  max-width-chars: 8;
-                                  hexpand: false;
-                                }
-
-                                ToggleButton link_axis {
-                                  active: true;
-                                  valign: center;
-                                  icon-name: 'chain-link-symbolic';
-                                  tooltip-text: _("Preserve aspect ratio");
-
-                                  styles [
-                                    'raised',
-                                    'circular',
-                                    'lock',
-                                  ]
-                                }
-
-                                Entry resize_height_value {
-                                  valign: center;
-                                  placeholder-text: _("Height");
-                                  tooltip-text: _("Height");
-                                  input-purpose: digits;
-                                  max-width-chars: 8;
-                                  hexpand: false;
-                                }
-
-                                Entry resize_scale_height_value {
-                                  valign: center;
-                                  placeholder-text: _("Width");
-                                  tooltip-text: _("Height");
-                                  input-purpose: digits;
-                                  max-width-chars: 8;
-                                  hexpand: false;
-                                }
-                              }
-
-                              Adw.Bin {
-                                Box {
-                                  DropDown resize_type {
-                                    valign: center;
-
-                                    accessibility {
-                                      label: _("Choose between resizing with percentages or using exact pixels");
-                                    }
-
-                                    model: StringList resize_types {
-                                      strings [
-                                        _("%"),
-                                        _("px"),
-                                      ]
-                                    };
-
-                                    styles [
-                                      "flat",
-                                      "unit-drop",
-                                    ]
-                                  }
-                                }
-                              }
-                            }
-
-                            Adw.ActionRow resize_filter_row {
-                              title: _("Resize Algorithm");
-
-                              Box {
-                                valign: center;
-
-                                ToggleButton resize_filter_default {
-                                  active: true;
-                                  label: _("Default");
-                                }
-
-                                ToggleButton resize_filter_pixel {
-                                  active: false;
-                                  label: _("Pixel Art");
-                                }
-
-                                styles [
-                                  "linked",
-                                ]
-                              }
-                            }
-                          }
-
-                          Adw.PreferencesGroup {
-                            valign: end;
-                            halign: center;
-
-                            Button convert_button {
-                              valign: center;
-                              halign: end;
-                              label: _("_Convert");
-                              use-underline: true;
-
-                              styles [
-                                "suggested-action",
-                                "pill",
-                                "long",
-                              ]
-                            }
-                          }
                         }
                       }
                     };
                   }
+                  
+                  // *************************** Hidden ***************************
+                  Adw.PreferencesGroup {
+                    Adw.ComboRow output_filetype {
+                      title: _("Export Format");
+
+                      model: StringList supported_output_filetypes {};
+
+                      styles ["output-filetype-drop" ]
+                    }
+
+                    Adw.ActionRow single_pdf {
+                      title: _("Save as multi-page PDF");
+                      activatable-widget: single_pdf_value;
+
+                      Switch single_pdf_value {
+                        active: false;
+                        valign: center;
+                      }
+                    }
+
+                    Adw.ActionRow output_compression {
+                      title: _("Save To ZIP");
+                      activatable-widget: output_compression_value;
+
+                      Switch output_compression_value {
+                        active: false;
+                        valign: center;
+                      }
+                    }
+                  }
+
+                  Adw.PreferencesGroup {
+                    Adw.ActionRow quality_row {
+                      title: _("Quality");
+
+                      Scale quality {
+                        adjustment: Adjustment percentage {
+                          lower: 1;
+                          upper: 100;
+                          step-increment: 1;
+                        };
+
+                        accessibility {
+                          labelled-by: quality_row;
+                        }
+
+                        hexpand: true;
+                        vexpand: true;
+                        digits: 0;
+                        draw-value: true;
+                        value-pos: right;
+                      }
+                    }
+
+                    Adw.ActionRow bgcolor_row {
+                      title: _("Background Color");
+                      subtitle: _("Replaces original transparency layer");
+                      activatable-widget: bgcolor;
+
+                      ColorDialogButton bgcolor {
+                        valign: center;
+                        rgba: "#00000000";
+
+                        dialog: ColorDialog {
+                          with-alpha: true;
+                        };
+                      }
+                    }
+
+                    Adw.ActionRow dpi_row {
+                      title: _("Pixel Density Per Inch");
+                      activatable-widget: dpi_value;
+
+                      Adw.Bin {
+                        Entry dpi_value {
+                          valign: center;
+                        }
+                      }
+                    }
+
+                    Adw.ActionRow resize_amount_row {
+                      title: _("Resize");
+
+                      Box {
+                        spacing: 5;
+
+                        Entry resize_width_value {
+                          valign: center;
+                          placeholder-text: _("Width");
+                          tooltip-text: _("Width");
+                          input-purpose: digits;
+                          max-width-chars: 8;
+                          hexpand: false;
+                        }
+
+                        Entry resize_scale_width_value {
+                          valign: center;
+                          placeholder-text: _("Width");
+                          input-purpose: digits;
+                          tooltip-text: _("Width");
+                          max-width-chars: 8;
+                          hexpand: false;
+                        }
+
+                        ToggleButton link_axis {
+                          active: true;
+                          valign: center;
+                          icon-name: 'chain-link-symbolic';
+                          tooltip-text: _("Preserve aspect ratio");
+
+                          styles [
+                            'raised',
+                            'circular',
+                            'lock',
+                          ]
+                        }
+
+                        Entry resize_height_value {
+                          valign: center;
+                          placeholder-text: _("Height");
+                          tooltip-text: _("Height");
+                          input-purpose: digits;
+                          max-width-chars: 8;
+                          hexpand: false;
+                        }
+
+                        Entry resize_scale_height_value {
+                          valign: center;
+                          placeholder-text: _("Width");
+                          tooltip-text: _("Height");
+                          input-purpose: digits;
+                          max-width-chars: 8;
+                          hexpand: false;
+                        }
+                      }
+
+                      Adw.Bin {
+                        Box {
+                          DropDown resize_type {
+                            valign: center;
+
+                            accessibility {
+                              label: _("Choose between resizing with percentages or using exact pixels");
+                            }
+
+                            model: StringList resize_types {
+                              strings [
+                                _("%"),
+                                _("px"),
+                              ]
+                            };
+
+                            styles [
+                              "flat",
+                              "unit-drop",
+                            ]
+                          }
+                        }
+                      }
+                    }
+
+                    Adw.ActionRow resize_filter_row {
+                      title: _("Resize Algorithm");
+
+                      Box {
+                        valign: center;
+
+                        ToggleButton resize_filter_default {
+                          active: true;
+                          label: _("Default");
+                        }
+
+                        ToggleButton resize_filter_pixel {
+                          active: false;
+                          label: _("Pixel Art");
+                        }
+
+                        styles [
+                          "linked",
+                        ]
+                      }
+                    }
+                  }
+
+                  Adw.PreferencesGroup {
+                    valign: end;
+                    halign: center;
+
+                    Button convert_button {
+                      valign: center;
+                      halign: end;
+                      label: _("_Convert");
+                      use-underline: true;
+
+                      styles [
+                        "suggested-action",
+                        "pill",
+                        "long",
+                      ]
+                    }
+                  }
+                  // *************************** Hidden finishes ***************************
 
                   StackPage {
                     name: "stack_invalid_image";
