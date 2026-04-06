@@ -37,21 +37,13 @@ impl MetamorphosisAbout {
         about.add_acknowledgement_section(
             Some(&gettext("Code and Design Borrowed from")),
             &[
-                "GTK-Rust-Template https://gitlab.gnome.org/World/Rust/gtk-rust-template",
-                "Amberol https://gitlab.gnome.org/World/amberol",
-                "Upscaler https://gitlab.gnome.org/World/Upscaler",
-                "Avvie https://github.com/Taiko2k/Avvie",
-                "Bottles https://github.com/bottlesdevs/Bottles",
-                "Loupe https://gitlab.gnome.org/GNOME/loupe",
-                "Totem https://gitlab.gnome.org/GNOME/totem",
                 "Switcheroo https://gitlab.com/adhami3310/Switcheroo",
             ],
         );
-        about.add_acknowledgement_section(
-            Some(&gettext("Sample Image from")),
-            &["Samuel Custodio https://github.com/samuelcust/flappy-bird-assets"],
-        );
         about.add_legal_section("ImageMagick", None, License::MitX11, None);
+        about.add_legal_section("ExifTool", None, License::Artistic, None);
+        about.set_copyright("Copyright © 2026 Deimos Hall");
+        about.set_comments("View and edit Exif metadata");
         about.present(Some(window));
     }
 }
