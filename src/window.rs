@@ -758,8 +758,8 @@ impl AppWindow {
                 ExifService::exiftool_version().await;
                 for path in paths {
                     println!("File: {}", path);
-                    // ExifService::read_all(path);
-                    println!("Create Date: {:?}", ExifService::create_date(path).await);
+                    ExifService::read_all(path).await;
+                    // println!("Create Date: {:?}", ExifService::create_date(path).await);
                 }
             }
         ));
@@ -2060,7 +2060,7 @@ impl WindowUI for AppWindow {
            #[weak(rename_to=this)]
            self,
            async move {
-               match ExifService::set_create_date(path, new_date).await {
+               match ExifService::set_all_dates(path, new_date).await {
                    Ok(_) => this.show_toast("Date updated successfully"),
                    Err(e) => this.show_toast(&format!("Error: {:#?}", e)),
                }

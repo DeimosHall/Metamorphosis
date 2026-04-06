@@ -27,9 +27,9 @@ impl ExifService {
         exiftool.read_tag(path, "CreateDate", &[]).ok()?
     }
     
-    pub async fn set_create_date(path: String, date: String) -> Result<(), ExifToolError> {
+    pub async fn set_all_dates(path: String, date: String) -> Result<(), ExifToolError> {
         let path = Path::new(path.as_str());
         let exiftool = ExifTool::with_executable(Path::new("/app/exiftool"))?;
-        Ok(exiftool.write_tag(&path, "CreateDate", date.as_str(), &["-overwrite_original"])?)
+        Ok(exiftool.write_tag(&path, "AllDates", date.as_str(), &["-overwrite_original"])?)
     }
 }
