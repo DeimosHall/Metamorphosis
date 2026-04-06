@@ -1,35 +1,29 @@
-use std::{path::Path, process::Command};
+use std::{path::Path, sync::LazyLock};
 
 use exiftool::{ExifTool, ExifToolError, g2::ExifData};
+
+static EXIFTOOL: LazyLock<ExifTool> =
+    LazyLock::new(|| ExifTool::with_executable(Path::new("/app/exiftool")).unwrap());
 
 pub struct ExifService;
 
 impl ExifService {
-    pub async fn exiftool_version() {
-        let command = Command::new("/app/exiftool").arg("-ver").output().expect("Not found");
-        println!("ExifTool version: {}", String::from_utf8_lossy(&command.stdout));
-    }
-    
-    pub async fn read_all(path: String) {
+    pub fn read_all(path: String) {
         let path = Path::new(path.as_str());
-        let exiftool = ExifTool::with_executable(Path::new("/app/exiftool")).unwrap();
-
-        let exif_data: ExifData = exiftool.read_metadata(path, &["-g2"]).unwrap();
+        let exif_data: ExifData = EXIFTOOL.read_metadata(path, &["-g2"]).unwrap();
         println!("Parsed data: \n{:#?}", exif_data);
     }
-    
+
     /// Get "Create Date" tag value
-    /// 
+    ///
     /// Output Example: Some("2026:03:31 22:02:24")
-    pub async fn create_date(path: String) -> Option<String> {
-        let exiftool = ExifTool::with_executable(Path::new("/app/exiftool")).unwrap();
+    pub fn create_date(path: String) -> Option<String> {
         let path = Path::new(path.as_str());
-        exiftool.read_tag(path, "CreateDate", &[]).ok()?
+        EXIFTOOL.read_tag(path, "CreateDate", &[]).ok()?
     }
-    
-    pub async fn set_all_dates(path: String, date: String) -> Result<(), ExifToolError> {
+
+    pub fn set_all_dates(path: String, date: String) -> Result<(), ExifToolError> {
         let path = Path::new(path.as_str());
-        let exiftool = ExifTool::with_executable(Path::new("/app/exiftool"))?;
-        Ok(exiftool.write_tag(&path, "AllDates", date.as_str(), &["-overwrite_original"])?)
+        Ok(EXIFTOOL.write_tag(&path, "AllDates", date.as_str(), &["-overwrite_original"])?)
     }
 }

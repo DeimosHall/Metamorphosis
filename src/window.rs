@@ -751,15 +751,14 @@ impl AppWindow {
     fn test_exiftool(&self) {
         println!("Testing exiftool");
         let paths = self.files().iter().map(|f| f.path()).collect_vec();
+        
         glib::spawn_future_local(clone!(
-            #[weak(rename_to=this)]
+            #[weak(rename_to=_this)]
             self,
             async move {
-                ExifService::exiftool_version().await;
                 for path in paths {
                     println!("File: {}", path);
-                    ExifService::read_all(path).await;
-                    // println!("Create Date: {:?}", ExifService::create_date(path).await);
+                    ExifService::read_all(path);
                 }
             }
         ));
@@ -2038,7 +2037,7 @@ impl WindowUI for AppWindow {
             #[weak(rename_to=this)]
             self,
             async move {
-                if let Some(date) = ExifService::create_date(path).await {
+                if let Some(date) = ExifService::create_date(path) {
                     this.imp().create_date_entry.set_text(&date);
                 }
             }
@@ -2060,7 +2059,7 @@ impl WindowUI for AppWindow {
            #[weak(rename_to=this)]
            self,
            async move {
-               match ExifService::set_all_dates(path, new_date).await {
+               match ExifService::set_all_dates(path, new_date) {
                    Ok(_) => this.show_toast("Date updated successfully"),
                    Err(e) => this.show_toast(&format!("Error: {:#?}", e)),
                }
