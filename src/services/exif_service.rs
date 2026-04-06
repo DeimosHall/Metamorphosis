@@ -1,13 +1,12 @@
-use std::{path::Path};
+use std::{path::Path, process::Command};
 
-use exiftool::{ExifTool, g2::ExifData};
-use tokio::process::Command;
+use exiftool::{ExifTool, ExifToolError, g2::ExifData};
 
 pub struct ExifService;
 
 impl ExifService {
     pub async fn exiftool_version() {
-        let command = Command::new("/app/exiftool").arg("-ver").output().await.expect("Not found");
+        let command = Command::new("/app/exiftool").arg("-ver").output().expect("Not found");
         println!("ExifTool version: {}", String::from_utf8_lossy(&command.stdout));
     }
     
@@ -28,7 +27,9 @@ impl ExifService {
         exiftool.read_tag(path, "CreateDate", &[]).ok()?
     }
     
-    pub async fn set_create_date(path: String) {
-        todo!()
+    pub async fn set_create_date(path: String, date: String) -> Result<(), ExifToolError> {
+        let path = Path::new(path.as_str());
+        let exiftool = ExifTool::with_executable(Path::new("/app/exiftool"))?;
+        Ok(exiftool.write_tag(&path, "CreateDate", date.as_str(), &["-overwrite_original"])?)
     }
 }

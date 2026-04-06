@@ -537,7 +537,7 @@ impl AppWindow {
             #[weak(rename_to=this)]
             self,
             move |_| {
-                // this.apply
+                this.apply_create_date();
             }
         ));
 
@@ -678,6 +678,11 @@ impl AppWindow {
             .chain(prev_files)
             .filter(|f| f.exists())
             .collect();
+        
+        if files.len() > 1 {
+            self.show_toast("Only one item is allowed by now");
+            files.truncate(1);
+        }
 
         self.imp().input_file_store.remove_all();
         self.imp().removed.replace(HashSet::new());
@@ -750,7 +755,7 @@ impl AppWindow {
             #[weak(rename_to=this)]
             self,
             async move {
-                // ExifService::exiftool_version().await;
+                ExifService::exiftool_version().await;
                 for path in paths {
                     println!("File: {}", path);
                     // ExifService::read_all(path);
@@ -861,7 +866,7 @@ impl AppWindow {
         self.update_options();
         self.switch_back_from_loading();
         self.load_create_date();
-        
+
         self.imp()
             .all_images_stack
             .set_visible_child_name("all_images");
@@ -2028,7 +2033,7 @@ impl WindowUI for AppWindow {
     fn load_create_date(&self) {
         let files = self.files();
         let path = files.first().unwrap().path();
-        
+
         glib::spawn_future_local(clone!(
             #[weak(rename_to=this)]
             self,
@@ -2039,9 +2044,28 @@ impl WindowUI for AppWindow {
             }
         ));
     }
-    
+
     fn apply_create_date(&self) {
-        todo!()
+        let files = self.active_files();
+        let path = files.first().unwrap().path();
+        let new_date = self.imp().create_date_entry.text().to_string();
+
+        if new_date.is_empty() {
+            // TODO: Verify date format
+            self.show_toast("Enter a date value");
+            return;
+        }
+
+        glib::spawn_future_local(clone!(
+           #[weak(rename_to=this)]
+           self,
+           async move {
+               match ExifService::set_create_date(path, new_date).await {
+                   Ok(_) => this.show_toast("Date updated successfully"),
+                   Err(e) => this.show_toast(&format!("Error: {:#?}", e)),
+               }
+           }
+        ));
     }
 }
 
