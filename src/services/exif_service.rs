@@ -34,9 +34,9 @@ impl ExifService {
 
     pub fn set_all_offset_times(path: String, offset: String) -> Result<(), ExifToolError> {
         let path = Path::new(path.as_str());
-        EXIFTOOL.write_tag(path, "OffsetTime", offset.as_str(), &[])?;
-        EXIFTOOL.write_tag(path, "OffsetTimeOriginal", offset.as_str(), &[])?;
-        EXIFTOOL.write_tag(path, "OffsetTimeDigitized", offset.as_str(), &[])?;
+        EXIFTOOL.write_tag(path, "OffsetTime", offset.as_str(), &["-overwrite_original"])?;
+        EXIFTOOL.write_tag(path, "OffsetTimeOriginal", offset.as_str(), &["-overwrite_original"])?;
+        EXIFTOOL.write_tag(path, "OffsetTimeDigitized", offset.as_str(), &["-overwrite_original"])?;
         Ok(())
     }
 }
