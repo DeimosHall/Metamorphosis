@@ -6,7 +6,7 @@ use gtk::License;
 //code 'inspired' by https://gitlab.com/news-flash/news_flash_gtk/-/blob/master/src/about_dialog.rs
 
 //this is non-translatable information, so it can be const
-pub const DEVELOPERS: &[&str] = &["Deimos Hall <deimos@deimoshall.io>"];
+pub const DEVELOPERS: &[&str] = &["Deimos Hall <deimoshall@proton.me>"];
 
 #[derive(Clone, Debug)]
 pub struct MetamorphosisAbout;
