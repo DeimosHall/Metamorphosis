@@ -125,6 +125,8 @@ mod imp {
         #[template_child]
         pub create_date_entry: TemplateChild<gtk::Entry>,
         #[template_child]
+        pub offset_time_entry: TemplateChild<gtk::Entry>,
+        #[template_child]
         pub apply_date_button: TemplateChild<gtk::Button>,
 
         #[template_child]
@@ -678,7 +680,7 @@ impl AppWindow {
             .chain(prev_files)
             .filter(|f| f.exists())
             .collect();
-        
+
         if files.len() > 1 {
             self.show_toast("Only one item is allowed by now");
             files.truncate(1);
@@ -751,7 +753,7 @@ impl AppWindow {
     fn test_exiftool(&self) {
         println!("Testing exiftool");
         let paths = self.files().iter().map(|f| f.path()).collect_vec();
-        
+
         glib::spawn_future_local(clone!(
             #[weak(rename_to=_this)]
             self,
@@ -865,6 +867,7 @@ impl AppWindow {
         self.update_options();
         self.switch_back_from_loading();
         self.load_create_date();
+        self.load_offset_time();
 
         self.imp()
             .all_images_stack
@@ -1253,6 +1256,7 @@ pub trait WindowUI {
     fn update_image_container(&self, count: usize, remaining_visible: bool);
     fn load_create_date(&self);
     fn apply_create_date(&self);
+    fn load_offset_time(&self);
 }
 
 trait ConvertArguments {
@@ -2044,26 +2048,45 @@ impl WindowUI for AppWindow {
         ));
     }
 
+    fn load_offset_time(&self) {
+        let files = self.files();
+        let path = files.first().unwrap().path();
+
+        glib::spawn_future_local(clone!(
+            #[weak(rename_to=this)]
+            self,
+            async move {
+                if let Some(offset) = ExifService::offset_time(path) {
+                    this.imp().offset_time_entry.set_text(&offset);
+                }
+            }
+        ));
+    }
+
     fn apply_create_date(&self) {
         let files = self.active_files();
         let path = files.first().unwrap().path();
         let new_date = self.imp().create_date_entry.text().to_string();
-
-        if new_date.is_empty() {
-            // TODO: Verify date format
-            self.show_toast("Enter a date value");
-            return;
-        }
+        let new_offset = self.imp().offset_time_entry.text().to_string();
 
         glib::spawn_future_local(clone!(
-           #[weak(rename_to=this)]
-           self,
-           async move {
-               match ExifService::set_all_dates(path, new_date) {
-                   Ok(_) => this.show_toast("Date updated successfully"),
-                   Err(e) => this.show_toast(&format!("Error: {:#?}", e)),
-               }
-           }
+            #[weak(rename_to=this)]
+            self,
+            async move {
+                if !new_offset.is_empty() {
+                    match ExifService::set_all_offset_times(path.clone(), new_offset) {
+                        Ok(_) => this.show_toast("Offset time updated successfully"),
+                        Err(e) => this.show_toast(&format!("Error: {}", e)),
+                    }
+                }
+
+                if !new_date.is_empty() {
+                    match ExifService::set_all_dates(path, new_date) {
+                        Ok(_) => this.show_toast("Date updated successfully"),
+                        Err(e) => this.show_toast(&format!("Error: {}", e)),
+                    }
+                }
+            }
         ));
     }
 }

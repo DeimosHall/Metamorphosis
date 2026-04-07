@@ -115,12 +115,22 @@ template $AppWindow: Adw.ApplicationWindow {
                           
                           Adw.PreferencesGroup {
                             Adw.ActionRow create_date_row {
-                              title: _("Create Date");
-                              subtitle: _("EXIF CreateDate");
+                              title: _("Creation Date");
+                              // subtitle: _("EXIF CreateDate");
           
                               Entry create_date_entry {
                                 placeholder-text: _("YYYY:MM:DD HH:MM:SS");
                                 width-chars: 20;
+                                valign: center;
+                              }
+                            }
+                            
+                            Adw.ActionRow time_offset_row {
+                              title: _("Offset Time");
+                              
+                              Entry offset_time_entry {
+                                placeholder-text: _("-06");
+                                width-chars: 3;
                                 valign: center;
                               }
                             }
