@@ -2041,7 +2041,8 @@ impl WindowUI for AppWindow {
             #[weak(rename_to=this)]
             self,
             async move {
-                let date = ExifService::create_date(path).unwrap_or_default();               
+                let path = Path::new(path.as_str());
+                let date = ExifService::create_date(path).unwrap_or_default();
                 this.imp().create_date_entry.set_text(&date);
             }
         ));
@@ -2050,11 +2051,12 @@ impl WindowUI for AppWindow {
     fn load_offset_time(&self) {
         let files = self.files();
         let path = files.first().unwrap().path();
-               
+
         glib::spawn_future_local(clone!(
             #[weak(rename_to=this)]
             self,
             async move {
+                let path = Path::new(path.as_str());
                 let offset = ExifService::offset_time(path).unwrap_or_default();
                 this.imp().offset_time_entry.set_text(&offset);
             }
@@ -2071,18 +2073,24 @@ impl WindowUI for AppWindow {
             #[weak(rename_to=this)]
             self,
             async move {
+                let path = Path::new(path.as_str());
+
                 if !new_offset.is_empty() {
-                    match ExifService::set_all_offset_times(path.clone(), new_offset) {
+                    match ExifService::set_all_offset_times(path, new_offset.as_str()) {
                         Ok(_) => this.show_toast("Offset time updated successfully"),
                         Err(e) => this.show_toast(&format!("Error: {}", e)),
                     }
                 }
 
                 if !new_date.is_empty() {
-                    match ExifService::set_all_dates(path, new_date) {
+                    match ExifService::set_all_dates(path, new_date.as_str()) {
                         Ok(_) => this.show_toast("Date updated successfully"),
                         Err(e) => this.show_toast(&format!("Error: {}", e)),
                     }
+                }
+
+                if let Err(e) = ExifService::set_software(path) {
+                    this.show_toast(&format!("Error: {}", e));
                 }
             }
         ));
