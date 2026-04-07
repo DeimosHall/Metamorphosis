@@ -2041,9 +2041,8 @@ impl WindowUI for AppWindow {
             #[weak(rename_to=this)]
             self,
             async move {
-                if let Some(date) = ExifService::create_date(path) {
-                    this.imp().create_date_entry.set_text(&date);
-                }
+                let date = ExifService::create_date(path).unwrap_or_default();               
+                this.imp().create_date_entry.set_text(&date);
             }
         ));
     }
@@ -2051,14 +2050,13 @@ impl WindowUI for AppWindow {
     fn load_offset_time(&self) {
         let files = self.files();
         let path = files.first().unwrap().path();
-
+               
         glib::spawn_future_local(clone!(
             #[weak(rename_to=this)]
             self,
             async move {
-                if let Some(offset) = ExifService::offset_time(path) {
-                    this.imp().offset_time_entry.set_text(&offset);
-                }
+                let offset = ExifService::offset_time(path).unwrap_or_default();
+                this.imp().offset_time_entry.set_text(&offset);
             }
         ));
     }
