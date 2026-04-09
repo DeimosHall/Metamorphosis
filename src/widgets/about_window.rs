@@ -14,7 +14,7 @@ pub struct MetamorphosisAbout;
 impl MetamorphosisAbout {
     pub fn show<W: IsA<gtk::Widget>>(window: &W) {
         let about = adw::AboutDialog::from_appdata(
-            "/io/dev/deimoshall/Metamorphosis/io.dev.deimoshall.Metamorphosis.metainfo.xml",
+            "/dev/deimoshall/Metamorphosis/dev.deimoshall.Metamorphosis.metainfo.xml",
             Some(crate::config::VERSION),
         );
         about.set_developers(DEVELOPERS);
@@ -36,9 +36,7 @@ impl MetamorphosisAbout {
         // );
         about.add_acknowledgement_section(
             Some(&gettext("Code and Design Borrowed from")),
-            &[
-                "Switcheroo https://gitlab.com/adhami3310/Switcheroo",
-            ],
+            &["Switcheroo https://gitlab.com/adhami3310/Switcheroo"],
         );
         about.add_legal_section("ImageMagick", None, License::MitX11, None);
         about.add_legal_section("ExifTool", None, License::Artistic, None);

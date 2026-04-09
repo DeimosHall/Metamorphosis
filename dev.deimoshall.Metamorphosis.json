@@ -1,5 +1,5 @@
 {
-    "app-id": "io.dev.deimoshall.Metamorphosis",
+    "app-id": "dev.deimoshall.Metamorphosis",
     "runtime": "org.gnome.Platform",
     "runtime-version": "49",
     "sdk": "org.gnome.Sdk",

@@ -18,8 +18,8 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 3.6\n"
 
-#: data/io.dev.deimoshall.Metamorphosis.desktop.in.in:2
-#: data/io.dev.deimoshall.Metamorphosis.metainfo.xml.in.in:5
+#: data/dev.deimoshall.Metamorphosis.desktop.in.in:2
+#: data/dev.deimoshall.Metamorphosis.metainfo.xml.in.in:5
 #: data/resources/blueprints/window.blp:9
 #: data/resources/blueprints/window.blp:21
 #: data/resources/blueprints/window.blp:57 src/main.rs:41
@@ -27,56 +27,56 @@ msgstr ""
 msgid "Metamorphosis"
 msgstr "سويتشيرو"
 
-#: data/io.dev.deimoshall.Metamorphosis.desktop.in.in:3
+#: data/dev.deimoshall.Metamorphosis.desktop.in.in:3
 msgid "Image Converter"
 msgstr "محوِّل الصور"
 
-#: data/io.dev.deimoshall.Metamorphosis.desktop.in.in:4
-#: data/io.dev.deimoshall.Metamorphosis.metainfo.xml.in.in:11
+#: data/dev.deimoshall.Metamorphosis.desktop.in.in:4
+#: data/dev.deimoshall.Metamorphosis.metainfo.xml.in.in:11
 msgid "Convert and manipulate images"
 msgstr "حوِّل الصور وعالجها"
 
-#: data/io.dev.deimoshall.Metamorphosis.desktop.in.in:10
+#: data/dev.deimoshall.Metamorphosis.desktop.in.in:10
 msgid "converter;image;convert;converting;processing"
 msgstr "محول;صورة;صور;تحويل;معالجة;converter;image;convert;converting;processing"
 
-#: data/io.dev.deimoshall.Metamorphosis.gschema.xml.in:26
+#: data/dev.deimoshall.Metamorphosis.gschema.xml.in:26
 msgid "Window width"
 msgstr "عُرض النافذة"
 
-#: data/io.dev.deimoshall.Metamorphosis.gschema.xml.in:30
+#: data/dev.deimoshall.Metamorphosis.gschema.xml.in:30
 msgid "Image quality"
 msgstr "جودة الصورة"
 
-#: data/io.dev.deimoshall.Metamorphosis.gschema.xml.in:34
+#: data/dev.deimoshall.Metamorphosis.gschema.xml.in:34
 msgid "Image density per inch"
 msgstr "كثافة الصورة لكل بوصة"
 
-#: data/io.dev.deimoshall.Metamorphosis.gschema.xml.in:38
+#: data/dev.deimoshall.Metamorphosis.gschema.xml.in:38
 msgid "Window height"
 msgstr "ارتفاع النافذة"
 
-#: data/io.dev.deimoshall.Metamorphosis.gschema.xml.in:42
+#: data/dev.deimoshall.Metamorphosis.gschema.xml.in:42
 msgid "Window maximized state"
 msgstr "حالة تكبير النافذة"
 
-#: data/io.dev.deimoshall.Metamorphosis.gschema.xml.in:46
+#: data/dev.deimoshall.Metamorphosis.gschema.xml.in:46
 msgid "Output format"
 msgstr "صيغة الإخراج"
 
-#: data/io.dev.deimoshall.Metamorphosis.gschema.xml.in:50
+#: data/dev.deimoshall.Metamorphosis.gschema.xml.in:50
 msgid "Compression format"
 msgstr "صيغة الضغط"
 
-#: data/io.dev.deimoshall.Metamorphosis.metainfo.xml.in.in:17
+#: data/dev.deimoshall.Metamorphosis.metainfo.xml.in.in:17
 msgid "Convert between different image filetypes and resize them easily."
 msgstr "حوِّل بين صيغ ملفات الصور المختلفة وغيِّر حجمها بسهولة."
 
-#: data/io.dev.deimoshall.Metamorphosis.metainfo.xml.in.in:43
+#: data/dev.deimoshall.Metamorphosis.metainfo.xml.in.in:43
 msgid "Converting sample image from PNG to HEIF"
 msgstr "تحويل صورة عيِّنة من صيغة PNG إلى HEIF"
 
-#: data/io.dev.deimoshall.Metamorphosis.metainfo.xml.in.in:48
+#: data/dev.deimoshall.Metamorphosis.metainfo.xml.in.in:48
 msgid "Converting multiple sample images from SVG to HEIF"
 msgstr "تحويل عدَّة صور عيِّنة من صيغة SVG إلى HEIF"
 

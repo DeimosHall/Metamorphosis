@@ -17,69 +17,69 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: data/io.dev.deimoshall.Metamorphosis.desktop.in.in:2
-#: data/io.dev.deimoshall.Metamorphosis.metainfo.xml.in.in:5
+#: data/dev.deimoshall.Metamorphosis.desktop.in.in:2
+#: data/dev.deimoshall.Metamorphosis.metainfo.xml.in.in:5
 #: data/resources/blueprints/window.blp:9
 #: data/resources/blueprints/window.blp:21
 #: data/resources/blueprints/window.blp:58 src/main.rs:45
 msgid "Metamorphosis"
 msgstr ""
 
-#: data/io.dev.deimoshall.Metamorphosis.desktop.in.in:3
+#: data/dev.deimoshall.Metamorphosis.desktop.in.in:3
 msgid "Image Converter"
 msgstr ""
 
-#: data/io.dev.deimoshall.Metamorphosis.desktop.in.in:4
-#: data/io.dev.deimoshall.Metamorphosis.metainfo.xml.in.in:9
+#: data/dev.deimoshall.Metamorphosis.desktop.in.in:4
+#: data/dev.deimoshall.Metamorphosis.metainfo.xml.in.in:9
 msgid "Convert and manipulate images"
 msgstr ""
 
-#: data/io.dev.deimoshall.Metamorphosis.desktop.in.in:10
+#: data/dev.deimoshall.Metamorphosis.desktop.in.in:10
 msgid "converter;image;convert;converting;processing"
 msgstr ""
 
-#: data/io.dev.deimoshall.Metamorphosis.desktop.in.in:20
+#: data/dev.deimoshall.Metamorphosis.desktop.in.in:20
 #: data/resources/blueprints/window.blp:480
 msgid "New Window"
 msgstr ""
 
-#: data/io.dev.deimoshall.Metamorphosis.gschema.xml.in:26
+#: data/dev.deimoshall.Metamorphosis.gschema.xml.in:26
 msgid "Window width"
 msgstr ""
 
-#: data/io.dev.deimoshall.Metamorphosis.gschema.xml.in:30
+#: data/dev.deimoshall.Metamorphosis.gschema.xml.in:30
 msgid "Image quality"
 msgstr ""
 
-#: data/io.dev.deimoshall.Metamorphosis.gschema.xml.in:34
+#: data/dev.deimoshall.Metamorphosis.gschema.xml.in:34
 msgid "Image density per inch"
 msgstr ""
 
-#: data/io.dev.deimoshall.Metamorphosis.gschema.xml.in:38
+#: data/dev.deimoshall.Metamorphosis.gschema.xml.in:38
 msgid "Window height"
 msgstr ""
 
-#: data/io.dev.deimoshall.Metamorphosis.gschema.xml.in:42
+#: data/dev.deimoshall.Metamorphosis.gschema.xml.in:42
 msgid "Window maximized state"
 msgstr ""
 
-#: data/io.dev.deimoshall.Metamorphosis.gschema.xml.in:46
+#: data/dev.deimoshall.Metamorphosis.gschema.xml.in:46
 msgid "Output format"
 msgstr ""
 
-#: data/io.dev.deimoshall.Metamorphosis.gschema.xml.in:50
+#: data/dev.deimoshall.Metamorphosis.gschema.xml.in:50
 msgid "Compression format"
 msgstr ""
 
-#: data/io.dev.deimoshall.Metamorphosis.metainfo.xml.in.in:15
+#: data/dev.deimoshall.Metamorphosis.metainfo.xml.in.in:15
 msgid "Convert between different image filetypes and resize them easily."
 msgstr ""
 
-#: data/io.dev.deimoshall.Metamorphosis.metainfo.xml.in.in:42
+#: data/dev.deimoshall.Metamorphosis.metainfo.xml.in.in:42
 msgid "Converting sample image from PNG to HEIF"
 msgstr ""
 
-#: data/io.dev.deimoshall.Metamorphosis.metainfo.xml.in.in:47
+#: data/dev.deimoshall.Metamorphosis.metainfo.xml.in.in:47
 msgid "Converting multiple sample images from SVG to HEIF"
 msgstr ""
 

@@ -3,9 +3,9 @@
 
 Edit EXIF metadata.
 
-<img src="data/resources/icons/hicolor/scalable/apps/io.dev.deimoshall.Metamorphosis.svg" width="128" height="128" alt="Metamorphosis icon">
+<img src="data/resources/icons/hicolor/scalable/apps/dev.deimoshall.Metamorphosis.svg" width="128" height="128" alt="Metamorphosis icon">
 
-[![Installs](https://img.shields.io/flathub/downloads/io.dev.deimoshall.Metamorphosis?style=for-the-badge)](https://flathub.org/apps/details/io.dev.deimoshall.Metamorphosis)
+[![Installs](https://img.shields.io/flathub/downloads/dev.deimoshall.Metamorphosis?style=for-the-badge)](https://flathub.org/apps/details/dev.deimoshall.Metamorphosis)
 [![Latest Tag](https://img.shields.io/gitlab/v/tag/deimoshall/Metamorphosis?sort=date&style=for-the-badge)](https://gitlab.com/deimoshall/Metamorphosis/-/tags)
 [![License](https://img.shields.io/gitlab/license/deimoshall/Metamorphosis?style=for-the-badge)](https://gitlab.com/deimoshall/Metamorphosis/-/raw/main/COPYING)
 
@@ -13,7 +13,7 @@ Edit EXIF metadata.
 </div>
 
 ## Installation
-<a href='https://flathub.org/apps/details/io.dev.deimoshall.Metamorphosis'><img width='240' alt='Download on Flathub' src='https://flathub.org/api/badge?svg&locale=en'/></a>
+<a href='https://flathub.org/apps/details/dev.deimoshall.Metamorphosis'><img width='240' alt='Download on Flathub' src='https://flathub.org/api/badge?svg&locale=en'/></a>
 
 ## About
 
@@ -67,7 +67,7 @@ You can install Metamorphosis from the latest commit:
 
 1. Install [`org.flatpak.Builder`](https://github.com/flathub/org.flatpak.Builder) from Flathub
 2. Clone `https://github.com/DeimosHall/Metamorphosis.git` (or your fork)
-3. Run `flatpak run org.flatpak.Builder --install --user --force-clean build-dir io.dev.deimoshall.Metamorphosis.json` in the terminal from the root of the repository.
+3. Run `flatpak run org.flatpak.Builder --install --user --force-clean build-dir dev.deimoshall.Metamorphosis.json` in the terminal from the root of the repository.
 
 ### Meson
 

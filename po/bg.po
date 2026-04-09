@@ -19,8 +19,8 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
 "X-Generator: Gtranslator 46.0\n"
 
-#: data/io.dev.deimoshall.Metamorphosis.desktop.in.in:3
-#: data/io.dev.deimoshall.Metamorphosis.metainfo.xml.in.in:5
+#: data/dev.deimoshall.Metamorphosis.desktop.in.in:3
+#: data/dev.deimoshall.Metamorphosis.metainfo.xml.in.in:5
 #: data/resources/blueprints/window.blp:9
 #: data/resources/blueprints/window.blp:21
 #: data/resources/blueprints/window.blp:57 src/main.rs:30
@@ -28,61 +28,61 @@ msgstr ""
 msgid "Metamorphosis"
 msgstr "Metamorphosis"
 
-#: data/io.dev.deimoshall.Metamorphosis.desktop.in.in:4
+#: data/dev.deimoshall.Metamorphosis.desktop.in.in:4
 msgid "Image Converter"
 msgstr "Преобразувател на изображения"
 
-#: data/io.dev.deimoshall.Metamorphosis.desktop.in.in:5
-#: data/io.dev.deimoshall.Metamorphosis.metainfo.xml.in.in:11
+#: data/dev.deimoshall.Metamorphosis.desktop.in.in:5
+#: data/dev.deimoshall.Metamorphosis.metainfo.xml.in.in:11
 msgid "Convert and manipulate images"
 msgstr "Преобразувайте и манипулирайте изображения"
 
-#: data/io.dev.deimoshall.Metamorphosis.desktop.in.in:11
+#: data/dev.deimoshall.Metamorphosis.desktop.in.in:11
 msgid "converter;image;convert;converting;processing"
 msgstr "преобразувател;изображение;преобразуване;обработване"
 
-#: data/io.dev.deimoshall.Metamorphosis.gschema.xml.in:26
+#: data/dev.deimoshall.Metamorphosis.gschema.xml.in:26
 msgid "Shows less popular datatypes in the menu"
 msgstr "Показва по-малко популярни типове данни в менюто"
 
-#: data/io.dev.deimoshall.Metamorphosis.gschema.xml.in:30
+#: data/dev.deimoshall.Metamorphosis.gschema.xml.in:30
 msgid "Window width"
 msgstr "Широчина на прозореца"
 
-#: data/io.dev.deimoshall.Metamorphosis.gschema.xml.in:34
+#: data/dev.deimoshall.Metamorphosis.gschema.xml.in:34
 msgid "Image quality"
 msgstr "Качество на изображението"
 
-#: data/io.dev.deimoshall.Metamorphosis.gschema.xml.in:38
+#: data/dev.deimoshall.Metamorphosis.gschema.xml.in:38
 msgid "Image density per inch"
 msgstr "Плътност на изображението на инч"
 
-#: data/io.dev.deimoshall.Metamorphosis.gschema.xml.in:42
+#: data/dev.deimoshall.Metamorphosis.gschema.xml.in:42
 msgid "Window height"
 msgstr "Височина на прозореца"
 
-#: data/io.dev.deimoshall.Metamorphosis.gschema.xml.in:46
+#: data/dev.deimoshall.Metamorphosis.gschema.xml.in:46
 msgid "Window maximized state"
 msgstr "Максимизирано състояние на прозорец"
 
-#: data/io.dev.deimoshall.Metamorphosis.gschema.xml.in:50
+#: data/dev.deimoshall.Metamorphosis.gschema.xml.in:50
 msgid "Output format"
 msgstr "Тип на изходния файл"
 
-#: data/io.dev.deimoshall.Metamorphosis.gschema.xml.in:54
+#: data/dev.deimoshall.Metamorphosis.gschema.xml.in:54
 msgid "Compression format"
 msgstr "Тип на компресията"
 
-#: data/io.dev.deimoshall.Metamorphosis.metainfo.xml.in.in:17
+#: data/dev.deimoshall.Metamorphosis.metainfo.xml.in.in:17
 msgid "Convert between different image filetypes and resize them easily."
 msgstr ""
 "Преобразувайте и лесно преоразмерявайте между различни видове изображения."
 
-#: data/io.dev.deimoshall.Metamorphosis.metainfo.xml.in.in:42
+#: data/dev.deimoshall.Metamorphosis.metainfo.xml.in.in:42
 msgid "Converting sample image from PNG to HEIF"
 msgstr "Преобразуване на примерни изображения от PNG в HEIF"
 
-#: data/io.dev.deimoshall.Metamorphosis.metainfo.xml.in.in:46
+#: data/dev.deimoshall.Metamorphosis.metainfo.xml.in.in:46
 msgid "Converting multiple sample images from SVG to HEIF"
 msgstr "Преобразуване на н примерни изображения от SVG в HEIF"
 

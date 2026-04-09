@@ -8,7 +8,7 @@
 	<shortdesc xml:lang="en">Edit exif metadata of images and videos</shortdesc>
 
 	<homepage rdf:resource="https://github.com/DeimosHall/Metamorphosis"/>
-	<download-page rdf:resource="https://flathub.org/apps/details/io.dev.deimoshall.Metamorphosis"/>
+	<download-page rdf:resource="https://flathub.org/apps/details/dev.deimoshall.Metamorphosis"/>
 	<bug-database rdf:resource="https://github.com/DeimosHall/Metamorphosis/issues"/>
 
 	<programming-language>Rust</programming-language>

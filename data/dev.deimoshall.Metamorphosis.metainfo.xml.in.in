@@ -3,7 +3,7 @@
     <id>@app-id@</id>
 
     <name>Metamorphosis</name>
-    <developer id="io.dev.deimoshall">
+    <developer id="dev.deimoshall">
         <name translate="no">Deimos Hall</name>
     </developer>
     <summary>Edit metadata</summary>

@@ -8,7 +8,7 @@ project('metamorphosis',
 i18n = import('i18n')
 gnome = import('gnome')
 
-base_id = 'io.dev.deimoshall.Metamorphosis'
+base_id = 'dev.deimoshall.Metamorphosis'
 
 dependency('gtk4', version: '>= 4.6.0')
 dependency('libadwaita-1')

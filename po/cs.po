@@ -17,8 +17,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: data/io.dev.deimoshall.Metamorphosis.desktop.in.in:3
-#: data/io.dev.deimoshall.Metamorphosis.metainfo.xml.in.in:5
+#: data/dev.deimoshall.Metamorphosis.desktop.in.in:3
+#: data/dev.deimoshall.Metamorphosis.metainfo.xml.in.in:5
 #: data/resources/blueprints/window.blp:9
 #: data/resources/blueprints/window.blp:21
 #: data/resources/blueprints/window.blp:57 src/main.rs:30
@@ -26,60 +26,60 @@ msgstr ""
 msgid "Metamorphosis"
 msgstr "Metamorphosis"
 
-#: data/io.dev.deimoshall.Metamorphosis.desktop.in.in:4
+#: data/dev.deimoshall.Metamorphosis.desktop.in.in:4
 msgid "Image Converter"
 msgstr "Převodník obrázků"
 
-#: data/io.dev.deimoshall.Metamorphosis.desktop.in.in:5
-#: data/io.dev.deimoshall.Metamorphosis.metainfo.xml.in.in:11
+#: data/dev.deimoshall.Metamorphosis.desktop.in.in:5
+#: data/dev.deimoshall.Metamorphosis.metainfo.xml.in.in:11
 msgid "Convert and manipulate images"
 msgstr "Převést a manipulovat obrázky"
 
-#: data/io.dev.deimoshall.Metamorphosis.desktop.in.in:11
+#: data/dev.deimoshall.Metamorphosis.desktop.in.in:11
 msgid "converter;image;convert;converting;processing"
 msgstr "converter;image;convert;converting;processing"
 
-#: data/io.dev.deimoshall.Metamorphosis.gschema.xml.in:26
+#: data/dev.deimoshall.Metamorphosis.gschema.xml.in:26
 msgid "Shows less popular datatypes in the menu"
 msgstr "Zobrazit méně populární datové typy v menu"
 
-#: data/io.dev.deimoshall.Metamorphosis.gschema.xml.in:30
+#: data/dev.deimoshall.Metamorphosis.gschema.xml.in:30
 msgid "Window width"
 msgstr "Šířka okna"
 
-#: data/io.dev.deimoshall.Metamorphosis.gschema.xml.in:34
+#: data/dev.deimoshall.Metamorphosis.gschema.xml.in:34
 msgid "Image quality"
 msgstr "Kvalita obrázku"
 
-#: data/io.dev.deimoshall.Metamorphosis.gschema.xml.in:38
+#: data/dev.deimoshall.Metamorphosis.gschema.xml.in:38
 msgid "Image density per inch"
 msgstr "Hustota obrázku na palec"
 
-#: data/io.dev.deimoshall.Metamorphosis.gschema.xml.in:42
+#: data/dev.deimoshall.Metamorphosis.gschema.xml.in:42
 msgid "Window height"
 msgstr "Výška okna"
 
-#: data/io.dev.deimoshall.Metamorphosis.gschema.xml.in:46
+#: data/dev.deimoshall.Metamorphosis.gschema.xml.in:46
 msgid "Window maximized state"
 msgstr "Stav maximalizovaného okna"
 
-#: data/io.dev.deimoshall.Metamorphosis.gschema.xml.in:50
+#: data/dev.deimoshall.Metamorphosis.gschema.xml.in:50
 msgid "Output format"
 msgstr "Výstupní formát"
 
-#: data/io.dev.deimoshall.Metamorphosis.gschema.xml.in:54
+#: data/dev.deimoshall.Metamorphosis.gschema.xml.in:54
 msgid "Compression format"
 msgstr "Formát pro kompresi"
 
-#: data/io.dev.deimoshall.Metamorphosis.metainfo.xml.in.in:17
+#: data/dev.deimoshall.Metamorphosis.metainfo.xml.in.in:17
 msgid "Convert between different image filetypes and resize them easily."
 msgstr "Převádějte mezi různými typy obrázků a měňte jejich velikost jednoduše."
 
-#: data/io.dev.deimoshall.Metamorphosis.metainfo.xml.in.in:42
+#: data/dev.deimoshall.Metamorphosis.metainfo.xml.in.in:42
 msgid "Converting sample image from PNG to HEIF"
 msgstr "Převádění ukázkového obrázku z PNG do HEIF"
 
-#: data/io.dev.deimoshall.Metamorphosis.metainfo.xml.in.in:46
+#: data/dev.deimoshall.Metamorphosis.metainfo.xml.in.in:46
 msgid "Converting multiple sample images from SVG to HEIF"
 msgstr "Převádění ukázkového obrázku z SVG do HEIF"
 
