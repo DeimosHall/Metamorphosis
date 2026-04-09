@@ -6,16 +6,39 @@
     <developer id="io.dev.deimoshall">
         <name translate="no">Deimos Hall</name>
     </developer>
-    <summary>Edit EXIF metadata</summary>
+    <summary>Edit metadata</summary>
 
     <metadata_license>CC-BY-SA-4.0</metadata_license>
     <project_license>GPL-3.0-only</project_license>
 
     <description>
         <p>
-            Convert between different image filetypes and resize them easily.
+            Metamorphosis helps you edit EXIF metadata in images.
+            Simply drag and drop files or paste images directly into the app to get started.
+        </p>
+        <p>
+            Supports JPEG, HEIC, AVIF, WebP, and many more image formats.
         </p>
     </description>
+
+    <categories>
+        <category>Graphics</category>
+        <category>Utility</category>
+    </categories>
+
+    <keywords>
+        <keyword>exif</keyword>
+        <keyword>metadata</keyword>
+        <keyword>image</keyword>
+        <keyword>video</keyword>
+        <keyword>audio</keyword>
+        <keyword>edit</keyword>
+        <keyword>tag</keyword>
+        <keyword>jpeg</keyword>
+        <keyword>png</keyword>
+        <keyword>heic</keyword>
+        <keyword>pdf</keyword>
+    </keywords>
 
     <translation type="gettext">@gettext-package@</translation>
 
@@ -59,7 +82,7 @@
     <url type="contribute">https://github.com/DeimosHall/Metamorphosis</url>
     <url type="contact">https://matrix.to/#/@deimos:gnome.org</url>
 
-    <update_contact>deimos@deimoshall.io</update_contact>
+    <update_contact>deimoshall.dev@proton.me</update_contact>
 
     <content_rating type="oars-1.1" />
 
