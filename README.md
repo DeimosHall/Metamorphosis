@@ -3,7 +3,7 @@
 
 Edit EXIF metadata.
 
-<img src="data/resources/icons/hicolor/scalable/apps/dev.deimoshall.Metamorphosis.svg" width="128" height="128" alt="Metamorphosis icon">
+<img src="data/resources/icons/hicolor/scalable/apps/dev.deimoshall.Metamorphosis.png" width="128" height="128" alt="Metamorphosis icon">
 
 [![Installs](https://img.shields.io/flathub/downloads/dev.deimoshall.Metamorphosis?style=for-the-badge)](https://flathub.org/apps/details/dev.deimoshall.Metamorphosis)
 [![Latest Tag](https://img.shields.io/gitlab/v/tag/deimoshall/Metamorphosis?sort=date&style=for-the-badge)](https://gitlab.com/deimoshall/Metamorphosis/-/tags)
