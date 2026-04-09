@@ -1,7 +1,7 @@
 <div align="center">
 <h1>Metamorphosis</h1>
 
-Edit exif metadata.
+Edit EXIF metadata.
 
 <img src="data/resources/icons/hicolor/scalable/apps/io.dev.deimoshall.Metamorphosis.svg" width="128" height="128" alt="Metamorphosis icon">
 
