@@ -86,4 +86,19 @@
 
     <content_rating type="oars-1.1" />
 
+    <releases>
+        <release version="0.1.0" date="2026-04-10">
+            <description>
+                <p>Initial release with core features:</p>
+                <ul>
+                    <li>Edit EXIF metadata in images</li>
+                    <li>Support for images (only JPEG tested)</li>
+                    <li>View and modify create date</li>
+                    <li>Set offset time for date values</li>
+                    <li>Write processing software tag</li>
+                </ul>
+            </description>
+        </release>
+    </releases>
+
 </component>
