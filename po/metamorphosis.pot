@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: metamorphosis\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-11-20 15:54-0800\n"
+"POT-Creation-Date: 2026-04-09 08:35-0600\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -21,17 +21,16 @@ msgstr ""
 #: data/dev.deimoshall.Metamorphosis.metainfo.xml.in.in:5
 #: data/resources/blueprints/window.blp:9
 #: data/resources/blueprints/window.blp:21
-#: data/resources/blueprints/window.blp:58 src/main.rs:45
+#: data/resources/blueprints/window.blp:58 src/main.rs:46
 msgid "Metamorphosis"
 msgstr ""
 
 #: data/dev.deimoshall.Metamorphosis.desktop.in.in:3
-msgid "Image Converter"
+msgid "EXIF Editor"
 msgstr ""
 
 #: data/dev.deimoshall.Metamorphosis.desktop.in.in:4
-#: data/dev.deimoshall.Metamorphosis.metainfo.xml.in.in:9
-msgid "Convert and manipulate images"
+msgid "Edit EXIF metadata"
 msgstr ""
 
 #: data/dev.deimoshall.Metamorphosis.desktop.in.in:10
@@ -39,7 +38,7 @@ msgid "converter;image;convert;converting;processing"
 msgstr ""
 
 #: data/dev.deimoshall.Metamorphosis.desktop.in.in:20
-#: data/resources/blueprints/window.blp:480
+#: data/resources/blueprints/window.blp:524
 msgid "New Window"
 msgstr ""
 
@@ -71,15 +70,69 @@ msgstr ""
 msgid "Compression format"
 msgstr ""
 
-#: data/dev.deimoshall.Metamorphosis.metainfo.xml.in.in:15
-msgid "Convert between different image filetypes and resize them easily."
+#: data/dev.deimoshall.Metamorphosis.metainfo.xml.in.in:9
+msgid "Edit metadata"
 msgstr ""
 
-#: data/dev.deimoshall.Metamorphosis.metainfo.xml.in.in:42
+#: data/dev.deimoshall.Metamorphosis.metainfo.xml.in.in:15
+msgid ""
+"Metamorphosis helps you edit EXIF metadata in images. Simply drag and drop "
+"files or paste images directly into the app to get started."
+msgstr ""
+
+#: data/dev.deimoshall.Metamorphosis.metainfo.xml.in.in:19
+msgid "Supports JPEG, HEIC, AVIF, WebP, and many more image formats."
+msgstr ""
+
+#: data/dev.deimoshall.Metamorphosis.metainfo.xml.in.in:30
+msgid "exif"
+msgstr ""
+
+#: data/dev.deimoshall.Metamorphosis.metainfo.xml.in.in:31
+msgid "metadata"
+msgstr ""
+
+#: data/dev.deimoshall.Metamorphosis.metainfo.xml.in.in:32
+msgid "image"
+msgstr ""
+
+#: data/dev.deimoshall.Metamorphosis.metainfo.xml.in.in:33
+msgid "video"
+msgstr ""
+
+#: data/dev.deimoshall.Metamorphosis.metainfo.xml.in.in:34
+msgid "audio"
+msgstr ""
+
+#: data/dev.deimoshall.Metamorphosis.metainfo.xml.in.in:35
+msgid "edit"
+msgstr ""
+
+#: data/dev.deimoshall.Metamorphosis.metainfo.xml.in.in:36
+msgid "tag"
+msgstr ""
+
+#: data/dev.deimoshall.Metamorphosis.metainfo.xml.in.in:37
+msgid "jpeg"
+msgstr ""
+
+#: data/dev.deimoshall.Metamorphosis.metainfo.xml.in.in:38
+msgid "png"
+msgstr ""
+
+#: data/dev.deimoshall.Metamorphosis.metainfo.xml.in.in:39
+msgid "heic"
+msgstr ""
+
+#: data/dev.deimoshall.Metamorphosis.metainfo.xml.in.in:40
+msgid "pdf"
+msgstr ""
+
+#: data/dev.deimoshall.Metamorphosis.metainfo.xml.in.in:65
 msgid "Converting sample image from PNG to HEIF"
 msgstr ""
 
-#: data/dev.deimoshall.Metamorphosis.metainfo.xml.in.in:47
+#: data/dev.deimoshall.Metamorphosis.metainfo.xml.in.in:70
 msgid "Converting multiple sample images from SVG to HEIF"
 msgstr ""
 
@@ -92,7 +145,7 @@ msgid "Drop Here to Open"
 msgstr ""
 
 #: data/resources/blueprints/window.blp:28
-#: data/resources/blueprints/window.blp:377
+#: data/resources/blueprints/window.blp:421
 msgid "Add Images (Ctrl+O)"
 msgstr ""
 
@@ -109,164 +162,184 @@ msgid "_Open Images…"
 msgstr ""
 
 #: data/resources/blueprints/window.blp:118
+msgid "Creation Date"
+msgstr ""
+
+#: data/resources/blueprints/window.blp:122
+msgid "YYYY:MM:DD HH:MM:SS"
+msgstr ""
+
+#: data/resources/blueprints/window.blp:129
+msgid "Offset Time"
+msgstr ""
+
+#: data/resources/blueprints/window.blp:132
+msgid "-06:00"
+msgstr ""
+
+#: data/resources/blueprints/window.blp:144
+msgid "Apply"
+msgstr ""
+
+#: data/resources/blueprints/window.blp:163
 msgid "Export Format"
 msgstr ""
 
-#: data/resources/blueprints/window.blp:124
+#: data/resources/blueprints/window.blp:171
 msgid "Save as multi-page PDF"
 msgstr ""
 
-#: data/resources/blueprints/window.blp:134
+#: data/resources/blueprints/window.blp:181
 msgid "Save To ZIP"
 msgstr ""
 
-#: data/resources/blueprints/window.blp:146
+#: data/resources/blueprints/window.blp:193
 msgid "Quality"
 msgstr ""
 
-#: data/resources/blueprints/window.blp:168
+#: data/resources/blueprints/window.blp:215
 msgid "Background Color"
 msgstr ""
 
-#: data/resources/blueprints/window.blp:169
+#: data/resources/blueprints/window.blp:216
 msgid "Replaces original transparency layer"
 msgstr ""
 
-#: data/resources/blueprints/window.blp:183
+#: data/resources/blueprints/window.blp:230
 msgid "Pixel Density Per Inch"
 msgstr ""
 
-#: data/resources/blueprints/window.blp:194
+#: data/resources/blueprints/window.blp:241
 msgid "Resize"
 msgstr ""
 
-#: data/resources/blueprints/window.blp:201
-#: data/resources/blueprints/window.blp:202
-#: data/resources/blueprints/window.blp:210
-#: data/resources/blueprints/window.blp:212
-#: data/resources/blueprints/window.blp:241
+#: data/resources/blueprints/window.blp:248
+#: data/resources/blueprints/window.blp:249
+#: data/resources/blueprints/window.blp:257
+#: data/resources/blueprints/window.blp:259
+#: data/resources/blueprints/window.blp:288
 msgid "Width"
 msgstr ""
 
-#: data/resources/blueprints/window.blp:221
+#: data/resources/blueprints/window.blp:268
 msgid "Preserve aspect ratio"
 msgstr ""
 
-#: data/resources/blueprints/window.blp:232
-#: data/resources/blueprints/window.blp:233
-#: data/resources/blueprints/window.blp:242
+#: data/resources/blueprints/window.blp:279
+#: data/resources/blueprints/window.blp:280
+#: data/resources/blueprints/window.blp:289
 msgid "Height"
 msgstr ""
 
-#: data/resources/blueprints/window.blp:255
+#: data/resources/blueprints/window.blp:302
 msgid "Choose between resizing with percentages or using exact pixels"
 msgstr ""
 
-#: data/resources/blueprints/window.blp:260
+#: data/resources/blueprints/window.blp:307
 msgid "%"
 msgstr ""
 
-#: data/resources/blueprints/window.blp:261
+#: data/resources/blueprints/window.blp:308
 msgid "px"
 msgstr ""
 
-#: data/resources/blueprints/window.blp:275
+#: data/resources/blueprints/window.blp:322
 msgid "Resize Algorithm"
 msgstr ""
 
-#: data/resources/blueprints/window.blp:282
+#: data/resources/blueprints/window.blp:329
 msgid "Default"
 msgstr ""
 
-#: data/resources/blueprints/window.blp:287
+#: data/resources/blueprints/window.blp:334
 msgid "Pixel Art"
 msgstr ""
 
-#: data/resources/blueprints/window.blp:304
+#: data/resources/blueprints/window.blp:351
 msgid "_Convert"
 msgstr ""
 
-#: data/resources/blueprints/window.blp:324
+#: data/resources/blueprints/window.blp:368
 msgid "Could not Load Image"
 msgstr ""
 
-#: data/resources/blueprints/window.blp:325
+#: data/resources/blueprints/window.blp:369
 msgid "This image could be corrupted or may use an unsupported file format."
 msgstr ""
 
-#: data/resources/blueprints/window.blp:335
+#: data/resources/blueprints/window.blp:379
 msgid "Converting"
 msgstr ""
 
-#: data/resources/blueprints/window.blp:336
+#: data/resources/blueprints/window.blp:380
 msgid "This could take a while"
 msgstr ""
 
-#: data/resources/blueprints/window.blp:346 src/window.rs:938
+#: data/resources/blueprints/window.blp:390 src/window.rs:987
 msgid "Loading…"
 msgstr ""
 
-#: data/resources/blueprints/window.blp:352 src/window.rs:568
-#: src/window.rs:1551
+#: data/resources/blueprints/window.blp:396 src/window.rs:593
+#: src/window.rs:1597
 msgid "_Cancel"
 msgstr ""
 
-#: data/resources/blueprints/window.blp:370
+#: data/resources/blueprints/window.blp:414
 msgid "All Images"
 msgstr ""
 
-#: data/resources/blueprints/window.blp:438
+#: data/resources/blueprints/window.blp:482
 msgctxt "shortcut window"
 msgid "General"
 msgstr ""
 
-#: data/resources/blueprints/window.blp:441
+#: data/resources/blueprints/window.blp:485
 msgctxt "shortcut window"
 msgid "Show Shortcuts"
 msgstr ""
 
-#: data/resources/blueprints/window.blp:446
+#: data/resources/blueprints/window.blp:490
 msgctxt "shortcut window"
 msgid "Quit"
 msgstr ""
 
-#: data/resources/blueprints/window.blp:451
+#: data/resources/blueprints/window.blp:495
 msgctxt "shortcut window"
 msgid "New Window"
 msgstr ""
 
-#: data/resources/blueprints/window.blp:456
+#: data/resources/blueprints/window.blp:500
 msgctxt "shortcut window"
 msgid "Clear Window"
 msgstr ""
 
-#: data/resources/blueprints/window.blp:461
+#: data/resources/blueprints/window.blp:505
 msgctxt "shortcut window"
 msgid "Paste From Clipboard"
 msgstr ""
 
-#: data/resources/blueprints/window.blp:466
+#: data/resources/blueprints/window.blp:510
 msgctxt "shortcut window"
 msgid "Add Images"
 msgstr ""
 
-#: data/resources/blueprints/window.blp:475
+#: data/resources/blueprints/window.blp:519
 msgid "Paste From Clipboard"
 msgstr ""
 
-#: data/resources/blueprints/window.blp:485
+#: data/resources/blueprints/window.blp:529
 msgid "Clear Window"
 msgstr ""
 
-#: data/resources/blueprints/window.blp:492
+#: data/resources/blueprints/window.blp:536
 msgid "Keyboard Shortcuts"
 msgstr ""
 
-#: data/resources/blueprints/window.blp:497
+#: data/resources/blueprints/window.blp:541
 msgid "About Metamorphosis"
 msgstr ""
 
-#: src/file_chooser.rs:39 src/window.rs:2136
+#: src/file_chooser.rs:39 src/window.rs:2245
 msgid "Unsupported filetype"
 msgstr ""
 
@@ -302,83 +375,59 @@ msgstr ""
 msgid "translator-credits"
 msgstr ""
 
-#. Translators: Metainfo for the app Impression. <https://gitlab.com/adhami3310/Impression>
-#: src/widgets/about_window.rs:26
-msgid "Impression"
-msgstr ""
-
-#. Translators: Metainfo for the app Impression. <https://gitlab.com/adhami3310/Impression>
-#: src/widgets/about_window.rs:28
-msgid "Create bootable drives"
-msgstr ""
-
-#. Translators: Metainfo for the app Footage. <https://gitlab.com/adhami3310/Footage>
-#: src/widgets/about_window.rs:33
-msgid "Footage"
-msgstr ""
-
-#. Translators: Metainfo for the app Footage. <https://gitlab.com/adhami3310/Footage>
-#: src/widgets/about_window.rs:35
-msgid "Polish your videos"
-msgstr ""
-
 #: src/widgets/about_window.rs:38
 msgid "Code and Design Borrowed from"
 msgstr ""
 
-#: src/widgets/about_window.rs:50
-msgid "Sample Image from"
-msgstr ""
-
-#: src/window.rs:518
+#: src/window.rs:534
 #, rust-format
 msgid "New transparency layer color: {}"
 msgstr ""
 
-#: src/window.rs:538
+#: src/window.rs:563
 msgid "Unable to access dropped files"
 msgstr ""
 
-#: src/window.rs:564 src/window.rs:1546
+#: src/window.rs:589 src/window.rs:1592
 msgid "Stop converting?"
 msgstr ""
 
-#: src/window.rs:565 src/window.rs:1547
+#: src/window.rs:590 src/window.rs:1593
 msgid "You will lose all progress."
 msgstr ""
 
-#: src/window.rs:569 src/window.rs:1551
+#: src/window.rs:594 src/window.rs:1597
 msgid "_Stop"
 msgstr ""
 
-#: src/window.rs:609
+#: src/window.rs:634
 msgid "Collecting files"
 msgstr ""
 
-#: src/window.rs:1464
+#: src/window.rs:1510
 msgid "Error While Processing"
 msgstr ""
 
-#: src/window.rs:1485
+#: src/window.rs:1531
 msgid "_Close"
 msgstr ""
 
-#: src/window.rs:1486
+#: src/window.rs:1532
 msgid "_Copy to Clipboard"
 msgstr ""
 
-#: src/window.rs:1497
+#: src/window.rs:1543
 msgid "Error copied to clipboard"
 msgstr ""
 
-#: src/window.rs:1513
+#: src/window.rs:1559
 msgid "Image converted"
 msgstr ""
 
-#: src/window.rs:1514
+#: src/window.rs:1560
 msgid "Open"
 msgstr ""
 
-#: src/window.rs:1576
+#: src/window.rs:1622
 msgid "Converting Cancelled"
 msgstr ""
