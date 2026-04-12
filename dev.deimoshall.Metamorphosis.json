@@ -1,17 +1,18 @@
 {
-    "app-id": "io.gitlab.adhami3310.Converter",
+    "app-id": "dev.deimoshall.Metamorphosis",
     "runtime": "org.gnome.Platform",
     "runtime-version": "49",
     "sdk": "org.gnome.Sdk",
     "sdk-extensions": [
         "org.freedesktop.Sdk.Extension.rust-stable"
     ],
-    "command": "switcheroo",
+    "command": "metamorphosis",
     "finish-args": [
         "--share=ipc",
         "--socket=fallback-x11",
         "--device=dri",
-        "--socket=wayland"
+        "--socket=wayland",
+        "--env=PATH=/app/bin:/usr/bin:/bin"
     ],
     "build-options": {
         "append-path": "/usr/lib/sdk/rust-stable/bin",
@@ -106,10 +107,23 @@
             ]
         },
         {
-            "name": "switcheroo",
+            "name": "exiftool",
+            "buildsystem": "simple",
+            "build-commands": [
+                "cp -r . /app/ && chmod +x /app/exiftool"
+            ],
+            "sources": [
+                {
+                    "type": "archive",
+                    "url": "https://sourceforge.net/projects/exiftool/files/Image-ExifTool-13.54.tar.gz",
+                    "sha256": "dfe612aa4a48c220591f3889c41346274c96c822e1376b3ba81e2832ac5210c4"
+                }
+            ]
+        },
+        {
+            "name": "metamorphosis",
             "builddir": true,
             "buildsystem": "meson",
-            "run-test": true,
             "config-opts": [
                 "--buildtype=release",
                 "-Dprofile=development"

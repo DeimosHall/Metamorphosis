@@ -68,7 +68,7 @@ msgstr ""
 #: ../data/resources/blueprints/window.blp:21
 #: ../data/resources/blueprints/window.blp:57 ../src/main.rs:30
 #: ../src/widgets/about_window.rs:24
-msgid "Switcheroo"
+msgid "Metamorphosis"
 msgstr ""
 
 #: ../data/resources/blueprints/window.blp:15
@@ -221,7 +221,7 @@ msgid "Keyboard Shortcuts"
 msgstr "Tangenbordsgenvägar"
 
 #: ../data/resources/blueprints/window.blp:465
-msgid "About Switcheroo"
+msgid "About Metamorphosis"
 msgstr ""
 
 #: ../src/file_chooser.rs:39

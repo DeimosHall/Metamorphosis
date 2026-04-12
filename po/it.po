@@ -67,8 +67,8 @@ msgstr "Mostra tutto"
 #: ../data/resources/blueprints/window.blp:21
 #: ../data/resources/blueprints/window.blp:57 ../src/main.rs:30
 #: ../src/widgets/about_window.rs:24
-msgid "Switcheroo"
-msgstr "Switcheroo"
+msgid "Metamorphosis"
+msgstr "Metamorphosis"
 
 #: ../data/resources/blueprints/window.blp:15
 msgid "Drop Here to Open"
@@ -214,8 +214,8 @@ msgid "Keyboard Shortcuts"
 msgstr "Scorciatoie da tastiera"
 
 #: ../data/resources/blueprints/window.blp:465
-msgid "About Switcheroo"
-msgstr "Informazioni su Switcheroo"
+msgid "About Metamorphosis"
+msgstr "Informazioni su Metamorphosis"
 
 #: ../src/file_chooser.rs:39
 msgid "Unsupported filetype"

@@ -1,12 +1,12 @@
-# Portuguese translations for switcheroo package.
-# Copyright (C) 2023 THE switcheroo'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the switcheroo package.
+# Portuguese translations for metamorphosis package.
+# Copyright (C) 2023 THE metamorphosis'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the metamorphosis package.
 # Automatically generated, 2023.
 # Juliano de Souza Camargo <julianosc@protonmail.com>, 2023-2024.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: switcheroo\n"
+"Project-Id-Version: metamorphosis\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-12-27 08:05-0500\n"
 "PO-Revision-Date: 2024-01-01 14:14-0300\n"
@@ -67,8 +67,8 @@ msgstr "Mostrar todas"
 #: ../data/resources/blueprints/window.blp:21
 #: ../data/resources/blueprints/window.blp:57 ../src/main.rs:30
 #: ../src/widgets/about_window.rs:24
-msgid "Switcheroo"
-msgstr "Switcheroo"
+msgid "Metamorphosis"
+msgstr "Metamorphosis"
 
 #: ../data/resources/blueprints/window.blp:15
 msgid "Drop Here to Open"
@@ -216,8 +216,8 @@ msgid "Keyboard Shortcuts"
 msgstr "Teclas de atalho"
 
 #: ../data/resources/blueprints/window.blp:465
-msgid "About Switcheroo"
-msgstr "Acerca do Switcheroo"
+msgid "About Metamorphosis"
+msgstr "Acerca do Metamorphosis"
 
 #: ../src/file_chooser.rs:39
 msgid "Unsupported filetype"

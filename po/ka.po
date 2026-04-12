@@ -1,11 +1,11 @@
-# Georgian translation for switcheroo.
-# Copyright (C) 2026 switcheroo authors.
-# This file is distributed under the same license as the switcheroo package.
+# Georgian translation for metamorphosis.
+# Copyright (C) 2026 metamorphosis authors.
+# This file is distributed under the same license as the metamorphosis package.
 # Ekaterine Papava <papava.e@gtu.ge>, 2026.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: switcheroo\n"
+"Project-Id-Version: metamorphosis\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-11-20 15:54-0800\n"
 "PO-Revision-Date: 2026-02-02 10:55+0100\n"
@@ -17,69 +17,69 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 3.8\n"
 
-#: data/io.gitlab.adhami3310.Converter.desktop.in.in:2
-#: data/io.gitlab.adhami3310.Converter.metainfo.xml.in.in:5
+#: data/dev.deimoshall.Metamorphosis.desktop.in.in:2
+#: data/dev.deimoshall.Metamorphosis.metainfo.xml.in.in:5
 #: data/resources/blueprints/window.blp:9
 #: data/resources/blueprints/window.blp:21
 #: data/resources/blueprints/window.blp:58 src/main.rs:45
-msgid "Switcheroo"
-msgstr "Switcheroo"
+msgid "Metamorphosis"
+msgstr "Metamorphosis"
 
-#: data/io.gitlab.adhami3310.Converter.desktop.in.in:3
+#: data/dev.deimoshall.Metamorphosis.desktop.in.in:3
 msgid "Image Converter"
 msgstr "გამოსახულების გადამყვანი"
 
-#: data/io.gitlab.adhami3310.Converter.desktop.in.in:4
-#: data/io.gitlab.adhami3310.Converter.metainfo.xml.in.in:9
+#: data/dev.deimoshall.Metamorphosis.desktop.in.in:4
+#: data/dev.deimoshall.Metamorphosis.metainfo.xml.in.in:9
 msgid "Convert and manipulate images"
 msgstr "გადაიყვანეთ და შეცვალეთ გამოსახულებები"
 
-#: data/io.gitlab.adhami3310.Converter.desktop.in.in:10
+#: data/dev.deimoshall.Metamorphosis.desktop.in.in:10
 msgid "converter;image;convert;converting;processing"
 msgstr "converter;image;convert;converting;processing;გადამყვანი;გამოსახულება;დამუშავება"
 
-#: data/io.gitlab.adhami3310.Converter.desktop.in.in:20
+#: data/dev.deimoshall.Metamorphosis.desktop.in.in:20
 #: data/resources/blueprints/window.blp:480
 msgid "New Window"
 msgstr "ახალი ფანჯარა"
 
-#: data/io.gitlab.adhami3310.Converter.gschema.xml.in:26
+#: data/dev.deimoshall.Metamorphosis.gschema.xml.in:26
 msgid "Window width"
 msgstr "ფანჯრის სიგანე"
 
-#: data/io.gitlab.adhami3310.Converter.gschema.xml.in:30
+#: data/dev.deimoshall.Metamorphosis.gschema.xml.in:30
 msgid "Image quality"
 msgstr "გამოსახულების ხარისხი"
 
-#: data/io.gitlab.adhami3310.Converter.gschema.xml.in:34
+#: data/dev.deimoshall.Metamorphosis.gschema.xml.in:34
 msgid "Image density per inch"
 msgstr "გამოსახულების სიმკვრივე თითოეულ დუიმზე"
 
-#: data/io.gitlab.adhami3310.Converter.gschema.xml.in:38
+#: data/dev.deimoshall.Metamorphosis.gschema.xml.in:38
 msgid "Window height"
 msgstr "ფანჯრის სიმაღლე"
 
-#: data/io.gitlab.adhami3310.Converter.gschema.xml.in:42
+#: data/dev.deimoshall.Metamorphosis.gschema.xml.in:42
 msgid "Window maximized state"
 msgstr "ფანჯრის სრულად გაშლილი მდგომარეობა"
 
-#: data/io.gitlab.adhami3310.Converter.gschema.xml.in:46
+#: data/dev.deimoshall.Metamorphosis.gschema.xml.in:46
 msgid "Output format"
 msgstr "გამოტანის ფორმატი"
 
-#: data/io.gitlab.adhami3310.Converter.gschema.xml.in:50
+#: data/dev.deimoshall.Metamorphosis.gschema.xml.in:50
 msgid "Compression format"
 msgstr "შეკუმშვის ფორმატი"
 
-#: data/io.gitlab.adhami3310.Converter.metainfo.xml.in.in:15
+#: data/dev.deimoshall.Metamorphosis.metainfo.xml.in.in:15
 msgid "Convert between different image filetypes and resize them easily."
 msgstr "ადვილად გადაიყვანეთ გამოსახულება სხვადასხვა ტიპებს შორის და შეუცვალეთ მათ ზომა."
 
-#: data/io.gitlab.adhami3310.Converter.metainfo.xml.in.in:42
+#: data/dev.deimoshall.Metamorphosis.metainfo.xml.in.in:42
 msgid "Converting sample image from PNG to HEIF"
 msgstr "მაგალითი გამოსახულების გადაყვანა PNG-დან HEIF-ში"
 
-#: data/io.gitlab.adhami3310.Converter.metainfo.xml.in.in:47
+#: data/dev.deimoshall.Metamorphosis.metainfo.xml.in.in:47
 msgid "Converting multiple sample images from SVG to HEIF"
 msgstr "ერთზე მეტი მაგალითი გამოსახულების გადაყვანა SVG-დან HEIF-ში"
 
@@ -263,8 +263,8 @@ msgid "Keyboard Shortcuts"
 msgstr "კლავიატურის მალსახმობები"
 
 #: data/resources/blueprints/window.blp:497
-msgid "About Switcheroo"
-msgstr "Switcheroo-ის შესახებ"
+msgid "About Metamorphosis"
+msgstr "Metamorphosis-ის შესახებ"
 
 #: src/file_chooser.rs:39 src/window.rs:2136
 msgid "Unsupported filetype"

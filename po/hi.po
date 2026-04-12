@@ -1,12 +1,12 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the switcheroo package.
+# This file is distributed under the same license as the metamorphosis package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # Scrambled777 <weblate.scrambled777@simplelogin.com>, 2024.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: switcheroo\n"
+"Project-Id-Version: metamorphosis\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-04-19 13:36-0400\n"
 "PO-Revision-Date: 2024-05-06 15:47+0530\n"
@@ -19,69 +19,69 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Generator: Gtranslator 46.1\n"
 
-#: data/io.gitlab.adhami3310.Converter.desktop.in.in:3
-#: data/io.gitlab.adhami3310.Converter.metainfo.xml.in.in:5
+#: data/dev.deimoshall.Metamorphosis.desktop.in.in:3
+#: data/dev.deimoshall.Metamorphosis.metainfo.xml.in.in:5
 #: data/resources/blueprints/window.blp:9
 #: data/resources/blueprints/window.blp:21
 #: data/resources/blueprints/window.blp:57 src/main.rs:30
 #: src/widgets/about_window.rs:24
-msgid "Switcheroo"
-msgstr "Switcheroo"
+msgid "Metamorphosis"
+msgstr "Metamorphosis"
 
-#: data/io.gitlab.adhami3310.Converter.desktop.in.in:4
+#: data/dev.deimoshall.Metamorphosis.desktop.in.in:4
 msgid "Image Converter"
 msgstr "छवि परिवर्तक"
 
-#: data/io.gitlab.adhami3310.Converter.desktop.in.in:5
-#: data/io.gitlab.adhami3310.Converter.metainfo.xml.in.in:11
+#: data/dev.deimoshall.Metamorphosis.desktop.in.in:5
+#: data/dev.deimoshall.Metamorphosis.metainfo.xml.in.in:11
 msgid "Convert and manipulate images"
 msgstr "छवियों को परिवर्तित और हेरफेर करें"
 
-#: data/io.gitlab.adhami3310.Converter.desktop.in.in:11
+#: data/dev.deimoshall.Metamorphosis.desktop.in.in:11
 msgid "converter;image;convert;converting;processing"
 msgstr "परिवर्तक;छवि;परिवर्तित करें;converting;प्रसंस्करण"
 
-#: data/io.gitlab.adhami3310.Converter.gschema.xml.in:26
+#: data/dev.deimoshall.Metamorphosis.gschema.xml.in:26
 msgid "Shows less popular datatypes in the menu"
 msgstr "मेनू में कम लोकप्रिय डेटाटाइप दिखाता है"
 
-#: data/io.gitlab.adhami3310.Converter.gschema.xml.in:30
+#: data/dev.deimoshall.Metamorphosis.gschema.xml.in:30
 msgid "Window width"
 msgstr "विंडो चौड़ाई"
 
-#: data/io.gitlab.adhami3310.Converter.gschema.xml.in:34
+#: data/dev.deimoshall.Metamorphosis.gschema.xml.in:34
 msgid "Image quality"
 msgstr "छवि गुणवत्ता"
 
-#: data/io.gitlab.adhami3310.Converter.gschema.xml.in:38
+#: data/dev.deimoshall.Metamorphosis.gschema.xml.in:38
 msgid "Image density per inch"
 msgstr "छवि घनत्व प्रति इंच"
 
-#: data/io.gitlab.adhami3310.Converter.gschema.xml.in:42
+#: data/dev.deimoshall.Metamorphosis.gschema.xml.in:42
 msgid "Window height"
 msgstr "विंडो ऊंचाई"
 
-#: data/io.gitlab.adhami3310.Converter.gschema.xml.in:46
+#: data/dev.deimoshall.Metamorphosis.gschema.xml.in:46
 msgid "Window maximized state"
 msgstr "विंडो अधिकतमीकृत स्थिति"
 
-#: data/io.gitlab.adhami3310.Converter.gschema.xml.in:50
+#: data/dev.deimoshall.Metamorphosis.gschema.xml.in:50
 msgid "Output format"
 msgstr "आउटपुट प्रारूप"
 
-#: data/io.gitlab.adhami3310.Converter.gschema.xml.in:54
+#: data/dev.deimoshall.Metamorphosis.gschema.xml.in:54
 msgid "Compression format"
 msgstr "संपीड़न प्रारूप"
 
-#: data/io.gitlab.adhami3310.Converter.metainfo.xml.in.in:17
+#: data/dev.deimoshall.Metamorphosis.metainfo.xml.in.in:17
 msgid "Convert between different image filetypes and resize them easily."
 msgstr "विभिन्न छवि फाइल प्रकारों के बीच परिवर्तित करें और उनका आसानी से आकार बदलें।"
 
-#: data/io.gitlab.adhami3310.Converter.metainfo.xml.in.in:42
+#: data/dev.deimoshall.Metamorphosis.metainfo.xml.in.in:42
 msgid "Converting sample image from PNG to HEIF"
 msgstr "नमूना छवि को PNG से HEIF में परिवर्तित किया जा रहा है"
 
-#: data/io.gitlab.adhami3310.Converter.metainfo.xml.in.in:46
+#: data/dev.deimoshall.Metamorphosis.metainfo.xml.in.in:46
 msgid "Converting multiple sample images from SVG to HEIF"
 msgstr "एकाधिक नमूना छवियों को SVG से HEIF में परिवर्तित किया जा रहा है"
 
@@ -278,8 +278,8 @@ msgid "Keyboard Shortcuts"
 msgstr "कीबोर्ड शॉर्टकट"
 
 #: data/resources/blueprints/window.blp:465
-msgid "About Switcheroo"
-msgstr "Switcheroo के बारे में"
+msgid "About Metamorphosis"
+msgstr "Metamorphosis के बारे में"
 
 #: src/file_chooser.rs:39
 msgid "Unsupported filetype"

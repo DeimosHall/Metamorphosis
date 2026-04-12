@@ -1,6 +1,6 @@
 use glib::{ParamSpec, ParamSpecEnum, ParamSpecString, Value};
 use gtk::{
-    gdk::{Texture, gdk_pixbuf::Pixbuf},
+    gdk::{gdk_pixbuf::Pixbuf, Texture},
     gio, glib,
     prelude::*,
     subclass::prelude::*,
@@ -28,7 +28,7 @@ mod imp {
 
     #[glib::object_subclass]
     impl ObjectSubclass for InputFile {
-        const NAME: &'static str = "SwitcherooInputFile";
+        const NAME: &'static str = "MetamorphosisInputFile";
         type Type = crate::input_file::InputFile;
 
         fn new() -> Self {

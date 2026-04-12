@@ -6,7 +6,7 @@ if [ -d "$BUILD_DIR" ]; then
 fi
 
 meson translation-build
-meson compile -C translation-build switcheroo-pot
-# meson compile -C translation-build switcheroo-update-po
+meson compile -C translation-build metamorphosis-pot
+# meson compile -C translation-build metamorphosis-update-po
 
 rm -r translation-build

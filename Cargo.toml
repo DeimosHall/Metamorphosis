@@ -1,8 +1,10 @@
 [package]
-name = "switcheroo"
-version = "2.5.2"
+name = "metamorphosis"
+version = "0.1.0"
 edition = "2024"
 rust-version = "1.88"
+
+authors = ["Deimos Hall <deimoshall.dev@proton.me>"]
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
@@ -28,3 +30,4 @@ shared_child = "1.1"
 fdlimit = "0.3"
 derivative = "2.2"
 async-channel = "2.5"
+exiftool = "0.3.1"

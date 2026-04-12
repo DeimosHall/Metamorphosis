@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop-application">
+    <id>@app-id@</id>
+
+    <name>Metamorphosis</name>
+    <developer id="dev.deimoshall">
+        <name translate="no">Deimos Hall</name>
+    </developer>
+    <summary>Edit metadata</summary>
+
+    <metadata_license>CC-BY-SA-4.0</metadata_license>
+    <project_license>GPL-3.0-only</project_license>
+
+    <description>
+        <p>
+            Metamorphosis helps you edit EXIF metadata in images.
+            Simply drag and drop files or paste images directly into the app to get started.
+        </p>
+        <p>
+            Supports JPEG, HEIC, AVIF, WebP, and many more image formats.
+        </p>
+    </description>
+
+    <categories>
+        <category>Graphics</category>
+        <category>Utility</category>
+    </categories>
+
+    <keywords>
+        <keyword>exif</keyword>
+        <keyword>metadata</keyword>
+        <keyword>image</keyword>
+        <keyword>video</keyword>
+        <keyword>audio</keyword>
+        <keyword>edit</keyword>
+        <keyword>tag</keyword>
+        <keyword>jpeg</keyword>
+        <keyword>png</keyword>
+        <keyword>heic</keyword>
+        <keyword>pdf</keyword>
+    </keywords>
+
+    <translation type="gettext">@gettext-package@</translation>
+
+    <requires>
+        <display_length compare="ge">360</display_length>
+        <internet>offline-only</internet>
+    </requires>
+
+    <recommends>
+        <control>pointing</control>
+        <control>keyboard</control>
+        <control>touch</control>
+    </recommends>
+
+    <branding>
+        <color type="primary" scheme_preference="light">#f18e57</color>
+        <color type="primary" scheme_preference="dark">#980e8c</color>
+    </branding>
+
+    <screenshots>
+        <screenshot type="default">
+            <image>
+                https://raw.githubusercontent.com/DeimosHall/Metamorphosis/dev/data/resources/screenshots/0.png</image>
+            <caption>Reading metadata from an image (light mode)</caption>
+        </screenshot>
+        <screenshot>
+            <image>
+                https://raw.githubusercontent.com/DeimosHall/Metamorphosis/dev/data/resources/screenshots/1.png</image>
+            <caption>Reading metadata from an image (dark mode)</caption>
+        </screenshot>
+    </screenshots>
+
+    <launchable type="desktop-id">@app-id@.desktop</launchable>
+
+    <url type="homepage">https://apps.gnome.org/Metamorphosis/</url>
+    <url type="donation">https://opencollective.com/metamorphosis</url>
+    <url type="bugtracker">https://github.com/DeimosHall/Metamorphosis/issues</url>
+    <url type="help">https://github.com/DeimosHall/Metamorphosis/issues</url>
+    <url type="vcs-browser">https://github.com/DeimosHall/Metamorphosis</url>
+    <url type="translate">https://github.com/DeimosHall/Metamorphosis/tree/main/po</url>
+    <url type="contribute">https://github.com/DeimosHall/Metamorphosis</url>
+    <url type="contact">https://matrix.to/#/@deimos:gnome.org</url>
+
+    <update_contact>deimoshall.dev@proton.me</update_contact>
+
+    <content_rating type="oars-1.1" />
+
+    <releases>
+        <release version="0.1.0" date="2026-04-11">
+            <description>
+                <p>Initial release with core features:</p>
+                <ul>
+                    <li>Edit EXIF metadata in images</li>
+                    <li>Support for images (only JPEG tested)</li>
+                    <li>View and modify create date</li>
+                    <li>Set offset time for date values</li>
+                    <li>Write processing software tag</li>
+                </ul>
+            </description>
+        </release>
+    </releases>
+
+</component>

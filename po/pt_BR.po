@@ -18,69 +18,69 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Generator: Poedit 3.6\n"
 
-#: data/io.gitlab.adhami3310.Converter.desktop.in.in:2
-#: data/io.gitlab.adhami3310.Converter.metainfo.xml.in.in:5
+#: data/dev.deimoshall.Metamorphosis.desktop.in.in:2
+#: data/dev.deimoshall.Metamorphosis.metainfo.xml.in.in:5
 #: data/resources/blueprints/window.blp:9
 #: data/resources/blueprints/window.blp:21
 #: data/resources/blueprints/window.blp:57 src/main.rs:41
 #: src/widgets/about_window.rs:21
-msgid "Switcheroo"
-msgstr "Switcheroo"
+msgid "Metamorphosis"
+msgstr "Metamorphosis"
 
-#: data/io.gitlab.adhami3310.Converter.desktop.in.in:3
+#: data/dev.deimoshall.Metamorphosis.desktop.in.in:3
 msgid "Image Converter"
 msgstr "Conversor de Imagens"
 
-#: data/io.gitlab.adhami3310.Converter.desktop.in.in:4
-#: data/io.gitlab.adhami3310.Converter.metainfo.xml.in.in:11
+#: data/dev.deimoshall.Metamorphosis.desktop.in.in:4
+#: data/dev.deimoshall.Metamorphosis.metainfo.xml.in.in:11
 msgid "Convert and manipulate images"
 msgstr "Converta e manipule imagens"
 
-#: data/io.gitlab.adhami3310.Converter.desktop.in.in:10
+#: data/dev.deimoshall.Metamorphosis.desktop.in.in:10
 msgid "converter;image;convert;converting;processing"
 msgstr ""
 "converter;image;convert;converting;processing;imagem;converter;conversão;"
 "processamento"
 
-#: data/io.gitlab.adhami3310.Converter.gschema.xml.in:26
+#: data/dev.deimoshall.Metamorphosis.gschema.xml.in:26
 msgid "Window width"
 msgstr "Largura da janela"
 
-#: data/io.gitlab.adhami3310.Converter.gschema.xml.in:30
+#: data/dev.deimoshall.Metamorphosis.gschema.xml.in:30
 msgid "Image quality"
 msgstr "Qualidade da imagem"
 
-#: data/io.gitlab.adhami3310.Converter.gschema.xml.in:34
+#: data/dev.deimoshall.Metamorphosis.gschema.xml.in:34
 msgid "Image density per inch"
 msgstr "Densidade da imagem por polegada"
 
-#: data/io.gitlab.adhami3310.Converter.gschema.xml.in:38
+#: data/dev.deimoshall.Metamorphosis.gschema.xml.in:38
 msgid "Window height"
 msgstr "Altura da janela"
 
-#: data/io.gitlab.adhami3310.Converter.gschema.xml.in:42
+#: data/dev.deimoshall.Metamorphosis.gschema.xml.in:42
 msgid "Window maximized state"
 msgstr "Estado de janela maximizada"
 
-#: data/io.gitlab.adhami3310.Converter.gschema.xml.in:46
+#: data/dev.deimoshall.Metamorphosis.gschema.xml.in:46
 msgid "Output format"
 msgstr "Formato de saída"
 
-#: data/io.gitlab.adhami3310.Converter.gschema.xml.in:50
+#: data/dev.deimoshall.Metamorphosis.gschema.xml.in:50
 msgid "Compression format"
 msgstr "Formato de compressão"
 
-#: data/io.gitlab.adhami3310.Converter.metainfo.xml.in.in:17
+#: data/dev.deimoshall.Metamorphosis.metainfo.xml.in.in:17
 msgid "Convert between different image filetypes and resize them easily."
 msgstr ""
 "Converta entre diferentes tipos de arquivos de imagem e redimensione-os "
 "facilmente."
 
-#: data/io.gitlab.adhami3310.Converter.metainfo.xml.in.in:43
+#: data/dev.deimoshall.Metamorphosis.metainfo.xml.in.in:43
 msgid "Converting sample image from PNG to HEIF"
 msgstr "Convertendo imagem de amostra de PNG para HEIF"
 
-#: data/io.gitlab.adhami3310.Converter.metainfo.xml.in.in:48
+#: data/dev.deimoshall.Metamorphosis.metainfo.xml.in.in:48
 msgid "Converting multiple sample images from SVG to HEIF"
 msgstr "Convertendo várias imagens de amostra de SVG para HEIF"
 
@@ -269,8 +269,8 @@ msgid "Keyboard Shortcuts"
 msgstr "Atalhos de teclado"
 
 #: data/resources/blueprints/window.blp:458
-msgid "About Switcheroo"
-msgstr "Sobre o Switcheroo"
+msgid "About Metamorphosis"
+msgstr "Sobre o Metamorphosis"
 
 #: src/file_chooser.rs:39 src/window.rs:2203
 msgid "Unsupported filetype"

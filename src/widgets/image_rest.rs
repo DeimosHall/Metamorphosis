@@ -13,7 +13,7 @@ mod imp {
     use gtk::CompositeTemplate;
 
     #[derive(Debug, CompositeTemplate, Default)]
-    #[template(resource = "/io/gitlab/adhami3310/Converter/blueprints/image-rest.ui")]
+    #[template(resource = "/dev/deimoshall/Metamorphosis/blueprints/image-rest.ui")]
     pub struct ImageRest {
         #[template_child]
         pub image: TemplateChild<gtk::Button>,

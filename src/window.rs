@@ -12,8 +12,9 @@ use crate::input_file::InputFile;
 use crate::magick::{
     JobFile, MagickConvertJob, ResizeArgument, count_frames, generate_job, wait_for_child,
 };
+use crate::services::exif_service::ExifService;
 use crate::temp::{clean_dir, create_temporary_dir, get_temp_file_path};
-use crate::widgets::about_window::SwitcherooAbout;
+use crate::widgets::about_window::MetamorphosisAbout;
 use crate::widgets::image_rest::ImageRest;
 use crate::widgets::image_thumbnail::ImageThumbnail;
 use crate::{ZIP_BINARY_NAME, runtime};
@@ -89,7 +90,7 @@ mod imp {
 
     #[derive(Debug, CompositeTemplate, Derivative)]
     #[derivative(Default)]
-    #[template(resource = "/io/gitlab/adhami3310/Converter/blueprints/window.ui")]
+    #[template(resource = "/dev/deimoshall/Metamorphosis/blueprints/window.ui")]
     pub struct AppWindow {
         #[template_child]
         pub toast_overlay: TemplateChild<adw::ToastOverlay>,
@@ -121,6 +122,12 @@ mod imp {
         pub supported_output_filetypes: TemplateChild<gtk::StringList>,
         #[template_child]
         pub progress_bar: TemplateChild<gtk::ProgressBar>,
+        #[template_child]
+        pub create_date_entry: TemplateChild<gtk::Entry>,
+        #[template_child]
+        pub offset_time_entry: TemplateChild<gtk::Entry>,
+        #[template_child]
+        pub apply_date_button: TemplateChild<gtk::Button>,
 
         #[template_child]
         pub output_filetype: TemplateChild<adw::ComboRow>,
@@ -292,6 +299,15 @@ impl AppWindow {
                     self,
                     move |_, _, _| {
                         window.clear();
+                    }
+                ))
+                .build(),
+            gio::ActionEntry::builder("exif")
+                .activate(clone!(
+                    #[weak(rename_to=window)]
+                    self,
+                    move |_, _, _| {
+                        window.test_exiftool();
                     }
                 ))
                 .build(),
@@ -518,6 +534,15 @@ impl AppWindow {
                 &gettext("New transparency layer color: {}").replace("{}", &y),
             )]);
         });
+
+        imp.apply_date_button.connect_clicked(clone!(
+            #[weak(rename_to=this)]
+            self,
+            move |_| {
+                this.apply_create_date();
+            }
+        ));
+
         self.load_options();
     }
 
@@ -552,7 +577,7 @@ impl AppWindow {
     }
 
     fn show_about(&self) {
-        SwitcherooAbout::show(self);
+        MetamorphosisAbout::show(self);
     }
 
     fn show_help_overlay(&self) {
@@ -656,6 +681,11 @@ impl AppWindow {
             .filter(|f| f.exists())
             .collect();
 
+        if files.len() > 1 {
+            self.show_toast("Only one item is allowed by now");
+            files.truncate(1);
+        }
+
         self.imp().input_file_store.remove_all();
         self.imp().removed.replace(HashSet::new());
 
@@ -715,6 +745,22 @@ impl AppWindow {
                             these.load_pixbuf();
                         }
                     ));
+                }
+            }
+        ));
+    }
+
+    fn test_exiftool(&self) {
+        println!("Testing exiftool");
+        let paths = self.files().iter().map(|f| f.path()).collect_vec();
+
+        glib::spawn_future_local(clone!(
+            #[weak(rename_to=_this)]
+            self,
+            async move {
+                for path in paths {
+                    println!("File: {}", path);
+                    ExifService::read_all(path);
                 }
             }
         ));
@@ -820,6 +866,9 @@ impl AppWindow {
 
         self.update_options();
         self.switch_back_from_loading();
+        self.load_create_date();
+        self.load_offset_time();
+
         self.imp()
             .all_images_stack
             .set_visible_child_name("all_images");
@@ -1205,6 +1254,9 @@ pub trait WindowUI {
     fn update_resize(&self);
     fn update_full_image_container(&self);
     fn update_image_container(&self, count: usize, remaining_visible: bool);
+    fn load_create_date(&self);
+    fn apply_create_date(&self);
+    fn load_offset_time(&self);
 }
 
 trait ConvertArguments {
@@ -1979,6 +2031,69 @@ impl WindowUI for AppWindow {
         }
 
         imp.image_container.invalidate_filter();
+    }
+
+    fn load_create_date(&self) {
+        let files = self.files();
+        let path = files.first().unwrap().path();
+
+        glib::spawn_future_local(clone!(
+            #[weak(rename_to=this)]
+            self,
+            async move {
+                let path = Path::new(path.as_str());
+                let date = ExifService::create_date(path).unwrap_or_default();
+                this.imp().create_date_entry.set_text(&date);
+            }
+        ));
+    }
+
+    fn load_offset_time(&self) {
+        let files = self.files();
+        let path = files.first().unwrap().path();
+
+        glib::spawn_future_local(clone!(
+            #[weak(rename_to=this)]
+            self,
+            async move {
+                let path = Path::new(path.as_str());
+                let offset = ExifService::offset_time(path).unwrap_or_default();
+                this.imp().offset_time_entry.set_text(&offset);
+            }
+        ));
+    }
+
+    fn apply_create_date(&self) {
+        let files = self.active_files();
+        let path = files.first().unwrap().path();
+        let new_date = self.imp().create_date_entry.text().to_string();
+        let new_offset = self.imp().offset_time_entry.text().to_string();
+
+        glib::spawn_future_local(clone!(
+            #[weak(rename_to=this)]
+            self,
+            async move {
+                let path = Path::new(path.as_str());
+
+                if !new_offset.is_empty() {
+                    match ExifService::set_all_offset_times(path, new_offset.as_str()) {
+                        Ok(_) => this.show_toast("Offset time updated successfully"),
+                        Err(e) => this.show_toast(&format!("Error: {}", e)),
+                    }
+                }
+
+                if !new_date.is_empty() {
+                    match ExifService::set_all_dates(path, new_date.as_str()) {
+                        Ok(_) => this.show_toast("Date updated successfully"),
+                        Err(e) => this.show_toast(&format!("Error: {}", e)),
+                    }
+                }
+
+                if let Err(e) = ExifService::set_software(path) {
+                    this.show_toast(&format!("Error: {}", e));
+                }
+            }
+        ));
     }
 }
 
