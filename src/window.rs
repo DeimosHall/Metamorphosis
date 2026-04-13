@@ -2077,14 +2077,14 @@ impl WindowUI for AppWindow {
 
                 if !new_offset.is_empty() {
                     match ExifService::set_all_offset_times(path, new_offset.as_str()) {
-                        Ok(_) => this.show_toast("Offset time updated successfully"),
+                        Ok(_) => this.show_toast("Successfully updated"),
                         Err(e) => this.show_toast(&format!("Error: {}", e)),
                     }
                 }
 
                 if !new_date.is_empty() {
                     match ExifService::set_all_dates(path, new_date.as_str()) {
-                        Ok(_) => this.show_toast("Date updated successfully"),
+                        Ok(_) => this.show_toast("Successfully updated"),
                         Err(e) => this.show_toast(&format!("Error: {}", e)),
                     }
                 }
