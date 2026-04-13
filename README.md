@@ -67,7 +67,17 @@ You can install Metamorphosis from the latest commit:
 
 1. Install [`org.flatpak.Builder`](https://github.com/flathub/org.flatpak.Builder) from Flathub
 2. Clone `https://github.com/DeimosHall/Metamorphosis.git` (or your fork)
-3. Run `flatpak run org.flatpak.Builder --install --user --force-clean build-dir dev.deimoshall.Metamorphosis.json` in the terminal from the root of the repository.
+3. Install the app using `flatpak-builder`:
+
+```bash
+flatpak-builder --user --install builddir dev.deimoshall.Metamorphosis.json
+```
+
+4. Run the app
+
+```bash
+flatpak run dev.deimoshall.Metamorphosis
+```
 
 ### Meson
 
@@ -84,8 +94,8 @@ sudo ninja -C build install
 
 ## Credits
 
-Actively developed by Deimos Hall.
+Made with ♥️ by Deimos Hall.
 
 Based on [`Switcheroo`](https://gitlab.com/adhami3310/Switcheroo.git) by Khaleel Al-Adhami, an app to convert and manipulate images.
 
-This app uses a variety of libraries but the main one is [ImageMagick](https://github.com/ImageMagick/ImageMagick), which without their generous contribution to the open source community this would be nearly impossible to make.
+This app uses a variety of libraries but the main one is [ExifTool](https://exiftool.org/).

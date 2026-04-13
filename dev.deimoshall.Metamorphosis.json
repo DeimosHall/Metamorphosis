@@ -12,11 +12,16 @@
         "--socket=fallback-x11",
         "--device=dri",
         "--socket=wayland",
-        "--env=PATH=/app/bin:/usr/bin:/bin"
+        "--env=PATH=/app/bin:/app/usr/lib/sdk/perl/bin:/usr/bin:/bin",
+        "--env=LD_LIBRARY_PATH=/app/lib:/app/usr/lib/sdk/perl/lib",
+        "--env=PERL5LIB=/app/usr/lib/sdk/perl/lib/perl5/5.40.1:/app/usr/lib/sdk/perl/lib/perl5/site_perl/5.40.1"
     ],
     "build-options": {
-        "append-path": "/usr/lib/sdk/rust-stable/bin",
-        "env": {}
+        "append-path": "/usr/lib/sdk/rust-stable/bin:/app/bin",
+        "prepend-ld-library-path": "/app/lib",
+        "env": {
+            "PERL5LIB": "/app/lib/perl5/5.40.1:/app/lib/perl5/site_perl/5.40.1"
+        }
     },
     "cleanup": [
         "/include",
@@ -104,6 +109,42 @@
                     "tag": "7.1.2-8",
                     "commit": "a3b13d143fd7dea44cd71d31aa02f411b597688f"
                 }
+            ]
+        },
+        {
+            "name": "perl",
+            "no-autogen": true,
+            "config-opts": [
+                "-des",
+                "-Duseshrplib"
+            ],
+            "build-options": {
+                "cflags": "-fPIC",
+                "ldflags": "-fpic"
+            },
+            "sources": [
+                {
+                    "type": "archive",
+                    "url": "https://www.cpan.org/src/5.0/perl-5.40.1.tar.gz",
+                    "sha256": "02f8c45bb379ed0c3de7514fad48c714fd46be8f0b536bfd5320050165a1ee26"
+                },
+                {
+                    "type": "script",
+                    "dest-filename": "configure",
+                    "commands": [
+                        "exec ./configure.gnu $@"
+                    ]
+                }
+            ],
+            "post-install": [
+                "chmod -R u+w /app/lib/perl5",
+                "mkdir -p /app/usr/lib/sdk/perl/lib/perl5",
+                "ln -sf /app/bin/perl /app/bin/perl5.40.1",
+                "ln -sf /app/lib/perl5/5.40.1 /app/usr/lib/sdk/perl/lib/perl5/5.40.1",
+                "ln -sf /app/lib/perl5/site_perl /app/usr/lib/sdk/perl/lib/perl5/site_perl"
+            ],
+            "cleanup": [
+                "/share"
             ]
         },
         {
