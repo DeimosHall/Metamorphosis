@@ -21,7 +21,7 @@ mod imp {
         pub content: TemplateChild<gtk::Label>,
     }
 
-    #[glib::object_subclass]
+    #[::glib::object_subclass]
     impl ObjectSubclass for ImageRest {
         const NAME: &'static str = "ImageRest";
         type Type = super::ImageRest;

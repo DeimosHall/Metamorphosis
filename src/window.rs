@@ -192,7 +192,7 @@ mod imp {
         pub elements: Cell<usize>,
     }
 
-    #[glib::object_subclass]
+    #[::glib::object_subclass]
     impl ObjectSubclass for AppWindow {
         const NAME: &'static str = "AppWindow";
         type Type = super::AppWindow;

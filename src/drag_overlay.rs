@@ -20,7 +20,7 @@ mod imp {
         pub handler_id: RefCell<Option<glib::SignalHandlerId>>,
     }
 
-    #[glib::object_subclass]
+    #[::glib::object_subclass]
     impl ObjectSubclass for DragOverlay {
         const NAME: &'static str = "DragOverlay";
         type Type = super::DragOverlay;

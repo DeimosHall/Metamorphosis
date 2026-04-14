@@ -11,7 +11,6 @@ use crate::window::AppWindow;
 mod imp {
 
     use crate::window::FileOperations;
-
     use super::*;
     use adw::subclass::prelude::AdwApplicationImpl;
 
@@ -20,7 +19,7 @@ mod imp {
         pub settings: gio::Settings,
     }
 
-    #[glib::object_subclass]
+    #[::glib::object_subclass]
     impl ObjectSubclass for App {
         const NAME: &'static str = "MetamorphosisApp";
         type Type = super::App;
