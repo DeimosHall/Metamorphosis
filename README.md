@@ -70,7 +70,7 @@ You can install Metamorphosis from the latest commit:
 3. Install the app using `flatpak-builder`:
 
 ```bash
-flatpak-builder --user --install builddir dev.deimoshall.Metamorphosis.json
+flatpak-builder --force-clean --user --install builddir dev.deimoshall.Metamorphosis.json
 ```
 
 4. Run the app
