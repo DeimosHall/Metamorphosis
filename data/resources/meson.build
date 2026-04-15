@@ -8,7 +8,7 @@ blueprints = custom_target('blueprints',
   command: [find_program('blueprint-compiler'), 'batch-compile', '@OUTPUT@', '@CURRENT_SOURCE_DIR@', '@INPUT@'],
 )
 
-scalable_dir = 'icons' / 'hicolor' / 'scalable' / 'apps'
+scalable_dir = 'icons' / 'hicolor' / '512x512' / 'apps'
 install_data(
   [
     scalable_dir / ('@0@.png').format(base_id),
