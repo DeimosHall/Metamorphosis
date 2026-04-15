@@ -1,6 +1,6 @@
 use glib::{ParamSpec, ParamSpecEnum, ParamSpecString, Value};
 use gtk::{
-    gdk::{gdk_pixbuf::Pixbuf, Texture},
+    gdk::{Texture, gdk_pixbuf::Pixbuf},
     gio, glib,
     prelude::*,
     subclass::prelude::*,
@@ -12,8 +12,7 @@ use crate::filetypes::FileType;
 
 mod imp {
 
-    use glib::{ParamSpecBoolean, ParamSpecObject};
-
+    use self::glib::{ParamSpecBoolean, ParamSpecObject};
     use super::*;
 
     pub struct InputFile {
@@ -26,7 +25,7 @@ mod imp {
         pub height: Cell<Option<usize>>,
     }
 
-    #[glib::object_subclass]
+    #[::glib::object_subclass]
     impl ObjectSubclass for InputFile {
         const NAME: &'static str = "MetamorphosisInputFile";
         type Type = crate::input_file::InputFile;

@@ -6,10 +6,9 @@ use once_cell::sync::Lazy;
 mod imp {
 
     use std::cell::Cell;
-
     use super::*;
 
-    use glib::{ParamSpec, ParamSpecObject, ParamSpecString, ParamSpecUInt};
+    use self::glib::{ParamSpec, ParamSpecObject, ParamSpecString, ParamSpecUInt};
     use gtk::CompositeTemplate;
 
     #[derive(Debug, CompositeTemplate, Default)]
@@ -32,7 +31,7 @@ mod imp {
         pub height: Cell<u32>,
     }
 
-    #[glib::object_subclass]
+    #[::glib::object_subclass]
     impl ObjectSubclass for ImageThumbnail {
         const NAME: &'static str = "ImageThumbnail";
         type Type = super::ImageThumbnail;
