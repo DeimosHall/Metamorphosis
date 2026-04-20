@@ -92,6 +92,10 @@ ninja -C build
 sudo ninja -C build install
 ```
 
+## License
+
+This project is licensed under the GPLv3 license. See the [License](LICENSE) file for more information.
+
 ## Credits
 
 Made with ♥️ by Deimos Hall.
