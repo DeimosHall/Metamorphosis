@@ -129,7 +129,19 @@ template $AppWindow: Adw.ApplicationWindow {
                               title: _("Offset Time");
                               
                               Entry offset_time_entry {
-                                placeholder-text: _("-06:00");
+                                placeholder-text: _("HH:MM");
+                                width-chars: 20;
+                                valign: center;
+                              }
+                            }
+                          }
+                          
+                          Adw.PreferencesGroup {
+                            Adw.ActionRow image_description_row {
+                              title: _("Description");
+                              
+                              Entry image_description_entry {
+                                placeholder-text: _("");
                                 width-chars: 20;
                                 valign: center;
                               }

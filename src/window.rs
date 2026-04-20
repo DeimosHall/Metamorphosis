@@ -127,6 +127,8 @@ mod imp {
         #[template_child]
         pub offset_time_entry: TemplateChild<gtk::Entry>,
         #[template_child]
+        pub image_description_entry: TemplateChild<gtk::Entry>,
+        #[template_child]
         pub apply_date_button: TemplateChild<gtk::Button>,
 
         #[template_child]
@@ -868,6 +870,7 @@ impl AppWindow {
         self.switch_back_from_loading();
         self.load_create_date();
         self.load_offset_time();
+        self.load_image_description();
 
         self.imp()
             .all_images_stack
@@ -1257,6 +1260,7 @@ pub trait WindowUI {
     fn load_create_date(&self);
     fn apply_create_date(&self);
     fn load_offset_time(&self);
+    fn load_image_description(&self);
 }
 
 trait ConvertArguments {
@@ -2062,12 +2066,28 @@ impl WindowUI for AppWindow {
             }
         ));
     }
+    
+    fn load_image_description(&self) {
+        let files = self.files();
+        let path = files.first().unwrap().path();
+        
+        glib::spawn_future_local(clone!(
+           #[weak(rename_to=this)] 
+           self,
+           async move {
+               let path = Path::new(path.as_str());
+               let description = ExifService::image_description(path).unwrap_or_default();
+               this.imp().image_description_entry.set_text(&description);
+           }
+        ));
+    }
 
     fn apply_create_date(&self) {
         let files = self.active_files();
         let path = files.first().unwrap().path();
         let new_date = self.imp().create_date_entry.text().to_string();
         let new_offset = self.imp().offset_time_entry.text().to_string();
+        let new_description = self.imp().image_description_entry.text().to_string();
 
         glib::spawn_future_local(clone!(
             #[weak(rename_to=this)]
@@ -2087,6 +2107,10 @@ impl WindowUI for AppWindow {
                         Ok(_) => this.show_toast("Successfully updated"),
                         Err(e) => this.show_toast(&format!("Error: {}", e)),
                     }
+                }
+
+                if let Err(e) = ExifService::set_image_description(path, new_description.as_str()) {
+                    this.show_toast(&format!("Error: {}", e));
                 }
 
                 if let Err(e) = ExifService::set_software(path) {
