@@ -66,11 +66,13 @@ impl ExifService {
         Self::write_tag(path, "ProcessingSoftware", software.as_str())?;
         Ok(())
     }
-    
+ 
+    /// Returns the ImageDescription tag value
     pub fn image_description(path: &Path) -> Option<String> {
         Self::read_tag(path, "ImageDescription")
     }
     
+    /// Sets the ImageDescription tag
     pub fn set_image_description(path: &Path, description: &str) -> Result<(), ExifToolError> {
         Self::write_tag(path, "ImageDescription", description)
     }
