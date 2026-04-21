@@ -7,7 +7,7 @@ use crate::color::Color;
 use crate::config::APP_ID;
 use crate::drag_overlay::DragOverlay;
 use crate::file_chooser::FileChooser;
-use crate::filetypes::{CompressionType, FileType, OutputType};
+use crate::models::filetypes::{CompressionType, FileType, OutputType};
 use crate::input_file::InputFile;
 use crate::magick::{
     JobFile, MagickConvertJob, ResizeArgument, count_frames, generate_job, wait_for_child,

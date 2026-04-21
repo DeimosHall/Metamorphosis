@@ -8,7 +8,7 @@ use gtk::{
 use once_cell::sync::Lazy;
 use std::cell::{Cell, Ref, RefCell};
 
-use crate::filetypes::FileType;
+use crate::models::filetypes::FileType;
 
 mod imp {
 
