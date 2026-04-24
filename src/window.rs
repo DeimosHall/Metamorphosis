@@ -129,7 +129,7 @@ mod imp {
         #[template_child]
         pub image_description_entry: TemplateChild<gtk::Entry>,
         #[template_child]
-        pub apply_date_button: TemplateChild<gtk::Button>,
+        pub apply_button: TemplateChild<gtk::Button>,
 
         #[template_child]
         pub output_filetype: TemplateChild<adw::ComboRow>,
@@ -537,11 +537,11 @@ impl AppWindow {
             )]);
         });
 
-        imp.apply_date_button.connect_clicked(clone!(
+        imp.apply_button.connect_clicked(clone!(
             #[weak(rename_to=this)]
             self,
             move |_| {
-                this.apply_create_date();
+                this.apply_changes();
             }
         ));
 
@@ -1258,7 +1258,7 @@ pub trait WindowUI {
     fn update_full_image_container(&self);
     fn update_image_container(&self, count: usize, remaining_visible: bool);
     fn load_create_date(&self);
-    fn apply_create_date(&self);
+    fn apply_changes(&self);
     fn load_offset_time(&self);
     fn load_image_description(&self);
 }
@@ -2082,7 +2082,7 @@ impl WindowUI for AppWindow {
         ));
     }
 
-    fn apply_create_date(&self) {
+    fn apply_changes(&self) {
         let files = self.active_files();
         let path = files.first().unwrap().path();
         let new_date = self.imp().create_date_entry.text().to_string();
@@ -2131,7 +2131,7 @@ impl WindowUI for AppWindow {
                         if errors.is_empty() {
                             // this.set_convert_progress(1, 1);
                             // this.switch_to_stack_convert();
-                            this.show_toast("Changes applied");
+                            this.show_toast(&gettext("Changes applied"));
                         } else {
                             for error in errors {
                                 this.show_toast(&format!("{}", error));
@@ -2139,7 +2139,7 @@ impl WindowUI for AppWindow {
                         }
                     }
                     Err(_) => {
-                        this.show_toast("Thread crashed! Report to developer");
+                        this.show_toast(&gettext("Concurrency issues! Report to developer"));
                     }
                 }
             }
