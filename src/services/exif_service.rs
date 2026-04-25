@@ -22,21 +22,36 @@ impl ExifService {
         println!("Parsed data: \n{:#?}", exif_data);
     }
 
-    /// Get "Create Date" tag value
+    /// Returns the CreateDate tag value
     ///
-    /// Output Example: Some("2026:03:31 22:02:24")
+    /// Format: "YYYY:MM:DD HH:MM:SS" (e.g., "2026:03:31 22:02:24")
     pub fn create_date(path: &Path) -> Option<String> {
         Self::read_tag(path, "CreateDate")
     }
 
+    /// Sets the following tag values:
+    /// - CreateDate
+    /// - DateTimeOrginal
+    /// - ModifyDate
+    ///
+    /// Format: "YYYY:MM:DD HH:MM:SS"
     pub fn set_all_dates(path: &Path, date: &str) -> Result<(), ExifToolError> {
         Self::write_tag(path, "AllDates", date)
     }
 
+    /// Returns the OffSetTime tag value
+    /// 
+    /// Format: "HH:MM"
     pub fn offset_time(path: &Path) -> Option<String> {
         Self::read_tag(path, "OffsetTime")
     }
 
+    /// Sets the following tag values:
+    /// - OffsetTime
+    /// - OffsetTimeOriginal
+    /// - OffsetTimeDigitized
+    ///
+    /// Format: "HH:MM" (e.g., "02:00", "-06:00")
     pub fn set_all_offset_times(path: &Path, offset: &str) -> Result<(), ExifToolError> {
         Self::write_tag(path, "OffsetTime", offset)?;
         Self::write_tag(path, "OffsetTimeOriginal", offset)?;
@@ -44,10 +59,21 @@ impl ExifService {
         Ok(())
     }
     
+    /// Sets the ProcessingSoftware tag
     pub fn set_software(path: &Path) -> Result<(), ExifToolError> {
         let software = format!("Metamorphosis {}", env!("CARGO_PKG_VERSION"));
         // Self::write_tag(path, "Software", software.as_str())?;
         Self::write_tag(path, "ProcessingSoftware", software.as_str())?;
         Ok(())
+    }
+ 
+    /// Returns the ImageDescription tag value
+    pub fn image_description(path: &Path) -> Option<String> {
+        Self::read_tag(path, "ImageDescription")
+    }
+    
+    /// Sets the ImageDescription tag
+    pub fn set_image_description(path: &Path, description: &str) -> Result<(), ExifToolError> {
+        Self::write_tag(path, "ImageDescription", description)
     }
 }

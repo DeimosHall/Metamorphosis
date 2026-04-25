@@ -1,4 +1,4 @@
-use crate::{color::Color, filetypes::FileType, window::ResizeFilter};
+use crate::{color::Color, models::filetypes::FileType, window::ResizeFilter};
 use gettextrs::gettext;
 use itertools::Itertools;
 use shared_child::SharedChild;

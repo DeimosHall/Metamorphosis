@@ -7,7 +7,7 @@ Icon=@icon@
 Terminal=false
 Type=Application
 Categories=GTK;GNOME;Graphics;ImageProcessing;Utility;
-Keywords=converter;image;convert;converting;processing
+Keywords=metadata;image;edit;exif
 StartupNotify=true
 DBusActivatable=true
 # Translators: Do NOT translate or transliterate this text (these are enum types)!

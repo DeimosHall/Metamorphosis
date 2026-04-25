@@ -4,11 +4,10 @@ This document describes steps to follow to update the app version and its depend
 
 ## App version
 
-TODO
+The app version must be updated in two files:
 
-```bash
-curl -sL "https://github.com/DeimosHall/Metamorphosis/archive/refs/tags/v0.1.0.tar.gz" | sha256sum
-```
+1. [Cargo.toml](Cargo.toml)
+2. [meson.build](meson.build)
 
 ## Exiftool
 

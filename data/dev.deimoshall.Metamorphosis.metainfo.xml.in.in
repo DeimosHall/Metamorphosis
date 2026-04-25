@@ -55,7 +55,7 @@
 
     <branding>
         <color type="primary" scheme_preference="light">#f18e57</color>
-        <color type="primary" scheme_preference="dark">#980e8c</color>
+        <color type="primary" scheme_preference="dark">#29426B</color>
     </branding>
 
     <screenshots>
@@ -74,7 +74,7 @@
     <launchable type="desktop-id">@app-id@.desktop</launchable>
 
     <url type="homepage">https://apps.gnome.org/Metamorphosis/</url>
-    <url type="donation">https://opencollective.com/metamorphosis</url>
+    <url type="donation">https://opencollective.com/deimoshall</url>
     <url type="bugtracker">https://github.com/DeimosHall/Metamorphosis/issues</url>
     <url type="help">https://github.com/DeimosHall/Metamorphosis/issues</url>
     <url type="vcs-browser">https://github.com/DeimosHall/Metamorphosis</url>
@@ -86,7 +86,12 @@
 
     <content_rating type="oars-1.1" />
 
-    <releases>
+    <releases>   
+        <release version="0.2.0" date="2026-04-24">
+            <description>
+                <p>Add description field</p>
+            </description>
+        </release>
         <release version="0.1.2" date="2026-04-15">
             <description>
                 <p>Update runtime to GNOME 50</p>

@@ -4,7 +4,7 @@ use gettextrs::gettext;
 use glib::clone;
 use gtk::{gio, prelude::*};
 
-use crate::filetypes::{CompressionType, FileType, OutputType};
+use crate::models::filetypes::{CompressionType, FileType, OutputType};
 use crate::input_file::InputFile;
 use crate::window::AppWindow;
 

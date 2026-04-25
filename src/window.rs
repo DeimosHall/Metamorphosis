@@ -7,11 +7,11 @@ use crate::color::Color;
 use crate::config::APP_ID;
 use crate::drag_overlay::DragOverlay;
 use crate::file_chooser::FileChooser;
-use crate::filetypes::{CompressionType, FileType, OutputType};
 use crate::input_file::InputFile;
 use crate::magick::{
     JobFile, MagickConvertJob, ResizeArgument, count_frames, generate_job, wait_for_child,
 };
+use crate::models::filetypes::{CompressionType, FileType, OutputType};
 use crate::services::exif_service::ExifService;
 use crate::temp::{clean_dir, create_temporary_dir, get_temp_file_path};
 use crate::widgets::about_window::MetamorphosisAbout;
@@ -127,7 +127,9 @@ mod imp {
         #[template_child]
         pub offset_time_entry: TemplateChild<gtk::Entry>,
         #[template_child]
-        pub apply_date_button: TemplateChild<gtk::Button>,
+        pub image_description_entry: TemplateChild<gtk::Entry>,
+        #[template_child]
+        pub apply_button: TemplateChild<gtk::Button>,
 
         #[template_child]
         pub output_filetype: TemplateChild<adw::ComboRow>,
@@ -535,11 +537,11 @@ impl AppWindow {
             )]);
         });
 
-        imp.apply_date_button.connect_clicked(clone!(
+        imp.apply_button.connect_clicked(clone!(
             #[weak(rename_to=this)]
             self,
             move |_| {
-                this.apply_create_date();
+                this.apply_changes();
             }
         ));
 
@@ -868,6 +870,7 @@ impl AppWindow {
         self.switch_back_from_loading();
         self.load_create_date();
         self.load_offset_time();
+        self.load_image_description();
 
         self.imp()
             .all_images_stack
@@ -1255,8 +1258,9 @@ pub trait WindowUI {
     fn update_full_image_container(&self);
     fn update_image_container(&self, count: usize, remaining_visible: bool);
     fn load_create_date(&self);
-    fn apply_create_date(&self);
+    fn apply_changes(&self);
     fn load_offset_time(&self);
+    fn load_image_description(&self);
 }
 
 trait ConvertArguments {
@@ -2063,34 +2067,80 @@ impl WindowUI for AppWindow {
         ));
     }
 
-    fn apply_create_date(&self) {
-        let files = self.active_files();
+    fn load_image_description(&self) {
+        let files = self.files();
         let path = files.first().unwrap().path();
-        let new_date = self.imp().create_date_entry.text().to_string();
-        let new_offset = self.imp().offset_time_entry.text().to_string();
 
         glib::spawn_future_local(clone!(
             #[weak(rename_to=this)]
             self,
             async move {
                 let path = Path::new(path.as_str());
+                let description = ExifService::image_description(path).unwrap_or_default();
+                this.imp().image_description_entry.set_text(&description);
+            }
+        ));
+    }
 
-                if !new_offset.is_empty() {
-                    match ExifService::set_all_offset_times(path, new_offset.as_str()) {
-                        Ok(_) => this.show_toast("Successfully updated"),
-                        Err(e) => this.show_toast(&format!("Error: {}", e)),
+    fn apply_changes(&self) {
+        let files = self.active_files();
+        let path = files.first().unwrap().path();
+        let new_date = self.imp().create_date_entry.text().to_string();
+        let new_offset = self.imp().offset_time_entry.text().to_string();
+        let new_description = self.imp().image_description_entry.text().to_string();
+
+        // The operations for a single file are very fast, having a loading screen
+        // is not worth it
+        // self.switch_to_stack_converting();
+        // self.set_convert_progress(0, 1);
+
+        glib::spawn_future_local(clone!(
+            #[weak(rename_to=this)]
+            self,
+            async move {
+                let (tx, rx) = tokio::sync::oneshot::channel();
+
+                std::thread::spawn(move || {
+                    // TODO: should this go here?
+                    let path = Path::new(path.as_str());
+                    let mut errors = Vec::new();
+
+                    if let Err(e) = ExifService::set_all_offset_times(path, new_offset.as_str()) {
+                        errors.push(e);
                     }
-                }
 
-                if !new_date.is_empty() {
-                    match ExifService::set_all_dates(path, new_date.as_str()) {
-                        Ok(_) => this.show_toast("Successfully updated"),
-                        Err(e) => this.show_toast(&format!("Error: {}", e)),
+                    if let Err(e) = ExifService::set_all_dates(path, new_date.as_str()) {
+                        errors.push(e);
                     }
-                }
 
-                if let Err(e) = ExifService::set_software(path) {
-                    this.show_toast(&format!("Error: {}", e));
+                    if let Err(e) =
+                        ExifService::set_image_description(path, new_description.as_str())
+                    {
+                        errors.push(e);
+                    }
+
+                    if let Err(e) = ExifService::set_software(path) {
+                        errors.push(e);
+                    }
+
+                    let _ = tx.send(errors);
+                });
+
+                match rx.await {
+                    Ok(errors) => {
+                        if errors.is_empty() {
+                            // this.set_convert_progress(1, 1);
+                            // this.switch_to_stack_convert();
+                            this.show_toast(&gettext("Changes applied"));
+                        } else {
+                            for error in errors {
+                                this.show_toast(&format!("{}", error));
+                            }
+                        }
+                    }
+                    Err(_) => {
+                        this.show_toast(&gettext("Concurrency issues! Report to developer"));
+                    }
                 }
             }
         ));

@@ -70,7 +70,7 @@ You can install Metamorphosis from the latest commit:
 3. Install the app using `flatpak-builder`:
 
 ```bash
-flatpak-builder --user --install builddir dev.deimoshall.Metamorphosis.json
+flatpak-builder --force-clean --user --install builddir dev.deimoshall.Metamorphosis.json
 ```
 
 4. Run the app
@@ -91,6 +91,10 @@ meson --prefix=/usr build
 ninja -C build
 sudo ninja -C build install
 ```
+
+## License
+
+This project is licensed under the GPLv3 license. See the [License](LICENSE) file for more information.
 
 ## Credits
 
