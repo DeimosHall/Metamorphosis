@@ -97,7 +97,7 @@ template $AppWindow: Adw.ApplicationWindow {
                   }
 
                   StackPage {
-                    name: "stack_convert";
+                    name: "stack_apply_basic";
 
                     child: Adw.Bin {
                       Adw.Bin {
@@ -182,10 +182,10 @@ template $AppWindow: Adw.ApplicationWindow {
                   }
 
                   StackPage {
-                    name: "stack_converting";
+                    name: "stack_applying";
 
                     child: Adw.StatusPage {
-                      title: _("Converting");
+                      title: _("Applying");
                       description: _("This could take a while");
 
                       Box {

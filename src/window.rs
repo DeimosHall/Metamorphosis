@@ -99,7 +99,7 @@ mod imp {
         pub image_description_entry: TemplateChild<gtk::Entry>,
         #[template_child]
         pub apply_button: TemplateChild<gtk::Button>,
-        
+
         #[template_child]
         pub navigation: TemplateChild<adw::NavigationView>,
         #[template_child]
@@ -308,6 +308,14 @@ impl AppWindow {
             #[upgrade_or_default]
             move |f| {
                 return !this.imp().removed.borrow().contains(&(f.index() as u32));
+            }
+        ));
+               
+        imp.cancel_button.connect_clicked(clone!(
+            #[weak(rename_to=this)]
+            self,
+            move |_| {
+                this.apply_cancel();
             }
         ));
 
@@ -642,7 +650,7 @@ impl AppWindow {
             .set_visible_child_name("all_images");
         if matches!(self.imp().navigation.visible_page().and_then(|x| x.tag()), Some(x) if x == "main")
         {
-            self.switch_to_stack_convert();
+            self.switch_to_stack_apply_basic();
         }
     }
 
@@ -738,8 +746,8 @@ pub trait FileOperations {
 }
 
 trait StackNavigation {
-    fn switch_to_stack_convert(&self);
-    fn switch_to_stack_converting(&self);
+    fn switch_to_stack_apply_basic(&self);
+    fn switch_to_stack_applying(&self);
     fn switch_to_stack_welcome(&self);
     fn switch_to_stack_invalid_image(&self);
     fn switch_to_stack_loading(&self);
@@ -754,6 +762,7 @@ pub trait WindowUI {
     fn apply_changes(&self);
     fn load_offset_time(&self);
     fn load_image_description(&self);
+    fn apply_cancel(&self);
 }
 
 trait SettingsStore {
@@ -956,8 +965,8 @@ impl WindowUI for AppWindow {
 
         // The operations for a single file are very fast, having a loading screen
         // is not worth it
-        // self.switch_to_stack_converting();
-        // self.set_convert_progress(0, 1);
+        self.switch_to_stack_applying();
+        self.set_convert_progress(0, 1);
 
         glib::spawn_future_local(clone!(
             #[weak(rename_to=this)]
@@ -994,8 +1003,8 @@ impl WindowUI for AppWindow {
                 match rx.await {
                     Ok(errors) => {
                         if errors.is_empty() {
-                            // this.set_convert_progress(1, 1);
-                            // this.switch_to_stack_convert();
+                            this.set_convert_progress(1, 1);
+                            this.switch_to_stack_apply_basic();
                             this.show_toast(&gettext("Changes applied"));
                         } else {
                             for error in errors {
@@ -1010,17 +1019,21 @@ impl WindowUI for AppWindow {
             }
         ));
     }
+    
+    fn apply_cancel(&self) {
+        
+    }
 }
 
 impl StackNavigation for AppWindow {
-    fn switch_to_stack_convert(&self) {
+    fn switch_to_stack_apply_basic(&self) {
         self.imp().add_button.set_visible(true);
-        self.imp().stack.set_visible_child_name("stack_convert");
+        self.imp().stack.set_visible_child_name("stack_apply_basic");
     }
 
-    fn switch_to_stack_converting(&self) {
+    fn switch_to_stack_applying(&self) {
         self.imp().add_button.set_visible(false);
-        self.imp().stack.set_visible_child_name("stack_converting");
+        self.imp().stack.set_visible_child_name("stack_applying");
     }
 
     fn switch_to_stack_welcome(&self) {
