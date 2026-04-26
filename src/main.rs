@@ -7,7 +7,6 @@ mod file_chooser;
 mod input_file;
 mod magick;
 mod models;
-mod temp;
 mod services;
 mod widgets;
 mod window;
@@ -31,8 +30,6 @@ fn runtime() -> &'static Runtime {
             .expect("Setting up tokio runtime needs to succeed.")
     })
 }
-
-const ZIP_BINARY_NAME: &str = "zip";
 
 fn main() -> ExitCode {
     // Initialize logger
