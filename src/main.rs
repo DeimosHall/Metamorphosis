@@ -2,13 +2,12 @@ mod application;
 #[rustfmt::skip]
 mod config;
 mod color;
-mod drag_overlay;
+mod components;
 mod file_chooser;
 mod input_file;
 mod magick;
 mod models;
 mod services;
-mod widgets;
 mod window;
 
 use std::sync::OnceLock;

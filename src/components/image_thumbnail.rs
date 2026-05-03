@@ -5,8 +5,8 @@ use once_cell::sync::Lazy;
 
 mod imp {
 
-    use std::cell::Cell;
     use super::*;
+    use std::cell::Cell;
 
     use self::glib::{ParamSpec, ParamSpecObject, ParamSpecString, ParamSpecUInt};
     use gtk::CompositeTemplate;
