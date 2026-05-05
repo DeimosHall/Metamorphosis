@@ -2,16 +2,16 @@ use std::collections::HashSet;
 use std::path::Path;
 use std::sync::atomic::AtomicUsize;
 
-use crate::config::APP_ID;
+use crate::components::about_window::MetamorphosisAbout;
 use crate::components::drag_overlay::DragOverlay;
+use crate::components::image_rest::ImageRest;
+use crate::components::image_thumbnail::ImageThumbnail;
+use crate::config::APP_ID;
 use crate::file_chooser::FileChooser;
 use crate::input_file::InputFile;
 use crate::magick::{JobFile, count_frames};
 use crate::runtime;
 use crate::services::exif_service::ExifService;
-use crate::components::about_window::MetamorphosisAbout;
-use crate::components::image_rest::ImageRest;
-use crate::components::image_thumbnail::ImageThumbnail;
 use adw::prelude::*;
 use futures::future::join_all;
 use gettextrs::gettext;
@@ -302,7 +302,7 @@ impl AppWindow {
                 return !this.imp().removed.borrow().contains(&(f.index() as u32));
             }
         ));
-               
+
         imp.cancel_button.connect_clicked(clone!(
             #[weak(rename_to=this)]
             self,
@@ -311,34 +311,45 @@ impl AppWindow {
             }
         ));
 
-        let apply_basic = imp.apply_basic_view.clone();       
+        let apply_basic = imp.apply_basic_view.clone();
         apply_basic.clone().set_on_apply(clone!(
             #[weak(rename_to=win)]
             self,
             move |_view, _date, _offset, _description| {
                 let path = win.files().first().unwrap().path();
-                win.switch_to_stack_applying();
-                win.set_convert_progress(0, 1);
-               
+
+                // Disable loading screen by now
+                // TODO: implement it after batch processing
+                if false {
+                    win.switch_to_stack_applying();
+                    win.set_convert_progress(0, 1);
+                }
+
                 glib::spawn_future_local(clone!(
-                   #[weak(rename_to=win)]
-                   win,
-                   #[strong] apply_basic,
-                   #[strong] path,
-                   async move {
-                       let result = apply_basic.apply_changes(path);
-                       
-                       match result {
-                           Ok(()) => {
-                               
-                           },
-                           Err(errors) => {
-                               for error in errors {
-                                   win.show_toast(&format!("{}", error));
-                               }
-                           }
-                       }
-                   }
+                    #[weak(rename_to=win)]
+                    win,
+                    #[strong]
+                    apply_basic,
+                    #[strong]
+                    path,
+                    async move {
+                        let result = apply_basic.apply_changes(path);
+
+                        match result {
+                            Ok(()) => {
+                                if false {
+                                    win.set_convert_progress(1, 1);
+                                    win.switch_to_stack_apply_basic();
+                                }
+                                win.show_toast(&gettext("Changes applied"));
+                            }
+                            Err(errors) => {
+                                for error in errors {
+                                    win.show_toast(&format!("{}", error));
+                                }
+                            }
+                        }
+                    }
                 ));
             }
         ));
@@ -658,7 +669,9 @@ impl AppWindow {
 
         self.switch_back_from_loading();
         let path = self.files().first().unwrap().path();
-        self.imp().apply_basic_view.load_from_file(Path::new(path.as_str()));
+        self.imp()
+            .apply_basic_view
+            .load_from_file(Path::new(path.as_str()));
 
         self.imp()
             .all_images_stack
@@ -921,10 +934,8 @@ impl WindowUI for AppWindow {
 
         // imp.image_container.invalidate_filter();
     }
-   
-    fn apply_cancel(&self) {
-        
-    }
+
+    fn apply_cancel(&self) {}
 }
 
 impl StackNavigation for AppWindow {

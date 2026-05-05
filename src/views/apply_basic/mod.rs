@@ -1,8 +1,11 @@
 use std::path::Path;
 
 use exiftool::ExifToolError;
-use glib::{subclass::types::ObjectSubclassIsExt};
-use gtk::{glib, prelude::{ButtonExt, EditableExt}};
+use glib::subclass::types::ObjectSubclassIsExt;
+use gtk::{
+    glib,
+    prelude::{ButtonExt, EditableExt},
+};
 
 use crate::services::exif_service::ExifService;
 
@@ -15,7 +18,7 @@ mod imp {
 
     #[derive(Debug, CompositeTemplate, Derivative)]
     #[derivative(Default)]
-    #[template(resource="/dev/deimoshall/Metamorphosis/blueprints/apply_basic.ui")]
+    #[template(resource = "/dev/deimoshall/Metamorphosis/blueprints/apply_basic.ui")]
     pub struct ApplyBasic {
         #[template_child]
         pub image_container: TemplateChild<gtk::FlowBox>,
@@ -44,9 +47,9 @@ mod imp {
         }
     }
 
-    impl ObjectImpl for ApplyBasic { }
-    impl WidgetImpl for ApplyBasic { }
-    impl BinImpl for ApplyBasic { }
+    impl ObjectImpl for ApplyBasic {}
+    impl WidgetImpl for ApplyBasic {}
+    impl BinImpl for ApplyBasic {}
 }
 
 glib::wrapper! {
@@ -127,14 +130,12 @@ impl ApplyBasic {
         if let Err(e) = ExifService::set_all_dates(path, date.as_str()) {
             errors.push(e);
         }
-        
+
         if let Err(e) = ExifService::set_all_offset_times(path, offset.as_str()) {
             errors.push(e);
         }
 
-        if let Err(e) =
-            ExifService::set_image_description(path, description.as_str())
-        {
+        if let Err(e) = ExifService::set_image_description(path, description.as_str()) {
             errors.push(e);
         }
 
@@ -144,7 +145,7 @@ impl ApplyBasic {
 
         if errors.is_empty() {
             return Ok(());
-        } {
+        } else {
             Err(errors)
         }
     }
