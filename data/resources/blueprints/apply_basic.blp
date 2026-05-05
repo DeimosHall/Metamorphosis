@@ -1,0 +1,74 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $ApplyBasicView: Adw.Bin {
+  child: Adw.Bin {
+    Adw.Bin {
+      Adw.PreferencesPage {
+        Adw.PreferencesGroup {
+          FlowBox image_container {
+            homogeneous: true;
+            hexpand: true;
+            vexpand: false;
+            column-spacing: 12;
+            row-spacing: 12;
+            selection-mode: none;
+          }
+        }
+
+        Adw.PreferencesGroup {
+          Adw.ActionRow create_date_row {
+            title: _("Creation Date");
+            // subtitle: _("EXIF CreateDate");
+
+            Entry create_date_entry {
+              placeholder-text: _("YYYY:MM:DD HH:MM:SS");
+              width-chars: 20;
+              valign: center;
+            }
+          }
+
+          Adw.ActionRow time_offset_row {
+            title: _("Offset Time");
+
+            Entry offset_time_entry {
+              placeholder-text: _("HH:MM");
+              width-chars: 20;
+              valign: center;
+            }
+          }
+        }
+
+        Adw.PreferencesGroup {
+          Adw.ActionRow image_description_row {
+            title: _("Description");
+
+            Entry image_description_entry {
+              placeholder-text: _("");
+              width-chars: 20;
+              valign: center;
+            }
+          }
+        }
+
+        Adw.PreferencesGroup {
+          valign: end;
+          halign: center;
+
+          Button apply_button {
+            label: _("Apply");
+            halign: start;
+            valign: center;
+
+            styles [
+              "suggested-action",
+              "pill",
+              "long",
+            ]
+          }
+        }
+      }
+    }
+  };
+}
+

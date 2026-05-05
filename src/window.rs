@@ -53,7 +53,7 @@ mod imp {
         sync::atomic::AtomicBool,
     };
 
-    use crate::config::PKGDATADIR;
+    use crate::{config::PKGDATADIR, views::apply_basic::ApplyBasic};
 
     use super::*;
 
@@ -86,19 +86,11 @@ mod imp {
         #[template_child]
         pub loading_spinner_images: TemplateChild<gtk::Spinner>,
         #[template_child]
-        pub image_container: TemplateChild<gtk::FlowBox>,
-        #[template_child]
         pub full_image_container: TemplateChild<gtk::FlowBox>,
         #[template_child]
         pub progress_bar: TemplateChild<gtk::ProgressBar>,
         #[template_child]
-        pub create_date_entry: TemplateChild<gtk::Entry>,
-        #[template_child]
-        pub offset_time_entry: TemplateChild<gtk::Entry>,
-        #[template_child]
-        pub image_description_entry: TemplateChild<gtk::Entry>,
-        #[template_child]
-        pub apply_button: TemplateChild<gtk::Button>,
+        pub apply_basic_view: TemplateChild<ApplyBasic>,
 
         #[template_child]
         pub navigation: TemplateChild<adw::NavigationView>,
@@ -293,15 +285,15 @@ impl AppWindow {
             }
         ));
 
-        imp.image_container.set_filter_func(clone!(
-            #[weak(rename_to=this)]
-            self,
-            #[upgrade_or_default]
-            move |f| {
-                return (f.index() as usize) >= this.imp().elements.get()
-                    || !this.imp().removed.borrow().contains(&(f.index() as u32));
-            }
-        ));
+        // imp.image_container.set_filter_func(clone!(
+        //     #[weak(rename_to=this)]
+        //     self,
+        //     #[upgrade_or_default]
+        //     move |f| {
+        //         return (f.index() as usize) >= this.imp().elements.get()
+        //             || !this.imp().removed.borrow().contains(&(f.index() as u32));
+        //     }
+        // ));
         imp.full_image_container.set_filter_func(clone!(
             #[weak(rename_to=this)]
             self,
@@ -319,11 +311,35 @@ impl AppWindow {
             }
         ));
 
-        imp.apply_button.connect_clicked(clone!(
-            #[weak(rename_to=this)]
+        let apply_basic = imp.apply_basic_view.clone();       
+        apply_basic.clone().set_on_apply(clone!(
+            #[weak(rename_to=win)]
             self,
-            move |_| {
-                this.apply_changes();
+            move |_view, _date, _offset, _description| {
+                let path = win.files().first().unwrap().path();
+                win.switch_to_stack_applying();
+                win.set_convert_progress(0, 1);
+               
+                glib::spawn_future_local(clone!(
+                   #[weak(rename_to=win)]
+                   win,
+                   #[strong] apply_basic,
+                   #[strong] path,
+                   async move {
+                       let result = apply_basic.apply_changes(path);
+                       
+                       match result {
+                           Ok(()) => {
+                               
+                           },
+                           Err(errors) => {
+                               for error in errors {
+                                   win.show_toast(&format!("{}", error));
+                               }
+                           }
+                       }
+                   }
+                ));
             }
         ));
     }
@@ -641,9 +657,8 @@ impl AppWindow {
         ));
 
         self.switch_back_from_loading();
-        self.load_create_date();
-        self.load_offset_time();
-        self.load_image_description();
+        let path = self.files().first().unwrap().path();
+        self.imp().apply_basic_view.load_from_file(Path::new(path.as_str()));
 
         self.imp()
             .all_images_stack
@@ -758,10 +773,6 @@ trait StackNavigation {
 pub trait WindowUI {
     fn update_full_image_container(&self);
     fn update_image_container(&self, count: usize, remaining_visible: bool);
-    fn load_create_date(&self);
-    fn apply_changes(&self);
-    fn load_offset_time(&self);
-    fn load_image_description(&self);
     fn apply_cancel(&self);
 }
 
@@ -772,254 +783,145 @@ trait SettingsStore {
 
 impl WindowUI for AppWindow {
     fn update_full_image_container(&self) {
-        let imp = self.imp();
+        // let imp = self.imp();
 
-        let input_files = self
-            .files()
-            .into_iter()
-            .map(|f| {
-                let (k, d) = (f.kind(), f.dimensions());
-                (f, k, d)
-            })
-            .collect_vec();
+        // let input_files = self
+        //     .files()
+        //     .into_iter()
+        //     .map(|f| {
+        //         let (k, d) = (f.kind(), f.dimensions());
+        //         (f, k, d)
+        //     })
+        //     .collect_vec();
 
-        while let Some(child) = imp.full_image_container.first_child() {
-            imp.full_image_container.remove(&child);
-        }
+        // while let Some(child) = imp.full_image_container.first_child() {
+        //     imp.full_image_container.remove(&child);
+        // }
 
-        for (i, (f, file_type, dims)) in input_files.into_iter().enumerate() {
-            let caption = match dims {
-                Some((w, h)) => {
-                    format!("{} · {}×{}", file_type.as_display_string(), w, h,)
-                }
-                None => file_type.as_display_string().to_owned(),
-            };
+        // for (i, (f, file_type, dims)) in input_files.into_iter().enumerate() {
+        //     let caption = match dims {
+        //         Some((w, h)) => {
+        //             format!("{} · {}×{}", file_type.as_display_string(), w, h,)
+        //         }
+        //         None => file_type.as_display_string().to_owned(),
+        //     };
 
-            let (w, h) = dims.unwrap_or_default();
+        //     let (w, h) = dims.unwrap_or_default();
 
-            let image_thumbnail =
-                ImageThumbnail::new(f.pixbuf().as_ref(), &caption, w as u32, h as u32);
+        //     let image_thumbnail =
+        //         ImageThumbnail::new(f.pixbuf().as_ref(), &caption, w as u32, h as u32);
 
-            let image_flow_box_child = gtk::FlowBoxChild::new();
-            image_flow_box_child.set_child(Some(&image_thumbnail));
+        //     let image_flow_box_child = gtk::FlowBoxChild::new();
+        //     image_flow_box_child.set_child(Some(&image_thumbnail));
 
-            image_flow_box_child.update_property(&[Property::Label(&caption)]);
+        //     image_flow_box_child.update_property(&[Property::Label(&caption)]);
 
-            imp.full_image_container.append(&image_flow_box_child);
-            image_thumbnail.connect_remove_clicked(clone!(
-                #[weak(rename_to=this)]
-                self,
-                move |_| {
-                    this.remove_file(i as u32);
-                    this.imp().image_container.invalidate_filter();
-                    this.imp().full_image_container.invalidate_filter();
-                }
-            ));
-        }
+        //     imp.full_image_container.append(&image_flow_box_child);
+        //     image_thumbnail.connect_remove_clicked(clone!(
+        //         #[weak(rename_to=this)]
+        //         self,
+        //         move |_| {
+        //             this.remove_file(i as u32);
+        //             this.imp().image_container.invalidate_filter();
+        //             this.imp().full_image_container.invalidate_filter();
+        //         }
+        //     ));
+        // }
     }
 
     fn update_image_container(&self, count: usize, remaining_visible: bool) {
-        let imp = self.imp();
+        // let imp = self.imp();
 
-        let input_files = self
-            .files()
-            .into_iter()
-            .map(|f| {
-                let (k, d) = (f.kind(), f.dimensions());
-                (f, k, d)
-            })
-            .collect_vec();
+        // let input_files = self
+        //     .files()
+        //     .into_iter()
+        //     .map(|f| {
+        //         let (k, d) = (f.kind(), f.dimensions());
+        //         (f, k, d)
+        //     })
+        //     .collect_vec();
 
-        while let Some(child) = imp.image_container.first_child() {
-            imp.image_container.remove(&child);
-        }
+        // while let Some(child) = imp.image_container.first_child() {
+        //     imp.image_container.remove(&child);
+        // }
 
-        let removed = self.imp().removed.borrow().clone();
+        // let removed = self.imp().removed.borrow().clone();
 
-        for (i, (f, file_type, dims)) in input_files.into_iter().take(count).enumerate() {
-            match removed.contains(&(i as u32)) {
-                false => {
-                    let caption = match dims {
-                        Some((w, h)) => {
-                            format!("{} · {}×{}", file_type.as_display_string(), w, h,)
-                        }
-                        None => file_type.as_display_string().to_owned(),
-                    };
+        // for (i, (f, file_type, dims)) in input_files.into_iter().take(count).enumerate() {
+        //     match removed.contains(&(i as u32)) {
+        //         false => {
+        //             let caption = match dims {
+        //                 Some((w, h)) => {
+        //                     format!("{} · {}×{}", file_type.as_display_string(), w, h,)
+        //                 }
+        //                 None => file_type.as_display_string().to_owned(),
+        //             };
 
-                    let (w, h) = dims.unwrap_or_default();
+        //             let (w, h) = dims.unwrap_or_default();
 
-                    let image_thumbnail =
-                        ImageThumbnail::new(f.pixbuf().as_ref(), &caption, w as u32, h as u32);
+        //             let image_thumbnail =
+        //                 ImageThumbnail::new(f.pixbuf().as_ref(), &caption, w as u32, h as u32);
 
-                    let image_flow_box_child = gtk::FlowBoxChild::new();
-                    image_flow_box_child.set_child(Some(&image_thumbnail));
+        //             let image_flow_box_child = gtk::FlowBoxChild::new();
+        //             image_flow_box_child.set_child(Some(&image_thumbnail));
 
-                    image_flow_box_child.update_property(&[Property::Label(&caption)]);
+        //             image_flow_box_child.update_property(&[Property::Label(&caption)]);
 
-                    imp.image_container.append(&image_flow_box_child);
-                    image_thumbnail.connect_remove_clicked(clone!(
-                        #[weak(rename_to=this)]
-                        self,
-                        move |_| {
-                            this.remove_file(i as u32);
-                            this.imp().image_container.invalidate_filter();
-                            this.imp().full_image_container.invalidate_filter();
-                        }
-                    ));
-                }
-                true => {
-                    imp.image_container.append(&gtk::FlowBoxChild::new());
-                }
-            }
-        }
+        //             imp.image_container.append(&image_flow_box_child);
+        //             image_thumbnail.connect_remove_clicked(clone!(
+        //                 #[weak(rename_to=this)]
+        //                 self,
+        //                 move |_| {
+        //                     this.remove_file(i as u32);
+        //                     this.imp().image_container.invalidate_filter();
+        //                     this.imp().full_image_container.invalidate_filter();
+        //                 }
+        //             ));
+        //         }
+        //         true => {
+        //             imp.image_container.append(&gtk::FlowBoxChild::new());
+        //         }
+        //     }
+        // }
 
-        imp.elements.replace(count);
+        // imp.elements.replace(count);
 
-        if remaining_visible {
-            let image_rest = ImageRest::new(self.files_count() - 5);
-            let image_flow_box_child = gtk::FlowBoxChild::new();
-            image_flow_box_child.set_child(Some(&image_rest));
-            image_flow_box_child.set_focusable(false);
-            imp.image_container.append(&image_flow_box_child);
-            image_rest.connect_clicked(clone!(
-                #[weak(rename_to=this)]
-                self,
-                move |_| {
-                    this.imp().navigation.push_by_tag("all_images");
-                }
-            ));
-        }
+        // if remaining_visible {
+        //     let image_rest = ImageRest::new(self.files_count() - 5);
+        //     let image_flow_box_child = gtk::FlowBoxChild::new();
+        //     image_flow_box_child.set_child(Some(&image_rest));
+        //     image_flow_box_child.set_focusable(false);
+        //     imp.image_container.append(&image_flow_box_child);
+        //     image_rest.connect_clicked(clone!(
+        //         #[weak(rename_to=this)]
+        //         self,
+        //         move |_| {
+        //             this.imp().navigation.push_by_tag("all_images");
+        //         }
+        //     ));
+        // }
 
-        match self.files_count() {
-            1 => {
-                imp.image_container.set_hexpand(true);
-                imp.image_container.set_max_children_per_line(1);
-                imp.image_container.set_halign(gtk::Align::Fill);
-            }
-            2 => {
-                imp.image_container.set_hexpand(true);
-                imp.image_container.set_max_children_per_line(2);
-                imp.image_container.set_halign(gtk::Align::Fill);
-            }
-            _ => {
-                imp.image_container.set_hexpand(false);
-                imp.image_container.set_max_children_per_line(3);
-                imp.image_container.set_halign(gtk::Align::Baseline);
-            }
-        }
+        // match self.files_count() {
+        //     1 => {
+        //         imp.image_container.set_hexpand(true);
+        //         imp.image_container.set_max_children_per_line(1);
+        //         imp.image_container.set_halign(gtk::Align::Fill);
+        //     }
+        //     2 => {
+        //         imp.image_container.set_hexpand(true);
+        //         imp.image_container.set_max_children_per_line(2);
+        //         imp.image_container.set_halign(gtk::Align::Fill);
+        //     }
+        //     _ => {
+        //         imp.image_container.set_hexpand(false);
+        //         imp.image_container.set_max_children_per_line(3);
+        //         imp.image_container.set_halign(gtk::Align::Baseline);
+        //     }
+        // }
 
-        imp.image_container.invalidate_filter();
+        // imp.image_container.invalidate_filter();
     }
-
-    fn load_create_date(&self) {
-        let files = self.files();
-        let path = files.first().unwrap().path();
-
-        glib::spawn_future_local(clone!(
-            #[weak(rename_to=this)]
-            self,
-            async move {
-                let path = Path::new(path.as_str());
-                let date = ExifService::create_date(path).unwrap_or_default();
-                this.imp().create_date_entry.set_text(&date);
-            }
-        ));
-    }
-
-    fn load_offset_time(&self) {
-        let files = self.files();
-        let path = files.first().unwrap().path();
-
-        glib::spawn_future_local(clone!(
-            #[weak(rename_to=this)]
-            self,
-            async move {
-                let path = Path::new(path.as_str());
-                let offset = ExifService::offset_time(path).unwrap_or_default();
-                this.imp().offset_time_entry.set_text(&offset);
-            }
-        ));
-    }
-
-    fn load_image_description(&self) {
-        let files = self.files();
-        let path = files.first().unwrap().path();
-
-        glib::spawn_future_local(clone!(
-            #[weak(rename_to=this)]
-            self,
-            async move {
-                let path = Path::new(path.as_str());
-                let description = ExifService::image_description(path).unwrap_or_default();
-                this.imp().image_description_entry.set_text(&description);
-            }
-        ));
-    }
-
-    fn apply_changes(&self) {
-        let files = self.active_files();
-        let path = files.first().unwrap().path();
-        let new_date = self.imp().create_date_entry.text().to_string();
-        let new_offset = self.imp().offset_time_entry.text().to_string();
-        let new_description = self.imp().image_description_entry.text().to_string();
-
-        // The operations for a single file are very fast, having a loading screen
-        // is not worth it
-        self.switch_to_stack_applying();
-        self.set_convert_progress(0, 1);
-
-        glib::spawn_future_local(clone!(
-            #[weak(rename_to=this)]
-            self,
-            async move {
-                let (tx, rx) = tokio::sync::oneshot::channel();
-
-                std::thread::spawn(move || {
-                    // TODO: should this go here?
-                    let path = Path::new(path.as_str());
-                    let mut errors = Vec::new();
-
-                    if let Err(e) = ExifService::set_all_offset_times(path, new_offset.as_str()) {
-                        errors.push(e);
-                    }
-
-                    if let Err(e) = ExifService::set_all_dates(path, new_date.as_str()) {
-                        errors.push(e);
-                    }
-
-                    if let Err(e) =
-                        ExifService::set_image_description(path, new_description.as_str())
-                    {
-                        errors.push(e);
-                    }
-
-                    if let Err(e) = ExifService::set_software(path) {
-                        errors.push(e);
-                    }
-
-                    let _ = tx.send(errors);
-                });
-
-                match rx.await {
-                    Ok(errors) => {
-                        if errors.is_empty() {
-                            this.set_convert_progress(1, 1);
-                            this.switch_to_stack_apply_basic();
-                            this.show_toast(&gettext("Changes applied"));
-                        } else {
-                            for error in errors {
-                                this.show_toast(&format!("{}", error));
-                            }
-                        }
-                    }
-                    Err(_) => {
-                        this.show_toast(&gettext("Concurrency issues! Report to developer"));
-                    }
-                }
-            }
-        ));
-    }
-    
+   
     fn apply_cancel(&self) {
         
     }
