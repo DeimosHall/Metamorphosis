@@ -149,69 +149,6 @@ template $AppWindow: Adw.ApplicationWindow {
               };
             };
           }
-
-          Adw.NavigationPage {
-            tag: "all_images";
-            title: _("All Images");
-
-            child: Adw.ToolbarView {
-              [top]
-              Adw.HeaderBar {
-                Button other_add_button {
-                  icon-name: 'plus-large-symbolic';
-                  tooltip-text: _("Add Images (Ctrl+O)");
-
-                  styles [
-                    'flat',
-                  ]
-                }
-              }
-
-              content: WindowHandle {
-                vexpand: true;
-
-                Stack all_images_stack {
-                  transition-type: crossfade;
-
-                  StackPage {
-                    name: "all_images";
-
-                    child: ScrolledWindow {
-                      vexpand: true;
-                      hexpand: true;
-
-                      FlowBox full_image_container {
-                        homogeneous: true;
-                        halign: center;
-                        valign: start;
-                        column-spacing: 12;
-                        row-spacing: 12;
-                        margin-top: 16;
-                        margin-bottom: 16;
-                        margin-start: 16;
-                        margin-end: 16;
-                        max-children-per-line: 4;
-                        selection-mode: none;
-                      }
-                    };
-                  }
-
-                  StackPage {
-                    name: "stack_loading";
-
-                    child: Adw.StatusPage {
-                      Spinner loading_spinner_images {
-                        valign: center;
-                        halign: center;
-                        height-request: 32;
-                        width-request: 32;
-                      }
-                    };
-                  }
-                }
-              };
-            };
-          }
         }
       };
     }

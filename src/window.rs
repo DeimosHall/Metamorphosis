@@ -16,7 +16,6 @@ use adw::prelude::*;
 use futures::future::join_all;
 use gettextrs::gettext;
 use glib::{MainContext, clone, idle_add_local_once};
-use gtk::accessible::Property;
 use gtk::gdk::Texture;
 use gtk::{gdk, gio, glib, subclass::prelude::*};
 use itertools::Itertools;
@@ -72,21 +71,13 @@ mod imp {
         #[template_child]
         pub stack: TemplateChild<gtk::Stack>,
         #[template_child]
-        pub all_images_stack: TemplateChild<gtk::Stack>,
-        #[template_child]
         pub open_button: TemplateChild<gtk::Button>,
         #[template_child]
         pub add_button: TemplateChild<gtk::Button>,
         #[template_child]
-        pub other_add_button: TemplateChild<gtk::Button>,
-        #[template_child]
         pub cancel_button: TemplateChild<gtk::Button>,
         #[template_child]
         pub loading_spinner: TemplateChild<gtk::Spinner>,
-        #[template_child]
-        pub loading_spinner_images: TemplateChild<gtk::Spinner>,
-        #[template_child]
-        pub full_image_container: TemplateChild<gtk::FlowBox>,
         #[template_child]
         pub progress_bar: TemplateChild<gtk::ProgressBar>,
         #[template_child]
@@ -277,13 +268,6 @@ impl AppWindow {
                 this.add_dialog();
             }
         ));
-        imp.other_add_button.connect_clicked(clone!(
-            #[weak(rename_to=this)]
-            self,
-            move |_| {
-                this.add_dialog();
-            }
-        ));
 
         // imp.image_container.set_filter_func(clone!(
         //     #[weak(rename_to=this)]
@@ -294,14 +278,6 @@ impl AppWindow {
         //             || !this.imp().removed.borrow().contains(&(f.index() as u32));
         //     }
         // ));
-        imp.full_image_container.set_filter_func(clone!(
-            #[weak(rename_to=this)]
-            self,
-            #[upgrade_or_default]
-            move |f| {
-                return !this.imp().removed.borrow().contains(&(f.index() as u32));
-            }
-        ));
 
         imp.cancel_button.connect_clicked(clone!(
             #[weak(rename_to=this)]
@@ -659,23 +635,12 @@ impl AppWindow {
 
         self.construct_short_thumbnail();
 
-        idle_add_local_once(clone!(
-            #[weak(rename_to=that)]
-            self,
-            move || {
-                that.update_full_image_container();
-            }
-        ));
-
         self.switch_back_from_loading();
         let path = self.files().first().unwrap().path();
         self.imp()
             .apply_basic_view
             .load_from_file(Path::new(path.as_str()));
 
-        self.imp()
-            .all_images_stack
-            .set_visible_child_name("all_images");
         if matches!(self.imp().navigation.visible_page().and_then(|x| x.tag()), Some(x) if x == "main")
         {
             self.switch_to_stack_apply_basic();
@@ -784,7 +749,6 @@ trait StackNavigation {
 }
 
 pub trait WindowUI {
-    fn update_full_image_container(&self);
     fn update_image_container(&self, count: usize, remaining_visible: bool);
     fn apply_cancel(&self);
 }
@@ -795,53 +759,6 @@ trait SettingsStore {
 }
 
 impl WindowUI for AppWindow {
-    fn update_full_image_container(&self) {
-        // let imp = self.imp();
-
-        // let input_files = self
-        //     .files()
-        //     .into_iter()
-        //     .map(|f| {
-        //         let (k, d) = (f.kind(), f.dimensions());
-        //         (f, k, d)
-        //     })
-        //     .collect_vec();
-
-        // while let Some(child) = imp.full_image_container.first_child() {
-        //     imp.full_image_container.remove(&child);
-        // }
-
-        // for (i, (f, file_type, dims)) in input_files.into_iter().enumerate() {
-        //     let caption = match dims {
-        //         Some((w, h)) => {
-        //             format!("{} · {}×{}", file_type.as_display_string(), w, h,)
-        //         }
-        //         None => file_type.as_display_string().to_owned(),
-        //     };
-
-        //     let (w, h) = dims.unwrap_or_default();
-
-        //     let image_thumbnail =
-        //         ImageThumbnail::new(f.pixbuf().as_ref(), &caption, w as u32, h as u32);
-
-        //     let image_flow_box_child = gtk::FlowBoxChild::new();
-        //     image_flow_box_child.set_child(Some(&image_thumbnail));
-
-        //     image_flow_box_child.update_property(&[Property::Label(&caption)]);
-
-        //     imp.full_image_container.append(&image_flow_box_child);
-        //     image_thumbnail.connect_remove_clicked(clone!(
-        //         #[weak(rename_to=this)]
-        //         self,
-        //         move |_| {
-        //             this.remove_file(i as u32);
-        //             this.imp().image_container.invalidate_filter();
-        //             this.imp().full_image_container.invalidate_filter();
-        //         }
-        //     ));
-        // }
-    }
-
     fn update_image_container(&self, count: usize, remaining_visible: bool) {
         // let imp = self.imp();
 
@@ -887,7 +804,6 @@ impl WindowUI for AppWindow {
         //                 move |_| {
         //                     this.remove_file(i as u32);
         //                     this.imp().image_container.invalidate_filter();
-        //                     this.imp().full_image_container.invalidate_filter();
         //                 }
         //             ));
         //         }
@@ -971,21 +887,10 @@ impl StackNavigation for AppWindow {
 
     fn switch_back_from_loading(&self) {
         self.imp().loading_spinner.stop();
-        self.imp().loading_spinner_images.stop();
-        self.imp().other_add_button.set_visible(true);
     }
 
     fn switch_to_stack_loading_generally(&self) {
-        if matches!(self.imp().navigation.visible_page().and_then(|x| x.tag()), Some(x) if x == "main")
-        {
-            self.switch_to_stack_loading();
-        } else {
-            self.imp().other_add_button.set_visible(false);
-            self.imp()
-                .all_images_stack
-                .set_visible_child_name("stack_loading");
-            self.imp().loading_spinner_images.start();
-        }
+        self.switch_to_stack_loading();
     }
 }
 
