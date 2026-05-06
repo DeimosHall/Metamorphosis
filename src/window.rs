@@ -4,8 +4,6 @@ use std::sync::atomic::AtomicUsize;
 
 use crate::components::about_window::MetamorphosisAbout;
 use crate::components::drag_overlay::DragOverlay;
-use crate::components::image_rest::ImageRest;
-use crate::components::image_thumbnail::ImageThumbnail;
 use crate::config::APP_ID;
 use crate::file_chooser::FileChooser;
 use crate::input_file::InputFile;
@@ -546,52 +544,10 @@ impl AppWindow {
         ));
     }
 
-    fn remove_file(&self, i: u32) {
-        self.imp().removed.borrow_mut().insert(i);
-        if self.files_count() == 0 {
-            self.clear();
-        } else {
-            self.construct_short_thumbnail();
-        }
-    }
-
     pub fn clear(&self) {
         self.imp().input_file_store.remove_all();
 
         self.switch_to_stack_welcome();
-    }
-
-    fn construct_short_thumbnail(&self) {
-        let imp = self.imp();
-
-        let input_files_count = self.files().len();
-
-        let mut elements = 0;
-        let mut visible = 0;
-
-        while visible < 6 && elements < input_files_count {
-            if !imp.removed.borrow().contains(&(elements as u32)) {
-                visible += 1;
-            }
-            elements += 1;
-        }
-
-        let mut remaining_visible = false;
-
-        let mut remaining_elements = elements;
-
-        while !remaining_visible && remaining_elements < input_files_count {
-            if !imp.removed.borrow().contains(&(remaining_elements as u32)) {
-                remaining_visible = true;
-            }
-            remaining_elements += 1;
-        }
-
-        if remaining_visible {
-            elements -= 1;
-        }
-
-        self.update_image_container(elements, remaining_visible);
     }
 
     fn active_files(&self) -> Vec<InputFile> {
@@ -633,7 +589,8 @@ impl AppWindow {
             imp.image_height.set(None);
         }
 
-        self.construct_short_thumbnail();
+        let file = self.files().first().unwrap().clone();
+        self.imp().apply_basic_view.update_image_container(file);
 
         self.switch_back_from_loading();
         let path = self.files().first().unwrap().path();
@@ -749,7 +706,6 @@ trait StackNavigation {
 }
 
 pub trait WindowUI {
-    fn update_image_container(&self, count: usize, remaining_visible: bool);
     fn apply_cancel(&self);
 }
 
@@ -759,98 +715,6 @@ trait SettingsStore {
 }
 
 impl WindowUI for AppWindow {
-    fn update_image_container(&self, count: usize, remaining_visible: bool) {
-        // let imp = self.imp();
-
-        // let input_files = self
-        //     .files()
-        //     .into_iter()
-        //     .map(|f| {
-        //         let (k, d) = (f.kind(), f.dimensions());
-        //         (f, k, d)
-        //     })
-        //     .collect_vec();
-
-        // while let Some(child) = imp.image_container.first_child() {
-        //     imp.image_container.remove(&child);
-        // }
-
-        // let removed = self.imp().removed.borrow().clone();
-
-        // for (i, (f, file_type, dims)) in input_files.into_iter().take(count).enumerate() {
-        //     match removed.contains(&(i as u32)) {
-        //         false => {
-        //             let caption = match dims {
-        //                 Some((w, h)) => {
-        //                     format!("{} · {}×{}", file_type.as_display_string(), w, h,)
-        //                 }
-        //                 None => file_type.as_display_string().to_owned(),
-        //             };
-
-        //             let (w, h) = dims.unwrap_or_default();
-
-        //             let image_thumbnail =
-        //                 ImageThumbnail::new(f.pixbuf().as_ref(), &caption, w as u32, h as u32);
-
-        //             let image_flow_box_child = gtk::FlowBoxChild::new();
-        //             image_flow_box_child.set_child(Some(&image_thumbnail));
-
-        //             image_flow_box_child.update_property(&[Property::Label(&caption)]);
-
-        //             imp.image_container.append(&image_flow_box_child);
-        //             image_thumbnail.connect_remove_clicked(clone!(
-        //                 #[weak(rename_to=this)]
-        //                 self,
-        //                 move |_| {
-        //                     this.remove_file(i as u32);
-        //                     this.imp().image_container.invalidate_filter();
-        //                 }
-        //             ));
-        //         }
-        //         true => {
-        //             imp.image_container.append(&gtk::FlowBoxChild::new());
-        //         }
-        //     }
-        // }
-
-        // imp.elements.replace(count);
-
-        // if remaining_visible {
-        //     let image_rest = ImageRest::new(self.files_count() - 5);
-        //     let image_flow_box_child = gtk::FlowBoxChild::new();
-        //     image_flow_box_child.set_child(Some(&image_rest));
-        //     image_flow_box_child.set_focusable(false);
-        //     imp.image_container.append(&image_flow_box_child);
-        //     image_rest.connect_clicked(clone!(
-        //         #[weak(rename_to=this)]
-        //         self,
-        //         move |_| {
-        //             this.imp().navigation.push_by_tag("all_images");
-        //         }
-        //     ));
-        // }
-
-        // match self.files_count() {
-        //     1 => {
-        //         imp.image_container.set_hexpand(true);
-        //         imp.image_container.set_max_children_per_line(1);
-        //         imp.image_container.set_halign(gtk::Align::Fill);
-        //     }
-        //     2 => {
-        //         imp.image_container.set_hexpand(true);
-        //         imp.image_container.set_max_children_per_line(2);
-        //         imp.image_container.set_halign(gtk::Align::Fill);
-        //     }
-        //     _ => {
-        //         imp.image_container.set_hexpand(false);
-        //         imp.image_container.set_max_children_per_line(3);
-        //         imp.image_container.set_halign(gtk::Align::Baseline);
-        //     }
-        // }
-
-        // imp.image_container.invalidate_filter();
-    }
-
     fn apply_cancel(&self) {}
 }
 
