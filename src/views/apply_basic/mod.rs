@@ -1,11 +1,10 @@
 use std::path::Path;
 
 use exiftool::ExifToolError;
-use glib::{clone, subclass::types::ObjectSubclassIsExt};
+use glib::{object::ObjectExt, subclass::types::ObjectSubclassIsExt};
 use gtk::{
-    accessible::Property,
     glib,
-    prelude::{AccessibleExtManual, ButtonExt, EditableExt, FlowBoxChildExt, WidgetExt},
+    prelude::{ButtonExt, EditableExt},
 };
 
 use crate::{
@@ -25,7 +24,7 @@ mod imp {
     #[template(resource = "/dev/deimoshall/Metamorphosis/blueprints/apply_basic.ui")]
     pub struct ApplyBasic {
         #[template_child]
-        pub image_container: TemplateChild<gtk::FlowBox>,
+        pub image_thumbnail: TemplateChild<ImageThumbnail>,
         #[template_child]
         pub create_date_entry: TemplateChild<gtk::Entry>,
         #[template_child]
@@ -74,41 +73,33 @@ impl ApplyBasic {
     }
 
     // Should it go here?
-    pub fn update_image_container(&self, file: InputFile) {
+    pub fn update_thumbnail(&self, file: InputFile) {
         let imp = self.imp();
         let file_type = file.kind();
-        let dims = file.dimensions();
+        let dimensions = file.dimensions();
 
-        while let Some(child) = imp.image_container.first_child() {
-            imp.image_container.remove(&child);
-        }
-
-        let f = file;
-        let caption = match dims {
+        let caption = match dimensions {
             Some((w, h)) => {
                 format!("{} · {}×{}", file_type.as_display_string(), w, h,)
             }
             None => file_type.as_display_string().to_owned(),
         };
 
-        let (w, h) = dims.unwrap_or_default();
+        let (w, h) = dimensions.unwrap_or_default();
 
-        let image_thumbnail =
-            ImageThumbnail::new(f.pixbuf().as_ref(), &caption, w as u32, h as u32);
+        imp.image_thumbnail
+            .set_property("image", file.pixbuf().as_ref());
+        imp.image_thumbnail.set_property("content", caption);
+        imp.image_thumbnail.set_property("width", w as u32);
+        imp.image_thumbnail.set_property("height", h as u32);
 
-        let image_flow_box_child = gtk::FlowBoxChild::new();
-        image_flow_box_child.set_child(Some(&image_thumbnail));
-
-        image_flow_box_child.update_property(&[Property::Label(&caption)]);
-
-        imp.image_container.append(&image_flow_box_child);
-        image_thumbnail.connect_remove_clicked(clone!(
-            #[weak(rename_to=this)]
-            self,
-            move |_| {
-                this.imp().image_container.invalidate_filter();
-            }
-        ));
+        // imp.image_thumbnail.connect_remove_clicked(clone!(
+        //     #[weak(rename_to=this)]
+        //     self,
+        //     move |_| {
+        //         // Switch to stack welcome here
+        //     }
+        // ));
     }
 
     pub fn set_on_apply<F>(&self, on_apply: F)

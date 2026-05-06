@@ -6,13 +6,9 @@ template $ApplyBasicView: Adw.Bin {
     Adw.Bin {
       Adw.PreferencesPage {
         Adw.PreferencesGroup {
-          FlowBox image_container {
-            homogeneous: true;
-            hexpand: true;
-            vexpand: false;
-            column-spacing: 12;
-            row-spacing: 12;
-            selection-mode: none;
+          halign: center;
+          $ImageThumbnail image_thumbnail {
+            // TODO: add an empty state for failure loading
           }
         }
 
@@ -71,4 +67,3 @@ template $ApplyBasicView: Adw.Bin {
     }
   };
 }
-
