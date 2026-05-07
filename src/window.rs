@@ -86,7 +86,6 @@ mod imp {
         #[template_child]
         pub help_overlay: TemplateChild<adw::ShortcutsDialog>,
 
-        pub provider: gtk::CssProvider,
         #[derivative(Default(value = "gio::ListStore::new::<InputFile>()"))]
         pub input_file_store: gio::ListStore,
         #[derivative(Default(value = "gio::Settings::new(APP_ID)"))]
@@ -122,6 +121,18 @@ mod imp {
     impl ObjectImpl for AppWindow {
         fn constructed(&self) {
             self.parent_constructed();
+
+            // Load CSS
+            let provider = gtk::CssProvider::new();
+            provider.load_from_resource("/dev/deimoshall/Metamorphosis/style.css");
+
+            if let Some(display) = gtk::gdk::Display::default() {
+                gtk::style_context_add_provider_for_display(
+                    &display,
+                    &provider,
+                    gtk::STYLE_PROVIDER_PRIORITY_APPLICATION,
+                );
+            }
 
             let theme = gtk::IconTheme::for_display(
                 &gtk::gdk::Display::default().expect("cannot find display"),
