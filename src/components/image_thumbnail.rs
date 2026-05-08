@@ -117,11 +117,25 @@ mod imp {
 
     impl WidgetImpl for ImageThumbnail {
         fn measure(&self, orientation: gtk::Orientation, for_size: i32) -> (i32, i32, i32, i32) {
-            let m = self.root.measure(orientation, for_size);
-            let (w, h) = (self.width.get() as i32, self.height.get() as i32);
-            match orientation {
-                gtk::Orientation::Horizontal if h + w != 0 => (150, 150, m.2, m.3),
-                _ => m,
+            let measure = self.root.measure(orientation, for_size);
+            let (width, height) = (self.width.get() as i32, self.height.get() as i32);
+            let constraint = 250;
+            
+            if width > 0 && height > 0 {
+                let original_aspect = width as f64 / height as f64;
+                match orientation {
+                    gtk::Orientation::Horizontal => {
+                        let scaled_height = (constraint as f64 * original_aspect) as i32;                       
+                        (constraint, scaled_height, measure.2, measure.3)
+                    }
+                    gtk::Orientation::Vertical => {
+                        let scaled_width = (constraint as f64 / original_aspect) as i32;
+                        (scaled_width, constraint, measure.2, measure.3)
+                    }
+                    _ => measure,
+                }
+            } else {
+                measure
             }
         }
 
