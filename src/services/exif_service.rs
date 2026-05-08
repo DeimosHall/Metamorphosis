@@ -36,6 +36,7 @@ impl ExifService {
     ///
     /// Format: "YYYY:MM:DD HH:MM:SS"
     pub fn set_all_dates(path: &Path, date: &str) -> Result<(), ExifToolError> {
+        // TODO: also set gps date
         Self::write_tag(path, "AllDates", date)
     }
 
@@ -75,5 +76,25 @@ impl ExifService {
     /// Sets the ImageDescription tag
     pub fn set_image_description(path: &Path, description: &str) -> Result<(), ExifToolError> {
         Self::write_tag(path, "ImageDescription", description)
+    }
+
+    /// Returns the Make tag value
+    pub fn make(path: &Path) -> Option<String> {
+        Self::read_tag(path, "Make")
+    }
+
+    /// Sets the Make tag value
+    pub fn set_make(path: &Path, make: &str) -> Result<(), ExifToolError> {
+        Self::write_tag(path, "Make", make)
+    }
+
+    /// Returns the Model tag value
+    pub fn model(path: &Path) -> Option<String> {
+        Self::read_tag(path, "Model")
+    }
+
+    /// Sets the Model tag value
+    pub fn set_model(path: &Path, model: &str) -> Result<(), ExifToolError> {
+        Self::write_tag(path, "Model", model)
     }
 }

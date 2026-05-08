@@ -30,6 +30,10 @@ mod imp {
         #[template_child]
         pub offset_time_entry: TemplateChild<gtk::Entry>,
         #[template_child]
+        pub manufacturer_entry: TemplateChild<gtk::Entry>,
+        #[template_child]
+        pub model_entry: TemplateChild<gtk::Entry>,
+        #[template_child]
         pub image_description_entry: TemplateChild<gtk::Entry>,
         #[template_child]
         pub apply_button: TemplateChild<gtk::Button>,
@@ -72,7 +76,6 @@ impl ApplyBasic {
         glib::Object::new()
     }
 
-    // Should it go here?
     pub fn update_thumbnail(&self, file: InputFile) {
         let imp = self.imp();
         let file_type = file.kind();
@@ -104,15 +107,17 @@ impl ApplyBasic {
 
     pub fn set_on_apply<F>(&self, on_apply: F)
     where
-        F: Fn(&ApplyBasic, String, String, String) + 'static,
+        F: Fn(&ApplyBasic, String, String, String, String, String) + 'static,
     {
         let view = self.clone();
         self.imp().apply_button.connect_clicked(move |_| {
             let imp = view.imp();
             let date = imp.create_date_entry.text().to_string();
             let offset = imp.offset_time_entry.text().to_string();
+            let manufacturer = imp.manufacturer_entry.text().to_string();
+            let model = imp.manufacturer_entry.text().to_string();
             let description = imp.image_description_entry.text().to_string();
-            on_apply(&view, date, offset, description);
+            on_apply(&view, date, offset, manufacturer, model, description);
         });
     }
 
@@ -122,6 +127,14 @@ impl ApplyBasic {
 
     pub fn offset(&self) -> String {
         self.imp().offset_time_entry.text().to_string()
+    }
+
+    pub fn manufacturer(&self) -> String {
+        self.imp().manufacturer_entry.text().to_string()
+    }
+
+    pub fn model(&self) -> String {
+        self.imp().model_entry.text().to_string()
     }
 
     pub fn description(&self) -> String {
@@ -136,6 +149,14 @@ impl ApplyBasic {
         self.imp().offset_time_entry.set_text(offset);
     }
 
+    pub fn set_manufacturer(&self, manufacturer: &str) {
+        self.imp().manufacturer_entry.set_text(manufacturer);
+    }
+
+    pub fn set_model(&self, model: &str) {
+        self.imp().model_entry.set_text(model);
+    }
+
     pub fn set_description(&self, description: &str) {
         self.imp().image_description_entry.set_text(description);
     }
@@ -144,10 +165,14 @@ impl ApplyBasic {
     pub fn load_from_file(&self, path: &Path) {
         let date = ExifService::create_date(path).unwrap_or_default();
         let offset = ExifService::offset_time(path).unwrap_or_default();
+        let manufacturer = ExifService::make(path).unwrap_or_default();
+        let model = ExifService::model(path).unwrap_or_default();
         let description = ExifService::image_description(path).unwrap_or_default();
 
         self.set_date(&date);
         self.set_offset(&offset);
+        self.set_manufacturer(&manufacturer);
+        self.set_model(&model);
         self.set_description(&description);
     }
 
@@ -156,6 +181,8 @@ impl ApplyBasic {
         let path = Path::new(path.as_str());
         let date = self.date();
         let offset = self.offset();
+        let manufacturer = self.manufacturer();
+        let model = self.model();
         let description = self.description();
 
         let mut errors = Vec::new();
@@ -165,6 +192,14 @@ impl ApplyBasic {
         }
 
         if let Err(e) = ExifService::set_all_offset_times(path, offset.as_str()) {
+            errors.push(e);
+        }
+
+        if let Err(e) = ExifService::set_make(path, manufacturer.as_str()) {
+            errors.push(e);
+        }
+
+        if let Err(e) = ExifService::set_model(path, model.as_str()) {
             errors.push(e);
         }
 

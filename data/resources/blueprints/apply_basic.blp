@@ -36,11 +36,30 @@ template $ApplyBasicView: Adw.Bin {
         }
 
         Adw.PreferencesGroup {
+          Adw.ActionRow manufacturer {
+            title: _("Manufacturer");
+
+            Entry manufacturer_entry {
+              width-chars: 20;
+              valign: center;
+            }
+          }
+
+          Adw.ActionRow model {
+            title: _("Model");
+
+            Entry model_entry {
+              width-chars: 20;
+              valign: center;
+            }
+          }
+        }
+
+        Adw.PreferencesGroup {
           Adw.ActionRow image_description_row {
             title: _("Description");
 
             Entry image_description_entry {
-              placeholder-text: _("");
               width-chars: 20;
               valign: center;
             }

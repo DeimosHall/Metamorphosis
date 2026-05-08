@@ -297,10 +297,11 @@ impl AppWindow {
         ));
 
         let apply_basic = imp.apply_basic_view.clone();
+        // TODO: check why going though here takes much time
         apply_basic.clone().set_on_apply(clone!(
             #[weak(rename_to=win)]
             self,
-            move |_view, _date, _offset, _description| {
+            move |_view, _date, _offset, _manufacturer, _model, _description| {
                 let path = win.files().first().unwrap().path();
 
                 // Disable loading screen by now
@@ -470,8 +471,8 @@ impl AppWindow {
             .filter(|f| f.exists())
             .collect();
 
+        // TODO: allow more than one file
         if files.len() > 1 {
-            self.show_toast("Only one item is allowed by now");
             files.truncate(1);
         }
 
