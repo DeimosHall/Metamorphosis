@@ -1,14 +1,13 @@
 <div align="center">
 <h1>Metamorphosis</h1>
 
-Edit EXIF metadata.
+Edit metadata of files.
 
 <img src="data/resources/icons/hicolor/512x512/apps/dev.deimoshall.Metamorphosis.png" width="128" height="128" alt="Metamorphosis icon">
 
 [![Installs](https://img.shields.io/flathub/downloads/dev.deimoshall.Metamorphosis?style=for-the-badge)](https://flathub.org/apps/details/dev.deimoshall.Metamorphosis)
 [![Latest Tag](https://img.shields.io/github/v/tag/deimoshall/Metamorphosis?sort=date&style=for-the-badge)](https://github.com/deimoshall/Metamorphosis/-/tags)
 [![License](https://img.shields.io/github/license/deimoshall/Metamorphosis?style=for-the-badge)](https://github.com/deimoshall/Metamorphosis/-/raw/main/LICENSE)
-
 
 </div>
 
@@ -25,16 +24,13 @@ Metamorphosis supports editing the following datatypes:
 
 - [x] **Images:**
   - [x] JPEG, JPG, JPE
-  - [ ] PNG, JNG, MNG
-  - [ ] TIFF, TIF
+  - [x] PNG
+  - [x] TIFF, TIF
   - [ ] GIF
   - [ ] BMP, DIB
-  - [ ] HEIC, HEIF, HIF
+  - [x] HEIC, HEIF, HIF
   - [ ] AVIF
-  - [ ] WebP
-  - [ ] SVG
-  - [ ] PSD, PSB
-  - [ ] ICO, CUR
+  - [x] WebP
 - [ ] **RAW formats:** CR2, CR3, NEF, ARW, RAF, ORF, RW2, DNG, and more
 - [ ] **Videos:** MOV, MP4, M4V, AVI, WebM
 - [ ] **Audio:** MP3, M4A, FLAC, OGG
