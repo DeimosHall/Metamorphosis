@@ -2,8 +2,9 @@ using Gtk 4.0;
 using Adw 1;
 
 template $ImageThumbnail : Widget {
-    overflow: hidden;
     Box root {
+        overflow: hidden;       
+        styles ["card-content"]
         Box child {
             Overlay {
                 Box {
@@ -50,8 +51,6 @@ template $ImageThumbnail : Widget {
                     styles ["circular", "image-remove", "osd"]
                 }
             }
-            styles ["image-container"]
         }
-        styles ["card-content"]
     }
 }

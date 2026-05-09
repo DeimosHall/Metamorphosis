@@ -17,7 +17,7 @@
             Simply drag and drop files or paste images directly into the app to get started.
         </p>
         <p>
-            Supports JPEG, HEIC, AVIF, WebP, and many more image formats.
+            Supports JPEG, PNG HEIC, AVIF, WebP, and many more image formats.
         </p>
     </description>
 
@@ -73,20 +73,25 @@
 
     <launchable type="desktop-id">@app-id@.desktop</launchable>
 
-    <url type="homepage">https://apps.gnome.org/Metamorphosis/</url>
-    <url type="donation">https://opencollective.com/deimoshall</url>
+    <url type="homepage">https://github.com/DeimosHall/Metamorphosis</url>
+    <url type="donation">https://ko-fi.com/deimoshall</url>
     <url type="bugtracker">https://github.com/DeimosHall/Metamorphosis/issues</url>
     <url type="help">https://github.com/DeimosHall/Metamorphosis/issues</url>
     <url type="vcs-browser">https://github.com/DeimosHall/Metamorphosis</url>
     <url type="translate">https://github.com/DeimosHall/Metamorphosis/tree/main/po</url>
     <url type="contribute">https://github.com/DeimosHall/Metamorphosis</url>
-    <url type="contact">https://matrix.to/#/@deimos:gnome.org</url>
+    <url type="contact">https://matrix.to/#/@deimoshall:matrix.org</url>
 
     <update_contact>deimoshall.dev@proton.me</update_contact>
 
     <content_rating type="oars-1.1" />
 
-    <releases>   
+    <releases>
+        <release version="0.3.0" date="2026-05-09">
+            <description>
+                <p>Add manufacturer and model fields</p>
+            </description>
+        </release>
         <release version="0.2.0" date="2026-04-24">
             <description>
                 <p>Add description field</p>

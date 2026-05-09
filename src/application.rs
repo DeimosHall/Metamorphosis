@@ -129,7 +129,7 @@ impl Default for App {
         glib::Object::builder::<Self>()
             .property("application-id", Some(APP_ID))
             .property("flags", gio::ApplicationFlags::HANDLES_OPEN)
-            .property("resource-base-path", "/io/dev/deimoshall/Metamorphosis/")
+            .property("resource-base-path", "/dev/deimoshall/Metamorphosis/")
             .build()
     }
 }

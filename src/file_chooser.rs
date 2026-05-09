@@ -4,7 +4,7 @@ use gettextrs::gettext;
 use glib::clone;
 use gtk::{gio, prelude::*};
 
-use crate::models::filetypes::{CompressionType, FileType, OutputType};
+use crate::models::filetypes::{FileType};
 use crate::input_file::InputFile;
 use crate::window::AppWindow;
 
@@ -116,136 +116,6 @@ impl FileChooser {
             &callback_start,
             &callback_success,
             &callback_error,
-        );
-    }
-
-    pub fn choose_output_file_wrapper<A, B>(
-        parent: &AppWindow,
-        default_name: String,
-        format: OutputType,
-        default_folder: String,
-        callback_success: A,
-        callback_error: B,
-    ) where
-        A: Fn(&AppWindow, OutputType, String) + 'static,
-        B: Fn(&AppWindow, Option<&str>) + 'static,
-    {
-        glib::MainContext::default().spawn_local(clone!(
-            #[strong]
-            parent,
-            async move {
-                FileChooser::choose_output_file(
-                    &parent,
-                    default_name,
-                    format,
-                    Some(default_folder),
-                    callback_success,
-                    callback_error,
-                )
-                .await;
-            }
-        ));
-    }
-
-    pub async fn choose_output_file<A, B>(
-        parent: &AppWindow,
-        default_name: String,
-        format: OutputType,
-        default_folder: Option<String>,
-        callback_success: A,
-        callback_error: B,
-    ) where
-        A: Fn(&AppWindow, OutputType, String) + 'static,
-        B: Fn(&AppWindow, Option<&str>) + 'static,
-    {
-        let image_filter = gtk::FileFilter::new();
-        image_filter.add_mime_type(format.as_mime());
-
-        let dialog = gtk::FileDialog::builder()
-            .modal(true)
-            .default_filter(&image_filter)
-            .build();
-
-        dialog.set_initial_name(Some(&default_name));
-        if let Some(default_folder) = default_folder {
-            dialog.set_initial_folder(Some(&gio::File::for_path(default_folder)));
-        }
-
-        let Ok(file) = dialog.save_future(Some(parent)).await else {
-            callback_error(parent, None);
-            return;
-        };
-
-        let file_path = file.path().unwrap();
-
-        let Some(file_extension) = file_path.extension() else {
-            callback_error(parent, Some(&gettext("Unspecified filetype")));
-            return;
-        };
-
-        let Some(file_extension) = OutputType::from_string(file_extension.to_str().unwrap()) else {
-            callback_error(parent, Some(&gettext("Unknown filetype")));
-            return;
-        };
-
-        if file_extension != format {
-            callback_error(parent, Some(&gettext("Used the wrong filetype")));
-            return;
-        }
-
-        callback_success(parent, format, file_path.to_str().unwrap().to_owned());
-    }
-
-    pub fn choose_output_folder_wrapper<A, B>(
-        parent: &AppWindow,
-        default_folder: String,
-        callback_success: A,
-        callback_error: B,
-    ) where
-        A: Fn(&AppWindow, OutputType, String) + 'static,
-        B: Fn(&AppWindow, Option<&str>) + 'static,
-    {
-        glib::MainContext::default().spawn_local(clone!(
-            #[strong]
-            parent,
-            async move {
-                FileChooser::choose_output_folder(
-                    &parent,
-                    Some(default_folder),
-                    callback_success,
-                    callback_error,
-                )
-                .await;
-            }
-        ));
-    }
-
-    pub async fn choose_output_folder<A, B>(
-        parent: &AppWindow,
-        default_folder: Option<String>,
-        callback_success: A,
-        callback_error: B,
-    ) where
-        A: Fn(&AppWindow, OutputType, String) + 'static,
-        B: Fn(&AppWindow, Option<&str>) + 'static,
-    {
-        let dialog = gtk::FileDialog::builder().build();
-
-        if let Some(default_folder) = default_folder {
-            dialog.set_initial_folder(Some(&gio::File::for_path(default_folder)));
-        }
-
-        let Ok(file) = dialog.select_folder_future(Some(parent)).await else {
-            callback_error(parent, None);
-            return;
-        };
-
-        let file_path = file.path().unwrap();
-
-        callback_success(
-            parent,
-            OutputType::Compression(CompressionType::Directory),
-            file_path.to_str().unwrap().to_owned(),
         );
     }
 }

@@ -18,11 +18,7 @@ dragoverlay {
 }
 
 .card-content {
-  border-radius: 60px;
-}
-
-flowboxchild:focus {
-  border-radius: 15px;
+    border-radius: 15px;
 }
 
 .image-caption {
@@ -38,10 +34,6 @@ flowboxchild:focus {
 
 .image-remove:focus {
   outline-color: alpha(@accent_color, 0.5);
-}
-
-.image-rest-button:focus {
-  outline-offset: 2px;
 }
 
 value {
@@ -64,10 +56,6 @@ value {
 .long {
   padding-right: 70px;
   padding-left: 70px;
-}
-
-.no-padding {
-  padding: 0;
 }
 
 .output-filetype-drop popover > contents {
