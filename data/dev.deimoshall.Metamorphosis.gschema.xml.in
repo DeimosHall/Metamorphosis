@@ -12,8 +12,6 @@
 		<value nick="Tiff" value="8"/>
 		<value nick="Pdf" value="9"/>
 		<value nick="Gif" value="10"/>
-		<value nick="Ico" value="11"/>
-		<value nick="Dds" value="12"/>
 	</enum>
 	<enum id="dev.deimoshall.Metamorphosis.compression">
 		<value nick="Zip" value="0"/>
