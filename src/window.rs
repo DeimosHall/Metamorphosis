@@ -628,7 +628,8 @@ impl AppWindow {
             .map(|f| {
                 (
                     f.kind().supports_pixbuf()
-                        && f.area().map(|x| x < 2000 * 2000).unwrap_or_default(), // image isn't too big
+                    // TODO: should I store full images or create downscale them to save memory?
+                        && f.area().map(|x| x < 8000 * 8000).unwrap_or_default(), // image isn't too big
                     f.path(),
                 )
             })
