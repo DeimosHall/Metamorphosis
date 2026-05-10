@@ -1,6 +1,6 @@
 # Updates
 
-This document describes steps to follow to update the app version and its dependencies
+This document describes steps to follow to deploy a new version on Flathub.
 
 ## App version
 
@@ -15,42 +15,44 @@ The app version must be updated in two files:
 2. Update the version number in the url field on the [dev.deimoshall.Metamorphosis.js](dev.deimoshall.Metamorphosis) file
 3. Updte the sha256 field, check the corresponding the the `exiftool` version here: [https://exiftool.org/checksums.txt](https://exiftool.org/checksums.txt)
 
-## Flatpak release
+## Screenshots
+
+Update app screenshots if required.
+
+## GitHub release
 
 When releasing a new version for flathub, I must create a source tarball that includes the vendored Rust dependencies:
 
-1. Vendor the Rust dependencies (if not already done):
-
-```bash
-cargo vendor
-```
-
-2. Setup the build directory (if not already done):
+2. Vendor the dependencies and setup the build directory:
 
 ```bash
 meson setup build --reconfigure
 ```
 
-3. Create the distribution tarball with vendored deps:
+3. Create the distribution tarball with vendored deps (takes a couple of minutes):
 
 ```bash
 meson dist -C build --allow-dirty --no-tests
 ```
 
-4. This generates a tarball in `build/meson-dist/` named `metamorphosis-X.Y.Z.tar.xz`
+> This generates a tarball in `build/meson-dist/` named `metamorphosis-X.Y.Z.tar.xz`
 
-5. Compute the SHA256 of this vendored tarball:
+6. Upload this tarball to the GitHub release
+
+> Flatpak builds run in offline mode, so cargo must be able to find all dependencies locally in the `vendor/` directory that's bundled in the tarball. The project's `build-aux/dist-vendor.sh` script automatically handles vendoring during distribution.
+
+## Deploy steps
+
+After tagging the release, update the flathub manifest:
+
+1. Go to my flathub repository:
 
 ```bash
-sha256sum build/meson-dist/metamorphosis-X.Y.Z.tar.xz
+cd ~/Projects/infra/dev.deimoshall.Metamorphosis
 ```
 
-6. Upload this tarball to your GitHub release
-
-**Why this is needed:** Flatpak builds run in offline mode, so cargo must be able to find all dependencies locally in the `vendor/` directory that's bundled in the tarball. The project's `build-aux/dist-vendor.sh` script automatically handles vendoring during distribution.
-
-**Updating the manifest:** After tagging the release, update the flathub manifest:
-
 1. Update the `url` in the metamorphosis module to point to my new release tarball
-2. Update the `sha256` with the value computed in step 5
-3. Commit to my flathub fork and open a PR
+
+2. Update the `sha256` with the value from the file created by step 3
+
+3. Commit and open a PR
