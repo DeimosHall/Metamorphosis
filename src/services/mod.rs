@@ -1,1 +1,1 @@
-pub mod exif_service;
+pub mod exif;

@@ -9,7 +9,7 @@ use crate::file_chooser::FileChooser;
 use crate::input_file::InputFile;
 use crate::magick::{JobFile, count_frames};
 use crate::runtime;
-use crate::services::exif_service::ExifService;
+use crate::services::exif::ExifService;
 use adw::prelude::*;
 use futures::future::join_all;
 use gettextrs::gettext;

@@ -9,7 +9,7 @@ use gtk::{
 
 use crate::{
     components::image_thumbnail::ImageThumbnail, input_file::InputFile,
-    services::exif_service::ExifService,
+    services::exif::ExifService,
 };
 
 mod imp {
