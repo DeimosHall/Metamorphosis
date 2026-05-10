@@ -1,7 +1,7 @@
 <div align="center">
 <h1>Metamorphosis</h1>
 
-Edit metadata of files.
+Edit file's metadata.
 
 <img src="data/resources/icons/hicolor/512x512/apps/dev.deimoshall.Metamorphosis.png" width="128" height="128" alt="Metamorphosis icon">
 
@@ -43,7 +43,7 @@ You can also drag and drop as well as paste the copied image into the app!
 
 Issues and merge requests are more than welcome. However, please take the following into consideration:
 
-- This project follows the [GNOME Code of Conduct](https://wiki.gnome.org/Foundation/CodeOfConduct)
+- This project follows the [GNOME Code of Conduct](https://conduct.gnome.org/)
 - Only Flatpak is supported
 
 ## Development
@@ -98,4 +98,4 @@ Made with ♥️ by Deimos Hall.
 
 Based on [`Switcheroo`](https://gitlab.com/adhami3310/Switcheroo.git) by Khaleel Al-Adhami, an app to convert and manipulate images.
 
-This app uses a variety of libraries but the main one is [ExifTool](https://exiftool.org/).
+This app uses [ExifTool](https://exiftool.org/) under the hood to perform metadata edits.
