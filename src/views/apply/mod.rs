@@ -17,12 +17,14 @@ mod imp {
     use derivative::Derivative;
     use gtk::CompositeTemplate;
 
+    use crate::views::apply;
+
     use super::*;
 
     #[derive(Debug, CompositeTemplate, Derivative)]
     #[derivative(Default)]
     #[template(resource = "/dev/deimoshall/Metamorphosis/blueprints/apply_basic.ui")]
-    pub struct ApplyBasic {
+    pub struct Apply {
         #[template_child]
         pub image_thumbnail: TemplateChild<ImageThumbnail>,
         #[template_child]
@@ -40,9 +42,9 @@ mod imp {
     }
 
     #[::glib::object_subclass]
-    impl ObjectSubclass for ApplyBasic {
+    impl ObjectSubclass for Apply {
         const NAME: &'static str = "ApplyBasicView";
-        type Type = super::ApplyBasic;
+        type Type = apply::Apply;
         type ParentType = adw::Bin;
 
         fn class_init(klass: &mut Self::Class) {
@@ -54,24 +56,24 @@ mod imp {
         }
     }
 
-    impl ObjectImpl for ApplyBasic {}
-    impl WidgetImpl for ApplyBasic {}
-    impl BinImpl for ApplyBasic {}
+    impl ObjectImpl for Apply {}
+    impl WidgetImpl for Apply {}
+    impl BinImpl for Apply {}
 }
 
 glib::wrapper! {
-    pub struct ApplyBasic(ObjectSubclass<imp::ApplyBasic>)
+    pub struct Apply(ObjectSubclass<imp::Apply>)
         @extends gtk::Widget, adw::Bin,
         @implements gtk::Accessible, gtk::Buildable, gtk::ConstraintTarget;
 }
 
-impl Default for ApplyBasic {
+impl Default for Apply {
     fn default() -> Self {
         glib::Object::new()
     }
 }
 
-impl ApplyBasic {
+impl Apply {
     pub fn new() -> Self {
         glib::Object::new()
     }
@@ -107,7 +109,7 @@ impl ApplyBasic {
 
     pub fn set_on_apply<F>(&self, on_apply: F)
     where
-        F: Fn(&ApplyBasic, String, String, String, String, String) + 'static,
+        F: Fn(&Apply, String, String, String, String, String) + 'static,
     {
         let view = self.clone();
         self.imp().apply_button.connect_clicked(move |_| {

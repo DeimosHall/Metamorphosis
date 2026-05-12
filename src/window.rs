@@ -50,7 +50,7 @@ mod imp {
         sync::atomic::AtomicBool,
     };
 
-    use crate::{config::PKGDATADIR, views::apply_basic::ApplyBasic};
+    use crate::{config::PKGDATADIR, views::apply::Apply};
 
     use super::*;
 
@@ -79,7 +79,7 @@ mod imp {
         #[template_child]
         pub progress_bar: TemplateChild<gtk::ProgressBar>,
         #[template_child]
-        pub apply_basic_view: TemplateChild<ApplyBasic>,
+        pub apply_basic_view: TemplateChild<Apply>,
 
         #[template_child]
         pub navigation: TemplateChild<adw::NavigationView>,
