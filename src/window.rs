@@ -80,6 +80,8 @@ mod imp {
         pub progress_bar: TemplateChild<gtk::ProgressBar>,
         #[template_child]
         pub apply_view: TemplateChild<Apply>,
+        #[template_child]
+        pub view_switcher: TemplateChild<adw::ViewSwitcher>,
 
         #[template_child]
         pub navigation: TemplateChild<adw::NavigationView>,
@@ -263,6 +265,9 @@ impl AppWindow {
     fn setup_callbacks(&self) {
         //load imp
         let imp = self.imp();
+
+        imp.view_switcher.set_stack(Some(&imp.apply_view.stack()));
+        
         imp.open_button.connect_clicked(clone!(
             #[weak(rename_to=this)]
             self,
@@ -270,6 +275,7 @@ impl AppWindow {
                 this.add_dialog();
             }
         ));
+        
         imp.add_button.connect_clicked(clone!(
             #[weak(rename_to=this)]
             self,
@@ -734,16 +740,19 @@ impl WindowUI for AppWindow {
 impl StackNavigation for AppWindow {
     fn switch_to_stack_apply(&self) {
         self.imp().add_button.set_visible(true);
+        self.imp().view_switcher.set_visible(true);
         self.imp().stack.set_visible_child_name("stack_apply");
     }
 
     fn switch_to_stack_applying(&self) {
         self.imp().add_button.set_visible(false);
+        self.imp().view_switcher.set_visible(false);
         self.imp().stack.set_visible_child_name("stack_applying");
     }
 
     fn switch_to_stack_welcome(&self) {
         self.imp().add_button.set_visible(false);
+        self.imp().view_switcher.set_visible(false);
         self.imp()
             .stack
             .set_visible_child_name("stack_welcome_page");
@@ -751,6 +760,7 @@ impl StackNavigation for AppWindow {
 
     fn switch_to_stack_invalid_image(&self) {
         self.imp().add_button.set_visible(false);
+        self.imp().view_switcher.set_visible(false);
         self.imp()
             .stack
             .set_visible_child_name("stack_invalid_image");
@@ -758,6 +768,7 @@ impl StackNavigation for AppWindow {
 
     fn switch_to_stack_loading(&self) {
         self.imp().add_button.set_visible(false);
+        self.imp().view_switcher.set_visible(false);
         self.imp().stack.set_visible_child_name("stack_loading");
         self.imp().loading_spinner.start();
     }

@@ -26,6 +26,8 @@ mod imp {
     #[template(resource = "/dev/deimoshall/Metamorphosis/ui/views/apply/mod.ui")]
     pub struct Apply {
         #[template_child]
+        pub image_stack: TemplateChild<adw::ViewStack>,
+        #[template_child]
         pub image_thumbnail: TemplateChild<ImageThumbnail>,
         #[template_child]
         pub create_date_entry: TemplateChild<gtk::Entry>,
@@ -76,6 +78,10 @@ impl Default for Apply {
 impl Apply {
     pub fn new() -> Self {
         glib::Object::new()
+    }
+
+    pub fn stack(&self) -> adw::ViewStack {
+        self.imp().image_stack.clone()
     }
 
     pub fn update_thumbnail(&self, file: InputFile) {

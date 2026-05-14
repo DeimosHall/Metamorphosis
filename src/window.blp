@@ -33,7 +33,11 @@ template $AppWindow: Adw.ApplicationWindow {
                   ]
                 }
 
-                show-title: false;
+                [title]
+                Adw.ViewSwitcher view_switcher {
+                  visible: false; // Don't show at startup
+                  policy: wide;
+                }
 
                 [end]
                 MenuButton {
