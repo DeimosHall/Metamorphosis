@@ -79,7 +79,7 @@ mod imp {
         #[template_child]
         pub progress_bar: TemplateChild<gtk::ProgressBar>,
         #[template_child]
-        pub apply_basic_view: TemplateChild<Apply>,
+        pub apply_view: TemplateChild<Apply>,
 
         #[template_child]
         pub navigation: TemplateChild<adw::NavigationView>,
@@ -296,9 +296,9 @@ impl AppWindow {
             }
         ));
 
-        let apply_basic = imp.apply_basic_view.clone();
+        let apply_view = imp.apply_view.clone();
         // TODO: check why going though here takes much time
-        apply_basic.clone().set_on_apply(clone!(
+        apply_view.clone().set_on_apply(clone!(
             #[weak(rename_to=win)]
             self,
             move |_view, _date, _offset, _manufacturer, _model, _description| {
@@ -315,17 +315,17 @@ impl AppWindow {
                     #[weak(rename_to=win)]
                     win,
                     #[strong]
-                    apply_basic,
+                    apply_view,
                     #[strong]
                     path,
                     async move {
-                        let result = apply_basic.apply_changes(path);
+                        let result = apply_view.apply_changes(path);
 
                         match result {
                             Ok(()) => {
                                 if false {
                                     win.set_convert_progress(1, 1);
-                                    win.switch_to_stack_apply_basic();
+                                    win.switch_to_stack_apply();
                                 }
                                 win.show_toast(&gettext("Changes applied"));
                             }
@@ -602,17 +602,17 @@ impl AppWindow {
         }
 
         let file = self.files().first().unwrap().clone();
-        self.imp().apply_basic_view.update_thumbnail(file);
+        self.imp().apply_view.update_thumbnail(file);
 
         self.switch_back_from_loading();
         let path = self.files().first().unwrap().path();
         self.imp()
-            .apply_basic_view
+            .apply_view
             .load_from_file(Path::new(path.as_str()));
 
         if matches!(self.imp().navigation.visible_page().and_then(|x| x.tag()), Some(x) if x == "main")
         {
-            self.switch_to_stack_apply_basic();
+            self.switch_to_stack_apply();
         }
     }
 
@@ -709,7 +709,7 @@ pub trait FileOperations {
 }
 
 trait StackNavigation {
-    fn switch_to_stack_apply_basic(&self);
+    fn switch_to_stack_apply(&self);
     fn switch_to_stack_applying(&self);
     fn switch_to_stack_welcome(&self);
     fn switch_to_stack_invalid_image(&self);
@@ -732,9 +732,9 @@ impl WindowUI for AppWindow {
 }
 
 impl StackNavigation for AppWindow {
-    fn switch_to_stack_apply_basic(&self) {
+    fn switch_to_stack_apply(&self) {
         self.imp().add_button.set_visible(true);
-        self.imp().stack.set_visible_child_name("stack_apply_basic");
+        self.imp().stack.set_visible_child_name("stack_apply");
     }
 
     fn switch_to_stack_applying(&self) {

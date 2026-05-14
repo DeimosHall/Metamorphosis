@@ -43,7 +43,7 @@ mod imp {
 
     #[::glib::object_subclass]
     impl ObjectSubclass for Apply {
-        const NAME: &'static str = "ApplyBasicView";
+        const NAME: &'static str = "ApplyView";
         type Type = apply::Apply;
         type ParentType = adw::Bin;
 
