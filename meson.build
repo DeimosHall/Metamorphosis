@@ -1,10 +1,11 @@
 project('metamorphosis',
   'rust',
   version: '0.3.0',
-  meson_version: '>= 0.59.0',
+  meson_version: '>= 1.4.0',
   license: 'GPLv3',
 )
 
+fs = import('fs')
 i18n = import('i18n')
 gnome = import('gnome')
 
@@ -16,6 +17,7 @@ dependency('libadwaita-1')
 glib_compile_resources = find_program('glib-compile-resources', required: true)
 glib_compile_schemas = find_program('glib-compile-schemas', required: true)
 desktop_file_validate = find_program('desktop-file-validate', required: false)
+blueprint_compiler = find_program('blueprint-compiler', required: true)
 appstreamcli = find_program('appstreamcli', required: false)
 cargo = find_program('cargo', required: true)
 

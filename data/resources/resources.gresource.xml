@@ -2,14 +2,17 @@
 <gresources>
     <gresource prefix="/dev/deimoshall/Metamorphosis/">
         <file alias="dev.deimoshall.Metamorphosis.metainfo.xml" preprocess="xml-stripblanks">../dev.deimoshall.Metamorphosis.metainfo.xml</file>
-        <file compressed="true" preprocess="xml-stripblanks">blueprints/window.ui</file>
-        <file compressed="true" preprocess="xml-stripblanks">blueprints/image-thumbnail.ui</file>
-        <file compressed="true" preprocess="xml-stripblanks">blueprints/apply_basic.ui</file>
         <file compressed="true">style.css</file>
         <file compressed="true">style-hc.css</file>
         <file preprocess="xml-stripblanks">icons/hicolor/symbolic/apps/dev.deimoshall.Metamorphosis-symbolic.svg</file>
         <file compressed="true">icons/hicolor/512x512/apps/dev.deimoshall.Metamorphosis.png</file>
         <file compressed="true">icons/hicolor/512x512/apps/dev.deimoshall.Metamorphosis.Devel.png</file>
+    </gresource>
+
+    <gresource prefix="/dev/deimoshall/Metamorphosis/ui/">
+        <file compressed="true" preprocess="xml-stripblanks" alias="window.ui">window.ui</file>
+        <file compressed="true" preprocess="xml-stripblanks" alias="components/image-thumbnail.ui">components-image_thumbnail.ui</file>
+        <file compressed="true" preprocess="xml-stripblanks" alias="views/apply/mod.ui">views-apply-mod.ui</file>
     </gresource>
 
     <gresource prefix="/dev/deimoshall/Metamorphosis/icons/scalable/apps/">

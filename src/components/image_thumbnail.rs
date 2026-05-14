@@ -12,7 +12,7 @@ mod imp {
     use gtk::CompositeTemplate;
 
     #[derive(Debug, CompositeTemplate, Default)]
-    #[template(resource = "/dev/deimoshall/Metamorphosis/blueprints/image-thumbnail.ui")]
+    #[template(resource = "/dev/deimoshall/Metamorphosis/ui/components/image-thumbnail.ui")]
     pub struct ImageThumbnail {
         #[template_child]
         pub image: TemplateChild<gtk::Image>,

@@ -23,7 +23,7 @@ mod imp {
 
     #[derive(Debug, CompositeTemplate, Derivative)]
     #[derivative(Default)]
-    #[template(resource = "/dev/deimoshall/Metamorphosis/blueprints/apply_basic.ui")]
+    #[template(resource = "/dev/deimoshall/Metamorphosis/ui/views/apply/mod.ui")]
     pub struct Apply {
         #[template_child]
         pub image_thumbnail: TemplateChild<ImageThumbnail>,

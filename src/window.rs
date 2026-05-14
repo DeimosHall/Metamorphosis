@@ -60,7 +60,7 @@ mod imp {
 
     #[derive(Debug, CompositeTemplate, Derivative)]
     #[derivative(Default)]
-    #[template(resource = "/dev/deimoshall/Metamorphosis/blueprints/window.ui")]
+    #[template(resource = "/dev/deimoshall/Metamorphosis/ui/window.ui")]
     pub struct AppWindow {
         #[template_child]
         pub toast_overlay: TemplateChild<adw::ToastOverlay>,
