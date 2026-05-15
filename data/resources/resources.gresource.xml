@@ -21,6 +21,8 @@
     </gresource>
 
     <gresource prefix="/dev/deimoshall/Metamorphosis/icons/scalable/actions/">
+        <file alias="build-alt-symbolic.svg" compressed="true" preprocess="xml-stripblanks">icons/hicolor/scalable/actions/build-alt-symbolic.svg</file>
+        <file alias="build-configure-symbolic.svg" compressed="true" preprocess="xml-stripblanks">icons/hicolor/scalable/actions/build-configure-symbolic.svg</file>
         <file alias="im-symbolic.svg" compressed="true" preprocess="xml-stripblanks">icons/hicolor/scalable/actions/im-symbolic.svg</file>
         <file alias="image-symbolic.svg" compressed="true" preprocess="xml-stripblanks">icons/hicolor/scalable/actions/image-symbolic.svg</file>
         <file alias="view-more-horizontal-symbolic.svg" compressed="true" preprocess="xml-stripblanks">icons/hicolor/scalable/actions/view-more-horizontal-symbolic.svg</file>
