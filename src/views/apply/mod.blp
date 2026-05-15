@@ -3,96 +3,105 @@ using Adw 1;
 
 template $ApplyView: Adw.Bin {
   child: Adw.ToolbarView {
-    content: Adw.ViewStack image_stack {
-      Adw.ViewStackPage {
-        name: "basic";
-        title: _("Basic");
-        icon-name: "document-text-symbolic";
-        child: ScrolledWindow {
-          Adw.PreferencesPage {
-            Adw.PreferencesGroup {
-              halign: center;
-              $ImageThumbnail image_thumbnail {
-                // TODO: add an empty state for failure loading
-              }
+    content: ScrolledWindow {
+      Adw.Clamp {
+        Gtk.Box {
+          orientation: vertical;
+          spacing: 24;
+          margin-top: 24;
+          margin-bottom: 24;
+
+          // Image inside preferences group to keep aspect ratio
+          Adw.PreferencesGroup {
+            halign: center;
+            $ImageThumbnail image_thumbnail {}
+          }
+          
+          Adw.ViewStack image_stack {
+            Adw.ViewStackPage {
+              name: "basic";
+              title: _("Basic");
+              icon-name: "document-text-symbolic";
+              child: Gtk.Box {
+                orientation: vertical;
+                spacing: 24;
+              
+                Adw.PreferencesGroup {
+                  Adw.ActionRow create_date_row {
+                    title: _("Creation Date");
+                    // subtitle: _("EXIF CreateDate");
+    
+                    Entry create_date_entry {
+                      placeholder-text: _("YYYY:MM:DD HH:MM:SS");
+                      width-chars: 20;
+                      valign: center;
+                    }
+                  }
+    
+                  Adw.ActionRow time_offset_row {
+                    title: _("Offset Time");
+    
+                    Entry offset_time_entry {
+                      placeholder-text: _("HH:MM");
+                      width-chars: 20;
+                      valign: center;
+                    }
+                  }
+                }
+    
+                Adw.PreferencesGroup {
+                  Adw.ActionRow manufacturer {
+                    title: _("Manufacturer");
+    
+                    Entry manufacturer_entry {
+                      width-chars: 20;
+                      valign: center;
+                    }
+                  }
+    
+                  Adw.ActionRow model {
+                    title: _("Model");
+    
+                    Entry model_entry {
+                      width-chars: 20;
+                      valign: center;
+                    }
+                  }
+                }
+    
+                Adw.PreferencesGroup {
+                  Adw.ActionRow image_description_row {
+                    title: _("Description");
+    
+                    Entry image_description_entry {
+                      width-chars: 20;
+                      valign: center;
+                    }
+                  }
+                }
+              };
             }
-
-            Adw.PreferencesGroup {
-              Adw.ActionRow create_date_row {
-                title: _("Creation Date");
-                // subtitle: _("EXIF CreateDate");
-
-                Entry create_date_entry {
-                  placeholder-text: _("YYYY:MM:DD HH:MM:SS");
-                  width-chars: 20;
-                  valign: center;
+      
+            Adw.ViewStackPage {
+              name: "advanced";
+              title: _("Advanced");
+              icon-name: "wrench-wide-symbolic";
+              child: Adw.Bin {
+                Adw.PreferencesGroup {
+                  Adw.ActionRow {
+                    title: _("Create Date");
+    
+                    Entry {
+                      width-chars: 20;
+                      valign: center;
+                    }
+                  }
                 }
-              }
-
-              Adw.ActionRow time_offset_row {
-                title: _("Offset Time");
-
-                Entry offset_time_entry {
-                  placeholder-text: _("HH:MM");
-                  width-chars: 20;
-                  valign: center;
-                }
-              }
-            }
-
-            Adw.PreferencesGroup {
-              Adw.ActionRow manufacturer {
-                title: _("Manufacturer");
-
-                Entry manufacturer_entry {
-                  width-chars: 20;
-                  valign: center;
-                }
-              }
-
-              Adw.ActionRow model {
-                title: _("Model");
-
-                Entry model_entry {
-                  width-chars: 20;
-                  valign: center;
-                }
-              }
-            }
-
-            Adw.PreferencesGroup {
-              Adw.ActionRow image_description_row {
-                title: _("Description");
-
-                Entry image_description_entry {
-                  width-chars: 20;
-                  valign: center;
-                }
-              }
+              };
             }
           }
-        };
-      }
-
-      Adw.ViewStackPage {
-        name: "advanced";
-        title: _("Advanced");
-        icon-name: "wrench-wide-symbolic";
-        child: ScrolledWindow {
-          Adw.PreferencesPage {
-            Adw.PreferencesGroup {
-              Adw.ActionRow {
-                title: _("Create Date");
-
-                Entry {
-                  width-chars: 20;
-                  valign: center;
-                }
-              }
-            }
-          }
-        };
-      }
+        }
+        }
     };
     [bottom]
     Gtk.ActionBar {
