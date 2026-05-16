@@ -6,6 +6,8 @@ template $ImageBasicTab: Gtk.Box {
   spacing: 24;
 
   Adw.PreferencesGroup {
+    title: _("Date and Time");
+  
     Adw.ActionRow create_date_row {
       title: _("Creation Date");
       // subtitle: _("EXIF CreateDate");
@@ -29,6 +31,8 @@ template $ImageBasicTab: Gtk.Box {
   }
 
   Adw.PreferencesGroup {
+    title: _("Device");
+    
     Adw.ActionRow manufacturer {
       title: _("Manufacturer");
 
@@ -49,6 +53,8 @@ template $ImageBasicTab: Gtk.Box {
   }
 
   Adw.PreferencesGroup {
+    title: _("Other");
+  
     Adw.ActionRow image_description_row {
       title: _("Description");
 
