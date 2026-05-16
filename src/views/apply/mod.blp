@@ -22,64 +22,7 @@ template $ApplyView: Adw.Bin {
               name: "basic";
               title: _("Basic");
               icon-name: "build-alt-symbolic";
-              child: Gtk.Box {
-                orientation: vertical;
-                spacing: 24;
-              
-                Adw.PreferencesGroup {
-                  Adw.ActionRow create_date_row {
-                    title: _("Creation Date");
-                    // subtitle: _("EXIF CreateDate");
-    
-                    Entry create_date_entry {
-                      placeholder-text: _("YYYY:MM:DD HH:MM:SS");
-                      width-chars: 20;
-                      valign: center;
-                    }
-                  }
-    
-                  Adw.ActionRow time_offset_row {
-                    title: _("Offset Time");
-    
-                    Entry offset_time_entry {
-                      placeholder-text: _("HH:MM");
-                      width-chars: 20;
-                      valign: center;
-                    }
-                  }
-                }
-    
-                Adw.PreferencesGroup {
-                  Adw.ActionRow manufacturer {
-                    title: _("Manufacturer");
-    
-                    Entry manufacturer_entry {
-                      width-chars: 20;
-                      valign: center;
-                    }
-                  }
-    
-                  Adw.ActionRow model {
-                    title: _("Model");
-    
-                    Entry model_entry {
-                      width-chars: 20;
-                      valign: center;
-                    }
-                  }
-                }
-    
-                Adw.PreferencesGroup {
-                  Adw.ActionRow image_description_row {
-                    title: _("Description");
-    
-                    Entry image_description_entry {
-                      width-chars: 20;
-                      valign: center;
-                    }
-                  }
-                }
-              };
+              child: $ImageBasicTab image_basic_tab {};
             }
       
             Adw.ViewStackPage {
@@ -101,7 +44,7 @@ template $ApplyView: Adw.Bin {
             }
           }
         }
-        }
+      }
     };
     [bottom]
     Gtk.ActionBar {
