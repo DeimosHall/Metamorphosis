@@ -29,18 +29,7 @@ template $ApplyView: Adw.Bin {
               name: "advanced";
               title: _("Advanced");
               icon-name: "build-configure-symbolic";
-              child: Adw.Bin {
-                Adw.PreferencesGroup {
-                  Adw.ActionRow {
-                    title: _("Create Date");
-    
-                    Entry {
-                      width-chars: 20;
-                      valign: center;
-                    }
-                  }
-                }
-              };
+              child: $ImageAdvancedTab image_advanced_tab {};
             }
           }
         }

@@ -21,7 +21,7 @@ mod imp {
     #[template(resource = "/dev/deimoshall/Metamorphosis/ui/views/apply/image_basic_tab.ui")]
     pub struct ImageBasicTab {
         #[template_child]
-        pub create_date_entry: TemplateChild<gtk::Entry>,
+        pub creation_date_entry: TemplateChild<gtk::Entry>,
         #[template_child]
         pub offset_time_entry: TemplateChild<gtk::Entry>,
         #[template_child]
@@ -64,7 +64,7 @@ impl ImageBasicTab {
     }
 
     pub fn date(&self) -> String {
-        self.imp().create_date_entry.text().to_string()
+        self.imp().creation_date_entry.text().to_string()
     }
 
     pub fn offset(&self) -> String {
@@ -84,7 +84,7 @@ impl ImageBasicTab {
     }
 
     pub fn set_date(&self, date: &str) {
-        self.imp().create_date_entry.set_text(date);
+        self.imp().creation_date_entry.set_text(date);
     }
 
     pub fn set_offset(&self, offset: &str) {

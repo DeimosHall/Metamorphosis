@@ -8,18 +8,17 @@ template $ImageBasicTab: Gtk.Box {
   Adw.PreferencesGroup {
     title: _("Date and Time");
   
-    Adw.ActionRow create_date_row {
+    Adw.ActionRow {
       title: _("Creation Date");
-      // subtitle: _("EXIF CreateDate");
 
-      Entry create_date_entry {
+      Entry creation_date_entry {
         placeholder-text: _("YYYY:MM:DD HH:MM:SS");
         width-chars: 20;
         valign: center;
       }
     }
 
-    Adw.ActionRow time_offset_row {
+    Adw.ActionRow {
       title: _("Offset Time");
 
       Entry offset_time_entry {
@@ -33,7 +32,7 @@ template $ImageBasicTab: Gtk.Box {
   Adw.PreferencesGroup {
     title: _("Device");
     
-    Adw.ActionRow manufacturer {
+    Adw.ActionRow {
       title: _("Manufacturer");
 
       Entry manufacturer_entry {
@@ -42,7 +41,7 @@ template $ImageBasicTab: Gtk.Box {
       }
     }
 
-    Adw.ActionRow model {
+    Adw.ActionRow {
       title: _("Model");
 
       Entry model_entry {
@@ -55,7 +54,7 @@ template $ImageBasicTab: Gtk.Box {
   Adw.PreferencesGroup {
     title: _("Other");
   
-    Adw.ActionRow image_description_row {
+    Adw.ActionRow {
       title: _("Description");
 
       Entry image_description_entry {
