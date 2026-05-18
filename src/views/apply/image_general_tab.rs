@@ -1,25 +1,20 @@
 use std::path::Path;
 
+use gtk::{glib, prelude::*, subclass::prelude::*};
+
 use derivative::Derivative;
 use exiftool::ExifToolError;
-use glib::subclass::types::ObjectSubclass;
-use gtk::TemplateChild;
-use gtk::{glib, prelude::*, subclass::prelude::*};
+use gtk_macros::CompositeTemplate;
 
 use crate::services::exif::ExifService;
 
 mod imp {
-    use glib::subclass::object::ObjectImpl;
-    use gtk::subclass::widget::CompositeTemplateClass;
-    use gtk::subclass::{box_::BoxImpl, widget::WidgetImpl};
-    use gtk::CompositeTemplate;
-
     use super::*;
 
     #[derive(Debug, CompositeTemplate, Derivative)]
     #[derivative(Default)]
-    #[template(resource = "/dev/deimoshall/Metamorphosis/ui/views/apply/image_basic_tab.ui")]
-    pub struct ImageBasicTab {
+    #[template(resource = "/dev/deimoshall/Metamorphosis/ui/views/apply/image_general_tab.ui")]
+    pub struct ImageGeneralTab {
         #[template_child]
         pub creation_date_entry: TemplateChild<gtk::Entry>,
         #[template_child]
@@ -32,10 +27,10 @@ mod imp {
         pub image_description_entry: TemplateChild<gtk::Entry>,
     }
 
-    #[::glib::object_subclass]
-    impl ObjectSubclass for ImageBasicTab {
+    #[glib::object_subclass]
+    impl ObjectSubclass for ImageGeneralTab {
         const NAME: &'static str = "ImageBasicTab";
-        type Type = super::ImageBasicTab;
+        type Type = super::ImageGeneralTab;
         type ParentType = gtk::Box;
 
         fn class_init(klass: &mut Self::Class) {
@@ -47,18 +42,18 @@ mod imp {
         }
     }
 
-    impl ObjectImpl for ImageBasicTab {}
-    impl WidgetImpl for ImageBasicTab {}
-    impl BoxImpl for ImageBasicTab {}
+    impl ObjectImpl for ImageGeneralTab {}
+    impl WidgetImpl for ImageGeneralTab {}
+    impl BoxImpl for ImageGeneralTab {}
 }
 
 glib::wrapper! {
-    pub struct ImageBasicTab(ObjectSubclass<imp::ImageBasicTab>)
+    pub struct ImageGeneralTab(ObjectSubclass<imp::ImageGeneralTab>)
     @extends gtk::Widget, gtk::Box,
     @implements gtk::Accessible, gtk::Buildable, gtk::ConstraintTarget;
 }
 
-impl ImageBasicTab {
+impl ImageGeneralTab {
     pub fn new() -> Self {
         glib::Object::new()
     }

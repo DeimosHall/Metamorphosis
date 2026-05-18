@@ -7,14 +7,14 @@ use gtk::{glib, prelude::ButtonExt};
 use crate::{components::image_thumbnail::ImageThumbnail, input_file::InputFile};
 
 mod image_advanced_tab;
-mod image_basic_tab;
+mod image_general_tab;
 
 mod imp {
     use adw::subclass::prelude::*;
     use derivative::Derivative;
     use gtk::CompositeTemplate;
 
-    use crate::views::apply::{self, image_advanced_tab::ImageAdvancedTab, image_basic_tab::ImageBasicTab};
+    use crate::views::apply::{self, image_advanced_tab::ImageAdvancedTab, image_general_tab::ImageGeneralTab};
 
     use super::*;
 
@@ -27,7 +27,7 @@ mod imp {
         #[template_child]
         pub image_thumbnail: TemplateChild<ImageThumbnail>,
         #[template_child]
-        pub image_basic_tab: TemplateChild<ImageBasicTab>,
+        pub image_basic_tab: TemplateChild<ImageGeneralTab>,
         #[template_child]
         pub image_advanced_tab: TemplateChild<ImageAdvancedTab>,
         #[template_child]
