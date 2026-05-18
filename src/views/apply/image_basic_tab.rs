@@ -105,7 +105,8 @@ impl ImageBasicTab {
 
     // TODO: maybe these methods should go in a trait
     /// Populate UI fields using exif data from the given file
-    pub fn load_from_file(&self, path: &Path) {
+    pub fn load_from_file(&self, path: String) {
+        let path = Path::new(path.as_str());
         let date = ExifService::create_date(path).unwrap_or_default();
         let offset = ExifService::offset_time(path).unwrap_or_default();
         let manufacturer = ExifService::make(path).unwrap_or_default();

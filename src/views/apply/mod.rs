@@ -122,8 +122,10 @@ impl Apply {
     }
 
     /// Populate UI fields using exif data from the given file
-    pub fn load_from_file(&self, path: &Path) {
-        self.imp().image_basic_tab.load_from_file(path);
+    pub fn load_from_file(&self, path: String) {
+        // TODO: improve arg to avoid cloning
+        self.imp().image_basic_tab.load_from_file(path.clone());
+        self.imp().image_advanced_tab.load_from_file(path);
     }
 
     /// Take the values from the UI fields and apply them to a file

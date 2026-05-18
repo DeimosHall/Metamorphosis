@@ -614,7 +614,7 @@ impl AppWindow {
         let path = self.files().first().unwrap().path();
         self.imp()
             .apply_view
-            .load_from_file(Path::new(path.as_str()));
+            .load_from_file(path);
 
         if matches!(self.imp().navigation.visible_page().and_then(|x| x.tag()), Some(x) if x == "main")
         {
