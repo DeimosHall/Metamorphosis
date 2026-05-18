@@ -1028,6 +1028,7 @@ dependencies = [
  "pretty_env_logger",
  "rand",
  "regex",
+ "serde_json",
  "shared_child",
  "tempfile",
  "tokio",

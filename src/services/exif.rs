@@ -8,16 +8,28 @@ static EXIFTOOL: LazyLock<ExifTool> =
 pub struct ExifService;
 
 impl ExifService {
+
+    /// Returns a tag value in String format
+    /// 
+    /// Converts numbers and bools to String
     fn read_tag(path: &Path, tag: &str) -> Option<String> {
-        EXIFTOOL.read_tag(path, tag, &[]).ok()?
+        let value = EXIFTOOL.json_tag(path, tag, &[]).ok()?;
+        match value {
+            serde_json::Value::String(value) => Some(value),
+            serde_json::Value::Number(value) => Some(value.to_string()),
+            serde_json::Value::Bool(value) => Some(value.to_string()),
+            _ => None,
+        }
     }
 
+    /// Writes a value to a tag
     fn write_tag(path: &Path, tag: &str, value: &str) -> Result<(), ExifToolError> {
         EXIFTOOL.write_tag(path, tag, value, &["-overwrite_original"])
     }
 
     // ****************** Dates ******************
 
+    // TODO: used for testing purposes, delete later
     pub fn read_all(path: String) {
         let path = Path::new(path.as_str());
         let exif_data: ExifData = EXIFTOOL.read_metadata(path, &["-g2"]).unwrap();

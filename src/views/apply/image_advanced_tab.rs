@@ -175,6 +175,7 @@ impl ImageAdvancedTab {
         let offset_time = ExifService::offset_time(path).unwrap_or_default();
         let offset_time_original = ExifService::offset_time_original(path).unwrap_or_default();
         let offset_time_digitized = ExifService::offset_time_digitized(path).unwrap_or_default();
+        println!("sub sec time: {}", &sub_sec_time);
 
         self.set_modify_date(&modify_date);
         self.set_date_time_original(&date_time_original);

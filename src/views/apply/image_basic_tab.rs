@@ -156,7 +156,7 @@ impl ImageBasicTab {
         }
 
         if errors.is_empty() {
-            return Ok(());
+            Ok(())
         } else {
             Err(errors)
         }
