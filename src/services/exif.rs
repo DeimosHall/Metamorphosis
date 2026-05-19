@@ -90,6 +90,7 @@ impl ExifService {
     /// Format: "YYYY:MM:DD HH:MM:SS"
     pub fn set_all_dates(path: &Path, date: &str) -> Result<(), ExifToolError> {
         // TODO: also set gps date
+        // TODO: set modify date as the current modification date
         Self::write_tag(path, "AllDates", date)
     }
 

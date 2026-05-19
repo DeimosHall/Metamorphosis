@@ -29,7 +29,7 @@ mod imp {
 
     #[glib::object_subclass]
     impl ObjectSubclass for ImageGeneralTab {
-        const NAME: &'static str = "ImageBasicTab";
+        const NAME: &'static str = "ImageGeneralTab";
         type Type = super::ImageGeneralTab;
         type ParentType = gtk::Box;
 
@@ -116,7 +116,7 @@ impl ImageGeneralTab {
     }
 
     /// Take the values from the UI fields and apply them to a file
-    pub fn apply_changes(&self, path: String) -> Result<(), Vec<ExifToolError>> {
+    pub fn apply_changes(&self, path: &String) -> Result<(), Vec<ExifToolError>> {
         let path = Path::new(path.as_str());
         let date = self.date();
         let offset = self.offset();

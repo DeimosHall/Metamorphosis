@@ -1,5 +1,4 @@
 use std::collections::HashSet;
-use std::path::Path;
 use std::sync::atomic::AtomicUsize;
 
 use crate::components::about_window::MetamorphosisAbout;
@@ -307,7 +306,7 @@ impl AppWindow {
         apply_view.clone().set_on_apply(clone!(
             #[weak(rename_to=win)]
             self,
-            move |_view, _date, _offset, _manufacturer, _model, _description| {
+            move |_| {
                 let path = win.files().first().unwrap().path();
 
                 // Disable loading screen by now
@@ -336,6 +335,7 @@ impl AppWindow {
                                 win.show_toast(&gettext("Changes applied"));
                             }
                             Err(errors) => {
+                                // TODO: use the right dialog
                                 for error in errors {
                                     win.show_toast(&format!("{}", error));
                                 }
