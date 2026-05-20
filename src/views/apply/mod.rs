@@ -1,8 +1,8 @@
 use exiftool::ExifToolError;
-use glib::{object::ObjectExt, property::PropertyGet, subclass::types::ObjectSubclassIsExt};
+use glib::{object::ObjectExt, subclass::types::ObjectSubclassIsExt};
 use gtk::{
     glib,
-    prelude::{ButtonExt, WidgetExt},
+    prelude::{ButtonExt},
 };
 
 use crate::{components::image_thumbnail::ImageThumbnail, input_file::InputFile};

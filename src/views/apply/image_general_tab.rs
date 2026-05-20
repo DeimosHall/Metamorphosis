@@ -1,5 +1,3 @@
-use std::path::Path;
-
 use gtk::{glib, prelude::*, subclass::prelude::*};
 
 use derivative::Derivative;
@@ -101,12 +99,12 @@ impl ImageGeneralTab {
     // TODO: maybe these methods should go in a trait
     /// Populate UI fields using exif data from the given file
     pub fn load_from_file(&self, path: String) {
-        let path = Path::new(path.as_str());
-        let date = ExifService::create_date(path).unwrap_or_default();
-        let offset = ExifService::offset_time(path).unwrap_or_default();
-        let manufacturer = ExifService::make(path).unwrap_or_default();
-        let model = ExifService::model(path).unwrap_or_default();
-        let description = ExifService::image_description(path).unwrap_or_default();
+        let exif = ExifService::new(&path);
+        let date = exif.create_date().unwrap_or_default();
+        let offset = exif.offset_time().unwrap_or_default();
+        let manufacturer = exif.make().unwrap_or_default();
+        let model = exif.model().unwrap_or_default();
+        let description = exif.image_description().unwrap_or_default();
 
         self.set_date(&date);
         self.set_offset(&offset);
@@ -117,7 +115,7 @@ impl ImageGeneralTab {
 
     /// Take the values from the UI fields and apply them to a file
     pub fn apply_changes(&self, path: &String) -> Result<(), Vec<ExifToolError>> {
-        let path = Path::new(path.as_str());
+        let exif = ExifService::new(&path);
         let date = self.date();
         let offset = self.offset();
         let manufacturer = self.manufacturer();
@@ -126,27 +124,27 @@ impl ImageGeneralTab {
 
         let mut errors = Vec::new();
 
-        if let Err(e) = ExifService::set_all_dates(path, date.as_str()) {
+        if let Err(e) = exif.set_all_dates(date.as_str()) {
             errors.push(e);
         }
 
-        if let Err(e) = ExifService::set_all_offset_times(path, offset.as_str()) {
+        if let Err(e) = exif.set_all_offset_times(offset.as_str()) {
             errors.push(e);
         }
 
-        if let Err(e) = ExifService::set_make(path, manufacturer.as_str()) {
+        if let Err(e) = exif.set_make(manufacturer.as_str()) {
             errors.push(e);
         }
 
-        if let Err(e) = ExifService::set_model(path, model.as_str()) {
+        if let Err(e) = exif.set_model(model.as_str()) {
             errors.push(e);
         }
 
-        if let Err(e) = ExifService::set_image_description(path, description.as_str()) {
+        if let Err(e) = exif.set_image_description(description.as_str()) {
             errors.push(e);
         }
 
-        if let Err(e) = ExifService::set_software(path) {
+        if let Err(e) = exif.set_software() {
             errors.push(e);
         }
 

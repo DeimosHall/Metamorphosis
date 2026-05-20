@@ -555,8 +555,8 @@ impl AppWindow {
             self,
             async move {
                 for path in paths {
-                    println!("File: {}", path);
-                    ExifService::read_all(path);
+                    let exif = ExifService::new(&path);
+                    exif.read_all();
                 }
             }
         ));

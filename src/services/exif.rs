@@ -5,15 +5,20 @@ use exiftool::{ExifTool, ExifToolError, g2::ExifData};
 static EXIFTOOL: LazyLock<ExifTool> =
     LazyLock::new(|| ExifTool::with_executable(Path::new("/app/exiftool")).unwrap());
 
-pub struct ExifService;
+pub struct ExifService<'a> {
+    path: &'a Path,
+}
 
-impl ExifService {
+impl<'a> ExifService<'a> {
+    pub fn new(path: &'a String) -> Self {
+        Self { path: Path::new(path.as_str()) }
+    }
 
     /// Returns a tag value in String format
-    /// 
+    ///
     /// Converts numbers and bools to String
-    fn read_tag(path: &Path, tag: &str) -> Option<String> {
-        let value = EXIFTOOL.json_tag(path, tag, &[]).ok()?;
+    fn read_tag(&self, tag: &str) -> Option<String> {
+        let value = EXIFTOOL.json_tag(self.path, tag, &[]).ok()?;
         match value {
             serde_json::Value::String(value) => Some(value),
             serde_json::Value::Number(value) => Some(value.to_string()),
@@ -23,63 +28,62 @@ impl ExifService {
     }
 
     /// Writes a value to a tag
-    fn write_tag(path: &Path, tag: &str, value: &str) -> Result<(), ExifToolError> {
-        EXIFTOOL.write_tag(path, tag, value, &["-overwrite_original"])
+    fn write_tag(&self, tag: &str, value: &str) -> Result<(), ExifToolError> {
+        EXIFTOOL.write_tag(self.path, tag, value, &["-overwrite_original"])
     }
 
     // ****************** Dates ******************
 
     // TODO: used for testing purposes, delete later
-    pub fn read_all(path: String) {
-        let path = Path::new(path.as_str());
-        let exif_data: ExifData = EXIFTOOL.read_metadata(path, &["-g2"]).unwrap();
+    pub fn read_all(&self) {
+        let exif_data: ExifData = EXIFTOOL.read_metadata(self.path, &["-g2"]).unwrap();
         println!("Parsed data: \n{:#?}", exif_data);
     }
 
-    pub fn modify_date(path: &Path) -> Option<String> {
-        Self::read_tag(path, "ModifyDate")
+    pub fn modify_date(&self) -> Option<String> {
+        self.read_tag("ModifyDate")
     }
 
-    pub fn set_modify_date(path: &Path, modify_date: &str) -> Result<(), ExifToolError> {
-        Self::write_tag(path, "ModifyDate", modify_date)
+    pub fn set_modify_date(&self, modify_date: &str) -> Result<(), ExifToolError> {
+        self.write_tag("ModifyDate", modify_date)
     }
 
-    pub fn date_time_original(path: &Path) -> Option<String> {
-        Self::read_tag(path, "DateTimeOriginal")
+    pub fn date_time_original(&self) -> Option<String> {
+        self.read_tag("DateTimeOriginal")
     }
 
     pub fn set_date_time_original(
-        path: &Path,
+        &self,
         date_time_original: &str,
     ) -> Result<(), ExifToolError> {
-        Self::write_tag(path, "DateTimeOriginal", date_time_original)
+        self.write_tag("DateTimeOriginal", date_time_original)
     }
 
     /// Returns the CreateDate tag value
     ///
     /// Format: "YYYY:MM:DD HH:MM:SS" (e.g., "2026:03:31 22:02:24")
-    pub fn create_date(path: &Path) -> Option<String> {
-        Self::read_tag(path, "CreateDate")
+    pub fn create_date(&self) -> Option<String> {
+        self.read_tag("CreateDate")
     }
 
-    pub fn set_create_date(path: &Path, create_date: &str) -> Result<(), ExifToolError> {
-        Self::write_tag(path, "CreateDate", create_date)
+    pub fn set_create_date(&self, create_date: &str) -> Result<(), ExifToolError> {
+        self.write_tag("CreateDate", create_date)
     }
 
-    pub fn gps_date_stamp(path: &Path) -> Option<String> {
-        Self::read_tag(path, "GPSDateStamp")
+    pub fn gps_date_stamp(&self) -> Option<String> {
+        self.read_tag("GPSDateStamp")
     }
 
-    pub fn set_gps_date_stamp(path: &Path, gps_date_stamp: &str) -> Result<(), ExifToolError> {
-        Self::write_tag(path, "GPSDateStamp", gps_date_stamp)
+    pub fn set_gps_date_stamp(&self, gps_date_stamp: &str) -> Result<(), ExifToolError> {
+        self.write_tag("GPSDateStamp", gps_date_stamp)
     }
 
-    pub fn gps_time_stamp(path: &Path) -> Option<String> {
-        Self::read_tag(path, "GPSTimeStamp")
+    pub fn gps_time_stamp(&self) -> Option<String> {
+        self.read_tag("GPSTimeStamp")
     }
 
-    pub fn set_gps_time_stamp(path: &Path, gps_time_stamp: &str) -> Result<(), ExifToolError> {
-        Self::write_tag(path, "GPSTimeStamp", gps_time_stamp)
+    pub fn set_gps_time_stamp(&self, gps_time_stamp: &str) -> Result<(), ExifToolError> {
+        self.write_tag("GPSTimeStamp", gps_time_stamp)
     }
 
     /// Sets the following tag values:
@@ -88,38 +92,38 @@ impl ExifService {
     /// - ModifyDate
     ///
     /// Format: "YYYY:MM:DD HH:MM:SS"
-    pub fn set_all_dates(path: &Path, date: &str) -> Result<(), ExifToolError> {
+    pub fn set_all_dates(&self, date: &str) -> Result<(), ExifToolError> {
         // TODO: also set gps date
         // TODO: set modify date as the current modification date
-        Self::write_tag(path, "AllDates", date)
+        self.write_tag("AllDates", date)
     }
 
     // ****************** Fractional seconds ******************
-    pub fn sub_sec_time(path: &Path) -> Option<String> {
-        Self::read_tag(path, "SubSecTime")
+    pub fn sub_sec_time(&self) -> Option<String> {
+        self.read_tag("SubSecTime")
     }
 
-    pub fn set_sub_sec_time(path: &Path, sub_sec_time: &str) -> Result<(), ExifToolError> {
-        Self::write_tag(path, "SubSecTime", sub_sec_time)
+    pub fn set_sub_sec_time(&self, sub_sec_time: &str) -> Result<(), ExifToolError> {
+        self.write_tag("SubSecTime", sub_sec_time)
     }
 
-    pub fn sub_sec_time_original(path: &Path) -> Option<String> {
-        Self::read_tag(path, "SubSecTimeOriginal")
+    pub fn sub_sec_time_original(&self) -> Option<String> {
+        self.read_tag("SubSecTimeOriginal")
     }
 
     pub fn set_sub_sec_time_original(
-        path: &Path,
+        &self,
         sub_sec_time_original: &str,
     ) -> Result<(), ExifToolError> {
-        Self::write_tag(path, "SubSecTimeOriginal", sub_sec_time_original)
+        self.write_tag("SubSecTimeOriginal", sub_sec_time_original)
     }
 
-    pub fn sub_sec_time_digitized(path: &Path) -> Option<String> {
-        Self::read_tag(path, "SubSecTimeDigitized")
+    pub fn sub_sec_time_digitized(&self) -> Option<String> {
+        self.read_tag("SubSecTimeDigitized")
     }
 
-    pub fn set_sub_sec_time_digitized(path: &Path, sub_sec_time_digitized: &str) -> Result<(), ExifToolError> {
-        Self::write_tag(path, "SubSecTimeDigitized", sub_sec_time_digitized)
+    pub fn set_sub_sec_time_digitized(&self, sub_sec_time_digitized: &str) -> Result<(), ExifToolError> {
+        self.write_tag("SubSecTimeDigitized", sub_sec_time_digitized)
     }
 
     // ****************** Timezone offsets ******************
@@ -127,28 +131,28 @@ impl ExifService {
     /// Returns the OffSetTime tag value
     ///
     /// Format: "HH:MM"
-    pub fn offset_time(path: &Path) -> Option<String> {
-        Self::read_tag(path, "OffsetTime")
+    pub fn offset_time(&self) -> Option<String> {
+        self.read_tag("OffsetTime")
     }
 
-    pub fn set_offset_time(path: &Path, offset_time: &str) -> Result<(), ExifToolError> {
-        Self::write_tag(path, "OffsetTime", offset_time)
+    pub fn set_offset_time(&self, offset_time: &str) -> Result<(), ExifToolError> {
+        self.write_tag("OffsetTime", offset_time)
     }
 
-    pub fn offset_time_original(path: &Path) -> Option<String> {
-        Self::read_tag(path, "OffsetTimeOriginal")
+    pub fn offset_time_original(&self) -> Option<String> {
+        self.read_tag("OffsetTimeOriginal")
     }
 
-    pub fn set_offset_time_original(path: &Path, offset_time_original: &str) -> Result<(), ExifToolError> {
-        Self::write_tag(path, "OffsetTimeOriginal", offset_time_original)
+    pub fn set_offset_time_original(&self, offset_time_original: &str) -> Result<(), ExifToolError> {
+        self.write_tag("OffsetTimeOriginal", offset_time_original)
     }
 
-    pub fn offset_time_digitized(path: &Path) -> Option<String> {
-        Self::read_tag(path, "OffsetTimeDigitized")
+    pub fn offset_time_digitized(&self) -> Option<String> {
+        self.read_tag("OffsetTimeDigitized")
     }
 
-    pub fn set_offset_time_digitized(path: &Path, offset_time_digitized: &str) -> Result<(), ExifToolError> {
-        Self::write_tag(path, "OffsetTimeDigitized", offset_time_digitized)
+    pub fn set_offset_time_digitized(&self, offset_time_digitized: &str) -> Result<(), ExifToolError> {
+        self.write_tag("OffsetTimeDigitized", offset_time_digitized)
     }
 
     /// Sets the following tag values:
@@ -157,48 +161,48 @@ impl ExifService {
     /// - OffsetTimeDigitized
     ///
     /// Format: "HH:MM" (e.g., "02:00", "-06:00")
-    pub fn set_all_offset_times(path: &Path, offset: &str) -> Result<(), ExifToolError> {
-        Self::write_tag(path, "OffsetTime", offset)?;
-        Self::write_tag(path, "OffsetTimeOriginal", offset)?;
-        Self::write_tag(path, "OffsetTimeDigitized", offset)?;
+    pub fn set_all_offset_times(&self, offset: &str) -> Result<(), ExifToolError> {
+        self.write_tag("OffsetTime", offset)?;
+        self.write_tag("OffsetTimeOriginal", offset)?;
+        self.write_tag("OffsetTimeDigitized", offset)?;
         Ok(())
     }
 
     /// Sets the ProcessingSoftware tag
-    pub fn set_software(path: &Path) -> Result<(), ExifToolError> {
+    pub fn set_software(&self) -> Result<(), ExifToolError> {
         let software = format!("Metamorphosis {}", env!("CARGO_PKG_VERSION"));
-        // Self::write_tag(path, "Software", software.as_str())?;
-        Self::write_tag(path, "ProcessingSoftware", software.as_str())?;
+        // self.write_tag("Software", software.as_str())?;
+        self.write_tag("ProcessingSoftware", software.as_str())?;
         Ok(())
     }
 
     /// Returns the ImageDescription tag value
-    pub fn image_description(path: &Path) -> Option<String> {
-        Self::read_tag(path, "ImageDescription")
+    pub fn image_description(&self) -> Option<String> {
+        self.read_tag("ImageDescription")
     }
 
     /// Sets the ImageDescription tag
-    pub fn set_image_description(path: &Path, description: &str) -> Result<(), ExifToolError> {
-        Self::write_tag(path, "ImageDescription", description)
+    pub fn set_image_description(&self, description: &str) -> Result<(), ExifToolError> {
+        self.write_tag("ImageDescription", description)
     }
 
     /// Returns the Make tag value
-    pub fn make(path: &Path) -> Option<String> {
-        Self::read_tag(path, "Make")
+    pub fn make(&self) -> Option<String> {
+        self.read_tag("Make")
     }
 
     /// Sets the Make tag value
-    pub fn set_make(path: &Path, make: &str) -> Result<(), ExifToolError> {
-        Self::write_tag(path, "Make", make)
+    pub fn set_make(&self, make: &str) -> Result<(), ExifToolError> {
+        self.write_tag("Make", make)
     }
 
     /// Returns the Model tag value
-    pub fn model(path: &Path) -> Option<String> {
-        Self::read_tag(path, "Model")
+    pub fn model(&self) -> Option<String> {
+        self.read_tag("Model")
     }
 
     /// Sets the Model tag value
-    pub fn set_model(path: &Path, model: &str) -> Result<(), ExifToolError> {
-        Self::write_tag(path, "Model", model)
+    pub fn set_model(&self, model: &str) -> Result<(), ExifToolError> {
+        self.write_tag("Model", model)
     }
 }

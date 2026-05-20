@@ -1,5 +1,3 @@
-use std::path::Path;
-
 use exiftool::ExifToolError;
 use gtk::{glib, prelude::*, subclass::prelude::*};
 
@@ -164,18 +162,18 @@ impl ImageAdvancedTab {
     }
 
     pub fn load_from_file(&self, path: String) {
-        let path = Path::new(path.as_str());
-        let modify_date = ExifService::modify_date(path).unwrap_or_default();
-        let date_time_original = ExifService::date_time_original(path).unwrap_or_default();
-        let create_date = ExifService::create_date(path).unwrap_or_default();
-        let gps_date_stamp = ExifService::gps_date_stamp(path).unwrap_or_default();
-        let gps_time_stamp = ExifService::gps_time_stamp(path).unwrap_or_default();
-        let sub_sec_time = ExifService::sub_sec_time(path).unwrap_or_default();
-        let sub_sec_time_original = ExifService::sub_sec_time_original(path).unwrap_or_default();
-        let sub_sec_time_digitized = ExifService::sub_sec_time_digitized(path).unwrap_or_default();
-        let offset_time = ExifService::offset_time(path).unwrap_or_default();
-        let offset_time_original = ExifService::offset_time_original(path).unwrap_or_default();
-        let offset_time_digitized = ExifService::offset_time_digitized(path).unwrap_or_default();
+        let exif = ExifService::new(&path);
+        let modify_date = exif.modify_date().unwrap_or_default();
+        let date_time_original = exif.date_time_original().unwrap_or_default();
+        let create_date = exif.create_date().unwrap_or_default();
+        let gps_date_stamp = exif.gps_date_stamp().unwrap_or_default();
+        let gps_time_stamp = exif.gps_time_stamp().unwrap_or_default();
+        let sub_sec_time = exif.sub_sec_time().unwrap_or_default();
+        let sub_sec_time_original = exif.sub_sec_time_original().unwrap_or_default();
+        let sub_sec_time_digitized = exif.sub_sec_time_digitized().unwrap_or_default();
+        let offset_time = exif.offset_time().unwrap_or_default();
+        let offset_time_original = exif.offset_time_original().unwrap_or_default();
+        let offset_time_digitized = exif.offset_time_digitized().unwrap_or_default();
 
         self.set_modify_date(&modify_date);
         self.set_date_time_original(&date_time_original);
@@ -191,7 +189,7 @@ impl ImageAdvancedTab {
     }
 
     pub fn apply_changes(&self, path: &String) -> Result<(), Vec<ExifToolError>> {
-        let path = Path::new(path);
+        let exif = ExifService::new(&path);
         let modify_date = self.modify_date();
         let date_time_original = self.date_time_original();
         let create_date = self.create_date();
@@ -206,51 +204,51 @@ impl ImageAdvancedTab {
 
         let mut errors = Vec::new();
 
-        if let Err(e) = ExifService::set_modify_date(path, modify_date.as_str()) {
+        if let Err(e) = exif.set_modify_date(modify_date.as_str()) {
             errors.push(e);
         }
 
-        if let Err(e) = ExifService::set_date_time_original(path, date_time_original.as_str()) {
+        if let Err(e) = exif.set_date_time_original(date_time_original.as_str()) {
             errors.push(e);
         }
 
-        if let Err(e) = ExifService::set_create_date(path, create_date.as_str()) {
+        if let Err(e) = exif.set_create_date(create_date.as_str()) {
             errors.push(e);
         }
 
-        if let Err(e) = ExifService::set_gps_date_stamp(path, gps_date_stamp.as_str()) {
+        if let Err(e) = exif.set_gps_date_stamp(gps_date_stamp.as_str()) {
             errors.push(e);
         }
 
-        if let Err(e) = ExifService::set_gps_time_stamp(path, gps_time_stamp.as_str()) {
+        if let Err(e) = exif.set_gps_time_stamp(gps_time_stamp.as_str()) {
             errors.push(e);
         }
 
-        if let Err(e) = ExifService::set_sub_sec_time(path, sub_sec_time.as_str()) {
+        if let Err(e) = exif.set_sub_sec_time(sub_sec_time.as_str()) {
             errors.push(e);
         }
 
-        if let Err(e) = ExifService::set_sub_sec_time_original(path, sub_sec_time_original.as_str()) {
+        if let Err(e) = exif.set_sub_sec_time_original(sub_sec_time_original.as_str()) {
             errors.push(e);
         }
 
-        if let Err(e) = ExifService::set_sub_sec_time_digitized(path, sub_sec_time_digitized.as_str()) {           
+        if let Err(e) = exif.set_sub_sec_time_digitized(sub_sec_time_digitized.as_str()) {           
             errors.push(e);
         }
 
-        if let Err(e) = ExifService::set_offset_time(path, offset_time.as_str()) {
+        if let Err(e) = exif.set_offset_time(offset_time.as_str()) {
             errors.push(e);
         }
 
-        if let Err(e) = ExifService::set_offset_time_original(path, offset_time_original.as_str()) {
+        if let Err(e) = exif.set_offset_time_original(offset_time_original.as_str()) {
             errors.push(e);
         }
 
-        if let Err(e) = ExifService::set_offset_time_digitized(path, offset_time_digitized.as_str()) {
+        if let Err(e) = exif.set_offset_time_digitized(offset_time_digitized.as_str()) {
             errors.push(e);
         }
 
-        if let Err(e) = ExifService::set_software(path) {
+        if let Err(e) = exif.set_software() {
             errors.push(e);
         }
         
