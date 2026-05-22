@@ -302,6 +302,15 @@ impl AppWindow {
         ));
 
         let apply_view = imp.apply_view.clone();
+
+        apply_view.clone().set_on_remove(clone!(
+            #[weak(rename_to=win)]
+            self,
+            move |_| {
+                win.switch_to_stack_welcome();
+            }
+        ));
+        
         // TODO: check why going though here takes much time
         apply_view.clone().set_on_apply(clone!(
             #[weak(rename_to=win)]

@@ -1,9 +1,6 @@
 use exiftool::ExifToolError;
 use glib::{object::ObjectExt, subclass::types::ObjectSubclassIsExt};
-use gtk::{
-    glib,
-    prelude::{ButtonExt},
-};
+use gtk::{glib, prelude::ButtonExt};
 
 use crate::{components::image_thumbnail::ImageThumbnail, input_file::InputFile};
 
@@ -97,14 +94,20 @@ impl Apply {
         imp.image_thumbnail.set_property("content", caption);
         imp.image_thumbnail.set_property("width", w as u32);
         imp.image_thumbnail.set_property("height", h as u32);
+    }
 
-        // imp.image_thumbnail.connect_remove_clicked(clone!(
-        //     #[weak(rename_to=this)]
-        //     self,
-        //     move |_| {
-        //         // Switch to stack welcome here
-        //     }
-        // ));
+    /// Sets a callback for the remove action.
+    /// 
+    /// The user can perform it on the trash icon
+    /// placed on the top right of the image.
+    pub fn set_on_remove<F>(&self, on_remove: F)
+    where
+        F: Fn(&Apply) + 'static,
+    {
+        let view = self.clone();
+        self.imp()
+            .image_thumbnail
+            .connect_remove_clicked(move |_| on_remove(&view));
     }
 
     pub fn set_on_apply<F>(&self, on_apply: F)
@@ -133,7 +136,7 @@ impl Apply {
             return match name.as_str() {
                 "general" => self.imp().image_general_tab.apply_changes(&path),
                 "advanced" => self.imp().image_advanced_tab.apply_changes(&path),
-                _ => Ok(()) // TODO: return an error here
+                _ => Ok(()), // TODO: return an error here
             };
         }
 
