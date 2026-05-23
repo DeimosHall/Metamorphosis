@@ -3,6 +3,7 @@ use gtk::{glib, prelude::*, subclass::prelude::*};
 use derivative::Derivative;
 use exiftool::ExifToolError;
 use gtk_macros::CompositeTemplate;
+use adw::subclass::bin::BinImpl;
 
 use crate::services::exif::ExifService;
 
@@ -29,7 +30,7 @@ mod imp {
     impl ObjectSubclass for ImageGeneralTab {
         const NAME: &'static str = "ImageGeneralTab";
         type Type = super::ImageGeneralTab;
-        type ParentType = gtk::Box;
+        type ParentType = adw::Bin;
 
         fn class_init(klass: &mut Self::Class) {
             klass.bind_template();
@@ -42,12 +43,12 @@ mod imp {
 
     impl ObjectImpl for ImageGeneralTab {}
     impl WidgetImpl for ImageGeneralTab {}
-    impl BoxImpl for ImageGeneralTab {}
+    impl BinImpl for ImageGeneralTab {}
 }
 
 glib::wrapper! {
     pub struct ImageGeneralTab(ObjectSubclass<imp::ImageGeneralTab>)
-    @extends gtk::Widget, gtk::Box,
+    @extends gtk::Widget, adw::Bin,
     @implements gtk::Accessible, gtk::Buildable, gtk::ConstraintTarget;
 }
 

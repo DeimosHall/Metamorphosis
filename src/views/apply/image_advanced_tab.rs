@@ -3,6 +3,7 @@ use gtk::{glib, prelude::*, subclass::prelude::*};
 
 use derivative::Derivative;
 use gtk_macros::CompositeTemplate;
+use adw::subclass::bin::BinImpl;
 
 use crate::services::exif::ExifService;
 
@@ -13,6 +14,8 @@ mod imp {
     #[derive(Default)]
     #[template(resource = "/dev/deimoshall/Metamorphosis/ui/views/apply/image_advanced_tab.ui")]
     pub struct ImageAdvancedTab {
+        #[template_child]
+        pub container: TemplateChild<gtk::Box>,
         // Dates
         #[template_child]
         pub modify_date_entry: TemplateChild<gtk::Entry>,
@@ -46,7 +49,7 @@ mod imp {
     impl ObjectSubclass for ImageAdvancedTab {
         const NAME: &'static str = "ImageAdvancedTab";
         type Type = super::ImageAdvancedTab;
-        type ParentType = gtk::Box;
+        type ParentType = adw::Bin;
 
         fn class_init(klass: &mut Self::Class) {
             klass.bind_template();
@@ -59,18 +62,26 @@ mod imp {
 
     impl ObjectImpl for ImageAdvancedTab {}
     impl WidgetImpl for ImageAdvancedTab {}
-    impl BoxImpl for ImageAdvancedTab {}
+    impl BinImpl for ImageAdvancedTab {}
 }
 
 glib::wrapper! {
     pub struct ImageAdvancedTab(ObjectSubclass<imp::ImageAdvancedTab>)
-    @extends gtk::Widget, gtk::Box,
+    @extends gtk::Widget, adw::Bin,
     @implements gtk::Accessible, gtk::Buildable, gtk::ConstraintTarget;
 }
 
 impl ImageAdvancedTab {
     pub fn new() -> Self {
         glib::Object::new()
+    }
+
+    pub fn show(&self) {
+        self.imp().container.set_visible(true);
+    }
+
+    pub fn hide(&self) {
+        self.imp().container.set_visible(false);
     }
 
     pub fn modify_date(&self) -> String {

@@ -75,6 +75,36 @@ impl Apply {
         self.imp().image_stack.clone()
     }
 
+    /// Helper method to show or hide the advanced tab container.
+    ///
+    /// Both tabs have different heights because of the different
+    /// amount of fields. This makes the general tab have a height
+    /// equivalent to the advanced one. This method addresses this
+    /// issue.
+    ///
+    /// This doesn't work without the inner container.
+    pub fn setup_tab_switch_listener(&self) {
+        let view = self.clone();
+        // Hide advanced tab at startup.
+        // Comment it to see the height issue at least once.
+        view.imp().image_advanced_tab.hide();
+
+        self.stack()
+            .connect_visible_child_name_notify(move |stack| {
+                if let Some(tab) = stack.visible_child_name() {
+                    match tab.as_str() {
+                        "general" => view.imp().image_advanced_tab.hide(),
+                        "advanced" => view.imp().image_advanced_tab.show(),
+                        _ => {}
+                    }
+                }
+            });
+    }
+
+    pub fn current_tab(&self) -> Option<glib::GString> {
+        Some(self.stack().visible_child_name()?)
+    }
+
     pub fn update_thumbnail(&self, file: InputFile) {
         let imp = self.imp();
         let file_type = file.kind();
@@ -97,7 +127,7 @@ impl Apply {
     }
 
     /// Sets a callback for the remove action.
-    /// 
+    ///
     /// The user can perform it on the trash icon
     /// placed on the top right of the image.
     pub fn set_on_remove<F>(&self, on_remove: F)
@@ -132,8 +162,8 @@ impl Apply {
 
     /// Take the values from the UI fields and apply them to a file
     pub fn apply_changes(&self, path: String) -> Result<(), Vec<ExifToolError>> {
-        if let Some(name) = self.stack().visible_child_name() {
-            return match name.as_str() {
+        if let Some(current_tab) = self.current_tab() {
+            return match current_tab.as_str() {
                 "general" => self.imp().image_general_tab.apply_changes(&path),
                 "advanced" => self.imp().image_advanced_tab.apply_changes(&path),
                 _ => Ok(()), // TODO: return an error here

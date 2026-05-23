@@ -267,6 +267,8 @@ impl AppWindow {
 
         imp.view_switcher.set_stack(Some(&imp.apply_view.stack()));
         
+        imp.apply_view.setup_tab_switch_listener();
+
         imp.open_button.connect_clicked(clone!(
             #[weak(rename_to=this)]
             self,
