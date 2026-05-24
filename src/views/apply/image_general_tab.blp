@@ -1,0 +1,68 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $ImageGeneralTab: Adw.Bin {
+  Gtk.Box container {
+    orientation: vertical;
+    spacing: 24;
+  
+    Adw.PreferencesGroup {
+      title: _("Date and Time");
+    
+      Adw.ActionRow {
+        title: _("Creation Date");
+  
+        Entry creation_date_entry {
+          placeholder-text: _("YYYY:MM:DD HH:MM:SS");
+          width-chars: 20;
+          valign: center;
+        }
+      }
+  
+      Adw.ActionRow {
+        title: _("Offset Time");
+  
+        Entry offset_time_entry {
+          placeholder-text: _("HH:MM");
+          width-chars: 20;
+          valign: center;
+        }
+      }
+    }
+  
+    Adw.PreferencesGroup {
+      title: _("Device");
+      
+      Adw.ActionRow {
+        title: _("Manufacturer");
+  
+        Entry manufacturer_entry {
+          width-chars: 20;
+          valign: center;
+        }
+      }
+  
+      Adw.ActionRow {
+        title: _("Model");
+  
+        Entry model_entry {
+          width-chars: 20;
+          valign: center;
+        }
+      }
+    }
+  
+    Adw.PreferencesGroup {
+      title: _("Other");
+    
+      Adw.ActionRow {
+        title: _("Description");
+  
+        Entry image_description_entry {
+          width-chars: 20;
+          valign: center;
+        }
+      }
+    }
+  }
+}

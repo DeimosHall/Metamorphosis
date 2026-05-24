@@ -1,0 +1,53 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $ApplyView: Adw.Bin {
+  child: Adw.ToolbarView {
+    content: ScrolledWindow {
+      Adw.Clamp {
+        Gtk.Box {
+          orientation: vertical;
+          spacing: 24;
+          margin-top: 24;
+          margin-bottom: 24;
+
+          // Image inside preferences group to keep aspect ratio
+          Adw.PreferencesGroup {
+            halign: center;
+            $ImageThumbnail image_thumbnail {}
+          }
+          
+          Adw.ViewStack image_stack {
+            Adw.ViewStackPage {
+              name: "general";
+              title: _("General");
+              icon-name: "build-alt-symbolic";
+              child: $ImageGeneralTab image_general_tab {};
+            }
+      
+            Adw.ViewStackPage {
+              name: "advanced";
+              title: _("Advanced");
+              icon-name: "build-configure-symbolic";
+              child: $ImageAdvancedTab image_advanced_tab {};
+            }
+          }
+        }
+      }
+    };
+    [bottom]
+    Gtk.ActionBar {
+      [center]
+      Button apply_button {
+        label: _("Apply");
+        valign: center;
+  
+        styles [
+          "suggested-action",
+          "pill",
+          "long",
+        ]
+      }
+    }
+  };
+}

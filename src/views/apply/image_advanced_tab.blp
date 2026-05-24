@@ -1,0 +1,145 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $ImageAdvancedTab: Adw.Bin {
+  // A container is strictly needed here because I need to manipulate
+  // the visible state in order to have a consistent height on the main
+  // window content. Check setup_tab_switch_listener for more context.
+  Gtk.Box container {
+    orientation: vertical;
+    spacing: 24;
+  
+    Adw.PreferencesGroup {
+      title: _("Dates");
+  
+      Adw.ActionRow {
+        title: _("Modify Date");
+        subtitle: _("File modification time");
+  
+        Entry modify_date_entry {
+          placeholder-text: _("YYYY:MM:DD HH:MM:SS");
+          width-chars: 20;
+          valign: center;
+        }
+      }
+      
+      Adw.ActionRow {
+        title: _("Date Time Original");
+        subtitle: _("Shutter click time");
+  
+        Entry date_time_original_entry {
+          placeholder-text: _("YYYY:MM:DD HH:MM:SS");
+          width-chars: 20;
+          valign: center;
+        }
+      }
+  
+      Adw.ActionRow {
+        title: _("Create Date");
+        subtitle: _("Digitization time");
+  
+        Entry create_date_entry {
+          placeholder-text: _("YYYY:MM:DD HH:MM:SS");
+          width-chars: 20;
+          valign: center;
+        }
+      }
+  
+      Adw.ActionRow {
+        title: _("GPS Date Stamp");
+        subtitle: _("Date from GPS");
+  
+        Entry gps_date_stamp_entry {
+          placeholder-text: _("YYYY:MM:DD");
+          width-chars: 20;
+          valign: center;
+        }
+      }
+  
+      Adw.ActionRow {
+        title: _("GPS Time Stamp");
+        subtitle: _("Time from GPS");
+  
+        Entry gps_time_stamp_entry {
+          placeholder-text: _("HH:MM:SS");
+          width-chars: 20;
+          valign: center;
+        }
+      }
+    }
+  
+    Adw.PreferencesGroup {
+      title: _("Fractional seconds");
+      
+      Adw.ActionRow {
+        title: _("Sub Sec Time");
+        subtitle: _("Fractional seconds for Modify Date");
+  
+        Entry sub_sec_time_entry {
+          placeholder-text: _("");
+          width-chars: 20;
+          valign: center;
+        }
+      }
+      
+      Adw.ActionRow {
+        title: _("Sub Sec Time Original");
+        subtitle: _("Fractional seconds for Date Time Original");
+  
+        Entry sub_sec_time_original_entry {
+          placeholder-text: _("");
+          width-chars: 20;
+          valign: center;
+        }
+      }
+  
+      Adw.ActionRow {
+        title: _("Sub Sec Time Digitized");
+        subtitle: _("Fractional seconds for Create Date");
+  
+        Entry sub_sec_time_digitized_entry {
+          placeholder-text: _("");
+          width-chars: 20;
+          valign: center;
+        }
+      }
+    }
+  
+    Adw.PreferencesGroup {
+      title: _("Timezone offsets");
+  
+      Adw.ActionRow {
+        title: _("Offset Time");
+        subtitle: _("Timezone for Modify Date");
+  
+        Entry offset_time_entry {
+          placeholder-text: _("HH:MM");
+          width-chars: 20;
+          valign: center;
+        }
+      }
+      
+      Adw.ActionRow {
+        title: _("Offset Time Original");
+        subtitle: _("Timezone for Date Time Original");
+  
+        Entry offset_time_original_entry {
+          placeholder-text: _("HH:MM");
+          width-chars: 20;
+          valign: center;
+        }
+      }
+      
+      Adw.ActionRow {
+        title: _("Offset Time Digitized");
+        subtitle: _("Timezone for Create Date");
+  
+        Entry offset_time_digitized_entry {
+          placeholder-text: _("HH:MM");
+          width-chars: 20;
+          valign: center;
+        }
+      }
+    }
+  }
+}

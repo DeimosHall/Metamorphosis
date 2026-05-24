@@ -62,12 +62,22 @@
         <screenshot type="default">
             <image>
                 https://raw.githubusercontent.com/DeimosHall/Metamorphosis/dev/data/resources/screenshots/0.png</image>
-            <caption>Reading metadata from an image (light mode)</caption>
+            <caption>Drag and drop window</caption>
         </screenshot>
         <screenshot>
             <image>
                 https://raw.githubusercontent.com/DeimosHall/Metamorphosis/dev/data/resources/screenshots/1.png</image>
-            <caption>Reading metadata from an image (dark mode)</caption>
+            <caption>General tab</caption>
+        </screenshot>
+        <screenshot>
+            <image>
+                https://raw.githubusercontent.com/DeimosHall/Metamorphosis/dev/data/resources/screenshots/2.png</image>
+            <caption>Advanced tab</caption>
+        </screenshot>
+        <screenshot>
+            <image>
+                https://raw.githubusercontent.com/DeimosHall/Metamorphosis/dev/data/resources/screenshots/3.png</image>
+            <caption>Advanced tab with more fields</caption>
         </screenshot>
     </screenshots>
 
@@ -87,6 +97,17 @@
     <content_rating type="oars-1.1" />
 
     <releases>
+        <release version="0.4.0" date="2026-05-23">
+            <description>
+                <p>Add new General and Advanced tabs</p>
+                <ul>
+                    <li>General tab for most common tags</li>
+                    <li>Advanced tab for raw tags and more granular editing</li>
+                    <li>Add more dates, fractional seconds, and timezone offsets fields</li>
+                    <li>Fix remove button stopped working</li>
+                </ul>
+            </description>
+        </release>
         <release version="0.3.0" date="2026-05-09">
             <description>
                 <p>Add manufacturer and model fields</p>

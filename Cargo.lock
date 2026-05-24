@@ -1009,7 +1009,7 @@ dependencies = [
 
 [[package]]
 name = "metamorphosis"
-version = "0.3.0"
+version = "0.4.0"
 dependencies = [
  "ashpd",
  "async-channel",
@@ -1028,6 +1028,7 @@ dependencies = [
  "pretty_env_logger",
  "rand",
  "regex",
+ "serde_json",
  "shared_child",
  "tempfile",
  "tokio",

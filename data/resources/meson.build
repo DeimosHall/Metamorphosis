@@ -1,11 +1,34 @@
-blueprints = custom_target('blueprints',
-  input: files(
-    'blueprints/window.blp',
-    'blueprints/image-thumbnail.blp',
-    'blueprints/apply_basic.blp',
-  ),
-  output: '.',
-  command: [find_program('blueprint-compiler'), 'batch-compile', '@OUTPUT@', '@CURRENT_SOURCE_DIR@', '@INPUT@'],
+# Compile Blueprint resources from src/
+src_dir = meson.project_source_root() / 'src'
+
+blp_files = []
+ui_files = []
+ui_files_xml = ''
+
+foreach file : fs.read(src_dir / 'ui-blueprint-resources.in').splitlines()
+    file = file.strip()
+    if file.startswith('#') or file == ''
+        continue
+    endif
+
+    blp_files += src_dir / file
+    ui_alias = file.replace('.blp', '.ui')
+    ui_file = ui_alias.replace('/', '-')
+    ui_files += ui_file
+    ui_files_xml += '\n    <file compressed="true" preprocess="xml-stripblanks" alias="' + ui_alias + '">' + ui_file + '</file>'
+endforeach
+
+blueprints = custom_target(
+    'blueprints',
+    input: blp_files,
+    output: ui_files,
+    command: [
+        meson.project_source_root() / 'build-aux' / 'compile-blueprints.sh',
+        blueprint_compiler.full_path(),
+        '@OUTDIR@',
+        meson.project_source_root() / 'src',
+        '@INPUT@',
+    ],
 )
 
 scalable_dir = 'icons' / 'hicolor' / '512x512' / 'apps'
@@ -31,5 +54,5 @@ resources = gnome.compile_resources(
     source_dir: meson.current_build_dir(),
     install: true,
     install_dir: pkgdatadir,
-    dependencies: [blueprints, appdata_file],
+    dependencies: [appdata_file, blueprints],
 )

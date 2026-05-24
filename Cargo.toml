@@ -1,10 +1,10 @@
 [package]
 name = "metamorphosis"
-version = "0.3.0"
+version = "0.4.0"
 edition = "2024"
-rust-version = "1.88"
-
+rust-version = "1.93"
 authors = ["Deimos Hall <deimoshall.dev@proton.me>"]
+license = "GPL-3.0"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
@@ -31,3 +31,4 @@ fdlimit = "0.3"
 derivative = "2.2"
 async-channel = "2.5"
 exiftool = "0.3.1"
+serde_json = "1.0.149"

@@ -1,5 +1,4 @@
 use std::collections::HashSet;
-use std::path::Path;
 use std::sync::atomic::AtomicUsize;
 
 use crate::components::about_window::MetamorphosisAbout;
@@ -9,7 +8,7 @@ use crate::file_chooser::FileChooser;
 use crate::input_file::InputFile;
 use crate::magick::{JobFile, count_frames};
 use crate::runtime;
-use crate::services::exif_service::ExifService;
+use crate::services::exif::ExifService;
 use adw::prelude::*;
 use futures::future::join_all;
 use gettextrs::gettext;
@@ -50,7 +49,7 @@ mod imp {
         sync::atomic::AtomicBool,
     };
 
-    use crate::{config::PKGDATADIR, views::apply_basic::ApplyBasic};
+    use crate::{config::PKGDATADIR, views::apply::Apply};
 
     use super::*;
 
@@ -60,7 +59,7 @@ mod imp {
 
     #[derive(Debug, CompositeTemplate, Derivative)]
     #[derivative(Default)]
-    #[template(resource = "/dev/deimoshall/Metamorphosis/blueprints/window.ui")]
+    #[template(resource = "/dev/deimoshall/Metamorphosis/ui/window.ui")]
     pub struct AppWindow {
         #[template_child]
         pub toast_overlay: TemplateChild<adw::ToastOverlay>,
@@ -79,7 +78,9 @@ mod imp {
         #[template_child]
         pub progress_bar: TemplateChild<gtk::ProgressBar>,
         #[template_child]
-        pub apply_basic_view: TemplateChild<ApplyBasic>,
+        pub apply_view: TemplateChild<Apply>,
+        #[template_child]
+        pub view_switcher: TemplateChild<adw::ViewSwitcher>,
 
         #[template_child]
         pub navigation: TemplateChild<adw::NavigationView>,
@@ -263,6 +264,11 @@ impl AppWindow {
     fn setup_callbacks(&self) {
         //load imp
         let imp = self.imp();
+
+        imp.view_switcher.set_stack(Some(&imp.apply_view.stack()));
+        
+        imp.apply_view.setup_tab_switch_listener();
+
         imp.open_button.connect_clicked(clone!(
             #[weak(rename_to=this)]
             self,
@@ -270,6 +276,7 @@ impl AppWindow {
                 this.add_dialog();
             }
         ));
+        
         imp.add_button.connect_clicked(clone!(
             #[weak(rename_to=this)]
             self,
@@ -296,12 +303,21 @@ impl AppWindow {
             }
         ));
 
-        let apply_basic = imp.apply_basic_view.clone();
-        // TODO: check why going though here takes much time
-        apply_basic.clone().set_on_apply(clone!(
+        let apply_view = imp.apply_view.clone();
+
+        apply_view.clone().set_on_remove(clone!(
             #[weak(rename_to=win)]
             self,
-            move |_view, _date, _offset, _manufacturer, _model, _description| {
+            move |_| {
+                win.switch_to_stack_welcome();
+            }
+        ));
+        
+        // TODO: check why going though here takes much time
+        apply_view.clone().set_on_apply(clone!(
+            #[weak(rename_to=win)]
+            self,
+            move |_| {
                 let path = win.files().first().unwrap().path();
 
                 // Disable loading screen by now
@@ -315,21 +331,22 @@ impl AppWindow {
                     #[weak(rename_to=win)]
                     win,
                     #[strong]
-                    apply_basic,
+                    apply_view,
                     #[strong]
                     path,
                     async move {
-                        let result = apply_basic.apply_changes(path);
+                        let result = apply_view.apply_changes(path);
 
                         match result {
                             Ok(()) => {
                                 if false {
                                     win.set_convert_progress(1, 1);
-                                    win.switch_to_stack_apply_basic();
+                                    win.switch_to_stack_apply();
                                 }
                                 win.show_toast(&gettext("Changes applied"));
                             }
                             Err(errors) => {
+                                // TODO: use the right dialog
                                 for error in errors {
                                     win.show_toast(&format!("{}", error));
                                 }
@@ -549,8 +566,8 @@ impl AppWindow {
             self,
             async move {
                 for path in paths {
-                    println!("File: {}", path);
-                    ExifService::read_all(path);
+                    let exif = ExifService::new(&path);
+                    exif.read_all();
                 }
             }
         ));
@@ -602,17 +619,17 @@ impl AppWindow {
         }
 
         let file = self.files().first().unwrap().clone();
-        self.imp().apply_basic_view.update_thumbnail(file);
+        self.imp().apply_view.update_thumbnail(file);
 
         self.switch_back_from_loading();
         let path = self.files().first().unwrap().path();
         self.imp()
-            .apply_basic_view
-            .load_from_file(Path::new(path.as_str()));
+            .apply_view
+            .load_from_file(path);
 
         if matches!(self.imp().navigation.visible_page().and_then(|x| x.tag()), Some(x) if x == "main")
         {
-            self.switch_to_stack_apply_basic();
+            self.switch_to_stack_apply();
         }
     }
 
@@ -709,7 +726,7 @@ pub trait FileOperations {
 }
 
 trait StackNavigation {
-    fn switch_to_stack_apply_basic(&self);
+    fn switch_to_stack_apply(&self);
     fn switch_to_stack_applying(&self);
     fn switch_to_stack_welcome(&self);
     fn switch_to_stack_invalid_image(&self);
@@ -732,18 +749,21 @@ impl WindowUI for AppWindow {
 }
 
 impl StackNavigation for AppWindow {
-    fn switch_to_stack_apply_basic(&self) {
+    fn switch_to_stack_apply(&self) {
         self.imp().add_button.set_visible(true);
-        self.imp().stack.set_visible_child_name("stack_apply_basic");
+        self.imp().view_switcher.set_visible(true);
+        self.imp().stack.set_visible_child_name("stack_apply");
     }
 
     fn switch_to_stack_applying(&self) {
         self.imp().add_button.set_visible(false);
+        self.imp().view_switcher.set_visible(false);
         self.imp().stack.set_visible_child_name("stack_applying");
     }
 
     fn switch_to_stack_welcome(&self) {
         self.imp().add_button.set_visible(false);
+        self.imp().view_switcher.set_visible(false);
         self.imp()
             .stack
             .set_visible_child_name("stack_welcome_page");
@@ -751,6 +771,7 @@ impl StackNavigation for AppWindow {
 
     fn switch_to_stack_invalid_image(&self) {
         self.imp().add_button.set_visible(false);
+        self.imp().view_switcher.set_visible(false);
         self.imp()
             .stack
             .set_visible_child_name("stack_invalid_image");
@@ -758,6 +779,7 @@ impl StackNavigation for AppWindow {
 
     fn switch_to_stack_loading(&self) {
         self.imp().add_button.set_visible(false);
+        self.imp().view_switcher.set_visible(false);
         self.imp().stack.set_visible_child_name("stack_loading");
         self.imp().loading_spinner.start();
     }
