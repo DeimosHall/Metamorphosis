@@ -22,7 +22,7 @@ Update app screenshots if required.
 ## Exiftool
 
 1. Verify the latest `exiftool` version here: [https://exiftool.org/](https://exiftool.org/)
-2. Update the version number in the url field on the [dev.deimoshall.Metamorphosis.js](dev.deimoshall.Metamorphosis) file
+2. Update the version number in the url field on the [manifest](dev.deimoshall.Metamorphosis.json) file.
 3. Update the sha256 field, check the corresponding the the `exiftool` version here: [https://exiftool.org/checksums.txt](https://exiftool.org/checksums.txt)
 
 ## GitHub release
