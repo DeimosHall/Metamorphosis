@@ -9,15 +9,21 @@ The app version must be updated in two files:
 1. [Cargo.toml](Cargo.toml)
 2. [meson.build](meson.build)
 
-## Exiftool
+## Release notes
 
-1. Verify the latest `exiftool` version here: [https://exiftool.org/](https://exiftool.org/)
-2. Update the version number in the url field on the [dev.deimoshall.Metamorphosis.js](dev.deimoshall.Metamorphosis) file
-3. Updte the sha256 field, check the corresponding the the `exiftool` version here: [https://exiftool.org/checksums.txt](https://exiftool.org/checksums.txt)
+Add release notes on the [meta info](dev.deimoshall.Metamorphosis.metainfo.xml.in.in) file.
 
 ## Screenshots
 
 Update app screenshots if required.
+
+> New screenshots or modification of existing ones must be added/edited in the [meta info](dev.deimoshall.Metamorphosis.metainfo.xml.in.in) file.
+
+## Exiftool
+
+1. Verify the latest `exiftool` version here: [https://exiftool.org/](https://exiftool.org/)
+2. Update the version number in the url field on the [dev.deimoshall.Metamorphosis.js](dev.deimoshall.Metamorphosis) file
+3. Update the sha256 field, check the corresponding the the `exiftool` version here: [https://exiftool.org/checksums.txt](https://exiftool.org/checksums.txt)
 
 ## GitHub release
 
