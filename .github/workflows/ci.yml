@@ -1,0 +1,72 @@
+name: CI
+
+on:
+  pull_request:
+    branches: [main]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    container:
+      image: fedora:latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions-rust-lang/setup-rust-toolchain@v1
+        with:
+          components: rustfmt, clippy
+
+      - name: Install system dependencies
+        run: >
+          dnf clean all && dnf install -y glib2-devel gtk4-devel
+          libadwaita-devel gcc pkgconf-pkg-config blueprint-compiler gettext
+          meson desktop-file-utils
+
+      - name: Meson setup
+        run: meson setup builddir
+
+      - name: Rust format
+        run: cargo fmt --all --check
+
+      - name: Rust lint
+        run: cargo clippy --all-features -- -D warnings
+
+      - name: Unused dependencies
+        uses: bnjbvr/cargo-machete@main
+
+      - name: Rust build
+        run: cargo check
+
+  build-flatpak:
+    runs-on: ubuntu-latest
+    needs: lint
+    container:
+      image: ghcr.io/flathub-infra/flatpak-github-actions:gnome-50
+      options: --privileged
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions-rust-lang/setup-rust-toolchain@v1
+
+      - name: Vendor Rust dependencies
+        run: |
+          mkdir -p .cargo
+          cargo vendor --locked vendor
+          cat > .cargo/config.toml << 'EOF'
+          [source.crates-io]
+          replace-with = "vendored-sources"
+          [source.vendored-sources]
+          directory = "vendor"
+          EOF
+
+      - name: Build App Bundle
+        uses: flatpak/flatpak-github-actions/flatpak-builder@v6
+        with:
+          manifest-path: dev.deimoshall.DecryptIt.json
+          run-tests: false
+          upload-artifact: false
