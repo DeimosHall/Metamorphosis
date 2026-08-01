@@ -68,6 +68,6 @@ jobs:
       - name: Build App Bundle
         uses: flatpak/flatpak-github-actions/flatpak-builder@v6
         with:
-          manifest-path: dev.deimoshall.DecryptIt.json
+          manifest-path: dev.deimoshall.Metamorphosis.json
           run-tests: false
           upload-artifact: false
