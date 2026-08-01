@@ -26,7 +26,7 @@ jobs:
         run: >
           dnf clean all && dnf install -y glib2-devel gtk4-devel
           libadwaita-devel pkgconf-pkg-config blueprint-compiler gettext
-          meson jq
+          meson desktop-file-utils jq
           # jq required by machete
 
       - name: Meson setup
