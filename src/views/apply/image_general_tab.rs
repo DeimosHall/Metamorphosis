@@ -1,9 +1,9 @@
 use gtk::{glib, prelude::*, subclass::prelude::*};
 
+use adw::subclass::bin::BinImpl;
 use derivative::Derivative;
 use exiftool::ExifToolError;
 use gtk_macros::CompositeTemplate;
-use adw::subclass::bin::BinImpl;
 
 use crate::services::exif::ExifService;
 
@@ -116,7 +116,7 @@ impl ImageGeneralTab {
 
     /// Take the values from the UI fields and apply them to a file
     pub fn apply_changes(&self, path: &String) -> Result<(), Vec<ExifToolError>> {
-        let exif = ExifService::new(&path);
+        let exif = ExifService::new(path);
         let date = self.date();
         let offset = self.offset();
         let manufacturer = self.manufacturer();
