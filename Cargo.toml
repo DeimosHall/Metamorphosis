@@ -22,13 +22,14 @@ pretty_env_logger = "0.5"
 itertools = "0.14"
 tokio = { version = "1.49", features = ["process", "rt", "rt-multi-thread"] }
 futures = "0.3"
-ashpd = { version = "0.12" }
-tempfile = "3.24"
 regex = "1.12"
-rand = "0.9"
 shared_child = "1.1"
 fdlimit = "0.3"
 derivative = "2.2"
 async-channel = "2.5"
 exiftool = "0.3.1"
 serde_json = "1.0.149"
+
+# These dependencies are false positives for cargo machete
+[package.metadata.cargo-machete]
+ignored = ["gettext-rs"]
