@@ -153,7 +153,7 @@ impl InputFile {
 
     pub fn dimensions(&self) -> Option<(usize, usize)> {
         let (w, h) = (self.width(), self.height());
-        w.and_then(|w| h.map(|h| (w, h)))
+        w.zip(h)
     }
 
     pub fn set_frames(&self, f: usize) {

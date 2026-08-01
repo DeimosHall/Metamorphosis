@@ -10,9 +10,9 @@ pub struct ExifService<'a> {
 }
 
 impl<'a> ExifService<'a> {
-    pub fn new(path: &'a String) -> Self {
+    pub fn new(path: &'a str) -> Self {
         Self {
-            path: Path::new(path.as_str()),
+            path: Path::new(path),
         }
     }
 

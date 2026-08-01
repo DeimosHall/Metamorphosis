@@ -99,8 +99,8 @@ impl ImageGeneralTab {
 
     // TODO: maybe these methods should go in a trait
     /// Populate UI fields using exif data from the given file
-    pub fn load_from_file(&self, path: String) {
-        let exif = ExifService::new(&path);
+    pub fn load_from_file(&self, path: &str) {
+        let exif = ExifService::new(path);
         let date = exif.create_date().unwrap_or_default();
         let offset = exif.offset_time().unwrap_or_default();
         let manufacturer = exif.make().unwrap_or_default();
@@ -115,7 +115,7 @@ impl ImageGeneralTab {
     }
 
     /// Take the values from the UI fields and apply them to a file
-    pub fn apply_changes(&self, path: &String) -> Result<(), Vec<ExifToolError>> {
+    pub fn apply_changes(&self, path: &str) -> Result<(), Vec<ExifToolError>> {
         let exif = ExifService::new(path);
         let date = self.date();
         let offset = self.offset();
