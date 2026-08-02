@@ -65,6 +65,9 @@ jobs:
           directory = "vendor"
           EOF
 
+      - name: Use default profile for Flatpak
+        run: sed -i 's/-Dprofile=development/-Dprofile=default/' dev.deimoshall.Metamorphosis.json
+
       - name: Build App Bundle
         uses: flatpak/flatpak-github-actions/flatpak-builder@v6
         with:
