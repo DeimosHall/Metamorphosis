@@ -10,8 +10,10 @@ pub struct ExifService<'a> {
 }
 
 impl<'a> ExifService<'a> {
-    pub fn new(path: &'a String) -> Self {
-        Self { path: Path::new(path.as_str()) }
+    pub fn new(path: &'a str) -> Self {
+        Self {
+            path: Path::new(path),
+        }
     }
 
     /// Returns a tag value in String format
@@ -52,10 +54,7 @@ impl<'a> ExifService<'a> {
         self.read_tag("DateTimeOriginal")
     }
 
-    pub fn set_date_time_original(
-        &self,
-        date_time_original: &str,
-    ) -> Result<(), ExifToolError> {
+    pub fn set_date_time_original(&self, date_time_original: &str) -> Result<(), ExifToolError> {
         self.write_tag("DateTimeOriginal", date_time_original)
     }
 
@@ -122,7 +121,10 @@ impl<'a> ExifService<'a> {
         self.read_tag("SubSecTimeDigitized")
     }
 
-    pub fn set_sub_sec_time_digitized(&self, sub_sec_time_digitized: &str) -> Result<(), ExifToolError> {
+    pub fn set_sub_sec_time_digitized(
+        &self,
+        sub_sec_time_digitized: &str,
+    ) -> Result<(), ExifToolError> {
         self.write_tag("SubSecTimeDigitized", sub_sec_time_digitized)
     }
 
@@ -143,7 +145,10 @@ impl<'a> ExifService<'a> {
         self.read_tag("OffsetTimeOriginal")
     }
 
-    pub fn set_offset_time_original(&self, offset_time_original: &str) -> Result<(), ExifToolError> {
+    pub fn set_offset_time_original(
+        &self,
+        offset_time_original: &str,
+    ) -> Result<(), ExifToolError> {
         self.write_tag("OffsetTimeOriginal", offset_time_original)
     }
 
@@ -151,7 +156,10 @@ impl<'a> ExifService<'a> {
         self.read_tag("OffsetTimeDigitized")
     }
 
-    pub fn set_offset_time_digitized(&self, offset_time_digitized: &str) -> Result<(), ExifToolError> {
+    pub fn set_offset_time_digitized(
+        &self,
+        offset_time_digitized: &str,
+    ) -> Result<(), ExifToolError> {
         self.write_tag("OffsetTimeDigitized", offset_time_digitized)
     }
 

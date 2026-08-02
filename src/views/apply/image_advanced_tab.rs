@@ -1,17 +1,16 @@
 use exiftool::ExifToolError;
 use gtk::{glib, prelude::*, subclass::prelude::*};
 
+use adw::subclass::bin::BinImpl;
 use derivative::Derivative;
 use gtk_macros::CompositeTemplate;
-use adw::subclass::bin::BinImpl;
 
 use crate::services::exif::ExifService;
 
 mod imp {
     use super::*;
 
-    #[derive(Debug, CompositeTemplate, Derivative)]
-    #[derive(Default)]
+    #[derive(Debug, CompositeTemplate, Derivative, Default)]
     #[template(resource = "/dev/deimoshall/Metamorphosis/ui/views/apply/image_advanced_tab.ui")]
     pub struct ImageAdvancedTab {
         #[template_child]
@@ -137,7 +136,9 @@ impl ImageAdvancedTab {
     }
 
     pub fn set_sub_sec_time_original(&self, sub_sec_time_original: &str) {
-        self.imp().sub_sec_time_original_entry.set_text(sub_sec_time_original);
+        self.imp()
+            .sub_sec_time_original_entry
+            .set_text(sub_sec_time_original);
     }
 
     pub fn sub_sec_time_digitized(&self) -> String {
@@ -145,7 +146,9 @@ impl ImageAdvancedTab {
     }
 
     pub fn set_sub_sec_time_digitized(&self, sub_sec_time_digitized: &str) {
-        self.imp().sub_sec_time_digitized_entry.set_text(sub_sec_time_digitized);
+        self.imp()
+            .sub_sec_time_digitized_entry
+            .set_text(sub_sec_time_digitized);
     }
 
     pub fn offset_time(&self) -> String {
@@ -161,7 +164,9 @@ impl ImageAdvancedTab {
     }
 
     pub fn set_offset_time_original(&self, offset_time_original: &str) {
-        self.imp().offset_time_original_entry.set_text(offset_time_original);
+        self.imp()
+            .offset_time_original_entry
+            .set_text(offset_time_original);
     }
 
     pub fn offset_time_digitized(&self) -> String {
@@ -169,11 +174,13 @@ impl ImageAdvancedTab {
     }
 
     pub fn set_offset_time_digitized(&self, offset_time_digitized: &str) {
-        self.imp().offset_time_digitized_entry.set_text(offset_time_digitized);
+        self.imp()
+            .offset_time_digitized_entry
+            .set_text(offset_time_digitized);
     }
 
-    pub fn load_from_file(&self, path: String) {
-        let exif = ExifService::new(&path);
+    pub fn load_from_file(&self, path: &str) {
+        let exif = ExifService::new(path);
         let modify_date = exif.modify_date().unwrap_or_default();
         let date_time_original = exif.date_time_original().unwrap_or_default();
         let create_date = exif.create_date().unwrap_or_default();
@@ -199,8 +206,8 @@ impl ImageAdvancedTab {
         self.set_offset_time_digitized(&offset_time_digitized);
     }
 
-    pub fn apply_changes(&self, path: &String) -> Result<(), Vec<ExifToolError>> {
-        let exif = ExifService::new(&path);
+    pub fn apply_changes(&self, path: &str) -> Result<(), Vec<ExifToolError>> {
+        let exif = ExifService::new(path);
         let modify_date = self.modify_date();
         let date_time_original = self.date_time_original();
         let create_date = self.create_date();
@@ -243,7 +250,7 @@ impl ImageAdvancedTab {
             errors.push(e);
         }
 
-        if let Err(e) = exif.set_sub_sec_time_digitized(sub_sec_time_digitized.as_str()) {           
+        if let Err(e) = exif.set_sub_sec_time_digitized(sub_sec_time_digitized.as_str()) {
             errors.push(e);
         }
 
@@ -262,7 +269,7 @@ impl ImageAdvancedTab {
         if let Err(e) = exif.set_software() {
             errors.push(e);
         }
-        
+
         if errors.is_empty() {
             Ok(())
         } else {

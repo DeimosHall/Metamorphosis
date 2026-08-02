@@ -102,7 +102,7 @@ impl Apply {
     }
 
     pub fn current_tab(&self) -> Option<glib::GString> {
-        Some(self.stack().visible_child_name()?)
+        self.stack().visible_child_name()
     }
 
     pub fn update_thumbnail(&self, file: InputFile) {
@@ -156,8 +156,8 @@ impl Apply {
     /// Populate UI fields using exif data from the given file
     pub fn load_from_file(&self, path: String) {
         // TODO: improve arg to avoid cloning
-        self.imp().image_general_tab.load_from_file(path.clone());
-        self.imp().image_advanced_tab.load_from_file(path);
+        self.imp().image_general_tab.load_from_file(&path);
+        self.imp().image_advanced_tab.load_from_file(&path);
     }
 
     /// Take the values from the UI fields and apply them to a file

@@ -266,7 +266,7 @@ impl AppWindow {
         let imp = self.imp();
 
         imp.view_switcher.set_stack(Some(&imp.apply_view.stack()));
-        
+
         imp.apply_view.setup_tab_switch_listener();
 
         imp.open_button.connect_clicked(clone!(
@@ -276,7 +276,7 @@ impl AppWindow {
                 this.add_dialog();
             }
         ));
-        
+
         imp.add_button.connect_clicked(clone!(
             #[weak(rename_to=this)]
             self,
@@ -312,7 +312,7 @@ impl AppWindow {
                 win.switch_to_stack_welcome();
             }
         ));
-        
+
         // TODO: check why going though here takes much time
         apply_view.clone().set_on_apply(clone!(
             #[weak(rename_to=win)]
@@ -623,9 +623,7 @@ impl AppWindow {
 
         self.switch_back_from_loading();
         let path = self.files().first().unwrap().path();
-        self.imp()
-            .apply_view
-            .load_from_file(path);
+        self.imp().apply_view.load_from_file(path);
 
         if matches!(self.imp().navigation.visible_page().and_then(|x| x.tag()), Some(x) if x == "main")
         {

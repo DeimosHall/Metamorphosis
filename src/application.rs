@@ -1,4 +1,4 @@
-use glib::{clone, ExitCode};
+use glib::{ExitCode, clone};
 use log::{debug, error, info};
 
 use gettextrs::gettext;
@@ -10,8 +10,8 @@ use crate::window::AppWindow;
 
 mod imp {
 
-    use crate::window::FileOperations;
     use super::*;
+    use crate::window::FileOperations;
     use adw::subclass::prelude::AdwApplicationImpl;
 
     #[derive(Debug)]
