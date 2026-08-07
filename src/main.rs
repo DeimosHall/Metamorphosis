@@ -32,9 +32,6 @@ fn runtime() -> &'static Runtime {
 }
 
 fn main() -> ExitCode {
-    // Initialize logger
-    pretty_env_logger::init();
-
     // Prepare i18n
     gettextrs::setlocale(LocaleCategory::LcAll, "");
     gettextrs::bindtextdomain(GETTEXT_PACKAGE, LOCALEDIR).expect("Unable to bind the text domain");
@@ -44,6 +41,24 @@ fn main() -> ExitCode {
 
     let res = gio::Resource::load(RESOURCES_FILE).expect("Could not load gresource file");
     gio::resources_register(&res);
+
+    // Set debug level for logs when building with devel profile
+    let mut builder = pretty_env_logger::formatted_builder();
+    match std::env::var("RUST_LOG") {
+        Ok(value) => {
+            builder.parse_filters(&value);
+        }
+        Err(_) => {
+            let filter = if config::PROFILE == "Devel" {
+                "debug"
+            } else {
+                "error"
+            };
+            builder.parse_filters(filter);
+        }
+    }
+
+    builder.init();
 
     let app = App::new();
     app.run()
