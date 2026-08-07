@@ -1,6 +1,7 @@
 use std::{path::Path, sync::LazyLock};
 
 use exiftool::{ExifTool, ExifToolError, g2::ExifData};
+use jiff::{Unit, Zoned};
 
 static EXIFTOOL: LazyLock<ExifTool> =
     LazyLock::new(|| ExifTool::with_executable(Path::new("/app/exiftool")).unwrap());
@@ -42,12 +43,27 @@ impl<'a> ExifService<'a> {
         println!("Parsed data: \n{:#?}", exif_data);
     }
 
+    /// Returns the ModifyDate tag value
+    ///
+    /// Format: "YYYY:MM:DD HH:MM:SS"
     pub fn modify_date(&self) -> Option<String> {
         self.read_tag("ModifyDate")
     }
 
+    /// Sets the ModifyDate tag value
+    ///
+    /// Date format: "YYYY:MM:DD HH:MM:SS"
     pub fn set_modify_date(&self, modify_date: &str) -> Result<(), ExifToolError> {
         self.write_tag("ModifyDate", modify_date)
+    }
+
+    /// Sets the ModifyDate tag value as today
+    pub fn set_modify_date_as_today(&self) -> Result<(), ExifToolError> {
+        let now = Zoned::now().round(Unit::Second).expect("Should never fail");
+        let current_date = now.date().to_string().replace("-", ":");
+        let current_time = now.time();
+        let date_time = format!("{} {}", current_date, current_time);
+        self.set_modify_date(date_time.as_str())
     }
 
     pub fn date_time_original(&self) -> Option<String> {
@@ -86,15 +102,15 @@ impl<'a> ExifService<'a> {
     }
 
     /// Sets the following tag values:
-    /// - CreateDate
-    /// - DateTimeOrginal
-    /// - ModifyDate
+    /// - `CreateDate` to the given date
+    /// - `DateTimeOrginal` to the given date
+    /// - `ModifyDate` as today
     ///
-    /// Format: "YYYY:MM:DD HH:MM:SS"
+    /// Date format: "YYYY:MM:DD HH:MM:SS"
     pub fn set_all_dates(&self, date: &str) -> Result<(), ExifToolError> {
-        // TODO: also set gps date
-        // TODO: set modify date as the current modification date
-        self.write_tag("AllDates", date)
+        // TODO: also set gps date if selected by user
+        self.write_tag("AllDates", date)?;
+        self.set_modify_date_as_today()
     }
 
     // ****************** Fractional seconds ******************
@@ -130,21 +146,30 @@ impl<'a> ExifService<'a> {
 
     // ****************** Timezone offsets ******************
 
-    /// Returns the OffSetTime tag value
+    /// Returns the OffSetTime tag value (from ModifyDate)
     ///
     /// Format: "HH:MM"
     pub fn offset_time(&self) -> Option<String> {
         self.read_tag("OffsetTime")
     }
 
+    /// Sets the OffsetTime tag value (for ModifyDate)
+    ///
+    /// Offset time format: "HH:MM"
     pub fn set_offset_time(&self, offset_time: &str) -> Result<(), ExifToolError> {
         self.write_tag("OffsetTime", offset_time)
     }
 
+    /// Returns the OffsetTimeOriginal tag value (from DateTimeOrginal)
+    ///
+    /// Format: "HH:MM"
     pub fn offset_time_original(&self) -> Option<String> {
         self.read_tag("OffsetTimeOriginal")
     }
 
+    /// Sets the OffsetTimeOriginal tag value (for DateTimeOrginal)
+    ///
+    /// Offset time format: "HH:MM"
     pub fn set_offset_time_original(
         &self,
         offset_time_original: &str,
@@ -152,10 +177,16 @@ impl<'a> ExifService<'a> {
         self.write_tag("OffsetTimeOriginal", offset_time_original)
     }
 
+    /// Returns the OffsetTimeDigitized tag value (from CreateDate)
+    ///
+    /// Format: "HH:MM"
     pub fn offset_time_digitized(&self) -> Option<String> {
         self.read_tag("OffsetTimeDigitized")
     }
 
+    /// Sets the OffsetTimeDigitized tag value (for CreateDate)
+    ///
+    /// Offset time format: "HH:MM"
     pub fn set_offset_time_digitized(
         &self,
         offset_time_digitized: &str,
@@ -164,16 +195,25 @@ impl<'a> ExifService<'a> {
     }
 
     /// Sets the following tag values:
-    /// - OffsetTime
-    /// - OffsetTimeOriginal
-    /// - OffsetTimeDigitized
+    /// - OffsetTime (ModifyDate) as the local time offset
+    /// - OffsetTimeOriginal (DateTimeOrginal) as the given value
+    /// - OffsetTimeDigitized (CreateDate) as the given value
     ///
-    /// Format: "HH:MM" (e.g., "02:00", "-06:00")
+    /// Offset time format: "HH:MM" (e.g., "02:00", "-06:00")
     pub fn set_all_offset_times(&self, offset: &str) -> Result<(), ExifToolError> {
-        self.write_tag("OffsetTime", offset)?;
-        self.write_tag("OffsetTimeOriginal", offset)?;
-        self.write_tag("OffsetTimeDigitized", offset)?;
-        Ok(())
+        let now = Zoned::now().round(Unit::Second).expect("Should never fail");
+        let local_offset = now.offset().to_string();
+
+        // Append ":00" if for example, the given value is like "+05"
+        let local_offset = if local_offset.len() <= 3 {
+            format!("{}:00", local_offset)
+        } else {
+            local_offset
+        };
+
+        self.set_offset_time(local_offset.as_str())?;
+        self.set_offset_time_original(offset)?;
+        self.set_offset_time_digitized(offset)
     }
 
     /// Sets the ProcessingSoftware tag

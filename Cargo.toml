@@ -29,6 +29,7 @@ derivative = "2.2"
 async-channel = "2.5"
 exiftool = "0.3.1"
 serde_json = "1.0.149"
+jiff = "0.2.35"
 
 # These dependencies are false positives for cargo machete
 [package.metadata.cargo-machete]
