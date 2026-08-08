@@ -335,7 +335,7 @@ impl AppWindow {
                     #[strong]
                     path,
                     async move {
-                        let result = apply_view.apply_changes(path);
+                        let result = apply_view.apply_changes(path.as_str());
 
                         match result {
                             Ok(()) => {
@@ -343,6 +343,7 @@ impl AppWindow {
                                     win.set_convert_progress(1, 1);
                                     win.switch_to_stack_apply();
                                 }
+                                apply_view.load_from_file(path.as_str());
                                 win.show_toast(&gettext("Changes applied"));
                             }
                             Err(errors) => {
@@ -623,7 +624,7 @@ impl AppWindow {
 
         self.switch_back_from_loading();
         let path = self.files().first().unwrap().path();
-        self.imp().apply_view.load_from_file(path);
+        self.imp().apply_view.load_from_file(path.as_str());
 
         if matches!(self.imp().navigation.visible_page().and_then(|x| x.tag()), Some(x) if x == "main")
         {

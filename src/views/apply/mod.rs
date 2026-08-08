@@ -154,18 +154,17 @@ impl Apply {
     }
 
     /// Populate UI fields using exif data from the given file
-    pub fn load_from_file(&self, path: String) {
-        // TODO: improve arg to avoid cloning
-        self.imp().image_general_tab.load_from_file(&path);
-        self.imp().image_advanced_tab.load_from_file(&path);
+    pub fn load_from_file(&self, path: &str) {
+        self.imp().image_general_tab.load_from_file(path);
+        self.imp().image_advanced_tab.load_from_file(path);
     }
 
     /// Take the values from the UI fields and apply them to a file
-    pub fn apply_changes(&self, path: String) -> Result<(), Vec<ExifToolError>> {
+    pub fn apply_changes(&self, path: &str) -> Result<(), Vec<ExifToolError>> {
         if let Some(current_tab) = self.current_tab() {
             return match current_tab.as_str() {
-                "general" => self.imp().image_general_tab.apply_changes(&path),
-                "advanced" => self.imp().image_advanced_tab.apply_changes(&path),
+                "general" => self.imp().image_general_tab.apply_changes(path),
+                "advanced" => self.imp().image_advanced_tab.apply_changes(path),
                 _ => Ok(()), // TODO: return an error here
             };
         }
