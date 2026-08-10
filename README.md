@@ -16,9 +16,9 @@ Edit file's metadata.
 
 ## About
 
-Metamorphosis is designed to help you edit exif metadata in a simple and reliable way.
+Metamorphosis is designed to help you edit metadata in a simple and reliable way.
 
-<img src="data/resources/screenshots/0.png" alt="View of Metamorphosis">
+<img src="data/resources/screenshots/1.png" alt="View of Metamorphosis">
 
 Metamorphosis supports editing the following datatypes:
 

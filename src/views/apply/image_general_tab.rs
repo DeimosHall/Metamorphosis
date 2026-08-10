@@ -102,7 +102,7 @@ impl ImageGeneralTab {
     pub fn load_from_file(&self, path: &str) {
         let exif = ExifService::new(path);
         let date = exif.create_date().unwrap_or_default();
-        let offset = exif.offset_time().unwrap_or_default();
+        let offset = exif.offset_time_digitized().unwrap_or_default();
         let manufacturer = exif.make().unwrap_or_default();
         let model = exif.model().unwrap_or_default();
         let description = exif.image_description().unwrap_or_default();
