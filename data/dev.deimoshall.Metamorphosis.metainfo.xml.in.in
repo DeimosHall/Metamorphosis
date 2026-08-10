@@ -13,11 +13,11 @@
 
     <description>
         <p>
-            Metamorphosis helps you edit EXIF metadata in images.
-            Simply drag and drop files or paste images directly into the app to get started.
+            Metamorphosis helps you edit metadata in files.
+            Simply drag and drop files or paste them directly into the app to get started.
         </p>
         <p>
-            Supports JPEG, PNG HEIC, AVIF, WebP, and many more image formats.
+            Supports JPEG, PNG HEIC, AVIF, WebP, and many more image formats. More file types support will be added in future releases.
         </p>
     </description>
 
@@ -61,11 +61,6 @@
     <screenshots>
         <screenshot type="default">
             <image>
-                https://raw.githubusercontent.com/DeimosHall/Metamorphosis/dev/data/resources/screenshots/0.png</image>
-            <caption>Drag and drop window</caption>
-        </screenshot>
-        <screenshot>
-            <image>
                 https://raw.githubusercontent.com/DeimosHall/Metamorphosis/dev/data/resources/screenshots/1.png</image>
             <caption>General tab</caption>
         </screenshot>
@@ -96,50 +91,61 @@
 
     <content_rating type="oars-1.1" />
 
-    <releases>
-        <release version="0.4.0" date="2026-05-23">
-            <description>
-                <p>Add new General and Advanced tabs</p>
-                <ul>
-                    <li>General tab for most common tags</li>
-                    <li>Advanced tab for raw tags and more granular editing</li>
-                    <li>Add more dates, fractional seconds, and timezone offsets fields</li>
-                    <li>Fix remove button stopped working</li>
-                </ul>
-            </description>
-        </release>
-        <release version="0.3.0" date="2026-05-09">
-            <description>
-                <p>Add manufacturer and model fields</p>
-            </description>
-        </release>
-        <release version="0.2.0" date="2026-04-24">
-            <description>
-                <p>Add description field</p>
-            </description>
-        </release>
-        <release version="0.1.2" date="2026-04-15">
-            <description>
-                <p>Update runtime to GNOME 50</p>
-            </description>
-        </release>
-        <release version="0.1.1" date="2026-04-13">
-            <description>
-                <p>Fix ExifTool execution fail due to Perl interpreter not available</p>
-            </description>
-        </release>
-        <release version="0.1.0" date="2026-04-11">
-            <description>
-                <p>Initial release with core features:</p>
-                <ul>
-                    <li>Edit EXIF metadata in images</li>
-                    <li>Support for images (only JPEG tested)</li>
-                    <li>View and modify create date</li>
-                    <li>Set offset time for date values</li>
-                    <li>Write processing software tag</li>
-                </ul>
-            </description>
-        </release>
-    </releases>
+  <releases>
+      <release version="0.5.0" date="2026-08-09">
+          <description>
+              <p>Enhancements and bug fixes</p>
+              <ul>
+                  <li>Fix not realoading fields after applying changes</li>
+                  <li>Show offset time from create date instead of the one from modify date</li>
+                  <li>Set modify date as today when applying from the general tab</li>
+                  <li>Remove unused dependencies and add CI to the project</li>
+              </ul>
+          </description>
+      </release>
+      <release version="0.4.0" date="2026-05-23">
+          <description>
+              <p>Add new General and Advanced tabs</p>
+              <ul>
+                  <li>General tab for most common tags</li>
+                  <li>Advanced tab for raw tags and more granular editing</li>
+                  <li>Add more dates, fractional seconds, and timezone offsets fields</li>
+                  <li>Fix remove button stopped working</li>
+              </ul>
+          </description>
+      </release>
+      <release version="0.3.0" date="2026-05-09">
+          <description>
+              <p>Add manufacturer and model fields</p>
+          </description>
+      </release>
+      <release version="0.2.0" date="2026-04-24">
+          <description>
+              <p>Add description field</p>
+          </description>
+      </release>
+      <release version="0.1.2" date="2026-04-15">
+          <description>
+              <p>Update runtime to GNOME 50</p>
+          </description>
+      </release>
+      <release version="0.1.1" date="2026-04-13">
+          <description>
+              <p>Fix ExifTool execution fail due to Perl interpreter not available</p>
+          </description>
+      </release>
+      <release version="0.1.0" date="2026-04-11">
+          <description>
+              <p>Initial release with core features:</p>
+              <ul>
+                  <li>Edit EXIF metadata in images</li>
+                  <li>Support for images (only JPEG tested)</li>
+                  <li>View and modify create date</li>
+                  <li>Set offset time for date values</li>
+                  <li>Write processing software tag</li>
+              </ul>
+          </description>
+      </release>
+  </releases>
 
 </component>

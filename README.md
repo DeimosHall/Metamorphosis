@@ -1,7 +1,7 @@
 <div align="center">
 <h1>Metamorphosis</h1>
 
-Edit file's metadata.
+Edit metadata.
 
 <img src="data/resources/icons/hicolor/512x512/apps/dev.deimoshall.Metamorphosis.png" width="128" height="128" alt="Metamorphosis icon">
 
