@@ -6,13 +6,13 @@ use crate::components::drag_overlay::DragOverlay;
 use crate::config::APP_ID;
 use crate::file_chooser::FileChooser;
 use crate::input_file::InputFile;
-use crate::magick::{JobFile, count_frames};
+use crate::magick::JobFile;
 use crate::runtime;
 use crate::services::exif::ExifService;
 use adw::prelude::*;
 use futures::future::join_all;
 use gettextrs::gettext;
-use glib::{MainContext, clone, idle_add_local_once};
+use glib::{MainContext, clone};
 use gtk::gdk::Texture;
 use gtk::{gdk, gio, glib, subclass::prelude::*};
 use itertools::Itertools;
@@ -505,55 +505,29 @@ impl AppWindow {
 
         let _ = fdlimit::raise_fd_limit();
 
-        self.load_frames();
+        self.load_images();
     }
 
-    fn load_frames(&self) {
+    fn load_images(&self) {
         let files = self.files();
         let file_paths = files.iter().map(|f| f.path()).collect_vec();
-
-        let (sender, receiver) = async_channel::bounded(1);
-
-        std::thread::spawn(move || {
-            let jobs = file_paths
-                .into_iter()
-                .map(|f| async move { count_frames(f).await.unwrap_or((1, None)) })
-                .collect_vec();
-
-            let res = runtime().block_on(join_all(jobs));
-
-            sender.send_blocking(res).expect("Concurrency Issues");
-        });
 
         glib::spawn_future_local(clone!(
             #[weak(rename_to=this)]
             self,
             async move {
-                if let Ok(image_info) = receiver.recv().await {
-                    let real_files = files.clone();
-                    for (f, (frame, dims)) in real_files.iter().zip(image_info.iter()) {
-                        f.set_frames(*frame);
-                        let dims = *dims;
-                        idle_add_local_once(clone!(
-                            #[weak(rename_to=ff)]
-                            f,
-                            move || {
-                                if let Some((width, height)) = dims {
-                                    ff.set_width(width);
-                                    ff.set_height(height);
-                                }
-                            }
-                        ));
-                        glib::MainContext::default().iteration(true);
+                for (file, path) in files.iter().zip(file_paths) {
+                    let exif = ExifService::new(&path);
+
+                    if let Some(width) = exif.width() {
+                        file.set_width(width);
                     }
-                    idle_add_local_once(clone!(
-                        #[weak(rename_to=these)]
-                        this,
-                        move || {
-                            these.load_pixbuf();
-                        }
-                    ));
+
+                    if let Some(height) = exif.height() {
+                        file.set_height(height);
+                    }
                 }
+                this.load_pixbuf();
             }
         ));
     }

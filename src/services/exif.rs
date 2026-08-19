@@ -35,6 +35,14 @@ impl<'a> ExifService<'a> {
         EXIFTOOL.write_tag(self.path, tag, value, &["-overwrite_original"])
     }
 
+    pub fn width(&self) -> Option<usize> {
+        self.read_tag("ImageWidth").and_then(|w| w.parse().ok())
+    }
+
+    pub fn height(&self) -> Option<usize> {
+        self.read_tag("ImageHeight").and_then(|h| h.parse().ok())
+    }
+
     // ****************** Dates ******************
 
     // TODO: used for testing purposes, delete later
