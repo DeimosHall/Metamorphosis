@@ -103,6 +103,7 @@ impl Default for InputFile {
     }
 }
 
+// TODO: document methods from this file
 impl InputFile {
     pub fn new(file: &gio::File) -> Option<Self> {
         let path = file.path().unwrap();
@@ -141,8 +142,16 @@ impl InputFile {
         self.imp().width.get()
     }
 
+    pub fn set_width(&self, f: usize) {
+        self.imp().width.replace(Some(f));
+    }
+
     pub fn height(&self) -> Option<usize> {
         self.imp().height.get()
+    }
+
+    pub fn set_height(&self, f: usize) {
+        self.imp().height.replace(Some(f));
     }
 
     pub fn dimensions(&self) -> Option<(usize, usize)> {
@@ -150,12 +159,10 @@ impl InputFile {
         w.zip(h)
     }
 
-    pub fn set_width(&self, f: usize) {
-        self.imp().width.replace(Some(f));
-    }
-
-    pub fn set_height(&self, f: usize) {
-        self.imp().height.replace(Some(f));
+    pub fn set_dimensions(&self, dimensions: (usize, usize)) {
+        let (width, height) = dimensions;
+        self.imp().width.replace(Some(width));
+        self.imp().height.replace(Some(height));
     }
 
     pub fn area(&self) -> Option<usize> {

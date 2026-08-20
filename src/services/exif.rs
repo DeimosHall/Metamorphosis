@@ -43,6 +43,10 @@ impl<'a> ExifService<'a> {
         self.read_tag("ImageHeight").and_then(|h| h.parse().ok())
     }
 
+    pub fn dimensions(&self) -> Option<(usize, usize)> {
+        self.width().zip(self.height())
+    }
+
     // ****************** Dates ******************
 
     // TODO: used for testing purposes, delete later

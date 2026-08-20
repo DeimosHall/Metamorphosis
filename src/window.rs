@@ -16,6 +16,7 @@ use glib::{MainContext, clone};
 use gtk::gdk::Texture;
 use gtk::{gdk, gio, glib, subclass::prelude::*};
 use itertools::Itertools;
+use log::{error, warn};
 use shared_child::SharedChild;
 use std::sync::Arc;
 
@@ -505,26 +506,43 @@ impl AppWindow {
 
         let _ = fdlimit::raise_fd_limit();
 
-        self.load_images();
+        self.load_dimensions();
     }
 
-    fn load_images(&self) {
+    fn load_dimensions(&self) {
         let files = self.files();
         let file_paths = files.iter().map(|f| f.path()).collect_vec();
+
+        let (sender, receiver) = async_channel::bounded(1);
+
+        std::thread::spawn(move || {
+            for (i, path) in file_paths.iter().enumerate() {
+                let exif = ExifService::new(path);
+                sender
+                    .send_blocking((i, exif.dimensions()))
+                    .expect("Concurrency issues while loading dimensions");
+            }
+        });
 
         glib::spawn_future_local(clone!(
             #[weak(rename_to=this)]
             self,
             async move {
-                for (file, path) in files.iter().zip(file_paths) {
-                    let exif = ExifService::new(&path);
-
-                    if let Some(width) = exif.width() {
-                        file.set_width(width);
-                    }
-
-                    if let Some(height) = exif.height() {
-                        file.set_height(height);
+                while let Ok((i, dimensions)) = receiver.recv().await {
+                    if let Some(dimensions) = dimensions {
+                        // TODO: should I use input_file_store instead of files()?
+                        if let Some(file) = this
+                            .imp()
+                            .input_file_store
+                            .item(i as u32)
+                            .and_downcast::<InputFile>()
+                        {
+                            file.set_dimensions(dimensions);
+                        } else {
+                            error!("File at index '{}' should exist", i);
+                        }
+                    } else {
+                        warn!("File at index '{}' don't contain dimensions", i);
                     }
                 }
                 this.load_pixbuf();
