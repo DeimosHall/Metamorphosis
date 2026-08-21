@@ -6,7 +6,7 @@ use crate::components::drag_overlay::DragOverlay;
 use crate::config::APP_ID;
 use crate::file_chooser::FileChooser;
 use crate::input_file::InputFile;
-use crate::magick::JobFile;
+use crate::models::job_file::JobFile;
 use crate::runtime;
 use crate::services::exif::ExifService;
 use adw::prelude::*;
@@ -16,7 +16,7 @@ use glib::{MainContext, clone};
 use gtk::gdk::Texture;
 use gtk::{gdk, gio, glib, subclass::prelude::*};
 use itertools::Itertools;
-use log::{error, warn};
+use log::{debug, error, warn};
 use shared_child::SharedChild;
 use std::sync::Arc;
 
@@ -445,8 +445,10 @@ impl AppWindow {
     }
 
     pub fn load_clipboard(&self) {
+        debug!("Loading clipboard");
         let clipboard = self.clipboard();
         if clipboard.formats().contain_mime_type("image/png") {
+            debug!("Image pasted");
             MainContext::default().spawn_local(clone!(
                 #[weak(rename_to=this)]
                 self,
@@ -465,6 +467,7 @@ impl AppWindow {
             .formats()
             .contain_mime_type("application/vnd.portal.files")
         {
+            debug!("Portal");
             MainContext::default().spawn_local(clone!(
                 #[weak(rename_to=this)]
                 self,

@@ -12,6 +12,7 @@ pub struct JobFile {
 static FILE_COUNT: AtomicUsize = AtomicUsize::new(0);
 
 impl JobFile {
+    // TODO: refactor this into a service
     pub fn from_clipboard() -> Self {
         let id = FILE_COUNT.fetch_add(1, Ordering::SeqCst) + 1;
         Self {
