@@ -6,16 +6,17 @@ use crate::components::drag_overlay::DragOverlay;
 use crate::config::APP_ID;
 use crate::file_chooser::FileChooser;
 use crate::input_file::InputFile;
-use crate::magick::{JobFile, count_frames};
+use crate::models::job_file::JobFile;
 use crate::runtime;
 use crate::services::exif::ExifService;
 use adw::prelude::*;
 use futures::future::join_all;
 use gettextrs::gettext;
-use glib::{MainContext, clone, idle_add_local_once};
+use glib::{MainContext, clone};
 use gtk::gdk::Texture;
 use gtk::{gdk, gio, glib, subclass::prelude::*};
 use itertools::Itertools;
+use log::{debug, error, warn};
 use shared_child::SharedChild;
 use std::sync::Arc;
 
@@ -444,8 +445,10 @@ impl AppWindow {
     }
 
     pub fn load_clipboard(&self) {
+        debug!("Loading clipboard");
         let clipboard = self.clipboard();
         if clipboard.formats().contain_mime_type("image/png") {
+            debug!("Image pasted");
             MainContext::default().spawn_local(clone!(
                 #[weak(rename_to=this)]
                 self,
@@ -464,6 +467,7 @@ impl AppWindow {
             .formats()
             .contain_mime_type("application/vnd.portal.files")
         {
+            debug!("Portal");
             MainContext::default().spawn_local(clone!(
                 #[weak(rename_to=this)]
                 self,
@@ -505,55 +509,46 @@ impl AppWindow {
 
         let _ = fdlimit::raise_fd_limit();
 
-        self.load_frames();
+        self.load_dimensions();
     }
 
-    fn load_frames(&self) {
+    fn load_dimensions(&self) {
         let files = self.files();
         let file_paths = files.iter().map(|f| f.path()).collect_vec();
 
         let (sender, receiver) = async_channel::bounded(1);
 
         std::thread::spawn(move || {
-            let jobs = file_paths
-                .into_iter()
-                .map(|f| async move { count_frames(f).await.unwrap_or((1, None)) })
-                .collect_vec();
-
-            let res = runtime().block_on(join_all(jobs));
-
-            sender.send_blocking(res).expect("Concurrency Issues");
+            for (i, path) in file_paths.iter().enumerate() {
+                let exif = ExifService::new(path);
+                sender
+                    .send_blocking((i, exif.dimensions()))
+                    .expect("Concurrency issues while loading dimensions");
+            }
         });
 
         glib::spawn_future_local(clone!(
             #[weak(rename_to=this)]
             self,
             async move {
-                if let Ok(image_info) = receiver.recv().await {
-                    let real_files = files.clone();
-                    for (f, (frame, dims)) in real_files.iter().zip(image_info.iter()) {
-                        f.set_frames(*frame);
-                        let dims = *dims;
-                        idle_add_local_once(clone!(
-                            #[weak(rename_to=ff)]
-                            f,
-                            move || {
-                                if let Some((width, height)) = dims {
-                                    ff.set_width(width);
-                                    ff.set_height(height);
-                                }
-                            }
-                        ));
-                        glib::MainContext::default().iteration(true);
-                    }
-                    idle_add_local_once(clone!(
-                        #[weak(rename_to=these)]
-                        this,
-                        move || {
-                            these.load_pixbuf();
+                while let Ok((i, dimensions)) = receiver.recv().await {
+                    if let Some(dimensions) = dimensions {
+                        // TODO: should I use input_file_store instead of files()?
+                        if let Some(file) = this
+                            .imp()
+                            .input_file_store
+                            .item(i as u32)
+                            .and_downcast::<InputFile>()
+                        {
+                            file.set_dimensions(dimensions);
+                        } else {
+                            error!("File at index '{}' should exist", i);
                         }
-                    ));
+                    } else {
+                        warn!("File at index '{}' don't contain dimensions", i);
+                    }
                 }
+                this.load_pixbuf();
             }
         ));
     }

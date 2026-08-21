@@ -19,7 +19,6 @@ mod imp {
         pub path: RefCell<String>,
         pub kind: Cell<FileType>,
         pub pixbuf: RefCell<Option<Texture>>,
-        pub frames: Cell<usize>,
         pub is_behind_sandbox: Cell<bool>,
         pub width: Cell<Option<usize>>,
         pub height: Cell<Option<usize>>,
@@ -35,7 +34,6 @@ mod imp {
                 path: RefCell::new("/invalid-path".to_string()),
                 kind: Cell::new(FileType::Unknown),
                 pixbuf: RefCell::new(None),
-                frames: Cell::new(1),
                 is_behind_sandbox: Cell::new(true),
                 width: Cell::new(None),
                 height: Cell::new(None),
@@ -105,6 +103,7 @@ impl Default for InputFile {
     }
 }
 
+// TODO: document methods from this file
 impl InputFile {
     pub fn new(file: &gio::File) -> Option<Self> {
         let path = file.path().unwrap();
@@ -139,16 +138,20 @@ impl InputFile {
         self.imp().pixbuf.borrow()
     }
 
-    pub fn frames(&self) -> usize {
-        self.imp().frames.get()
-    }
-
     pub fn width(&self) -> Option<usize> {
         self.imp().width.get()
     }
 
+    pub fn set_width(&self, f: usize) {
+        self.imp().width.replace(Some(f));
+    }
+
     pub fn height(&self) -> Option<usize> {
         self.imp().height.get()
+    }
+
+    pub fn set_height(&self, f: usize) {
+        self.imp().height.replace(Some(f));
     }
 
     pub fn dimensions(&self) -> Option<(usize, usize)> {
@@ -156,16 +159,10 @@ impl InputFile {
         w.zip(h)
     }
 
-    pub fn set_frames(&self, f: usize) {
-        self.imp().frames.replace(f);
-    }
-
-    pub fn set_width(&self, f: usize) {
-        self.imp().width.replace(Some(f));
-    }
-
-    pub fn set_height(&self, f: usize) {
-        self.imp().height.replace(Some(f));
+    pub fn set_dimensions(&self, dimensions: (usize, usize)) {
+        let (width, height) = dimensions;
+        self.imp().width.replace(Some(width));
+        self.imp().height.replace(Some(height));
     }
 
     pub fn area(&self) -> Option<usize> {

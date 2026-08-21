@@ -1,11 +1,9 @@
 mod application;
 #[rustfmt::skip]
 mod config;
-mod color;
 mod components;
 mod file_chooser;
 mod input_file;
-mod magick;
 mod models;
 mod services;
 mod views;
