@@ -5,11 +5,21 @@ data/dev.deimoshall.Metamorphosis.desktop.in.in
 data/dev.deimoshall.Metamorphosis.gschema.xml.in
 data/dev.deimoshall.Metamorphosis.metainfo.xml.in.in
 # UI files
-data/resources/blueprints/image-rest.blp
-data/resources/blueprints/window.blp
+src/components/image_thumbnail.blp
+src/views/apply/image_advanced_tab.blp
+src/views/apply/image_general_tab.blp
+src/views/apply/mod.blp
+src/window.blp
 # RUST files
+src/application.rs
+src/components/about_window.rs
+src/components/drag_overlay.rs
+src/components/image_thumbnail.rs
 src/file_chooser.rs
-src/magick.rs
+src/input_file.rs
 src/main.rs
-src/widgets/about_window.rs
+src/models/job_file.rs
+src/views/apply/image_advanced_tab.rs
+src/views/apply/image_general_tab.rs
+src/views/apply/mod.rs
 src/window.rs

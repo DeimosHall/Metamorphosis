@@ -3,13 +3,15 @@
 # This file is distributed under the same license as the metamorphosis package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-#: data/resources/blueprints/window.blp:144
+#: src/views/apply/image_advanced_tab.blp:79
+#: src/views/apply/image_advanced_tab.blp:90
+#: src/views/apply/image_advanced_tab.blp:101
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: metamorphosis\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-04-24 18:42-0600\n"
+"POT-Creation-Date: 2026-08-20 19:12-0600\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,10 +21,8 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #: data/dev.deimoshall.Metamorphosis.desktop.in.in:2
-#: data/dev.deimoshall.Metamorphosis.metainfo.xml.in.in:5
-#: data/resources/blueprints/window.blp:9
-#: data/resources/blueprints/window.blp:21
-#: data/resources/blueprints/window.blp:58 src/main.rs:46
+#: data/dev.deimoshall.Metamorphosis.metainfo.xml.in.in:5 src/window.blp:9
+#: src/window.blp:21 src/window.blp:62 src/main.rs:38
 msgid "Metamorphosis"
 msgstr ""
 
@@ -38,36 +38,35 @@ msgstr ""
 msgid "metadata;image;edit;exif"
 msgstr ""
 
-#: data/dev.deimoshall.Metamorphosis.desktop.in.in:20
-#: data/resources/blueprints/window.blp:536
+#: data/dev.deimoshall.Metamorphosis.desktop.in.in:20 src/window.blp:206
 msgid "New Window"
 msgstr ""
 
-#: data/dev.deimoshall.Metamorphosis.gschema.xml.in:26
+#: data/dev.deimoshall.Metamorphosis.gschema.xml.in:24
 msgid "Window width"
 msgstr ""
 
-#: data/dev.deimoshall.Metamorphosis.gschema.xml.in:30
+#: data/dev.deimoshall.Metamorphosis.gschema.xml.in:28
 msgid "Image quality"
 msgstr ""
 
-#: data/dev.deimoshall.Metamorphosis.gschema.xml.in:34
+#: data/dev.deimoshall.Metamorphosis.gschema.xml.in:32
 msgid "Image density per inch"
 msgstr ""
 
-#: data/dev.deimoshall.Metamorphosis.gschema.xml.in:38
+#: data/dev.deimoshall.Metamorphosis.gschema.xml.in:36
 msgid "Window height"
 msgstr ""
 
-#: data/dev.deimoshall.Metamorphosis.gschema.xml.in:42
+#: data/dev.deimoshall.Metamorphosis.gschema.xml.in:40
 msgid "Window maximized state"
 msgstr ""
 
-#: data/dev.deimoshall.Metamorphosis.gschema.xml.in:46
+#: data/dev.deimoshall.Metamorphosis.gschema.xml.in:44
 msgid "Output format"
 msgstr ""
 
-#: data/dev.deimoshall.Metamorphosis.gschema.xml.in:50
+#: data/dev.deimoshall.Metamorphosis.gschema.xml.in:48
 msgid "Compression format"
 msgstr ""
 
@@ -77,12 +76,14 @@ msgstr ""
 
 #: data/dev.deimoshall.Metamorphosis.metainfo.xml.in.in:15
 msgid ""
-"Metamorphosis helps you edit EXIF metadata in images. Simply drag and drop "
-"files or paste images directly into the app to get started."
+"Metamorphosis helps you edit metadata in files. Simply drag and drop files "
+"or paste them directly into the app to get started."
 msgstr ""
 
 #: data/dev.deimoshall.Metamorphosis.metainfo.xml.in.in:19
-msgid "Supports JPEG, HEIC, AVIF, WebP, and many more image formats."
+msgid ""
+"Supports JPEG, PNG HEIC, AVIF, WebP, and many more image formats. More file "
+"types support will be added in future releases."
 msgstr ""
 
 #: data/dev.deimoshall.Metamorphosis.metainfo.xml.in.in:30
@@ -130,257 +131,376 @@ msgid "pdf"
 msgstr ""
 
 #: data/dev.deimoshall.Metamorphosis.metainfo.xml.in.in:65
-msgid "Reading metadata from an image (light mode)"
+msgid "General tab"
 msgstr ""
 
 #: data/dev.deimoshall.Metamorphosis.metainfo.xml.in.in:70
-msgid "Reading metadata from an image (dark mode)"
+msgid "Advanced tab"
 msgstr ""
 
-#: data/dev.deimoshall.Metamorphosis.metainfo.xml.in.in:92
-msgid "Add description field"
+#: data/dev.deimoshall.Metamorphosis.metainfo.xml.in.in:75
+msgid "Advanced tab with more fields"
 msgstr ""
 
 #: data/dev.deimoshall.Metamorphosis.metainfo.xml.in.in:97
-msgid "Update runtime to GNOME 50"
+msgid "Enhancements and bug fixes"
+msgstr ""
+
+#: data/dev.deimoshall.Metamorphosis.metainfo.xml.in.in:99
+msgid "Fix not realoading fields after applying changes"
+msgstr ""
+
+#: data/dev.deimoshall.Metamorphosis.metainfo.xml.in.in:100
+msgid "Show offset time from create date instead of the one from modify date"
+msgstr ""
+
+#: data/dev.deimoshall.Metamorphosis.metainfo.xml.in.in:101
+msgid "Set modify date as today when applying from the general tab"
 msgstr ""
 
 #: data/dev.deimoshall.Metamorphosis.metainfo.xml.in.in:102
-msgid "Fix ExifTool execution fail due to Perl interpreter not available"
+msgid "Remove unused dependencies and add CI to the project"
 msgstr ""
 
-#: data/dev.deimoshall.Metamorphosis.metainfo.xml.in.in:107
-msgid "Initial release with core features:"
-msgstr ""
-
-#: data/dev.deimoshall.Metamorphosis.metainfo.xml.in.in:109
-msgid "Edit EXIF metadata in images"
+#: data/dev.deimoshall.Metamorphosis.metainfo.xml.in.in:108
+msgid "Add new General and Advanced tabs"
 msgstr ""
 
 #: data/dev.deimoshall.Metamorphosis.metainfo.xml.in.in:110
-msgid "Support for images (only JPEG tested)"
+msgid "General tab for most common tags"
 msgstr ""
 
 #: data/dev.deimoshall.Metamorphosis.metainfo.xml.in.in:111
-msgid "View and modify create date"
+msgid "Advanced tab for raw tags and more granular editing"
 msgstr ""
 
 #: data/dev.deimoshall.Metamorphosis.metainfo.xml.in.in:112
-msgid "Set offset time for date values"
+msgid "Add more dates, fractional seconds, and timezone offsets fields"
 msgstr ""
 
 #: data/dev.deimoshall.Metamorphosis.metainfo.xml.in.in:113
+msgid "Fix remove button stopped working"
+msgstr ""
+
+#: data/dev.deimoshall.Metamorphosis.metainfo.xml.in.in:119
+msgid "Add manufacturer and model fields"
+msgstr ""
+
+#: data/dev.deimoshall.Metamorphosis.metainfo.xml.in.in:124
+msgid "Add description field"
+msgstr ""
+
+#: data/dev.deimoshall.Metamorphosis.metainfo.xml.in.in:129
+msgid "Update runtime to GNOME 50"
+msgstr ""
+
+#: data/dev.deimoshall.Metamorphosis.metainfo.xml.in.in:134
+msgid "Fix ExifTool execution fail due to Perl interpreter not available"
+msgstr ""
+
+#: data/dev.deimoshall.Metamorphosis.metainfo.xml.in.in:139
+msgid "Initial release with core features:"
+msgstr ""
+
+#: data/dev.deimoshall.Metamorphosis.metainfo.xml.in.in:141
+msgid "Edit EXIF metadata in images"
+msgstr ""
+
+#: data/dev.deimoshall.Metamorphosis.metainfo.xml.in.in:142
+msgid "Support for images (only JPEG tested)"
+msgstr ""
+
+#: data/dev.deimoshall.Metamorphosis.metainfo.xml.in.in:143
+msgid "View and modify create date"
+msgstr ""
+
+#: data/dev.deimoshall.Metamorphosis.metainfo.xml.in.in:144
+msgid "Set offset time for date values"
+msgstr ""
+
+#: data/dev.deimoshall.Metamorphosis.metainfo.xml.in.in:145
 msgid "Write processing software tag"
 msgstr ""
 
-#: data/resources/blueprints/image-rest.blp:21
-msgid "Show All"
+#: src/components/image_thumbnail.blp:48
+msgid "Remove image"
 msgstr ""
 
-#: data/resources/blueprints/window.blp:15
-msgid "Drop Here to Open"
+#: src/views/apply/image_advanced_tab.blp:13
+msgid "Dates"
 msgstr ""
 
-#: data/resources/blueprints/window.blp:28
-#: data/resources/blueprints/window.blp:433
-msgid "Add Images (Ctrl+O)"
+#: src/views/apply/image_advanced_tab.blp:16
+msgid "Modify Date"
 msgstr ""
 
-#: data/resources/blueprints/window.blp:42
-msgid "Primary Menu"
+#: src/views/apply/image_advanced_tab.blp:17
+msgid "File modification time"
 msgstr ""
 
-#: data/resources/blueprints/window.blp:59
-msgid "Drag and drop images here"
-msgstr ""
-
-#: data/resources/blueprints/window.blp:70
-msgid "_Open Images…"
-msgstr ""
-
-#: data/resources/blueprints/window.blp:118
-msgid "Creation Date"
-msgstr ""
-
-#: data/resources/blueprints/window.blp:122
+#: src/views/apply/image_advanced_tab.blp:20
+#: src/views/apply/image_advanced_tab.blp:31
+#: src/views/apply/image_advanced_tab.blp:42
+#: src/views/apply/image_general_tab.blp:16
 msgid "YYYY:MM:DD HH:MM:SS"
 msgstr ""
 
-#: data/resources/blueprints/window.blp:129
+#: src/views/apply/image_advanced_tab.blp:27
+msgid "Date Time Original"
+msgstr ""
+
+#: src/views/apply/image_advanced_tab.blp:28
+msgid "Shutter click time"
+msgstr ""
+
+#: src/views/apply/image_advanced_tab.blp:38
+msgid "Create Date"
+msgstr ""
+
+#: src/views/apply/image_advanced_tab.blp:39
+msgid "Digitization time"
+msgstr ""
+
+#: src/views/apply/image_advanced_tab.blp:49
+msgid "GPS Date Stamp"
+msgstr ""
+
+#: src/views/apply/image_advanced_tab.blp:50
+msgid "Date from GPS"
+msgstr ""
+
+#: src/views/apply/image_advanced_tab.blp:53
+msgid "YYYY:MM:DD"
+msgstr ""
+
+#: src/views/apply/image_advanced_tab.blp:60
+msgid "GPS Time Stamp"
+msgstr ""
+
+#: src/views/apply/image_advanced_tab.blp:61
+msgid "Time from GPS"
+msgstr ""
+
+#: src/views/apply/image_advanced_tab.blp:64
+msgid "HH:MM:SS"
+msgstr ""
+
+#: src/views/apply/image_advanced_tab.blp:72
+msgid "Fractional seconds"
+msgstr ""
+
+#: src/views/apply/image_advanced_tab.blp:75
+msgid "Sub Sec Time"
+msgstr ""
+
+#: src/views/apply/image_advanced_tab.blp:76
+msgid "Fractional seconds for Modify Date"
+msgstr ""
+
+#: src/views/apply/image_advanced_tab.blp:86
+msgid "Sub Sec Time Original"
+msgstr ""
+
+#: src/views/apply/image_advanced_tab.blp:87
+msgid "Fractional seconds for Date Time Original"
+msgstr ""
+
+#: src/views/apply/image_advanced_tab.blp:97
+msgid "Sub Sec Time Digitized"
+msgstr ""
+
+#: src/views/apply/image_advanced_tab.blp:98
+msgid "Fractional seconds for Create Date"
+msgstr ""
+
+#: src/views/apply/image_advanced_tab.blp:109
+msgid "Timezone offsets"
+msgstr ""
+
+#: src/views/apply/image_advanced_tab.blp:112
+#: src/views/apply/image_general_tab.blp:23
 msgid "Offset Time"
 msgstr ""
 
-#: data/resources/blueprints/window.blp:132
+#: src/views/apply/image_advanced_tab.blp:113
+msgid "Timezone for Modify Date"
+msgstr ""
+
+#: src/views/apply/image_advanced_tab.blp:116
+#: src/views/apply/image_advanced_tab.blp:127
+#: src/views/apply/image_advanced_tab.blp:138
+#: src/views/apply/image_general_tab.blp:26
 msgid "HH:MM"
 msgstr ""
 
-#: data/resources/blueprints/window.blp:141
+#: src/views/apply/image_advanced_tab.blp:123
+msgid "Offset Time Original"
+msgstr ""
+
+#: src/views/apply/image_advanced_tab.blp:124
+msgid "Timezone for Date Time Original"
+msgstr ""
+
+#: src/views/apply/image_advanced_tab.blp:134
+msgid "Offset Time Digitized"
+msgstr ""
+
+#: src/views/apply/image_advanced_tab.blp:135
+msgid "Timezone for Create Date"
+msgstr ""
+
+#: src/views/apply/image_general_tab.blp:10
+msgid "Date and Time"
+msgstr ""
+
+#: src/views/apply/image_general_tab.blp:13
+msgid "Creation Date"
+msgstr ""
+
+#: src/views/apply/image_general_tab.blp:34
+msgid "Device"
+msgstr ""
+
+#: src/views/apply/image_general_tab.blp:37
+msgid "Manufacturer"
+msgstr ""
+
+#: src/views/apply/image_general_tab.blp:46
+msgid "Model"
+msgstr ""
+
+#: src/views/apply/image_general_tab.blp:56
+msgid "Other"
+msgstr ""
+
+#: src/views/apply/image_general_tab.blp:59
 msgid "Description"
 msgstr ""
 
-#: data/resources/blueprints/window.blp:156
+#: src/views/apply/mod.blp:23
+msgid "General"
+msgstr ""
+
+#: src/views/apply/mod.blp:30
+msgid "Advanced"
+msgstr ""
+
+#: src/views/apply/mod.blp:42
 msgid "Apply"
 msgstr ""
 
-#: data/resources/blueprints/window.blp:175
-msgid "Export Format"
+#: src/window.blp:15
+msgid "Drop Here to Open"
 msgstr ""
 
-#: data/resources/blueprints/window.blp:183
-msgid "Save as multi-page PDF"
+#: src/window.blp:28
+msgid "Add Files (Ctrl+O)"
 msgstr ""
 
-#: data/resources/blueprints/window.blp:193
-msgid "Save To ZIP"
+#: src/window.blp:46
+msgid "Primary Menu"
 msgstr ""
 
-#: data/resources/blueprints/window.blp:205
-msgid "Quality"
+#: src/window.blp:63
+msgid "Drag and drop images here"
 msgstr ""
 
-#: data/resources/blueprints/window.blp:227
-msgid "Background Color"
+#: src/window.blp:74
+msgid "_Open Images…"
 msgstr ""
 
-#: data/resources/blueprints/window.blp:228
-msgid "Replaces original transparency layer"
-msgstr ""
-
-#: data/resources/blueprints/window.blp:242
-msgid "Pixel Density Per Inch"
-msgstr ""
-
-#: data/resources/blueprints/window.blp:253
-msgid "Resize"
-msgstr ""
-
-#: data/resources/blueprints/window.blp:260
-#: data/resources/blueprints/window.blp:261
-#: data/resources/blueprints/window.blp:269
-#: data/resources/blueprints/window.blp:271
-#: data/resources/blueprints/window.blp:300
-msgid "Width"
-msgstr ""
-
-#: data/resources/blueprints/window.blp:280
-msgid "Preserve aspect ratio"
-msgstr ""
-
-#: data/resources/blueprints/window.blp:291
-#: data/resources/blueprints/window.blp:292
-#: data/resources/blueprints/window.blp:301
-msgid "Height"
-msgstr ""
-
-#: data/resources/blueprints/window.blp:314
-msgid "Choose between resizing with percentages or using exact pixels"
-msgstr ""
-
-#: data/resources/blueprints/window.blp:319
-msgid "%"
-msgstr ""
-
-#: data/resources/blueprints/window.blp:320
-msgid "px"
-msgstr ""
-
-#: data/resources/blueprints/window.blp:334
-msgid "Resize Algorithm"
-msgstr ""
-
-#: data/resources/blueprints/window.blp:341
-msgid "Default"
-msgstr ""
-
-#: data/resources/blueprints/window.blp:346
-msgid "Pixel Art"
-msgstr ""
-
-#: data/resources/blueprints/window.blp:363
-msgid "_Convert"
-msgstr ""
-
-#: data/resources/blueprints/window.blp:380
+#: src/window.blp:113
 msgid "Could not Load Image"
 msgstr ""
 
-#: data/resources/blueprints/window.blp:381
+#: src/window.blp:114
 msgid "This image could be corrupted or may use an unsupported file format."
 msgstr ""
 
-#: data/resources/blueprints/window.blp:391
-msgid "Converting"
+#: src/window.blp:124
+msgid "Applying"
 msgstr ""
 
-#: data/resources/blueprints/window.blp:392
+#: src/window.blp:125
 msgid "This could take a while"
 msgstr ""
 
-#: data/resources/blueprints/window.blp:402 src/window.rs:990
+#: src/window.blp:135
 msgid "Loading…"
 msgstr ""
 
-#: data/resources/blueprints/window.blp:408 src/window.rs:595
-#: src/window.rs:1601
+#: src/window.blp:141 src/window.rs:407
 msgid "_Cancel"
 msgstr ""
 
-#: data/resources/blueprints/window.blp:426
-msgid "All Images"
-msgstr ""
-
-#: data/resources/blueprints/window.blp:494
+#: src/window.blp:164
 msgctxt "shortcut window"
 msgid "General"
 msgstr ""
 
-#: data/resources/blueprints/window.blp:497
+#: src/window.blp:167
 msgctxt "shortcut window"
 msgid "Show Shortcuts"
 msgstr ""
 
-#: data/resources/blueprints/window.blp:502
+#: src/window.blp:172
 msgctxt "shortcut window"
 msgid "Quit"
 msgstr ""
 
-#: data/resources/blueprints/window.blp:507
+#: src/window.blp:177
 msgctxt "shortcut window"
 msgid "New Window"
 msgstr ""
 
-#: data/resources/blueprints/window.blp:512
+#: src/window.blp:182
 msgctxt "shortcut window"
 msgid "Clear Window"
 msgstr ""
 
-#: data/resources/blueprints/window.blp:517
+#: src/window.blp:187
 msgctxt "shortcut window"
 msgid "Paste From Clipboard"
 msgstr ""
 
-#: data/resources/blueprints/window.blp:522
+#: src/window.blp:192
 msgctxt "shortcut window"
 msgid "Add Images"
 msgstr ""
 
-#: data/resources/blueprints/window.blp:531
+#: src/window.blp:201
 msgid "Paste From Clipboard"
 msgstr ""
 
-#: data/resources/blueprints/window.blp:541
+#: src/window.blp:211
 msgid "Clear Window"
 msgstr ""
 
-#: data/resources/blueprints/window.blp:548
+#: src/window.blp:218
 msgid "Keyboard Shortcuts"
 msgstr ""
 
-#: data/resources/blueprints/window.blp:553
+#: src/window.blp:223
 msgid "About Metamorphosis"
 msgstr ""
 
-#: src/file_chooser.rs:39 src/window.rs:2295
+#: src/application.rs:46
+msgid "Open a new window"
+msgstr ""
+
+#: src/components/about_window.rs:21
+msgid "translator-credits"
+msgstr ""
+
+#: src/components/about_window.rs:26
+msgid "Decrypt DLC files"
+msgstr ""
+
+#: src/components/about_window.rs:30
+msgid "Code and Design Borrowed from"
+msgstr ""
+
+#: src/file_chooser.rs:39 src/window.rs:824
 msgid "Unsupported filetype"
 msgstr ""
 
@@ -392,93 +512,26 @@ msgstr ""
 msgid "_Select Images"
 msgstr ""
 
-#: src/file_chooser.rs:182
-msgid "Unspecified filetype"
-msgstr ""
-
-#: src/file_chooser.rs:187
-msgid "Unknown filetype"
-msgstr ""
-
-#: src/file_chooser.rs:192
-msgid "Used the wrong filetype"
-msgstr ""
-
-#: src/magick.rs:138
+#: src/models/job_file.rs:20
 msgid "Pasted Image"
 msgstr ""
 
-#: src/magick.rs:292
-msgid "Unknown IO error happened"
-msgstr ""
-
-#: src/widgets/about_window.rs:21
-msgid "translator-credits"
-msgstr ""
-
-#: src/widgets/about_window.rs:38
-msgid "Code and Design Borrowed from"
-msgstr ""
-
-#: src/window.rs:536
-#, rust-format
-msgid "New transparency layer color: {}"
-msgstr ""
-
-#: src/window.rs:565
-msgid "Unable to access dropped files"
-msgstr ""
-
-#: src/window.rs:591 src/window.rs:1596
-msgid "Stop converting?"
-msgstr ""
-
-#: src/window.rs:592 src/window.rs:1597
-msgid "You will lose all progress."
-msgstr ""
-
-#: src/window.rs:596 src/window.rs:1601
-msgid "_Stop"
-msgstr ""
-
-#: src/window.rs:636
-msgid "Collecting files"
-msgstr ""
-
-#: src/window.rs:1514
-msgid "Error While Processing"
-msgstr ""
-
-#: src/window.rs:1535
-msgid "_Close"
-msgstr ""
-
-#: src/window.rs:1536
-msgid "_Copy to Clipboard"
-msgstr ""
-
-#: src/window.rs:1547
-msgid "Error copied to clipboard"
-msgstr ""
-
-#: src/window.rs:1563
-msgid "Image converted"
-msgstr ""
-
-#: src/window.rs:1564
-msgid "Open"
-msgstr ""
-
-#: src/window.rs:1626
-msgid "Converting Cancelled"
-msgstr ""
-
-#. this.set_convert_progress(1, 1);
-#. this.switch_to_stack_convert();
-#: src/window.rs:2134
+#: src/window.rs:348
 msgid "Changes applied"
 msgstr ""
 
-#: src/window.rs:2142
-msgid "Concurrency issues! Report to developer"
+#: src/window.rs:377
+msgid "Unable to access dropped files"
+msgstr ""
+
+#: src/window.rs:403
+msgid "Stop converting?"
+msgstr ""
+
+#: src/window.rs:404
+msgid "You will lose all progress."
+msgstr ""
+
+#: src/window.rs:408
+msgid "_Stop"
 msgstr ""
