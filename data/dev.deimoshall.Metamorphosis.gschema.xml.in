@@ -13,23 +13,11 @@
 		<value nick="Pdf" value="9"/>
 		<value nick="Gif" value="10"/>
 	</enum>
-	<enum id="dev.deimoshall.Metamorphosis.compression">
-		<value nick="Zip" value="0"/>
-		<value nick="Dir" value="1"/>
-	</enum>
 
 	<schema id="@app-id@" path="/dev/deimoshall/Metamorphosis/" gettext-domain="@gettext-package@">
 		<key name="window-width" type="i">
 			<default>750</default>
 			<summary>Window width</summary>
-		</key>
-		<key name="quality" type="i">
-			<default>92</default>
-			<summary>Image quality</summary>
-		</key>
-		<key name="dpi" type="i">
-			<default>300</default>
-			<summary>Image density per inch</summary>
 		</key>
 		<key name="window-height" type="i">
 			<default>750</default>
@@ -38,14 +26,6 @@
 			<key name="is-maximized" type="b">
 			<default>false</default>
 			<summary>Window maximized state</summary>
-		</key>
-		<key name="output-format" enum="dev.deimoshall.Metamorphosis.output">
-			<default>'Jpg'</default>
-			<summary>Output format</summary>
-		</key>
-		<key name="compression-format" enum="dev.deimoshall.Metamorphosis.compression">
-			<default>'Dir'</default>
-			<summary>Compression format</summary>
 		</key>
 	</schema>
 </schemalist>

@@ -88,6 +88,16 @@ ninja -C build
 sudo ninja -C build install
 ```
 
+## Translations
+
+TODO: add translation instructions
+
+To run the app with an specific language (e.g. Spanish), add the following line to the `finish-args` section in the manifest file:
+
+```json
+"--env=LANGUAGE=es"
+```
+
 ## License
 
 This project is licensed under the GPLv3 license. See the [License](LICENSE) file for more information.

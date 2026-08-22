@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: metamorphosis\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-08-20 19:12-0600\n"
+"POT-Creation-Date: 2026-08-21 16:50-0600\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -27,11 +27,12 @@ msgid "Metamorphosis"
 msgstr ""
 
 #: data/dev.deimoshall.Metamorphosis.desktop.in.in:3
-msgid "EXIF Editor"
+msgid "Metadata Editor"
 msgstr ""
 
 #: data/dev.deimoshall.Metamorphosis.desktop.in.in:4
-msgid "Edit EXIF metadata"
+#: data/dev.deimoshall.Metamorphosis.metainfo.xml.in.in:9
+msgid "Edit metadata"
 msgstr ""
 
 #: data/dev.deimoshall.Metamorphosis.desktop.in.in:10
@@ -42,36 +43,16 @@ msgstr ""
 msgid "New Window"
 msgstr ""
 
-#: data/dev.deimoshall.Metamorphosis.gschema.xml.in:24
+#: data/dev.deimoshall.Metamorphosis.gschema.xml.in:20
 msgid "Window width"
 msgstr ""
 
-#: data/dev.deimoshall.Metamorphosis.gschema.xml.in:28
-msgid "Image quality"
-msgstr ""
-
-#: data/dev.deimoshall.Metamorphosis.gschema.xml.in:32
-msgid "Image density per inch"
-msgstr ""
-
-#: data/dev.deimoshall.Metamorphosis.gschema.xml.in:36
+#: data/dev.deimoshall.Metamorphosis.gschema.xml.in:24
 msgid "Window height"
 msgstr ""
 
-#: data/dev.deimoshall.Metamorphosis.gschema.xml.in:40
+#: data/dev.deimoshall.Metamorphosis.gschema.xml.in:28
 msgid "Window maximized state"
-msgstr ""
-
-#: data/dev.deimoshall.Metamorphosis.gschema.xml.in:44
-msgid "Output format"
-msgstr ""
-
-#: data/dev.deimoshall.Metamorphosis.gschema.xml.in:48
-msgid "Compression format"
-msgstr ""
-
-#: data/dev.deimoshall.Metamorphosis.metainfo.xml.in.in:9
-msgid "Edit metadata"
 msgstr ""
 
 #: data/dev.deimoshall.Metamorphosis.metainfo.xml.in.in:15
