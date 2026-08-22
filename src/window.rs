@@ -1,7 +1,6 @@
 use std::collections::HashSet;
 use std::sync::atomic::AtomicUsize;
 
-use crate::components::about_window::MetamorphosisAbout;
 use crate::components::drag_overlay::DragOverlay;
 use crate::config::APP_ID;
 use crate::file_chooser::FileChooser;
@@ -9,6 +8,7 @@ use crate::input_file::InputFile;
 use crate::models::job_file::JobFile;
 use crate::runtime;
 use crate::services::exif::ExifService;
+use crate::views::about::AboutView;
 use adw::prelude::*;
 use futures::future::join_all;
 use gettextrs::gettext;
@@ -391,7 +391,7 @@ impl AppWindow {
     }
 
     fn show_about(&self) {
-        MetamorphosisAbout::show(self);
+        AboutView::show(self);
     }
 
     fn show_help_overlay(&self) {

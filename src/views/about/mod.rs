@@ -9,9 +9,9 @@ use gtk::License;
 pub const DEVELOPERS: &[&str] = &["Deimos Hall <deimoshall@proton.me>"];
 
 #[derive(Clone, Debug)]
-pub struct MetamorphosisAbout;
+pub struct AboutView;
 
-impl MetamorphosisAbout {
+impl AboutView {
     pub fn show<W: IsA<gtk::Widget>>(window: &W) {
         let about = adw::AboutDialog::from_appdata(
             "/dev/deimoshall/Metamorphosis/dev.deimoshall.Metamorphosis.metainfo.xml",
