@@ -1,7 +1,7 @@
 [Desktop Entry]
 Name=Metamorphosis
-GenericName=EXIF Editor
-Comment=Edit EXIF metadata
+GenericName=Metadata Editor
+Comment=Edit metadata
 Exec=metamorphosis %U
 Icon=@icon@
 Terminal=false
