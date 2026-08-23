@@ -28,7 +28,10 @@ impl AboutView {
 
         about.add_acknowledgement_section(
             Some(&gettext("Code and Design Borrowed from")),
-            &["Switcheroo https://gitlab.com/adhami3310/Switcheroo"],
+            &[
+                "Switcheroo https://gitlab.com/adhami3310/Switcheroo",
+                "Fractal https://gitlab.gnome.org/World/fractal",
+            ],
         );
 
         about.add_legal_section("ExifTool", None, License::Artistic, None);
