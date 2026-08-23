@@ -1,7 +1,7 @@
 # List of Blueprint files to compile.
 # Keep this file sorted alphabetically.
 components/image_thumbnail.blp
-views/apply/image_advanced_tab.blp
-views/apply/image_general_tab.blp
-views/apply/mod.blp
+views/image_metadata/image_advanced_tab.blp
+views/image_metadata/image_general_tab.blp
+views/image_metadata/mod.blp
 window.blp

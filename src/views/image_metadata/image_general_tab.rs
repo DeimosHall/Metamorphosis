@@ -12,7 +12,9 @@ mod imp {
 
     #[derive(Debug, CompositeTemplate, Derivative)]
     #[derivative(Default)]
-    #[template(resource = "/dev/deimoshall/Metamorphosis/ui/views/apply/image_general_tab.ui")]
+    #[template(
+        resource = "/dev/deimoshall/Metamorphosis/ui/views/image_metadata/image_general_tab.ui"
+    )]
     pub struct ImageGeneralTab {
         #[template_child]
         pub creation_date_entry: TemplateChild<gtk::Entry>,

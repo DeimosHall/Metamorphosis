@@ -11,7 +11,9 @@ mod imp {
     use super::*;
 
     #[derive(Debug, CompositeTemplate, Derivative, Default)]
-    #[template(resource = "/dev/deimoshall/Metamorphosis/ui/views/apply/image_advanced_tab.ui")]
+    #[template(
+        resource = "/dev/deimoshall/Metamorphosis/ui/views/image_metadata/image_advanced_tab.ui"
+    )]
     pub struct ImageAdvancedTab {
         #[template_child]
         pub container: TemplateChild<gtk::Box>,

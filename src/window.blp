@@ -102,9 +102,10 @@ template $AppWindow: Adw.ApplicationWindow {
 
                   StackPage {
                     name: "stack_apply";
-                    child: $ApplyView apply_view { };
+
+                    child: $ImageMetadataView image_metadata_view {};
                   }
-                  
+
                   StackPage {
                     name: "stack_invalid_image";
 

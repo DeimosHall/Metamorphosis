@@ -12,9 +12,9 @@
     <gresource prefix="/dev/deimoshall/Metamorphosis/ui/">
         <file compressed="true" preprocess="xml-stripblanks" alias="window.ui">window.ui</file>
         <file compressed="true" preprocess="xml-stripblanks" alias="components/image-thumbnail.ui">components-image_thumbnail.ui</file>
-        <file compressed="true" preprocess="xml-stripblanks" alias="views/apply/mod.ui">views-apply-mod.ui</file>
-        <file compressed="true" preprocess="xml-stripblanks" alias="views/apply/image_general_tab.ui">views-apply-image_general_tab.ui</file>
-        <file compressed="true" preprocess="xml-stripblanks" alias="views/apply/image_advanced_tab.ui">views-apply-image_advanced_tab.ui</file>
+        <file compressed="true" preprocess="xml-stripblanks" alias="views/image_metadata/mod.ui">views-image_metadata-mod.ui</file>
+        <file compressed="true" preprocess="xml-stripblanks" alias="views/image_metadata/image_general_tab.ui">views-image_metadata-image_general_tab.ui</file>
+        <file compressed="true" preprocess="xml-stripblanks" alias="views/image_metadata/image_advanced_tab.ui">views-image_metadata-image_advanced_tab.ui</file>
     </gresource>
 
     <gresource prefix="/dev/deimoshall/Metamorphosis/icons/scalable/apps/">

@@ -12,7 +12,7 @@ mod imp {
     use derivative::Derivative;
     use gtk::CompositeTemplate;
 
-    use crate::views::apply::{
+    use crate::views::image_metadata::{
         self, image_advanced_tab::ImageAdvancedTab, image_general_tab::ImageGeneralTab,
     };
 
@@ -20,8 +20,8 @@ mod imp {
 
     #[derive(Debug, CompositeTemplate, Derivative)]
     #[derivative(Default)]
-    #[template(resource = "/dev/deimoshall/Metamorphosis/ui/views/apply/mod.ui")]
-    pub struct Apply {
+    #[template(resource = "/dev/deimoshall/Metamorphosis/ui/views/image_metadata/mod.ui")]
+    pub struct ImageMetadataView {
         #[template_child]
         pub image_stack: TemplateChild<adw::ViewStack>,
         #[template_child]
@@ -35,9 +35,9 @@ mod imp {
     }
 
     #[::glib::object_subclass]
-    impl ObjectSubclass for Apply {
-        const NAME: &'static str = "ApplyView";
-        type Type = apply::Apply;
+    impl ObjectSubclass for ImageMetadataView {
+        const NAME: &'static str = "ImageMetadataView";
+        type Type = image_metadata::ImageMetadataView;
         type ParentType = adw::Bin;
 
         fn class_init(klass: &mut Self::Class) {
@@ -49,24 +49,24 @@ mod imp {
         }
     }
 
-    impl ObjectImpl for Apply {}
-    impl WidgetImpl for Apply {}
-    impl BinImpl for Apply {}
+    impl ObjectImpl for ImageMetadataView {}
+    impl WidgetImpl for ImageMetadataView {}
+    impl BinImpl for ImageMetadataView {}
 }
 
 glib::wrapper! {
-    pub struct Apply(ObjectSubclass<imp::Apply>)
+    pub struct ImageMetadataView(ObjectSubclass<imp::ImageMetadataView>)
         @extends gtk::Widget, adw::Bin,
         @implements gtk::Accessible, gtk::Buildable, gtk::ConstraintTarget;
 }
 
-impl Default for Apply {
+impl Default for ImageMetadataView {
     fn default() -> Self {
         glib::Object::new()
     }
 }
 
-impl Apply {
+impl ImageMetadataView {
     pub fn new() -> Self {
         glib::Object::new()
     }
@@ -132,7 +132,7 @@ impl Apply {
     /// placed on the top right of the image.
     pub fn set_on_remove<F>(&self, on_remove: F)
     where
-        F: Fn(&Apply) + 'static,
+        F: Fn(&ImageMetadataView) + 'static,
     {
         let view = self.clone();
         self.imp()
@@ -143,7 +143,7 @@ impl Apply {
     pub fn set_on_apply<F>(&self, on_apply: F)
     where
         // TODO: refactor this implementation
-        F: Fn(&Apply) + 'static,
+        F: Fn(&ImageMetadataView) + 'static,
     {
         let view = self.clone();
         self.imp().apply_button.connect_clicked(move |_| {

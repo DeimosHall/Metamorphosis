@@ -20,37 +20,13 @@ use log::{debug, error, warn};
 use shared_child::SharedChild;
 use std::sync::Arc;
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq)]
-pub enum ResizeFilter {
-    Default,
-    Point,
-}
-
-#[allow(dead_code)]
-impl ResizeFilter {
-    pub fn as_display_string(&self) -> Option<&str> {
-        match self {
-            ResizeFilter::Default => None,
-            ResizeFilter::Point => Some("Point"),
-        }
-    }
-
-    pub fn from_index(index: usize) -> Option<Self> {
-        match index {
-            0 => Some(ResizeFilter::Default),
-            1 => Some(ResizeFilter::Point),
-            _ => None,
-        }
-    }
-}
-
 mod imp {
     use std::{
         cell::{Cell, RefCell},
         sync::atomic::AtomicBool,
     };
 
-    use crate::{config::PKGDATADIR, views::apply::Apply};
+    use crate::{config::PKGDATADIR, views::image_metadata::ImageMetadataView};
 
     use super::*;
 
@@ -79,7 +55,7 @@ mod imp {
         #[template_child]
         pub progress_bar: TemplateChild<gtk::ProgressBar>,
         #[template_child]
-        pub apply_view: TemplateChild<Apply>,
+        pub image_metadata_view: TemplateChild<ImageMetadataView>,
         #[template_child]
         pub view_switcher: TemplateChild<adw::ViewSwitcher>,
 
@@ -266,9 +242,10 @@ impl AppWindow {
         //load imp
         let imp = self.imp();
 
-        imp.view_switcher.set_stack(Some(&imp.apply_view.stack()));
+        imp.view_switcher
+            .set_stack(Some(&imp.image_metadata_view.stack()));
 
-        imp.apply_view.setup_tab_switch_listener();
+        imp.image_metadata_view.setup_tab_switch_listener();
 
         imp.open_button.connect_clicked(clone!(
             #[weak(rename_to=this)]
@@ -304,7 +281,7 @@ impl AppWindow {
             }
         ));
 
-        let apply_view = imp.apply_view.clone();
+        let apply_view = imp.image_metadata_view.clone();
 
         apply_view.clone().set_on_remove(clone!(
             #[weak(rename_to=win)]
@@ -615,11 +592,11 @@ impl AppWindow {
         }
 
         let file = self.files().first().unwrap().clone();
-        self.imp().apply_view.update_thumbnail(file);
+        self.imp().image_metadata_view.update_thumbnail(file);
 
         self.switch_back_from_loading();
         let path = self.files().first().unwrap().path();
-        self.imp().apply_view.load_from_file(path.as_str());
+        self.imp().image_metadata_view.load_from_file(path.as_str());
 
         if matches!(self.imp().navigation.visible_page().and_then(|x| x.tag()), Some(x) if x == "main")
         {
