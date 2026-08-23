@@ -85,10 +85,10 @@ impl FileChooser {
         for filter in FileType::input_formats() {
             image_filter.add_mime_type(filter.as_mime());
         }
-        image_filter.set_name(Some(&gettext("Images")));
+        image_filter.set_name(Some(&gettext("Files")));
 
         let dialog = gtk::FileDialog::builder()
-            .accept_label(gettext("_Select Images"))
+            .accept_label(gettext("_Select Files"))
             .modal(true)
             .default_filter(&image_filter)
             .build();
