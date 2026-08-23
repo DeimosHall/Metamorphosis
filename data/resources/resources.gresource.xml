@@ -18,8 +18,7 @@
     </gresource>
 
     <gresource prefix="/dev/deimoshall/Metamorphosis/icons/scalable/apps/">
-        <file alias="io.gitlab.adhami3310.Impression.svg" compressed="true" preprocess="xml-stripblanks">icons/hicolor/scalable/apps/io.gitlab.adhami3310.Impression.svg</file>
-        <file alias="io.gitlab.adhami3310.Footage.svg" compressed="true" preprocess="xml-stripblanks">icons/hicolor/scalable/apps/io.gitlab.adhami3310.Footage.svg</file>
+        <file alias="dev.deimoshall.DecryptIt.svg" compressed="true" preprocess="xml-stripblanks">icons/hicolor/scalable/apps/dev.deimoshall.DecryptIt.svg</file>
     </gresource>
 
     <gresource prefix="/dev/deimoshall/Metamorphosis/icons/scalable/actions/">

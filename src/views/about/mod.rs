@@ -21,7 +21,7 @@ impl AboutView {
         about.set_translator_credits(&gettext("translator-credits"));
 
         about.add_other_app(
-            "io.dev.deimoshall.DecryptIt",
+            "dev.deimoshall.DecryptIt",
             "Decrypt It",
             &gettext("Decrypt DLC files"),
         );
