@@ -3,7 +3,6 @@ mod application;
 mod config;
 mod components;
 mod dialogs;
-mod input_file;
 mod models;
 mod services;
 mod views;

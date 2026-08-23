@@ -5,13 +5,12 @@ use gettextrs::gettext;
 use gtk::{gio, glib, prelude::*, subclass::prelude::*};
 
 use crate::config::{APP_ID, PKGDATADIR, PROFILE, VERSION};
-use crate::input_file::InputFile;
 use crate::window::AppWindow;
 
 mod imp {
 
     use super::*;
-    use crate::window::FileOperations;
+    use crate::{models::input_file::InputFile, window::FileOperations};
     use adw::subclass::prelude::AdwApplicationImpl;
 
     #[derive(Debug)]

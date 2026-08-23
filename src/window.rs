@@ -4,7 +4,7 @@ use std::sync::atomic::AtomicUsize;
 use crate::components::drag_overlay::DragOverlay;
 use crate::config::APP_ID;
 use crate::dialogs::file_chooser::FileChooser;
-use crate::input_file::InputFile;
+use crate::models::input_file::InputFile;
 use crate::models::job_file::JobFile;
 use crate::runtime;
 use crate::services::exif::ExifService;

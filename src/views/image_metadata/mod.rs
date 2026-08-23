@@ -2,7 +2,7 @@ use exiftool::ExifToolError;
 use glib::{object::ObjectExt, subclass::types::ObjectSubclassIsExt};
 use gtk::{glib, prelude::ButtonExt};
 
-use crate::{components::image_thumbnail::ImageThumbnail, input_file::InputFile};
+use crate::{components::image_thumbnail::ImageThumbnail, models::input_file::InputFile};
 
 mod image_advanced_tab;
 mod image_general_tab;
