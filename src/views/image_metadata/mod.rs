@@ -1,6 +1,7 @@
 use exiftool::ExifToolError;
 use glib::{object::ObjectExt, subclass::types::ObjectSubclassIsExt};
 use gtk::{glib, prelude::ButtonExt};
+use log::warn;
 
 use crate::{components::image_thumbnail::ImageThumbnail, models::input_file::InputFile};
 
@@ -31,7 +32,7 @@ mod imp {
         #[template_child]
         pub image_advanced_tab: TemplateChild<ImageAdvancedTab>,
         #[template_child]
-        pub apply_button: TemplateChild<gtk::Button>,
+        pub save_button: TemplateChild<gtk::Button>,
     }
 
     #[::glib::object_subclass]
@@ -140,16 +141,16 @@ impl ImageMetadataView {
             .connect_remove_clicked(move |_| on_remove(&view));
     }
 
-    pub fn set_on_apply<F>(&self, on_apply: F)
+    pub fn set_on_save<F>(&self, on_save: F)
     where
         // TODO: refactor this implementation
         F: Fn(&ImageMetadataView) + 'static,
     {
         let view = self.clone();
-        self.imp().apply_button.connect_clicked(move |_| {
+        self.imp().save_button.connect_clicked(move |_| {
             // Implemented on window.rs
-            // Calls apply_changes
-            on_apply(&view);
+            // Calls save_changes
+            on_save(&view);
         });
     }
 
@@ -160,16 +161,16 @@ impl ImageMetadataView {
     }
 
     /// Take the values from the UI fields and apply them to a file
-    pub fn apply_changes(&self, path: &str) -> Result<(), Vec<ExifToolError>> {
+    pub fn save_changes(&self, path: &str) -> Result<(), Vec<ExifToolError>> {
         if let Some(current_tab) = self.current_tab() {
             return match current_tab.as_str() {
-                "general" => self.imp().image_general_tab.apply_changes(path),
-                "advanced" => self.imp().image_advanced_tab.apply_changes(path),
+                "general" => self.imp().image_general_tab.save_changes(path),
+                "advanced" => self.imp().image_advanced_tab.save_changes(path),
                 _ => Ok(()), // TODO: return an error here
             };
         }
 
-        println!("This should never be printed");
+        warn!("This should never be printed");
         Ok(())
     }
 }

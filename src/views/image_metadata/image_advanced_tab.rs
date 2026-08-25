@@ -208,7 +208,7 @@ impl ImageAdvancedTab {
         self.set_offset_time_digitized(&offset_time_digitized);
     }
 
-    pub fn apply_changes(&self, path: &str) -> Result<(), Vec<ExifToolError>> {
+    pub fn save_changes(&self, path: &str) -> Result<(), Vec<ExifToolError>> {
         let exif = ExifService::new(path);
         let modify_date = self.modify_date();
         let date_time_original = self.date_time_original();

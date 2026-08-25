@@ -117,7 +117,7 @@ impl ImageGeneralTab {
     }
 
     /// Take the values from the UI fields and apply them to a file
-    pub fn apply_changes(&self, path: &str) -> Result<(), Vec<ExifToolError>> {
+    pub fn save_changes(&self, path: &str) -> Result<(), Vec<ExifToolError>> {
         let exif = ExifService::new(path);
         let date = self.date();
         let offset = self.offset();

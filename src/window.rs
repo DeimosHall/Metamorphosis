@@ -281,9 +281,9 @@ impl AppWindow {
             }
         ));
 
-        let apply_view = imp.image_metadata_view.clone();
+        let image_metadata_view = imp.image_metadata_view.clone();
 
-        apply_view.clone().set_on_remove(clone!(
+        image_metadata_view.clone().set_on_remove(clone!(
             #[weak(rename_to=win)]
             self,
             move |_| {
@@ -292,7 +292,7 @@ impl AppWindow {
         ));
 
         // TODO: check why going though here takes much time
-        apply_view.clone().set_on_apply(clone!(
+        image_metadata_view.clone().set_on_save(clone!(
             #[weak(rename_to=win)]
             self,
             move |_| {
@@ -309,11 +309,11 @@ impl AppWindow {
                     #[weak(rename_to=win)]
                     win,
                     #[strong]
-                    apply_view,
+                    image_metadata_view,
                     #[strong]
                     path,
                     async move {
-                        let result = apply_view.apply_changes(path.as_str());
+                        let result = image_metadata_view.save_changes(path.as_str());
 
                         match result {
                             Ok(()) => {
@@ -321,7 +321,7 @@ impl AppWindow {
                                     win.set_convert_progress(1, 1);
                                     win.switch_to_stack_apply();
                                 }
-                                apply_view.load_from_file(path.as_str());
+                                image_metadata_view.load_from_file(path.as_str());
                                 win.show_toast(&gettext("Changes applied"));
                             }
                             Err(errors) => {
