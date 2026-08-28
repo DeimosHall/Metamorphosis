@@ -1,12 +1,14 @@
 use exiftool::ExifToolError;
 use glib::{object::ObjectExt, subclass::types::ObjectSubclassIsExt};
 use gtk::{glib, prelude::ButtonExt};
-use log::warn;
+use log::{error, warn};
 
 use crate::{components::image_thumbnail::ImageThumbnail, models::input_file::InputFile};
 
-mod image_advanced_tab;
-mod image_general_tab;
+mod image_camera_lens;
+mod image_date_time;
+mod image_details;
+mod image_location;
 
 mod imp {
     use adw::subclass::prelude::*;
@@ -14,7 +16,8 @@ mod imp {
     use gtk::CompositeTemplate;
 
     use crate::views::image_metadata::{
-        self, image_advanced_tab::ImageAdvancedTab, image_general_tab::ImageGeneralTab,
+        self, image_camera_lens::ImageCameraLensView, image_date_time::ImageDateTimeView,
+        image_details::ImageDetailsView, image_location::ImageLocationView,
     };
 
     use super::*;
@@ -28,9 +31,13 @@ mod imp {
         #[template_child]
         pub image_thumbnail: TemplateChild<ImageThumbnail>,
         #[template_child]
-        pub image_general_tab: TemplateChild<ImageGeneralTab>,
+        pub image_camera_lens_view: TemplateChild<ImageCameraLensView>,
         #[template_child]
-        pub image_advanced_tab: TemplateChild<ImageAdvancedTab>,
+        pub image_date_time_view: TemplateChild<ImageDateTimeView>,
+        #[template_child]
+        pub image_details_view: TemplateChild<ImageDetailsView>,
+        #[template_child]
+        pub image_location_view: TemplateChild<ImageLocationView>,
         #[template_child]
         pub save_button: TemplateChild<gtk::Button>,
     }
@@ -78,28 +85,38 @@ impl ImageMetadataView {
 
     /// Helper method to show or hide the advanced tab container.
     ///
-    /// Both tabs have different heights because of the different
-    /// amount of fields. This makes the general tab have a height
-    /// equivalent to the advanced one. This method addresses this
-    /// issue.
+    /// Tabs have different heights because of the different
+    /// amount of fields. This method addresses this issue.
     ///
     /// This doesn't work without the inner container.
     pub fn setup_tab_switch_listener(&self) {
         let view = self.clone();
         // Hide advanced tab at startup.
         // Comment it to see the height issue at least once.
-        view.imp().image_advanced_tab.hide();
+        view.imp().image_camera_lens_view.hide();
 
         self.stack()
             .connect_visible_child_name_notify(move |stack| {
                 if let Some(tab) = stack.visible_child_name() {
+                    view.hide_all_tabs();
+
                     match tab.as_str() {
-                        "general" => view.imp().image_advanced_tab.hide(),
-                        "advanced" => view.imp().image_advanced_tab.show(),
-                        _ => {}
+                        "date_time" => view.imp().image_date_time_view.show(),
+                        "location" => view.imp().image_location_view.show(),
+                        "camera_lens" => view.imp().image_camera_lens_view.show(),
+                        "details" => view.imp().image_details_view.show(),
+                        _ => warn!("Unhandled tab: {}", tab.as_str()),
                     }
+                } else {
+                    error!("Error getting the tab name");
                 }
             });
+    }
+
+    fn hide_all_tabs(&self) {
+        self.imp().image_camera_lens_view.hide();
+        self.imp().image_date_time_view.hide();
+        self.imp().image_location_view.hide();
     }
 
     pub fn current_tab(&self) -> Option<glib::GString> {
@@ -156,17 +173,24 @@ impl ImageMetadataView {
 
     /// Populate UI fields using exif data from the given file
     pub fn load_from_file(&self, path: &str) {
-        self.imp().image_general_tab.load_from_file(path);
-        self.imp().image_advanced_tab.load_from_file(path);
+        self.imp().image_date_time_view.load_from_file(path);
+        self.imp().image_location_view.load_from_file(path);
+        self.imp().image_camera_lens_view.load_from_file(path);
+        self.imp().image_details_view.load_file(path);
     }
 
     /// Take the values from the UI fields and apply them to a file
     pub fn save_changes(&self, path: &str) -> Result<(), Vec<ExifToolError>> {
         if let Some(current_tab) = self.current_tab() {
             return match current_tab.as_str() {
-                "general" => self.imp().image_general_tab.save_changes(path),
-                "advanced" => self.imp().image_advanced_tab.save_changes(path),
-                _ => Ok(()), // TODO: return an error here
+                "date_time" => self.imp().image_date_time_view.save_changes(path),
+                "location" => self.imp().image_location_view.save_changes(path),
+                "camera_lens" => self.imp().image_camera_lens_view.save_changes(path),
+                "details" => self.imp().image_details_view.save_changes(path),
+                _ => {
+                    warn!("Unhandled tab: {}", current_tab);
+                    Ok(())
+                }
             };
         }
 

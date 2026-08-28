@@ -13,8 +13,10 @@
         <file compressed="true" preprocess="xml-stripblanks" alias="window.ui">window.ui</file>
         <file compressed="true" preprocess="xml-stripblanks" alias="components/image-thumbnail.ui">components-image_thumbnail.ui</file>
         <file compressed="true" preprocess="xml-stripblanks" alias="views/image_metadata/mod.ui">views-image_metadata-mod.ui</file>
-        <file compressed="true" preprocess="xml-stripblanks" alias="views/image_metadata/image_general_tab.ui">views-image_metadata-image_general_tab.ui</file>
-        <file compressed="true" preprocess="xml-stripblanks" alias="views/image_metadata/image_advanced_tab.ui">views-image_metadata-image_advanced_tab.ui</file>
+        <file compressed="true" preprocess="xml-stripblanks" alias="views/image_metadata/image_camera_lens.ui">views-image_metadata-image_camera_lens.ui</file>
+        <file compressed="true" preprocess="xml-stripblanks" alias="views/image_metadata/image_date_time.ui">views-image_metadata-image_date_time.ui</file>
+        <file compressed="true" preprocess="xml-stripblanks" alias="views/image_metadata/image_details.ui">views-image_metadata-image_details.ui</file>
+        <file compressed="true" preprocess="xml-stripblanks" alias="views/image_metadata/image_location.ui">views-image_metadata-image_location.ui</file>
     </gresource>
 
     <gresource prefix="/dev/deimoshall/Metamorphosis/icons/scalable/apps/">
@@ -29,7 +31,9 @@
         <file alias="view-more-horizontal-symbolic.svg" compressed="true" preprocess="xml-stripblanks">icons/hicolor/scalable/actions/view-more-horizontal-symbolic.svg</file>
         <file alias="plus-large-symbolic.svg" compressed="true" preprocess="xml-stripblanks">icons/hicolor/scalable/actions/plus-large-symbolic.svg</file>
         <file alias="user-trash-symbolic.svg" compressed="true" preprocess="xml-stripblanks">icons/hicolor/scalable/actions/user-trash-symbolic.svg</file>
-        <file alias="chain-link-loose-symbolic.svg" compressed="true" preprocess="xml-stripblanks">icons/hicolor/scalable/actions/chain-link-loose-symbolic.svg</file>
-        <file alias="chain-link-symbolic.svg" compressed="true" preprocess="xml-stripblanks">icons/hicolor/scalable/actions/chain-link-symbolic.svg</file>
+        <file alias="clock-alt-symbolic.svg" compressed="true" preprocess="xml-stripblanks">icons/hicolor/scalable/actions/clock-alt-symbolic.svg</file>
+        <file alias="map-marker-symbolic.svg" compressed="true" preprocess="xml-stripblanks">icons/hicolor/scalable/actions/map-marker-symbolic.svg</file>
+        <file alias="editor-symbolic.svg" compressed="true" preprocess="xml-stripblanks">icons/hicolor/scalable/actions/editor-symbolic.svg</file>
+        <file alias="camera-shutter-symbolic.svg" compressed="true" preprocess="xml-stripblanks">icons/hicolor/scalable/actions/camera-shutter-symbolic.svg</file>
     </gresource>
 </gresources>

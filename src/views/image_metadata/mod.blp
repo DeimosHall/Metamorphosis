@@ -21,19 +21,35 @@ template $ImageMetadataView: Adw.Bin {
             margin-bottom: 64;
 
             Adw.ViewStackPage {
-              name: "general";
-              title: _("General");
-              icon-name: "build-alt-symbolic";
+              name: "date_time";
+              title: _("Date & Time");
+              icon-name: "clock-alt-symbolic";
 
-              child: $ImageGeneralTab image_general_tab {};
+              child: $ImageDateTimeView image_date_time_view {};
             }
 
             Adw.ViewStackPage {
-              name: "advanced";
-              title: _("Advanced");
-              icon-name: "build-configure-symbolic";
+              name: "location";
+              title: _("Location");
+              icon-name: "map-marker-symbolic";
 
-              child: $ImageAdvancedTab image_advanced_tab {};
+              child: $ImageLocationView image_location_view {};
+            }
+
+            Adw.ViewStackPage {
+              name: "camera_lens";
+              title: _("Camera & Lens");
+              icon-name: "camera-shutter-symbolic";
+
+              child: $ImageCameraLensView image_camera_lens_view {};
+            }
+
+            Adw.ViewStackPage {
+              name: "details";
+              title: _("Details");
+              icon-name: "editor-symbolic";
+
+              child: $ImageDetailsView image_details_view {};
             }
           }
         }

@@ -13,9 +13,11 @@ mod imp {
     #[derive(Debug, CompositeTemplate, Derivative)]
     #[derivative(Default)]
     #[template(
-        resource = "/dev/deimoshall/Metamorphosis/ui/views/image_metadata/image_general_tab.ui"
+        resource = "/dev/deimoshall/Metamorphosis/ui/views/image_metadata/image_date_time.ui"
     )]
-    pub struct ImageGeneralTab {
+    pub struct ImageDateTimeView {
+        #[template_child]
+        pub container: TemplateChild<gtk::Box>,
         #[template_child]
         pub creation_date_entry: TemplateChild<gtk::Entry>,
         #[template_child]
@@ -24,14 +26,12 @@ mod imp {
         pub manufacturer_entry: TemplateChild<gtk::Entry>,
         #[template_child]
         pub model_entry: TemplateChild<gtk::Entry>,
-        #[template_child]
-        pub image_description_entry: TemplateChild<gtk::Entry>,
     }
 
     #[glib::object_subclass]
-    impl ObjectSubclass for ImageGeneralTab {
-        const NAME: &'static str = "ImageGeneralTab";
-        type Type = super::ImageGeneralTab;
+    impl ObjectSubclass for ImageDateTimeView {
+        const NAME: &'static str = "ImageDateTimeView";
+        type Type = super::ImageDateTimeView;
         type ParentType = adw::Bin;
 
         fn class_init(klass: &mut Self::Class) {
@@ -43,20 +43,28 @@ mod imp {
         }
     }
 
-    impl ObjectImpl for ImageGeneralTab {}
-    impl WidgetImpl for ImageGeneralTab {}
-    impl BinImpl for ImageGeneralTab {}
+    impl ObjectImpl for ImageDateTimeView {}
+    impl WidgetImpl for ImageDateTimeView {}
+    impl BinImpl for ImageDateTimeView {}
 }
 
 glib::wrapper! {
-    pub struct ImageGeneralTab(ObjectSubclass<imp::ImageGeneralTab>)
+    pub struct ImageDateTimeView(ObjectSubclass<imp::ImageDateTimeView>)
     @extends gtk::Widget, adw::Bin,
     @implements gtk::Accessible, gtk::Buildable, gtk::ConstraintTarget;
 }
 
-impl ImageGeneralTab {
+impl ImageDateTimeView {
     pub fn new() -> Self {
         glib::Object::new()
+    }
+
+    pub fn show(&self) {
+        self.imp().container.set_visible(true);
+    }
+
+    pub fn hide(&self) {
+        self.imp().container.set_visible(false);
     }
 
     pub fn date(&self) -> String {
@@ -75,10 +83,6 @@ impl ImageGeneralTab {
         self.imp().model_entry.text().to_string()
     }
 
-    pub fn description(&self) -> String {
-        self.imp().image_description_entry.text().to_string()
-    }
-
     pub fn set_date(&self, date: &str) {
         self.imp().creation_date_entry.set_text(date);
     }
@@ -95,10 +99,6 @@ impl ImageGeneralTab {
         self.imp().model_entry.set_text(model);
     }
 
-    pub fn set_description(&self, description: &str) {
-        self.imp().image_description_entry.set_text(description);
-    }
-
     // TODO: maybe these methods should go in a trait
     /// Populate UI fields using exif data from the given file
     pub fn load_from_file(&self, path: &str) {
@@ -107,13 +107,11 @@ impl ImageGeneralTab {
         let offset = exif.offset_time_digitized().unwrap_or_default();
         let manufacturer = exif.make().unwrap_or_default();
         let model = exif.model().unwrap_or_default();
-        let description = exif.image_description().unwrap_or_default();
 
         self.set_date(&date);
         self.set_offset(&offset);
         self.set_manufacturer(&manufacturer);
         self.set_model(&model);
-        self.set_description(&description);
     }
 
     /// Take the values from the UI fields and apply them to a file
@@ -123,7 +121,6 @@ impl ImageGeneralTab {
         let offset = self.offset();
         let manufacturer = self.manufacturer();
         let model = self.model();
-        let description = self.description();
 
         let mut errors = Vec::new();
 
@@ -140,10 +137,6 @@ impl ImageGeneralTab {
         }
 
         if let Err(e) = exif.set_model(model.as_str()) {
-            errors.push(e);
-        }
-
-        if let Err(e) = exif.set_image_description(description.as_str()) {
             errors.push(e);
         }
 

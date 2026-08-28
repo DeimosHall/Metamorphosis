@@ -1,7 +1,9 @@
 # List of Blueprint files to compile.
 # Keep this file sorted alphabetically.
 components/image_thumbnail.blp
-views/image_metadata/image_advanced_tab.blp
-views/image_metadata/image_general_tab.blp
+views/image_metadata/image_camera_lens.blp
+views/image_metadata/image_date_time.blp
+views/image_metadata/image_details.blp
+views/image_metadata/image_location.blp
 views/image_metadata/mod.blp
 window.blp
