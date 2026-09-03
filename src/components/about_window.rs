@@ -7,6 +7,7 @@ use gtk::License;
 
 // This is non-translatable information, so it can be const
 pub const DEVELOPERS: &[&str] = &["Deimos Hall <deimoshall@proton.me>"];
+pub const ARTISTS: &[&str] = &["Hylke Bons https://planetpeanut.studio"];
 
 #[derive(Clone, Debug)]
 pub struct MetamorphosisAbout;
@@ -18,6 +19,7 @@ impl MetamorphosisAbout {
             Some(crate::config::VERSION),
         );
         about.set_developers(DEVELOPERS);
+        about.set_artists(ARTISTS);
         about.set_translator_credits(&gettext("translator-credits"));
 
         about.add_other_app(
