@@ -54,8 +54,8 @@
     </recommends>
 
     <branding>
-        <color type="primary" scheme_preference="light">#f18e57</color>
-        <color type="primary" scheme_preference="dark">#29426B</color>
+        <color type="primary" scheme_preference="light">#D4AE94</color>
+        <color type="primary" scheme_preference="dark">#983013</color>
     </branding>
 
     <screenshots>
