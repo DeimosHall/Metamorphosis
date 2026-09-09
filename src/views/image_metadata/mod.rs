@@ -1,43 +1,51 @@
 use exiftool::ExifToolError;
 use glib::{object::ObjectExt, subclass::types::ObjectSubclassIsExt};
 use gtk::{glib, prelude::ButtonExt};
+use log::{error, warn};
 
-use crate::{components::image_thumbnail::ImageThumbnail, input_file::InputFile};
+use crate::{components::image_thumbnail::ImageThumbnail, models::input_file::InputFile};
 
-mod image_advanced_tab;
-mod image_general_tab;
+mod image_camera_lens;
+mod image_date_time;
+mod image_details;
+mod image_location;
 
 mod imp {
     use adw::subclass::prelude::*;
     use derivative::Derivative;
     use gtk::CompositeTemplate;
 
-    use crate::views::apply::{
-        self, image_advanced_tab::ImageAdvancedTab, image_general_tab::ImageGeneralTab,
+    use crate::views::image_metadata::{
+        self, image_camera_lens::ImageCameraLensView, image_date_time::ImageDateTimeView,
+        image_details::ImageDetailsView, image_location::ImageLocationView,
     };
 
     use super::*;
 
     #[derive(Debug, CompositeTemplate, Derivative)]
     #[derivative(Default)]
-    #[template(resource = "/dev/deimoshall/Metamorphosis/ui/views/apply/mod.ui")]
-    pub struct Apply {
+    #[template(resource = "/dev/deimoshall/Metamorphosis/ui/views/image_metadata/mod.ui")]
+    pub struct ImageMetadataView {
         #[template_child]
         pub image_stack: TemplateChild<adw::ViewStack>,
         #[template_child]
         pub image_thumbnail: TemplateChild<ImageThumbnail>,
         #[template_child]
-        pub image_general_tab: TemplateChild<ImageGeneralTab>,
+        pub image_camera_lens_view: TemplateChild<ImageCameraLensView>,
         #[template_child]
-        pub image_advanced_tab: TemplateChild<ImageAdvancedTab>,
+        pub image_date_time_view: TemplateChild<ImageDateTimeView>,
         #[template_child]
-        pub apply_button: TemplateChild<gtk::Button>,
+        pub image_details_view: TemplateChild<ImageDetailsView>,
+        #[template_child]
+        pub image_location_view: TemplateChild<ImageLocationView>,
+        #[template_child]
+        pub save_button: TemplateChild<gtk::Button>,
     }
 
     #[::glib::object_subclass]
-    impl ObjectSubclass for Apply {
-        const NAME: &'static str = "ApplyView";
-        type Type = apply::Apply;
+    impl ObjectSubclass for ImageMetadataView {
+        const NAME: &'static str = "ImageMetadataView";
+        type Type = image_metadata::ImageMetadataView;
         type ParentType = adw::Bin;
 
         fn class_init(klass: &mut Self::Class) {
@@ -49,24 +57,24 @@ mod imp {
         }
     }
 
-    impl ObjectImpl for Apply {}
-    impl WidgetImpl for Apply {}
-    impl BinImpl for Apply {}
+    impl ObjectImpl for ImageMetadataView {}
+    impl WidgetImpl for ImageMetadataView {}
+    impl BinImpl for ImageMetadataView {}
 }
 
 glib::wrapper! {
-    pub struct Apply(ObjectSubclass<imp::Apply>)
+    pub struct ImageMetadataView(ObjectSubclass<imp::ImageMetadataView>)
         @extends gtk::Widget, adw::Bin,
         @implements gtk::Accessible, gtk::Buildable, gtk::ConstraintTarget;
 }
 
-impl Default for Apply {
+impl Default for ImageMetadataView {
     fn default() -> Self {
         glib::Object::new()
     }
 }
 
-impl Apply {
+impl ImageMetadataView {
     pub fn new() -> Self {
         glib::Object::new()
     }
@@ -77,28 +85,38 @@ impl Apply {
 
     /// Helper method to show or hide the advanced tab container.
     ///
-    /// Both tabs have different heights because of the different
-    /// amount of fields. This makes the general tab have a height
-    /// equivalent to the advanced one. This method addresses this
-    /// issue.
+    /// Tabs have different heights because of the different
+    /// amount of fields. This method addresses this issue.
     ///
     /// This doesn't work without the inner container.
     pub fn setup_tab_switch_listener(&self) {
         let view = self.clone();
         // Hide advanced tab at startup.
         // Comment it to see the height issue at least once.
-        view.imp().image_advanced_tab.hide();
+        view.imp().image_camera_lens_view.hide();
 
         self.stack()
             .connect_visible_child_name_notify(move |stack| {
                 if let Some(tab) = stack.visible_child_name() {
+                    view.hide_all_tabs();
+
                     match tab.as_str() {
-                        "general" => view.imp().image_advanced_tab.hide(),
-                        "advanced" => view.imp().image_advanced_tab.show(),
-                        _ => {}
+                        "date_time" => view.imp().image_date_time_view.show(),
+                        "location" => view.imp().image_location_view.show(),
+                        "camera_lens" => view.imp().image_camera_lens_view.show(),
+                        "details" => view.imp().image_details_view.show(),
+                        _ => warn!("Unhandled tab: {}", tab.as_str()),
                     }
+                } else {
+                    error!("Error getting the tab name");
                 }
             });
+    }
+
+    fn hide_all_tabs(&self) {
+        self.imp().image_camera_lens_view.hide();
+        self.imp().image_date_time_view.hide();
+        self.imp().image_location_view.hide();
     }
 
     pub fn current_tab(&self) -> Option<glib::GString> {
@@ -132,7 +150,7 @@ impl Apply {
     /// placed on the top right of the image.
     pub fn set_on_remove<F>(&self, on_remove: F)
     where
-        F: Fn(&Apply) + 'static,
+        F: Fn(&ImageMetadataView) + 'static,
     {
         let view = self.clone();
         self.imp()
@@ -140,36 +158,43 @@ impl Apply {
             .connect_remove_clicked(move |_| on_remove(&view));
     }
 
-    pub fn set_on_apply<F>(&self, on_apply: F)
+    pub fn set_on_save<F>(&self, on_save: F)
     where
         // TODO: refactor this implementation
-        F: Fn(&Apply) + 'static,
+        F: Fn(&ImageMetadataView) + 'static,
     {
         let view = self.clone();
-        self.imp().apply_button.connect_clicked(move |_| {
+        self.imp().save_button.connect_clicked(move |_| {
             // Implemented on window.rs
-            // Calls apply_changes
-            on_apply(&view);
+            // Calls save_changes
+            on_save(&view);
         });
     }
 
     /// Populate UI fields using exif data from the given file
     pub fn load_from_file(&self, path: &str) {
-        self.imp().image_general_tab.load_from_file(path);
-        self.imp().image_advanced_tab.load_from_file(path);
+        self.imp().image_date_time_view.load_from_file(path);
+        self.imp().image_location_view.load_from_file(path);
+        self.imp().image_camera_lens_view.load_from_file(path);
+        self.imp().image_details_view.load_file(path);
     }
 
     /// Take the values from the UI fields and apply them to a file
-    pub fn apply_changes(&self, path: &str) -> Result<(), Vec<ExifToolError>> {
+    pub fn save_changes(&self, path: &str) -> Result<(), Vec<ExifToolError>> {
         if let Some(current_tab) = self.current_tab() {
             return match current_tab.as_str() {
-                "general" => self.imp().image_general_tab.apply_changes(path),
-                "advanced" => self.imp().image_advanced_tab.apply_changes(path),
-                _ => Ok(()), // TODO: return an error here
+                "date_time" => self.imp().image_date_time_view.save_changes(path),
+                "location" => self.imp().image_location_view.save_changes(path),
+                "camera_lens" => self.imp().image_camera_lens_view.save_changes(path),
+                "details" => self.imp().image_details_view.save_changes(path),
+                _ => {
+                    warn!("Unhandled tab: {}", current_tab);
+                    Ok(())
+                }
             };
         }
 
-        println!("This should never be printed");
+        warn!("This should never be printed");
         Ok(())
     }
 }

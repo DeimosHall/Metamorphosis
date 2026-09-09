@@ -2,8 +2,7 @@ mod application;
 #[rustfmt::skip]
 mod config;
 mod components;
-mod file_chooser;
-mod input_file;
+mod dialogs;
 mod models;
 mod services;
 mod views;

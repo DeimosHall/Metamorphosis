@@ -1,0 +1,34 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $ImageCameraLensView: Adw.Bin {
+  // A container is strictly needed here because I need to manipulate
+  // the visible state in order to have a consistent height on the main
+  // window content. Check setup_tab_switch_listener for more context.
+  Gtk.Box container {
+    orientation: vertical;
+    spacing: 24;
+
+    Adw.PreferencesGroup {
+      title: _("Device");
+
+      Adw.ActionRow {
+        title: _("Manufacturer");
+
+        Entry manufacturer_entry {
+          width-chars: 20;
+          valign: center;
+        }
+      }
+
+      Adw.ActionRow {
+        title: _("Model");
+
+        Entry model_entry {
+          width-chars: 20;
+          valign: center;
+        }
+      }
+    }
+  }
+}

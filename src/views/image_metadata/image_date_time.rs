@@ -1,8 +1,8 @@
-use exiftool::ExifToolError;
 use gtk::{glib, prelude::*, subclass::prelude::*};
 
 use adw::subclass::bin::BinImpl;
 use derivative::Derivative;
+use exiftool::ExifToolError;
 use gtk_macros::CompositeTemplate;
 
 use crate::services::exif::ExifService;
@@ -10,11 +10,17 @@ use crate::services::exif::ExifService;
 mod imp {
     use super::*;
 
-    #[derive(Debug, CompositeTemplate, Derivative, Default)]
-    #[template(resource = "/dev/deimoshall/Metamorphosis/ui/views/apply/image_advanced_tab.ui")]
-    pub struct ImageAdvancedTab {
+    #[derive(Debug, CompositeTemplate, Derivative)]
+    #[derivative(Default)]
+    #[template(
+        resource = "/dev/deimoshall/Metamorphosis/ui/views/image_metadata/image_date_time.ui"
+    )]
+    pub struct ImageDateTimeView {
         #[template_child]
         pub container: TemplateChild<gtk::Box>,
+        #[template_child]
+        pub creation_date_entry: TemplateChild<gtk::Entry>,
+
         // Dates
         #[template_child]
         pub modify_date_entry: TemplateChild<gtk::Entry>,
@@ -22,10 +28,6 @@ mod imp {
         pub date_time_original_entry: TemplateChild<gtk::Entry>,
         #[template_child]
         pub create_date_entry: TemplateChild<gtk::Entry>,
-        #[template_child]
-        pub gps_date_stamp_entry: TemplateChild<gtk::Entry>,
-        #[template_child]
-        pub gps_time_stamp_entry: TemplateChild<gtk::Entry>,
 
         // Fractional seconds
         #[template_child]
@@ -45,9 +47,9 @@ mod imp {
     }
 
     #[glib::object_subclass]
-    impl ObjectSubclass for ImageAdvancedTab {
-        const NAME: &'static str = "ImageAdvancedTab";
-        type Type = super::ImageAdvancedTab;
+    impl ObjectSubclass for ImageDateTimeView {
+        const NAME: &'static str = "ImageDateTimeView";
+        type Type = super::ImageDateTimeView;
         type ParentType = adw::Bin;
 
         fn class_init(klass: &mut Self::Class) {
@@ -59,18 +61,18 @@ mod imp {
         }
     }
 
-    impl ObjectImpl for ImageAdvancedTab {}
-    impl WidgetImpl for ImageAdvancedTab {}
-    impl BinImpl for ImageAdvancedTab {}
+    impl ObjectImpl for ImageDateTimeView {}
+    impl WidgetImpl for ImageDateTimeView {}
+    impl BinImpl for ImageDateTimeView {}
 }
 
 glib::wrapper! {
-    pub struct ImageAdvancedTab(ObjectSubclass<imp::ImageAdvancedTab>)
+    pub struct ImageDateTimeView(ObjectSubclass<imp::ImageDateTimeView>)
     @extends gtk::Widget, adw::Bin,
     @implements gtk::Accessible, gtk::Buildable, gtk::ConstraintTarget;
 }
 
-impl ImageAdvancedTab {
+impl ImageDateTimeView {
     pub fn new() -> Self {
         glib::Object::new()
     }
@@ -81,6 +83,14 @@ impl ImageAdvancedTab {
 
     pub fn hide(&self) {
         self.imp().container.set_visible(false);
+    }
+
+    pub fn date(&self) -> String {
+        self.imp().creation_date_entry.text().to_string()
+    }
+
+    pub fn set_date(&self, date: &str) {
+        self.imp().creation_date_entry.set_text(date);
     }
 
     pub fn modify_date(&self) -> String {
@@ -105,22 +115,6 @@ impl ImageAdvancedTab {
 
     pub fn set_create_date(&self, create_date: &str) {
         self.imp().create_date_entry.set_text(create_date);
-    }
-
-    pub fn gps_date_stamp(&self) -> String {
-        self.imp().gps_date_stamp_entry.text().to_string()
-    }
-
-    pub fn set_gps_date_stamp(&self, gps_date_stamp: &str) {
-        self.imp().gps_date_stamp_entry.set_text(gps_date_stamp);
-    }
-
-    pub fn gps_time_stamp(&self) -> String {
-        self.imp().gps_time_stamp_entry.text().to_string()
-    }
-
-    pub fn set_gps_time_stamp(&self, gps_time_stamp: &str) {
-        self.imp().gps_time_stamp_entry.set_text(gps_time_stamp);
     }
 
     pub fn sub_sec_time(&self) -> String {
@@ -179,13 +173,15 @@ impl ImageAdvancedTab {
             .set_text(offset_time_digitized);
     }
 
+    // TODO: maybe these methods should go in a trait
+    /// Populate UI fields using exif data from the given file
     pub fn load_from_file(&self, path: &str) {
         let exif = ExifService::new(path);
+        let date = exif.create_date().unwrap_or_default();
+
         let modify_date = exif.modify_date().unwrap_or_default();
         let date_time_original = exif.date_time_original().unwrap_or_default();
         let create_date = exif.create_date().unwrap_or_default();
-        let gps_date_stamp = exif.gps_date_stamp().unwrap_or_default();
-        let gps_time_stamp = exif.gps_time_stamp().unwrap_or_default();
         let sub_sec_time = exif.sub_sec_time().unwrap_or_default();
         let sub_sec_time_original = exif.sub_sec_time_original().unwrap_or_default();
         let sub_sec_time_digitized = exif.sub_sec_time_digitized().unwrap_or_default();
@@ -193,11 +189,11 @@ impl ImageAdvancedTab {
         let offset_time_original = exif.offset_time_original().unwrap_or_default();
         let offset_time_digitized = exif.offset_time_digitized().unwrap_or_default();
 
+        self.set_date(&date);
+
         self.set_modify_date(&modify_date);
         self.set_date_time_original(&date_time_original);
         self.set_create_date(&create_date);
-        self.set_gps_date_stamp(&gps_date_stamp);
-        self.set_gps_time_stamp(&gps_time_stamp);
         self.set_sub_sec_time(&sub_sec_time);
         self.set_sub_sec_time_original(&sub_sec_time_original);
         self.set_sub_sec_time_digitized(&sub_sec_time_digitized);
@@ -206,13 +202,14 @@ impl ImageAdvancedTab {
         self.set_offset_time_digitized(&offset_time_digitized);
     }
 
-    pub fn apply_changes(&self, path: &str) -> Result<(), Vec<ExifToolError>> {
+    /// Take the values from the UI fields and apply them to a file
+    pub fn save_changes(&self, path: &str) -> Result<(), Vec<ExifToolError>> {
         let exif = ExifService::new(path);
+        let date = self.date();
+
         let modify_date = self.modify_date();
         let date_time_original = self.date_time_original();
         let create_date = self.create_date();
-        let gps_date_stamp = self.gps_date_stamp();
-        let gps_time_stamp = self.gps_time_stamp();
         let sub_sec_time = self.sub_sec_time();
         let sub_sec_time_original = self.sub_sec_time_original();
         let sub_sec_time_digitized = self.sub_sec_time_digitized();
@@ -221,6 +218,10 @@ impl ImageAdvancedTab {
         let offset_time_digitized = self.offset_time_digitized();
 
         let mut errors = Vec::new();
+
+        if let Err(e) = exif.set_all_dates(date.as_str()) {
+            errors.push(e);
+        }
 
         if let Err(e) = exif.set_modify_date(modify_date.as_str()) {
             errors.push(e);
@@ -231,14 +232,6 @@ impl ImageAdvancedTab {
         }
 
         if let Err(e) = exif.set_create_date(create_date.as_str()) {
-            errors.push(e);
-        }
-
-        if let Err(e) = exif.set_gps_date_stamp(gps_date_stamp.as_str()) {
-            errors.push(e);
-        }
-
-        if let Err(e) = exif.set_gps_time_stamp(gps_time_stamp.as_str()) {
             errors.push(e);
         }
 
@@ -263,6 +256,10 @@ impl ImageAdvancedTab {
         }
 
         if let Err(e) = exif.set_offset_time_digitized(offset_time_digitized.as_str()) {
+            errors.push(e);
+        }
+
+        if let Err(e) = exif.set_software() {
             errors.push(e);
         }
 

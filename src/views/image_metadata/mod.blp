@@ -1,0 +1,73 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $ImageMetadataView: Adw.Bin {
+  child: Gtk.Overlay {
+    ScrolledWindow {
+      Adw.Clamp {
+        Gtk.Box {
+          orientation: vertical;
+          spacing: 24;
+          margin-top: 24;
+          margin-bottom: 24;
+          // Image inside preferences group to keep aspect ratio
+          Adw.PreferencesGroup {
+            halign: center;
+
+            $ImageThumbnail image_thumbnail {}
+          }
+
+          Adw.ViewStack image_stack {
+            margin-bottom: 64;
+
+            Adw.ViewStackPage {
+              name: "date_time";
+              title: _("Date & Time");
+              icon-name: "clock-alt-symbolic";
+
+              child: $ImageDateTimeView image_date_time_view {};
+            }
+
+            Adw.ViewStackPage {
+              name: "location";
+              title: _("Location");
+              icon-name: "map-marker-symbolic";
+
+              child: $ImageLocationView image_location_view {};
+            }
+
+            Adw.ViewStackPage {
+              name: "camera_lens";
+              title: _("Camera & Lens");
+              icon-name: "camera-shutter-symbolic";
+
+              child: $ImageCameraLensView image_camera_lens_view {};
+            }
+
+            Adw.ViewStackPage {
+              name: "details";
+              title: _("Details");
+              icon-name: "editor-symbolic";
+
+              child: $ImageDetailsView image_details_view {};
+            }
+          }
+        }
+      }
+    }
+
+    [overlay]
+    Button save_button {
+      label: _("Save");
+      halign: end;
+      valign: end;
+      margin-end: 24;
+      margin-bottom: 24;
+
+      styles [
+        "suggested-action",
+        "pill",
+      ]
+    }
+  };
+}

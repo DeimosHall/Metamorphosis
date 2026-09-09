@@ -1,14 +1,14 @@
 use std::collections::HashSet;
 use std::sync::atomic::AtomicUsize;
 
-use crate::components::about_window::MetamorphosisAbout;
 use crate::components::drag_overlay::DragOverlay;
 use crate::config::APP_ID;
-use crate::file_chooser::FileChooser;
-use crate::input_file::InputFile;
+use crate::dialogs::file_chooser::FileChooser;
+use crate::models::input_file::InputFile;
 use crate::models::job_file::JobFile;
 use crate::runtime;
 use crate::services::exif::ExifService;
+use crate::views::about::AboutView;
 use adw::prelude::*;
 use futures::future::join_all;
 use gettextrs::gettext;
@@ -20,37 +20,13 @@ use log::{debug, error, warn};
 use shared_child::SharedChild;
 use std::sync::Arc;
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq)]
-pub enum ResizeFilter {
-    Default,
-    Point,
-}
-
-#[allow(dead_code)]
-impl ResizeFilter {
-    pub fn as_display_string(&self) -> Option<&str> {
-        match self {
-            ResizeFilter::Default => None,
-            ResizeFilter::Point => Some("Point"),
-        }
-    }
-
-    pub fn from_index(index: usize) -> Option<Self> {
-        match index {
-            0 => Some(ResizeFilter::Default),
-            1 => Some(ResizeFilter::Point),
-            _ => None,
-        }
-    }
-}
-
 mod imp {
     use std::{
         cell::{Cell, RefCell},
         sync::atomic::AtomicBool,
     };
 
-    use crate::{config::PKGDATADIR, views::apply::Apply};
+    use crate::{config::PKGDATADIR, views::image_metadata::ImageMetadataView};
 
     use super::*;
 
@@ -79,9 +55,11 @@ mod imp {
         #[template_child]
         pub progress_bar: TemplateChild<gtk::ProgressBar>,
         #[template_child]
-        pub apply_view: TemplateChild<Apply>,
+        pub image_metadata_view: TemplateChild<ImageMetadataView>,
         #[template_child]
         pub view_switcher: TemplateChild<adw::ViewSwitcher>,
+        #[template_child]
+        pub view_switcher_bar: TemplateChild<adw::ViewSwitcherBar>,
 
         #[template_child]
         pub navigation: TemplateChild<adw::NavigationView>,
@@ -266,9 +244,12 @@ impl AppWindow {
         //load imp
         let imp = self.imp();
 
-        imp.view_switcher.set_stack(Some(&imp.apply_view.stack()));
+        imp.view_switcher
+            .set_stack(Some(&imp.image_metadata_view.stack()));
+        imp.view_switcher_bar
+            .set_stack(Some(&imp.image_metadata_view.stack()));
 
-        imp.apply_view.setup_tab_switch_listener();
+        imp.image_metadata_view.setup_tab_switch_listener();
 
         imp.open_button.connect_clicked(clone!(
             #[weak(rename_to=this)]
@@ -304,9 +285,9 @@ impl AppWindow {
             }
         ));
 
-        let apply_view = imp.apply_view.clone();
+        let image_metadata_view = imp.image_metadata_view.clone();
 
-        apply_view.clone().set_on_remove(clone!(
+        image_metadata_view.clone().set_on_remove(clone!(
             #[weak(rename_to=win)]
             self,
             move |_| {
@@ -315,7 +296,7 @@ impl AppWindow {
         ));
 
         // TODO: check why going though here takes much time
-        apply_view.clone().set_on_apply(clone!(
+        image_metadata_view.clone().set_on_save(clone!(
             #[weak(rename_to=win)]
             self,
             move |_| {
@@ -332,11 +313,11 @@ impl AppWindow {
                     #[weak(rename_to=win)]
                     win,
                     #[strong]
-                    apply_view,
+                    image_metadata_view,
                     #[strong]
                     path,
                     async move {
-                        let result = apply_view.apply_changes(path.as_str());
+                        let result = image_metadata_view.save_changes(path.as_str());
 
                         match result {
                             Ok(()) => {
@@ -344,7 +325,7 @@ impl AppWindow {
                                     win.set_convert_progress(1, 1);
                                     win.switch_to_stack_apply();
                                 }
-                                apply_view.load_from_file(path.as_str());
+                                image_metadata_view.load_from_file(path.as_str());
                                 win.show_toast(&gettext("Changes applied"));
                             }
                             Err(errors) => {
@@ -391,7 +372,7 @@ impl AppWindow {
     }
 
     fn show_about(&self) {
-        MetamorphosisAbout::show(self);
+        AboutView::show(self);
     }
 
     fn show_help_overlay(&self) {
@@ -615,11 +596,11 @@ impl AppWindow {
         }
 
         let file = self.files().first().unwrap().clone();
-        self.imp().apply_view.update_thumbnail(file);
+        self.imp().image_metadata_view.update_thumbnail(file);
 
         self.switch_back_from_loading();
         let path = self.files().first().unwrap().path();
-        self.imp().apply_view.load_from_file(path.as_str());
+        self.imp().image_metadata_view.load_from_file(path.as_str());
 
         if matches!(self.imp().navigation.visible_page().and_then(|x| x.tag()), Some(x) if x == "main")
         {
@@ -746,18 +727,21 @@ impl StackNavigation for AppWindow {
     fn switch_to_stack_apply(&self) {
         self.imp().add_button.set_visible(true);
         self.imp().view_switcher.set_visible(true);
+        self.imp().view_switcher_bar.set_visible(true);
         self.imp().stack.set_visible_child_name("stack_apply");
     }
 
     fn switch_to_stack_applying(&self) {
         self.imp().add_button.set_visible(false);
         self.imp().view_switcher.set_visible(false);
+        self.imp().view_switcher_bar.set_visible(false);
         self.imp().stack.set_visible_child_name("stack_applying");
     }
 
     fn switch_to_stack_welcome(&self) {
         self.imp().add_button.set_visible(false);
         self.imp().view_switcher.set_visible(false);
+        self.imp().view_switcher_bar.set_visible(false);
         self.imp()
             .stack
             .set_visible_child_name("stack_welcome_page");
@@ -766,6 +750,7 @@ impl StackNavigation for AppWindow {
     fn switch_to_stack_invalid_image(&self) {
         self.imp().add_button.set_visible(false);
         self.imp().view_switcher.set_visible(false);
+        self.imp().view_switcher_bar.set_visible(false);
         self.imp()
             .stack
             .set_visible_child_name("stack_invalid_image");
@@ -774,6 +759,7 @@ impl StackNavigation for AppWindow {
     fn switch_to_stack_loading(&self) {
         self.imp().add_button.set_visible(false);
         self.imp().view_switcher.set_visible(false);
+        self.imp().view_switcher_bar.set_visible(false);
         self.imp().stack.set_visible_child_name("stack_loading");
         self.imp().loading_spinner.start();
     }

@@ -12,6 +12,8 @@ use crate::models::filetypes::FileType;
 
 mod imp {
 
+    use crate::models::input_file;
+
     use self::glib::{ParamSpecBoolean, ParamSpecObject};
     use super::*;
 
@@ -27,7 +29,7 @@ mod imp {
     #[::glib::object_subclass]
     impl ObjectSubclass for InputFile {
         const NAME: &'static str = "MetamorphosisInputFile";
-        type Type = crate::input_file::InputFile;
+        type Type = input_file::InputFile;
 
         fn new() -> Self {
             Self {
