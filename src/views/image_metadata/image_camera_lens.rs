@@ -17,29 +17,10 @@ mod imp {
     pub struct ImageCameraLensView {
         #[template_child]
         pub container: TemplateChild<gtk::Box>,
-        // Dates
         #[template_child]
-        pub modify_date_entry: TemplateChild<gtk::Entry>,
+        pub manufacturer_entry: TemplateChild<gtk::Entry>,
         #[template_child]
-        pub date_time_original_entry: TemplateChild<gtk::Entry>,
-        #[template_child]
-        pub create_date_entry: TemplateChild<gtk::Entry>,
-
-        // Fractional seconds
-        #[template_child]
-        pub sub_sec_time_entry: TemplateChild<gtk::Entry>,
-        #[template_child]
-        pub sub_sec_time_original_entry: TemplateChild<gtk::Entry>,
-        #[template_child]
-        pub sub_sec_time_digitized_entry: TemplateChild<gtk::Entry>,
-
-        // Timezone offsets
-        #[template_child]
-        pub offset_time_entry: TemplateChild<gtk::Entry>,
-        #[template_child]
-        pub offset_time_original_entry: TemplateChild<gtk::Entry>,
-        #[template_child]
-        pub offset_time_digitized_entry: TemplateChild<gtk::Entry>,
+        pub model_entry: TemplateChild<gtk::Entry>,
     }
 
     #[glib::object_subclass]
@@ -81,160 +62,43 @@ impl ImageCameraLensView {
         self.imp().container.set_visible(false);
     }
 
-    pub fn modify_date(&self) -> String {
-        self.imp().modify_date_entry.text().to_string()
+    pub fn manufacturer(&self) -> String {
+        self.imp().manufacturer_entry.text().to_string()
     }
 
-    pub fn set_modify_date(&self, modify_date: &str) {
-        self.imp().modify_date_entry.set_text(modify_date);
+    pub fn set_manufacturer(&self, manufacturer: &str) {
+        self.imp().manufacturer_entry.set_text(manufacturer);
     }
 
-    pub fn date_time_original(&self) -> String {
-        self.imp().date_time_original_entry.text().to_string()
+    pub fn model(&self) -> String {
+        self.imp().model_entry.text().to_string()
     }
 
-    pub fn set_date_time_original(&self, date_time: &str) {
-        self.imp().date_time_original_entry.set_text(date_time);
-    }
-
-    pub fn create_date(&self) -> String {
-        self.imp().create_date_entry.text().to_string()
-    }
-
-    pub fn set_create_date(&self, create_date: &str) {
-        self.imp().create_date_entry.set_text(create_date);
-    }
-
-    pub fn sub_sec_time(&self) -> String {
-        self.imp().sub_sec_time_entry.text().to_string()
-    }
-
-    pub fn set_sub_sec_time(&self, sub_sec_time: &str) {
-        self.imp().sub_sec_time_entry.set_text(sub_sec_time);
-    }
-
-    pub fn sub_sec_time_original(&self) -> String {
-        self.imp().sub_sec_time_original_entry.text().to_string()
-    }
-
-    pub fn set_sub_sec_time_original(&self, sub_sec_time_original: &str) {
-        self.imp()
-            .sub_sec_time_original_entry
-            .set_text(sub_sec_time_original);
-    }
-
-    pub fn sub_sec_time_digitized(&self) -> String {
-        self.imp().sub_sec_time_digitized_entry.text().to_string()
-    }
-
-    pub fn set_sub_sec_time_digitized(&self, sub_sec_time_digitized: &str) {
-        self.imp()
-            .sub_sec_time_digitized_entry
-            .set_text(sub_sec_time_digitized);
-    }
-
-    pub fn offset_time(&self) -> String {
-        self.imp().offset_time_entry.text().to_string()
-    }
-
-    pub fn set_offset_time(&self, offset_time: &str) {
-        self.imp().offset_time_entry.set_text(offset_time);
-    }
-
-    pub fn offset_time_original(&self) -> String {
-        self.imp().offset_time_original_entry.text().to_string()
-    }
-
-    pub fn set_offset_time_original(&self, offset_time_original: &str) {
-        self.imp()
-            .offset_time_original_entry
-            .set_text(offset_time_original);
-    }
-
-    pub fn offset_time_digitized(&self) -> String {
-        self.imp().offset_time_digitized_entry.text().to_string()
-    }
-
-    pub fn set_offset_time_digitized(&self, offset_time_digitized: &str) {
-        self.imp()
-            .offset_time_digitized_entry
-            .set_text(offset_time_digitized);
+    pub fn set_model(&self, model: &str) {
+        self.imp().model_entry.set_text(model);
     }
 
     pub fn load_from_file(&self, path: &str) {
         let exif = ExifService::new(path);
-        let modify_date = exif.modify_date().unwrap_or_default();
-        let date_time_original = exif.date_time_original().unwrap_or_default();
-        let create_date = exif.create_date().unwrap_or_default();
-        let sub_sec_time = exif.sub_sec_time().unwrap_or_default();
-        let sub_sec_time_original = exif.sub_sec_time_original().unwrap_or_default();
-        let sub_sec_time_digitized = exif.sub_sec_time_digitized().unwrap_or_default();
-        let offset_time = exif.offset_time().unwrap_or_default();
-        let offset_time_original = exif.offset_time_original().unwrap_or_default();
-        let offset_time_digitized = exif.offset_time_digitized().unwrap_or_default();
+        let manufacturer = exif.make().unwrap_or_default();
+        let model = exif.model().unwrap_or_default();
 
-        self.set_modify_date(&modify_date);
-        self.set_date_time_original(&date_time_original);
-        self.set_create_date(&create_date);
-        self.set_sub_sec_time(&sub_sec_time);
-        self.set_sub_sec_time_original(&sub_sec_time_original);
-        self.set_sub_sec_time_digitized(&sub_sec_time_digitized);
-        self.set_offset_time(&offset_time);
-        self.set_offset_time_original(&offset_time_original);
-        self.set_offset_time_digitized(&offset_time_digitized);
+        self.set_manufacturer(&manufacturer);
+        self.set_model(&model);
     }
 
     pub fn save_changes(&self, path: &str) -> Result<(), Vec<ExifToolError>> {
         let exif = ExifService::new(path);
-        let modify_date = self.modify_date();
-        let date_time_original = self.date_time_original();
-        let create_date = self.create_date();
-        let sub_sec_time = self.sub_sec_time();
-        let sub_sec_time_original = self.sub_sec_time_original();
-        let sub_sec_time_digitized = self.sub_sec_time_digitized();
-        let offset_time = self.offset_time();
-        let offset_time_original = self.offset_time_original();
-        let offset_time_digitized = self.offset_time_digitized();
+        let manufacturer = self.manufacturer();
+        let model = self.model();
 
         let mut errors = Vec::new();
 
-        if let Err(e) = exif.set_modify_date(modify_date.as_str()) {
+        if let Err(e) = exif.set_make(manufacturer.as_str()) {
             errors.push(e);
         }
 
-        if let Err(e) = exif.set_date_time_original(date_time_original.as_str()) {
-            errors.push(e);
-        }
-
-        if let Err(e) = exif.set_create_date(create_date.as_str()) {
-            errors.push(e);
-        }
-
-        if let Err(e) = exif.set_sub_sec_time(sub_sec_time.as_str()) {
-            errors.push(e);
-        }
-
-        if let Err(e) = exif.set_sub_sec_time_original(sub_sec_time_original.as_str()) {
-            errors.push(e);
-        }
-
-        if let Err(e) = exif.set_sub_sec_time_digitized(sub_sec_time_digitized.as_str()) {
-            errors.push(e);
-        }
-
-        if let Err(e) = exif.set_offset_time(offset_time.as_str()) {
-            errors.push(e);
-        }
-
-        if let Err(e) = exif.set_offset_time_original(offset_time_original.as_str()) {
-            errors.push(e);
-        }
-
-        if let Err(e) = exif.set_offset_time_digitized(offset_time_digitized.as_str()) {
-            errors.push(e);
-        }
-
-        if let Err(e) = exif.set_software() {
+        if let Err(e) = exif.set_model(model.as_str()) {
             errors.push(e);
         }
 
