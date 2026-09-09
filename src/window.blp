@@ -8,6 +8,15 @@ template $AppWindow: Adw.ApplicationWindow {
   height-request: 300;
   title: _("Metamorphosis");
 
+  Adw.Breakpoint {
+    condition ("max-width: 550sp")
+
+    setters {
+      headerbar.title-widget: null;
+      view_switcher_bar.reveal: true;
+    }
+  }
+
   Box {
     orientation: vertical;
 
@@ -46,6 +55,11 @@ template $AppWindow: Adw.ApplicationWindow {
                   tooltip-text: _("Primary Menu");
                   primary: true;
                 }
+              }
+
+              [bottom]
+              Adw.ViewSwitcherBar view_switcher_bar {
+                visible: false; // Don't show at startup
               }
 
               content: WindowHandle {
