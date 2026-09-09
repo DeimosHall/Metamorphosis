@@ -212,7 +212,7 @@ impl<'a> ExifService<'a> {
     /// - OffsetTimeDigitized (CreateDate) as the given value
     ///
     /// Offset time format: "HH:MM" (e.g., "02:00", "-06:00")
-    pub fn set_all_offset_times(&self, offset: &str) -> Result<(), ExifToolError> {
+    pub fn _set_all_offset_times(&self, offset: &str) -> Result<(), ExifToolError> {
         let now = Zoned::now().round(Unit::Second).expect("Should never fail");
         let local_offset = now.offset().to_string();
 
