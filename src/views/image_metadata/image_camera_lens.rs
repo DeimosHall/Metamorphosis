@@ -1,4 +1,5 @@
 use exiftool::ExifToolError;
+use glib::GString;
 use gtk::{glib, prelude::*, subclass::prelude::*};
 
 use adw::subclass::bin::BinImpl;
@@ -70,8 +71,8 @@ impl ImageCameraLensView {
         self.imp().manufacturer_entry.set_text(manufacturer);
     }
 
-    pub fn model(&self) -> String {
-        self.imp().model_entry.text().to_string()
+    pub fn model(&self) -> GString {
+        self.imp().model_entry.text()
     }
 
     pub fn set_model(&self, model: &str) {
@@ -87,25 +88,11 @@ impl ImageCameraLensView {
         self.set_model(&model);
     }
 
-    pub fn save_changes(&self, path: &str) -> Result<(), Vec<ExifToolError>> {
+    pub fn save_changes(&self, path: &str) -> Result<(), ExifToolError> {
         let exif = ExifService::new(path);
-        let manufacturer = self.manufacturer();
-        let model = self.model();
 
-        let mut errors = Vec::new();
-
-        if let Err(e) = exif.set_make(manufacturer.as_str()) {
-            errors.push(e);
-        }
-
-        if let Err(e) = exif.set_model(model.as_str()) {
-            errors.push(e);
-        }
-
-        if errors.is_empty() {
-            Ok(())
-        } else {
-            Err(errors)
-        }
+        exif.set_make(self.manufacturer().as_str())?;
+        exif.set_model(self.model().as_str())?;
+        Ok(())
     }
 }

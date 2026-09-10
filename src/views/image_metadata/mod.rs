@@ -180,7 +180,7 @@ impl ImageMetadataView {
     }
 
     /// Take the values from the UI fields and apply them to a file
-    pub fn save_changes(&self, path: &str) -> Result<(), Vec<ExifToolError>> {
+    pub fn save_changes(&self, path: &str) -> Result<(), ExifToolError> {
         if let Some(current_tab) = self.current_tab() {
             return match current_tab.as_str() {
                 "date_time" => self.imp().image_date_time_view.save_changes(path),

@@ -328,11 +328,9 @@ impl AppWindow {
                                 image_metadata_view.load_from_file(path.as_str());
                                 win.show_toast(&gettext("Changes applied"));
                             }
-                            Err(errors) => {
+                            Err(error) => {
                                 // TODO: use the right dialog
-                                for error in errors {
-                                    win.show_toast(&format!("{}", error));
-                                }
+                                win.show_toast(&format!("{}", error));
                             }
                         }
                     }

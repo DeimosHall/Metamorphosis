@@ -1,3 +1,4 @@
+use glib::GString;
 use gtk::{glib, prelude::*, subclass::prelude::*};
 
 use adw::subclass::bin::BinImpl;
@@ -85,48 +86,48 @@ impl ImageDateTimeView {
         self.imp().container.set_visible(false);
     }
 
-    pub fn date(&self) -> String {
-        self.imp().creation_date_entry.text().to_string()
+    pub fn date(&self) -> GString {
+        self.imp().creation_date_entry.text()
     }
 
     pub fn set_date(&self, date: &str) {
         self.imp().creation_date_entry.set_text(date);
     }
 
-    pub fn modify_date(&self) -> String {
-        self.imp().modify_date_entry.text().to_string()
+    pub fn modify_date(&self) -> GString {
+        self.imp().modify_date_entry.text()
     }
 
     pub fn set_modify_date(&self, modify_date: &str) {
         self.imp().modify_date_entry.set_text(modify_date);
     }
 
-    pub fn date_time_original(&self) -> String {
-        self.imp().date_time_original_entry.text().to_string()
+    pub fn date_time_original(&self) -> GString {
+        self.imp().date_time_original_entry.text()
     }
 
     pub fn set_date_time_original(&self, date_time: &str) {
         self.imp().date_time_original_entry.set_text(date_time);
     }
 
-    pub fn create_date(&self) -> String {
-        self.imp().create_date_entry.text().to_string()
+    pub fn create_date(&self) -> GString {
+        self.imp().create_date_entry.text()
     }
 
     pub fn set_create_date(&self, create_date: &str) {
         self.imp().create_date_entry.set_text(create_date);
     }
 
-    pub fn sub_sec_time(&self) -> String {
-        self.imp().sub_sec_time_entry.text().to_string()
+    pub fn sub_sec_time(&self) -> GString {
+        self.imp().sub_sec_time_entry.text()
     }
 
     pub fn set_sub_sec_time(&self, sub_sec_time: &str) {
         self.imp().sub_sec_time_entry.set_text(sub_sec_time);
     }
 
-    pub fn sub_sec_time_original(&self) -> String {
-        self.imp().sub_sec_time_original_entry.text().to_string()
+    pub fn sub_sec_time_original(&self) -> GString {
+        self.imp().sub_sec_time_original_entry.text()
     }
 
     pub fn set_sub_sec_time_original(&self, sub_sec_time_original: &str) {
@@ -135,8 +136,8 @@ impl ImageDateTimeView {
             .set_text(sub_sec_time_original);
     }
 
-    pub fn sub_sec_time_digitized(&self) -> String {
-        self.imp().sub_sec_time_digitized_entry.text().to_string()
+    pub fn sub_sec_time_digitized(&self) -> GString {
+        self.imp().sub_sec_time_digitized_entry.text()
     }
 
     pub fn set_sub_sec_time_digitized(&self, sub_sec_time_digitized: &str) {
@@ -145,16 +146,16 @@ impl ImageDateTimeView {
             .set_text(sub_sec_time_digitized);
     }
 
-    pub fn offset_time(&self) -> String {
-        self.imp().offset_time_entry.text().to_string()
+    pub fn offset_time(&self) -> GString {
+        self.imp().offset_time_entry.text()
     }
 
     pub fn set_offset_time(&self, offset_time: &str) {
         self.imp().offset_time_entry.set_text(offset_time);
     }
 
-    pub fn offset_time_original(&self) -> String {
-        self.imp().offset_time_original_entry.text().to_string()
+    pub fn offset_time_original(&self) -> GString {
+        self.imp().offset_time_original_entry.text()
     }
 
     pub fn set_offset_time_original(&self, offset_time_original: &str) {
@@ -163,8 +164,8 @@ impl ImageDateTimeView {
             .set_text(offset_time_original);
     }
 
-    pub fn offset_time_digitized(&self) -> String {
-        self.imp().offset_time_digitized_entry.text().to_string()
+    pub fn offset_time_digitized(&self) -> GString {
+        self.imp().offset_time_digitized_entry.text()
     }
 
     pub fn set_offset_time_digitized(&self, offset_time_digitized: &str) {
@@ -203,74 +204,21 @@ impl ImageDateTimeView {
     }
 
     /// Take the values from the UI fields and apply them to a file
-    pub fn save_changes(&self, path: &str) -> Result<(), Vec<ExifToolError>> {
+    pub fn save_changes(&self, path: &str) -> Result<(), ExifToolError> {
         let exif = ExifService::new(path);
-        let date = self.date();
 
-        let modify_date = self.modify_date();
-        let date_time_original = self.date_time_original();
-        let create_date = self.create_date();
-        let sub_sec_time = self.sub_sec_time();
-        let sub_sec_time_original = self.sub_sec_time_original();
-        let sub_sec_time_digitized = self.sub_sec_time_digitized();
-        let offset_time = self.offset_time();
-        let offset_time_original = self.offset_time_original();
-        let offset_time_digitized = self.offset_time_digitized();
+        exif.set_all_dates(self.date().as_str())?;
+        exif.set_modify_date(self.modify_date().as_str())?;
+        exif.set_date_time_original(self.date_time_original().as_str())?;
+        exif.set_create_date(self.create_date().as_str())?;
+        exif.set_sub_sec_time(self.sub_sec_time().as_str())?;
+        exif.set_sub_sec_time_original(self.sub_sec_time_original().as_str())?;
+        exif.set_sub_sec_time_digitized(self.sub_sec_time_digitized().as_str())?;
+        exif.set_offset_time(self.offset_time().as_str())?;
+        exif.set_offset_time_original(self.offset_time_original().as_str())?;
+        exif.set_offset_time_digitized(self.offset_time_digitized().as_str())?;
+        exif.set_software()?;
 
-        let mut errors = Vec::new();
-
-        if let Err(e) = exif.set_all_dates(date.as_str()) {
-            errors.push(e);
-        }
-
-        if let Err(e) = exif.set_modify_date(modify_date.as_str()) {
-            errors.push(e);
-        }
-
-        if let Err(e) = exif.set_date_time_original(date_time_original.as_str()) {
-            errors.push(e);
-        }
-
-        if let Err(e) = exif.set_create_date(create_date.as_str()) {
-            errors.push(e);
-        }
-
-        if let Err(e) = exif.set_sub_sec_time(sub_sec_time.as_str()) {
-            errors.push(e);
-        }
-
-        if let Err(e) = exif.set_sub_sec_time_original(sub_sec_time_original.as_str()) {
-            errors.push(e);
-        }
-
-        if let Err(e) = exif.set_sub_sec_time_digitized(sub_sec_time_digitized.as_str()) {
-            errors.push(e);
-        }
-
-        if let Err(e) = exif.set_offset_time(offset_time.as_str()) {
-            errors.push(e);
-        }
-
-        if let Err(e) = exif.set_offset_time_original(offset_time_original.as_str()) {
-            errors.push(e);
-        }
-
-        if let Err(e) = exif.set_offset_time_digitized(offset_time_digitized.as_str()) {
-            errors.push(e);
-        }
-
-        if let Err(e) = exif.set_software() {
-            errors.push(e);
-        }
-
-        if let Err(e) = exif.set_software() {
-            errors.push(e);
-        }
-
-        if errors.is_empty() {
-            Ok(())
-        } else {
-            Err(errors)
-        }
+        Ok(())
     }
 }

@@ -1,4 +1,5 @@
 use exiftool::ExifToolError;
+use glib::GString;
 use gtk::{glib, prelude::*, subclass::prelude::*};
 
 use crate::services::exif::ExifService;
@@ -63,8 +64,8 @@ impl ImageDetailsView {
         self.imp().container.set_visible(false);
     }
 
-    pub fn description(&self) -> String {
-        self.imp().image_description_entry.text().to_string()
+    pub fn description(&self) -> GString {
+        self.imp().image_description_entry.text()
     }
 
     pub fn set_description(&self, description: &str) {
@@ -79,20 +80,11 @@ impl ImageDetailsView {
     }
 
     /// Take the values from the UI fields and apply them to a file
-    pub fn save_changes(&self, path: &str) -> Result<(), Vec<ExifToolError>> {
+    pub fn save_changes(&self, path: &str) -> Result<(), ExifToolError> {
         let exif = ExifService::new(path);
-        let description = self.description();
 
-        let mut errors = Vec::new();
+        exif.set_image_description(self.description().as_str())?;
 
-        if let Err(e) = exif.set_image_description(description.as_str()) {
-            errors.push(e);
-        }
-
-        if errors.is_empty() {
-            Ok(())
-        } else {
-            Err(errors)
-        }
+        Ok(())
     }
 }
