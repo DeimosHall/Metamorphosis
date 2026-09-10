@@ -10,14 +10,12 @@ template $ImageDateTimeView: Adw.Bin {
     spacing: 24;
 
     Adw.PreferencesGroup {
-      Adw.ActionRow {
+      Adw.EntryRow creation_date_entry {
         title: _("Creation Date");
+      }
 
-        Entry creation_date_entry {
-          placeholder-text: _("YYYY:MM:DD HH:MM:SS");
-          width-chars: 20;
-          valign: center;
-        }
+      Adw.EntryRow creation_time_entry {
+        title: _("Creation Time");
       }
     }
 
@@ -40,7 +38,7 @@ template $ImageDateTimeView: Adw.Bin {
           title: _("Modify Date");
 
           Adw.ActionRow {
-            title: _("Modify Date");
+            title: _("Date");
             subtitle: _("File modification time");
 
             Entry modify_date_entry {
@@ -51,7 +49,7 @@ template $ImageDateTimeView: Adw.Bin {
           }
 
           Adw.ActionRow {
-            title: _("Sub Sec Time");
+            title: _("Fractional Seconds");
 
             Entry sub_sec_time_entry {
               placeholder-text: _("");
@@ -62,7 +60,6 @@ template $ImageDateTimeView: Adw.Bin {
 
           Adw.ActionRow {
             title: _("Offset Time");
-            subtitle: _("Timezone for Modify Date");
 
             Entry offset_time_entry {
               placeholder-text: _("HH:MM");
@@ -76,7 +73,7 @@ template $ImageDateTimeView: Adw.Bin {
           title: _("Date Time Original");
 
           Adw.ActionRow {
-            title: _("Date Time Original");
+            title: _("Date");
             subtitle: _("Shutter click time");
 
             Entry date_time_original_entry {
@@ -87,8 +84,7 @@ template $ImageDateTimeView: Adw.Bin {
           }
 
           Adw.ActionRow {
-            title: _("Sub Sec Time Original");
-            subtitle: _("Fractional seconds for Date Time Original");
+            title: _("Fractional Seconds");
 
             Entry sub_sec_time_original_entry {
               placeholder-text: _("");
@@ -98,8 +94,7 @@ template $ImageDateTimeView: Adw.Bin {
           }
 
           Adw.ActionRow {
-            title: _("Offset Time Original");
-            subtitle: _("Timezone for Date Time Original");
+            title: _("Offset Time");
 
             Entry offset_time_original_entry {
               placeholder-text: _("HH:MM");
@@ -113,7 +108,7 @@ template $ImageDateTimeView: Adw.Bin {
           title: _("Create Date");
 
           Adw.ActionRow {
-            title: _("Create Date");
+            title: _("Date");
             subtitle: _("Digitization time");
 
             Entry create_date_entry {
@@ -124,8 +119,7 @@ template $ImageDateTimeView: Adw.Bin {
           }
 
           Adw.ActionRow {
-            title: _("Sub Sec Time Digitized");
-            subtitle: _("Fractional seconds for Create Date");
+            title: _("Fractional Seconds");
 
             Entry sub_sec_time_digitized_entry {
               placeholder-text: _("");
@@ -135,8 +129,7 @@ template $ImageDateTimeView: Adw.Bin {
           }
 
           Adw.ActionRow {
-            title: _("Offset Time Digitized");
-            subtitle: _("Timezone for Create Date");
+            title: _("Offset Time");
 
             Entry offset_time_digitized_entry {
               placeholder-text: _("HH:MM");
