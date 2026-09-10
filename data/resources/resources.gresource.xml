@@ -5,8 +5,8 @@
         <file compressed="true">style.css</file>
         <file compressed="true">style-hc.css</file>
         <file preprocess="xml-stripblanks">icons/hicolor/symbolic/apps/dev.deimoshall.Metamorphosis-symbolic.svg</file>
-        <file compressed="true">icons/hicolor/512x512/apps/dev.deimoshall.Metamorphosis.png</file>
-        <file compressed="true">icons/hicolor/512x512/apps/dev.deimoshall.Metamorphosis.Devel.png</file>
+        <file compressed="true">icons/hicolor/scalable/apps/dev.deimoshall.Metamorphosis.svg</file>
+        <file compressed="true">icons/hicolor/scalable/apps/dev.deimoshall.Metamorphosis.Devel.svg</file>
     </gresource>
 
     <gresource prefix="/dev/deimoshall/Metamorphosis/ui/">
