@@ -249,7 +249,7 @@ impl AppWindow {
         imp.view_switcher_bar
             .set_stack(Some(&imp.image_metadata_view.stack()));
 
-        imp.image_metadata_view.setup_tab_switch_listener();
+        imp.image_metadata_view.setup_listeners();
 
         imp.open_button.connect_clicked(clone!(
             #[weak(rename_to=this)]
@@ -266,16 +266,6 @@ impl AppWindow {
                 this.add_dialog();
             }
         ));
-
-        // imp.image_container.set_filter_func(clone!(
-        //     #[weak(rename_to=this)]
-        //     self,
-        //     #[upgrade_or_default]
-        //     move |f| {
-        //         return (f.index() as usize) >= this.imp().elements.get()
-        //             || !this.imp().removed.borrow().contains(&(f.index() as u32));
-        //     }
-        // ));
 
         imp.cancel_button.connect_clicked(clone!(
             #[weak(rename_to=this)]

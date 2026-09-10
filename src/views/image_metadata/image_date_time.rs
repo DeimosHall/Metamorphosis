@@ -20,6 +20,10 @@ mod imp {
         #[template_child]
         pub container: TemplateChild<gtk::Box>,
         #[template_child]
+        pub advanced_options_switch: TemplateChild<adw::SwitchRow>,
+        #[template_child]
+        pub advanced_revelear: TemplateChild<gtk::Revealer>,
+        #[template_child]
         pub creation_date_entry: TemplateChild<gtk::Entry>,
 
         // Dates
@@ -84,6 +88,17 @@ impl ImageDateTimeView {
 
     pub fn hide(&self) {
         self.imp().container.set_visible(false);
+    }
+
+    pub fn setup_advanced_switch_listener(&self) {
+        let view = self.clone();
+        self.imp()
+            .advanced_options_switch
+            .connect_active_notify(move |switch| {
+                view.imp()
+                    .advanced_revelear
+                    .set_reveal_child(switch.is_active());
+            });
     }
 
     pub fn date(&self) -> GString {
@@ -207,17 +222,19 @@ impl ImageDateTimeView {
     pub fn save_changes(&self, path: &str) -> Result<(), ExifToolError> {
         let exif = ExifService::new(path);
 
-        exif.set_all_dates(self.date().as_str())?;
-        exif.set_modify_date(self.modify_date().as_str())?;
-        exif.set_date_time_original(self.date_time_original().as_str())?;
-        exif.set_create_date(self.create_date().as_str())?;
-        exif.set_sub_sec_time(self.sub_sec_time().as_str())?;
-        exif.set_sub_sec_time_original(self.sub_sec_time_original().as_str())?;
-        exif.set_sub_sec_time_digitized(self.sub_sec_time_digitized().as_str())?;
-        exif.set_offset_time(self.offset_time().as_str())?;
-        exif.set_offset_time_original(self.offset_time_original().as_str())?;
-        exif.set_offset_time_digitized(self.offset_time_digitized().as_str())?;
-        exif.set_software()?;
+        if !self.imp().advanced_options_switch.is_active() {
+            exif.set_all_dates(self.date().as_str())?;
+        } else {
+            exif.set_modify_date(self.modify_date().as_str())?;
+            exif.set_date_time_original(self.date_time_original().as_str())?;
+            exif.set_create_date(self.create_date().as_str())?;
+            exif.set_sub_sec_time(self.sub_sec_time().as_str())?;
+            exif.set_sub_sec_time_original(self.sub_sec_time_original().as_str())?;
+            exif.set_sub_sec_time_digitized(self.sub_sec_time_digitized().as_str())?;
+            exif.set_offset_time(self.offset_time().as_str())?;
+            exif.set_offset_time_original(self.offset_time_original().as_str())?;
+            exif.set_offset_time_digitized(self.offset_time_digitized().as_str())?;
+        }
 
         Ok(())
     }

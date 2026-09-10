@@ -10,8 +10,6 @@ template $ImageDateTimeView: Adw.Bin {
     spacing: 24;
 
     Adw.PreferencesGroup {
-      title: _("Date &amp; Time");
-
       Adw.ActionRow {
         title: _("Creation Date");
 
@@ -24,112 +22,128 @@ template $ImageDateTimeView: Adw.Bin {
     }
 
     Adw.PreferencesGroup {
-      title: _("Dates");
-
-      Adw.ActionRow {
-        title: _("Modify Date");
-        subtitle: _("File modification time");
-
-        Entry modify_date_entry {
-          placeholder-text: _("YYYY:MM:DD HH:MM:SS");
-          width-chars: 20;
-          valign: center;
-        }
-      }
-
-      Adw.ActionRow {
-        title: _("Date Time Original");
-        subtitle: _("Shutter click time");
-
-        Entry date_time_original_entry {
-          placeholder-text: _("YYYY:MM:DD HH:MM:SS");
-          width-chars: 20;
-          valign: center;
-        }
-      }
-
-      Adw.ActionRow {
-        title: _("Create Date");
-        subtitle: _("Digitization time");
-
-        Entry create_date_entry {
-          placeholder-text: _("YYYY:MM:DD HH:MM:SS");
-          width-chars: 20;
-          valign: center;
-        }
+      Adw.SwitchRow advanced_options_switch {
+        title: _("Advanced options");
       }
     }
 
-    Adw.PreferencesGroup {
-      title: _("Fractional seconds");
+    Gtk.Revealer advanced_revelear {
+      reveal-child: false;
+      transition-type: slide_down;
+      transition-duration: 200;
 
-      Adw.ActionRow {
-        title: _("Sub Sec Time");
-        subtitle: _("Fractional seconds for Modify Date");
+      Gtk.Box {
+        orientation: vertical;
+        spacing: 24;
 
-        Entry sub_sec_time_entry {
-          placeholder-text: _("");
-          width-chars: 20;
-          valign: center;
+        Adw.PreferencesGroup {
+          title: _("Modify Date");
+
+          Adw.ActionRow {
+            title: _("Modify Date");
+            subtitle: _("File modification time");
+
+            Entry modify_date_entry {
+              placeholder-text: _("YYYY:MM:DD HH:MM:SS");
+              width-chars: 20;
+              valign: center;
+            }
+          }
+
+          Adw.ActionRow {
+            title: _("Sub Sec Time");
+
+            Entry sub_sec_time_entry {
+              placeholder-text: _("");
+              width-chars: 20;
+              valign: center;
+            }
+          }
+
+          Adw.ActionRow {
+            title: _("Offset Time");
+            subtitle: _("Timezone for Modify Date");
+
+            Entry offset_time_entry {
+              placeholder-text: _("HH:MM");
+              width-chars: 20;
+              valign: center;
+            }
+          }
         }
-      }
 
-      Adw.ActionRow {
-        title: _("Sub Sec Time Original");
-        subtitle: _("Fractional seconds for Date Time Original");
+        Adw.PreferencesGroup {
+          title: _("Date Time Original");
 
-        Entry sub_sec_time_original_entry {
-          placeholder-text: _("");
-          width-chars: 20;
-          valign: center;
+          Adw.ActionRow {
+            title: _("Date Time Original");
+            subtitle: _("Shutter click time");
+
+            Entry date_time_original_entry {
+              placeholder-text: _("YYYY:MM:DD HH:MM:SS");
+              width-chars: 20;
+              valign: center;
+            }
+          }
+
+          Adw.ActionRow {
+            title: _("Sub Sec Time Original");
+            subtitle: _("Fractional seconds for Date Time Original");
+
+            Entry sub_sec_time_original_entry {
+              placeholder-text: _("");
+              width-chars: 20;
+              valign: center;
+            }
+          }
+
+          Adw.ActionRow {
+            title: _("Offset Time Original");
+            subtitle: _("Timezone for Date Time Original");
+
+            Entry offset_time_original_entry {
+              placeholder-text: _("HH:MM");
+              width-chars: 20;
+              valign: center;
+            }
+          }
         }
-      }
 
-      Adw.ActionRow {
-        title: _("Sub Sec Time Digitized");
-        subtitle: _("Fractional seconds for Create Date");
+        Adw.PreferencesGroup {
+          title: _("Create Date");
 
-        Entry sub_sec_time_digitized_entry {
-          placeholder-text: _("");
-          width-chars: 20;
-          valign: center;
-        }
-      }
-    }
+          Adw.ActionRow {
+            title: _("Create Date");
+            subtitle: _("Digitization time");
 
-    Adw.PreferencesGroup {
-      title: _("Timezone offsets");
+            Entry create_date_entry {
+              placeholder-text: _("YYYY:MM:DD HH:MM:SS");
+              width-chars: 20;
+              valign: center;
+            }
+          }
 
-      Adw.ActionRow {
-        title: _("Offset Time");
-        subtitle: _("Timezone for Modify Date");
+          Adw.ActionRow {
+            title: _("Sub Sec Time Digitized");
+            subtitle: _("Fractional seconds for Create Date");
 
-        Entry offset_time_entry {
-          placeholder-text: _("HH:MM");
-          width-chars: 20;
-          valign: center;
-        }
-      }
+            Entry sub_sec_time_digitized_entry {
+              placeholder-text: _("");
+              width-chars: 20;
+              valign: center;
+            }
+          }
 
-      Adw.ActionRow {
-        title: _("Offset Time Original");
-        subtitle: _("Timezone for Date Time Original");
+          Adw.ActionRow {
+            title: _("Offset Time Digitized");
+            subtitle: _("Timezone for Create Date");
 
-        Entry offset_time_original_entry {
-          placeholder-text: _("HH:MM");
-          width-chars: 20;
-          valign: center;
-        }
-      }
-
-      Adw.ActionRow {
-        title: _("Offset Time Digitized");
-        subtitle: _("Timezone for Create Date");
-
-        Entry offset_time_digitized_entry {
-          placeholder-text: _("HH:MM");
-          width-chars: 20;
-          valign: center;
+            Entry offset_time_digitized_entry {
+              placeholder-text: _("HH:MM");
+              width-chars: 20;
+              valign: center;
+            }
+          }
         }
       }
     }

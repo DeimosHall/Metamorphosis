@@ -84,6 +84,8 @@ impl ImageDetailsView {
         let exif = ExifService::new(path);
 
         exif.set_image_description(self.description().as_str())?;
+        // TODO: Let the user configure the software name
+        exif.set_software()?;
 
         Ok(())
     }

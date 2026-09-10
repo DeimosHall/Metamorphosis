@@ -89,7 +89,7 @@ impl ImageMetadataView {
     /// amount of fields. This method addresses this issue.
     ///
     /// This doesn't work without the inner container.
-    pub fn setup_tab_switch_listener(&self) {
+    fn setup_tab_switch_listener(&self) {
         let view = self.clone();
         // Hide advanced tab at startup.
         // Comment it to see the height issue at least once.
@@ -121,6 +121,13 @@ impl ImageMetadataView {
 
     pub fn current_tab(&self) -> Option<glib::GString> {
         self.stack().visible_child_name()
+    }
+
+    pub fn setup_listeners(&self) {
+        self.setup_tab_switch_listener();
+        self.imp()
+            .image_date_time_view
+            .setup_advanced_switch_listener();
     }
 
     pub fn update_thumbnail(&self, file: InputFile) {
