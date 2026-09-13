@@ -24,10 +24,10 @@ mod imp {
     pub struct ImageDateTimeView {
         #[template_child]
         pub container: TemplateChild<gtk::Box>,
+
+        // General fields
         #[template_child]
-        pub advanced_options_switch: TemplateChild<adw::SwitchRow>,
-        #[template_child]
-        pub advanced_revelear: TemplateChild<gtk::Revealer>,
+        pub general_fields_group: TemplateChild<adw::PreferencesGroup>,
         #[template_child]
         pub creation_date_entry: TemplateChild<adw::EntryRow>,
         #[template_child]
@@ -35,6 +35,11 @@ mod imp {
         #[template_child]
         pub timezone_combo: TemplateChild<adw::ComboRow>,
         pub timezone_options: StringList,
+
+        #[template_child]
+        pub advanced_options_switch: TemplateChild<adw::SwitchRow>,
+        #[template_child]
+        pub advanced_revelear: TemplateChild<gtk::Revealer>,
 
         // Dates
         #[template_child]
@@ -125,9 +130,14 @@ impl ImageDateTimeView {
         self.imp()
             .advanced_options_switch
             .connect_active_notify(move |switch| {
+                // Show/hide advanced options
                 view.imp()
                     .advanced_revelear
                     .set_reveal_child(switch.is_active());
+                // Enables/disables general fields
+                view.imp()
+                    .general_fields_group
+                    .set_sensitive(!switch.is_active());
             });
     }
 
