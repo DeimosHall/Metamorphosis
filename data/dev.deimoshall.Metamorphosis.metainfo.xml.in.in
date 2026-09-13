@@ -62,17 +62,27 @@
         <screenshot type="default">
             <image>
                 https://raw.githubusercontent.com/DeimosHall/Metamorphosis/dev/data/resources/screenshots/1.png</image>
-            <caption>General tab</caption>
+            <caption>Date &amp; Time</caption>
         </screenshot>
         <screenshot>
             <image>
                 https://raw.githubusercontent.com/DeimosHall/Metamorphosis/dev/data/resources/screenshots/2.png</image>
-            <caption>Advanced tab</caption>
+            <caption>Date &amp; Time Advanced</caption>
         </screenshot>
         <screenshot>
             <image>
                 https://raw.githubusercontent.com/DeimosHall/Metamorphosis/dev/data/resources/screenshots/3.png</image>
-            <caption>Advanced tab with more fields</caption>
+            <caption>Location</caption>
+        </screenshot>
+        <screenshot>
+            <image>
+                https://raw.githubusercontent.com/DeimosHall/Metamorphosis/dev/data/resources/screenshots/4.png</image>
+            <caption>Camera &amp; Lens</caption>
+        </screenshot>
+        <screenshot>
+            <image>
+                https://raw.githubusercontent.com/DeimosHall/Metamorphosis/dev/data/resources/screenshots/5.png</image>
+            <caption>Details</caption>
         </screenshot>
     </screenshots>
 
