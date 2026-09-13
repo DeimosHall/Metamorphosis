@@ -1,4 +1,5 @@
 use exiftool::ExifToolError;
+use glib::GString;
 use gtk::{glib, prelude::*, subclass::prelude::*};
 
 use crate::services::exif::ExifService;
@@ -66,16 +67,16 @@ impl ImageLocationView {
         self.imp().container.set_visible(false);
     }
 
-    pub fn gps_date_stamp(&self) -> String {
-        self.imp().gps_date_stamp_entry.text().to_string()
+    pub fn gps_date_stamp(&self) -> GString {
+        self.imp().gps_date_stamp_entry.text()
     }
 
     pub fn set_gps_date_stamp(&self, gps_date_stamp: &str) {
         self.imp().gps_date_stamp_entry.set_text(gps_date_stamp);
     }
 
-    pub fn gps_time_stamp(&self) -> String {
-        self.imp().gps_time_stamp_entry.text().to_string()
+    pub fn gps_time_stamp(&self) -> GString {
+        self.imp().gps_time_stamp_entry.text()
     }
 
     pub fn set_gps_time_stamp(&self, gps_time_stamp: &str) {
@@ -91,25 +92,12 @@ impl ImageLocationView {
         self.set_gps_time_stamp(&gps_time_stamp);
     }
 
-    pub fn save_changes(&self, path: &str) -> Result<(), Vec<ExifToolError>> {
+    pub fn save_changes(&self, path: &str) -> Result<(), ExifToolError> {
         let exif = ExifService::new(path);
-        let gps_date_stamp = self.gps_date_stamp();
-        let gps_time_stamp = self.gps_time_stamp();
 
-        let mut errors = Vec::new();
+        exif.set_gps_date_stamp(self.gps_date_stamp().as_str())?;
+        exif.set_gps_time_stamp(self.gps_time_stamp().as_str())?;
 
-        if let Err(e) = exif.set_gps_date_stamp(gps_date_stamp.as_str()) {
-            errors.push(e);
-        }
-
-        if let Err(e) = exif.set_gps_time_stamp(gps_time_stamp.as_str()) {
-            errors.push(e);
-        }
-
-        if errors.is_empty() {
-            Ok(())
-        } else {
-            Err(errors)
-        }
+        Ok(())
     }
 }
