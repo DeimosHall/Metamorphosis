@@ -125,9 +125,7 @@ impl ImageMetadataView {
 
     pub fn setup_listeners(&self) {
         self.setup_tab_switch_listener();
-        self.imp()
-            .image_date_time_view
-            .setup_advanced_switch_listener();
+        self.imp().image_date_time_view.setup();
     }
 
     pub fn update_thumbnail(&self, file: InputFile) {

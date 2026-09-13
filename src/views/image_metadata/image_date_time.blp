@@ -17,11 +17,15 @@ template $ImageDateTimeView: Adw.Bin {
       Adw.EntryRow creation_time_entry {
         title: _("Creation Time");
       }
+
+      Adw.ComboRow timezone_combo {
+        title: _("Time Zone");
+      }
     }
 
     Adw.PreferencesGroup {
       Adw.SwitchRow advanced_options_switch {
-        title: _("Advanced options");
+        title: _("Advanced Options");
       }
     }
 
