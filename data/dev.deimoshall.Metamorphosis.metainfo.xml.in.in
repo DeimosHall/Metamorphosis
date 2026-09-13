@@ -102,6 +102,18 @@
     <content_rating type="oars-1.1" />
 
   <releases>
+      <release version="0.6.0" date="2026-09-13">
+          <description>
+              <p>Separation of concerns</p>
+              <p>This version focuses on improving the user experience with the following changes:</p>
+              <ul>
+                  <li>Add four categories; Date &amp; Time, Location, Camera &amp; Lens, and Details</li>
+                  <li>Add new app icon by Hylke Bons</li>
+                  <li>Floating save button</li>
+                  <li>Separate general and advanced sections in Date &amp; Time</li>
+              </ul>
+          </description>
+      </release>
       <release version="0.5.0" date="2026-08-09">
           <description>
               <p>Enhancements and bug fixes</p>
