@@ -61,27 +61,27 @@
     <screenshots>
         <screenshot type="default">
             <image>
-                https://raw.githubusercontent.com/DeimosHall/Metamorphosis/dev/data/resources/screenshots/1.png</image>
+                https://raw.githubusercontent.com/DeimosHall/Metamorphosis/main/data/resources/screenshots/1.png</image>
             <caption>Date &amp; Time</caption>
         </screenshot>
         <screenshot>
             <image>
-                https://raw.githubusercontent.com/DeimosHall/Metamorphosis/dev/data/resources/screenshots/2.png</image>
+                https://raw.githubusercontent.com/DeimosHall/Metamorphosis/main/data/resources/screenshots/2.png</image>
             <caption>Date &amp; Time Advanced</caption>
         </screenshot>
         <screenshot>
             <image>
-                https://raw.githubusercontent.com/DeimosHall/Metamorphosis/dev/data/resources/screenshots/3.png</image>
+                https://raw.githubusercontent.com/DeimosHall/Metamorphosis/main/data/resources/screenshots/3.png</image>
             <caption>Location</caption>
         </screenshot>
         <screenshot>
             <image>
-                https://raw.githubusercontent.com/DeimosHall/Metamorphosis/dev/data/resources/screenshots/4.png</image>
+                https://raw.githubusercontent.com/DeimosHall/Metamorphosis/main/data/resources/screenshots/4.png</image>
             <caption>Camera &amp; Lens</caption>
         </screenshot>
         <screenshot>
             <image>
-                https://raw.githubusercontent.com/DeimosHall/Metamorphosis/dev/data/resources/screenshots/5.png</image>
+                https://raw.githubusercontent.com/DeimosHall/Metamorphosis/main/data/resources/screenshots/5.png</image>
             <caption>Details</caption>
         </screenshot>
     </screenshots>
@@ -102,6 +102,11 @@
     <content_rating type="oars-1.1" />
 
   <releases>
+      <release version="0.6.1" date="2026-09-15">
+          <description>
+              <p>Fix release. The save button now applies the changes from all the tabs, not only from the selected one</p>
+          </description>
+      </release>
       <release version="0.6.0" date="2026-09-13">
           <description>
               <p>Separation of concerns</p>
