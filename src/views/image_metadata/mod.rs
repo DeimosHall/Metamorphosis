@@ -186,20 +186,10 @@ impl ImageMetadataView {
 
     /// Take the values from the UI fields and apply them to a file
     pub fn save_changes(&self, path: &str) -> Result<(), ExifToolError> {
-        if let Some(current_tab) = self.current_tab() {
-            return match current_tab.as_str() {
-                "date_time" => self.imp().image_date_time_view.save_changes(path),
-                "location" => self.imp().image_location_view.save_changes(path),
-                "camera_lens" => self.imp().image_camera_lens_view.save_changes(path),
-                "details" => self.imp().image_details_view.save_changes(path),
-                _ => {
-                    warn!("Unhandled tab: {}", current_tab);
-                    Ok(())
-                }
-            };
-        }
-
-        warn!("This should never be printed");
+        self.imp().image_date_time_view.save_changes(path)?;
+        self.imp().image_location_view.save_changes(path)?;
+        self.imp().image_camera_lens_view.save_changes(path)?;
+        self.imp().image_details_view.save_changes(path)?;
         Ok(())
     }
 }
