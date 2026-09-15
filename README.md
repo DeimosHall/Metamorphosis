@@ -106,6 +106,8 @@ This project is licensed under the GPLv3 license. See the [License](LICENSE) fil
 
 Made with ♥️ by Deimos Hall.
 
+App icon created and designed by [Hylke Bons](https://planetpeanut.studio/).
+
 Based on [`Switcheroo`](https://gitlab.com/adhami3310/Switcheroo.git) by Khaleel Al-Adhami, an app to convert and manipulate images.
 
 This app uses [ExifTool](https://exiftool.org/) under the hood to perform metadata edits.
