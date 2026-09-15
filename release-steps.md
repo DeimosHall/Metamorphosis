@@ -19,6 +19,22 @@ Update app screenshots if required.
 
 > New screenshots or modification of existing ones must be added/edited in the [meta info](dev.deimoshall.Metamorphosis.metainfo.xml.in.in) file.
 
+## Translations
+
+I'm translating locally and for that I use the `update_translations` script. I need to improve it because right now it's needed to manually include blueprint and rust files in the [POTFILES.in](po/POTFILES.in) file.
+
+The workflow is running the script:
+
+```bash
+./update_translation.sh
+```
+
+And merge the template into the target language (e.g. Spanish)
+
+```bash
+msgmerge -U po/es.po po/metamorphosis.pot
+```
+
 ## Exiftool
 
 1. Verify the latest `exiftool` version here: [https://exiftool.org/](https://exiftool.org/)
