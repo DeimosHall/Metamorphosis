@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: unnamed project\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-09-15 11:27-0600\n"
-"PO-Revision-Date: 2026-09-15 11:30-0600\n"
+"PO-Revision-Date: 2026-09-15 11:37-0600\n"
 "Last-Translator: Deimos Hall <deimoshall.dev@proton.me>\n"
 "Language-Team: Spanish\n"
 "Language: es\n"
@@ -289,7 +289,7 @@ msgstr "Fecha de creación"
 
 #: src/views/image_metadata/image_date_time.blp:18
 msgid "Creation Time"
-msgstr "Fecha de creación"
+msgstr "Hora de creación"
 
 #: src/views/image_metadata/image_date_time.blp:22
 msgid "Time Zone"
