@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: unnamed project\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-15 11:27-0600\n"
-"PO-Revision-Date: 2026-09-15 11:30-0600\n"
+"POT-Creation-Date: 2026-09-15 08:36-0600\n"
+"PO-Revision-Date: 2026-09-15 08:48-0600\n"
 "Last-Translator: Deimos Hall <deimoshall.dev@proton.me>\n"
 "Language-Team: Spanish\n"
 "Language: es\n"
@@ -144,18 +144,10 @@ msgid "Details"
 msgstr "Detalles"
 
 #: data/dev.deimoshall.Metamorphosis.metainfo.xml.in.in:107
-msgid ""
-"Fix release. The save button now applies the changes from all the tabs, not "
-"only from the selected one"
-msgstr ""
-"Lanzamiento de correción. El botón de guardar ahora aplica los cambios de "
-"todas las pestañas, no solo de la seleccionada"
-
-#: data/dev.deimoshall.Metamorphosis.metainfo.xml.in.in:112
 msgid "Separation of concerns"
 msgstr "Separación de responsabilidades"
 
-#: data/dev.deimoshall.Metamorphosis.metainfo.xml.in.in:113
+#: data/dev.deimoshall.Metamorphosis.metainfo.xml.in.in:108
 msgid ""
 "This version focuses on improving the user experience with the following "
 "changes:"
@@ -163,107 +155,107 @@ msgstr ""
 "Esta versión se centra en mejorar la experiencia de usuario con los "
 "siguientes cambios:"
 
-#: data/dev.deimoshall.Metamorphosis.metainfo.xml.in.in:115
+#: data/dev.deimoshall.Metamorphosis.metainfo.xml.in.in:110
 msgid "Add four categories; Date & Time, Location, Camera & Lens, and Details"
 msgstr ""
 "Agregar cuatro categorías; Fecha y Hora, Ubicación, Cámara y Lentes y "
 "Detalles"
 
-#: data/dev.deimoshall.Metamorphosis.metainfo.xml.in.in:116
+#: data/dev.deimoshall.Metamorphosis.metainfo.xml.in.in:111
 msgid "Add new app icon by Hylke Bons"
 msgstr "Agregar nuevo icono de la applicación por Hylke Bons"
 
-#: data/dev.deimoshall.Metamorphosis.metainfo.xml.in.in:117
+#: data/dev.deimoshall.Metamorphosis.metainfo.xml.in.in:112
 msgid "Floating save button"
 msgstr "Botón de guardar flotante"
 
-#: data/dev.deimoshall.Metamorphosis.metainfo.xml.in.in:118
+#: data/dev.deimoshall.Metamorphosis.metainfo.xml.in.in:113
 msgid "Separate general and advanced sections in Date & Time"
 msgstr "Separar las secciones general y avanzada en Fecha y Hora"
 
-#: data/dev.deimoshall.Metamorphosis.metainfo.xml.in.in:124
+#: data/dev.deimoshall.Metamorphosis.metainfo.xml.in.in:119
 msgid "Enhancements and bug fixes"
 msgstr "Mejoras y arreglos de errores"
 
-#: data/dev.deimoshall.Metamorphosis.metainfo.xml.in.in:126
+#: data/dev.deimoshall.Metamorphosis.metainfo.xml.in.in:121
 msgid "Fix not realoading fields after applying changes"
 msgstr "Se arreglo no recargar los campos después de aplicar cambios"
 
-#: data/dev.deimoshall.Metamorphosis.metainfo.xml.in.in:127
+#: data/dev.deimoshall.Metamorphosis.metainfo.xml.in.in:122
 msgid "Show offset time from create date instead of the one from modify date"
 msgstr ""
 "Mostrar el huso horario de la fecha de creación en lugar del de la fecha de "
 "modificación"
 
-#: data/dev.deimoshall.Metamorphosis.metainfo.xml.in.in:128
+#: data/dev.deimoshall.Metamorphosis.metainfo.xml.in.in:123
 msgid "Set modify date as today when applying from the general tab"
 msgstr ""
 "Establecer la fecha de modificación al día de hoy al aplicar desde la "
 "pestaña general"
 
-#: data/dev.deimoshall.Metamorphosis.metainfo.xml.in.in:129
+#: data/dev.deimoshall.Metamorphosis.metainfo.xml.in.in:124
 msgid "Remove unused dependencies and add CI to the project"
 msgstr "Remover dependencias no usadas y agregar CI al proyecto"
 
-#: data/dev.deimoshall.Metamorphosis.metainfo.xml.in.in:135
+#: data/dev.deimoshall.Metamorphosis.metainfo.xml.in.in:130
 msgid "Add new General and Advanced tabs"
 msgstr "Agregar nuevas pestañas General y Avanzado"
 
-#: data/dev.deimoshall.Metamorphosis.metainfo.xml.in.in:137
+#: data/dev.deimoshall.Metamorphosis.metainfo.xml.in.in:132
 msgid "General tab for most common tags"
 msgstr "Pestaña general para las etiquetas más comunes"
 
-#: data/dev.deimoshall.Metamorphosis.metainfo.xml.in.in:138
+#: data/dev.deimoshall.Metamorphosis.metainfo.xml.in.in:133
 msgid "Advanced tab for raw tags and more granular editing"
 msgstr "Pestaña avanzado para etiquetas raw y edición más granular"
 
-#: data/dev.deimoshall.Metamorphosis.metainfo.xml.in.in:139
+#: data/dev.deimoshall.Metamorphosis.metainfo.xml.in.in:134
 msgid "Add more dates, fractional seconds, and timezone offsets fields"
 msgstr "Agregar más fechas, fracciones de segundo y campos de husos horarios"
 
-#: data/dev.deimoshall.Metamorphosis.metainfo.xml.in.in:140
+#: data/dev.deimoshall.Metamorphosis.metainfo.xml.in.in:135
 msgid "Fix remove button stopped working"
 msgstr "Arreglar el botón de remover dejo de funcionar"
 
-#: data/dev.deimoshall.Metamorphosis.metainfo.xml.in.in:146
+#: data/dev.deimoshall.Metamorphosis.metainfo.xml.in.in:141
 msgid "Add manufacturer and model fields"
 msgstr "Agregar campos de fabricante y modelo"
 
-#: data/dev.deimoshall.Metamorphosis.metainfo.xml.in.in:151
+#: data/dev.deimoshall.Metamorphosis.metainfo.xml.in.in:146
 msgid "Add description field"
 msgstr "Agregar campo de descripción"
 
-#: data/dev.deimoshall.Metamorphosis.metainfo.xml.in.in:156
+#: data/dev.deimoshall.Metamorphosis.metainfo.xml.in.in:151
 msgid "Update runtime to GNOME 50"
 msgstr "Actualizar entorno de ejecución a GNOME 50"
 
-#: data/dev.deimoshall.Metamorphosis.metainfo.xml.in.in:161
+#: data/dev.deimoshall.Metamorphosis.metainfo.xml.in.in:156
 msgid "Fix ExifTool execution fail due to Perl interpreter not available"
 msgstr ""
 "Arreglar fallo de ejecución de ExifTool debido al interprete de Perl no "
 "disponible"
 
-#: data/dev.deimoshall.Metamorphosis.metainfo.xml.in.in:166
+#: data/dev.deimoshall.Metamorphosis.metainfo.xml.in.in:161
 msgid "Initial release with core features:"
 msgstr "Lanzamiento inicial con funcionalidad principal"
 
-#: data/dev.deimoshall.Metamorphosis.metainfo.xml.in.in:168
+#: data/dev.deimoshall.Metamorphosis.metainfo.xml.in.in:163
 msgid "Edit EXIF metadata in images"
 msgstr "Editar metadatos EXIF en imagenes"
 
-#: data/dev.deimoshall.Metamorphosis.metainfo.xml.in.in:169
+#: data/dev.deimoshall.Metamorphosis.metainfo.xml.in.in:164
 msgid "Support for images (only JPEG tested)"
 msgstr "Soporte para imagenes (solamente JPEG probado)"
 
-#: data/dev.deimoshall.Metamorphosis.metainfo.xml.in.in:170
+#: data/dev.deimoshall.Metamorphosis.metainfo.xml.in.in:165
 msgid "View and modify create date"
 msgstr "Ver y modificar fecha de creación"
 
-#: data/dev.deimoshall.Metamorphosis.metainfo.xml.in.in:171
+#: data/dev.deimoshall.Metamorphosis.metainfo.xml.in.in:166
 msgid "Set offset time for date values"
 msgstr "Establecer diferencia horaria para los valores de fecha"
 
-#: data/dev.deimoshall.Metamorphosis.metainfo.xml.in.in:172
+#: data/dev.deimoshall.Metamorphosis.metainfo.xml.in.in:167
 msgid "Write processing software tag"
 msgstr "Escribir etiqueta de software de procesamiento"
 

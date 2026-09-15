@@ -6,20 +6,20 @@ data/dev.deimoshall.Metamorphosis.gschema.xml.in
 data/dev.deimoshall.Metamorphosis.metainfo.xml.in.in
 # UI files
 src/components/image_thumbnail.blp
-src/views/apply/image_advanced_tab.blp
-src/views/apply/image_general_tab.blp
-src/views/apply/mod.blp
+src/views/image_metadata/image_camera_lens.blp
+src/views/image_metadata/image_date_time.blp
+src/views/image_metadata/image_details.blp
+src/views/image_metadata/image_location.blp
+src/views/image_metadata/mod.blp
 src/window.blp
 # RUST files
 src/application.rs
-src/components/about_window.rs
 src/components/drag_overlay.rs
 src/components/image_thumbnail.rs
-src/file_chooser.rs
-src/input_file.rs
+src/dialogs/file_chooser.rs
 src/main.rs
+src/models/input_file.rs
 src/models/job_file.rs
-src/views/apply/image_advanced_tab.rs
-src/views/apply/image_general_tab.rs
-src/views/apply/mod.rs
+src/views/about/mod.rs
+src/views/image_metadata/image_date_time.rs
 src/window.rs
