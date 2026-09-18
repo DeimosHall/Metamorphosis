@@ -441,18 +441,33 @@ impl AppWindow {
                 #[weak(rename_to=this)]
                 self,
                 async move {
-                    let t = clipboard.read_text_future().await.unwrap().unwrap();
-                    let files = t
-                        .lines()
-                        .flat_map(|p| InputFile::new(&gio::File::for_path(p)))
-                        .collect();
-                    this.open_success(files);
+                    let value = clipboard
+                        .read_value_future(gdk::FileList::static_type(), glib::Priority::DEFAULT)
+                        .await
+                        .ok();
+
+                    if let Some(value) = value
+                        && let Ok(file_list) = value.get::<gdk::FileList>()
+                    {
+                        let files = file_list
+                            .files()
+                            .iter()
+                            .filter_map(InputFile::new)
+                            .collect();
+
+                        this.open_success(files);
+                    }
                 }
             ));
         }
     }
 
     fn open_success(&self, mut files: Vec<InputFile>) {
+        if files.is_empty() {
+            self.show_toast(&gettext("Error opening files"));
+            return;
+        }
+
         let prev_files = self.active_files();
         let prev_files_paths = prev_files.iter().map(|f| f.path()).collect_vec();
         files = files
@@ -464,6 +479,7 @@ impl AppWindow {
 
         // TODO: allow more than one file
         if files.len() > 1 {
+            debug!("Received {} files. Truncating to 1.", files.len());
             files.truncate(1);
         }
 

@@ -5,6 +5,7 @@ use gtk::{
     prelude::*,
     subclass::prelude::*,
 };
+use log::debug;
 use once_cell::sync::Lazy;
 use std::cell::{Cell, Ref, RefCell};
 
@@ -108,7 +109,8 @@ impl Default for InputFile {
 // TODO: document methods from this file
 impl InputFile {
     pub fn new(file: &gio::File) -> Option<Self> {
-        let path = file.path().unwrap();
+        let path = file.path()?;
+        debug!("Path: {:?}", path);
         let is_behind_sandbox = !path.starts_with("/home");
 
         let file_info = file
@@ -117,15 +119,17 @@ impl InputFile {
                 gio::FileQueryInfoFlags::NONE,
                 gio::Cancellable::NONE,
             )
-            .unwrap();
+            .ok()?;
 
-        let mimetype = file_info.content_type().unwrap().as_str().to_owned();
+        debug!("File info: {:?}", file_info);
+
+        let mimetype = file_info.content_type()?.as_str().to_owned();
 
         let extension = FileType::from_mimetype(&mimetype);
 
         extension.map(|extension| {
             glib::Object::builder::<Self>()
-                .property("path", path.to_str().unwrap())
+                .property("path", path.to_str().expect("Should convert path to str"))
                 .property("kind", extension)
                 .property("is-behind-sandbox", is_behind_sandbox)
                 .build()
