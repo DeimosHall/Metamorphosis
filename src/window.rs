@@ -76,7 +76,6 @@ mod imp {
         pub image_width: Cell<Option<u32>>,
         pub image_height: Cell<Option<u32>>,
         pub removed: RefCell<HashSet<u32>>,
-        pub elements: Cell<usize>,
     }
 
     #[::glib::object_subclass]
@@ -154,7 +153,6 @@ glib::wrapper! {
                     gtk::Accessible, gtk::Buildable, gtk::ConstraintTarget;
 }
 
-#[gtk::template_callbacks]
 impl AppWindow {
     pub fn new<P: glib::prelude::IsA<gtk::Application>>(app: &P) -> Self {
         let win = glib::Object::builder::<AppWindow>()
@@ -416,6 +414,7 @@ impl AppWindow {
     pub fn load_clipboard(&self) {
         debug!("Loading clipboard");
         let clipboard = self.clipboard();
+        debug!("Formats: {:?}", clipboard.formats().mime_types());
         if clipboard.formats().contain_mime_type("image/png") {
             debug!("Image pasted");
             MainContext::default().spawn_local(clone!(

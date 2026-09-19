@@ -153,20 +153,6 @@ glib::wrapper! {
 
 #[gtk::template_callbacks]
 impl ImageThumbnail {
-    pub fn new(image: Option<&Texture>, content: &str, width: u32, height: u32) -> Self {
-        let bin = glib::Object::builder::<ImageThumbnail>()
-            .property("image", image)
-            .property("content", content)
-            .property("width", width)
-            .property("height", height)
-            .build();
-
-        bin.add_css_class("card");
-        bin.add_css_class("image-thumbnail");
-
-        bin
-    }
-
     pub fn connect_remove_clicked<F>(&self, func: F) -> SignalHandlerId
     where
         F: Fn(&gtk::Button) + 'static,

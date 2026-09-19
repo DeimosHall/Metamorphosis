@@ -99,17 +99,7 @@ glib::wrapper! {
         @implements gtk::Accessible, gtk::Buildable, gtk::ConstraintTarget;
 }
 
-impl Default for DragOverlay {
-    fn default() -> Self {
-        glib::Object::new()
-    }
-}
-
 impl DragOverlay {
-    pub fn new() -> Self {
-        Self::default()
-    }
-
     pub fn set_drop_target(&self, drop_target: &gtk::DropTarget) {
         let priv_ = self.imp();
 

@@ -61,40 +61,8 @@ impl FileType {
         )
     }
 
-    pub fn supports_animation(&self) -> bool {
-        matches!(self, Webp | Gif | Heic | Heif)
-    }
-
-    pub fn is_lossy(&self) -> bool {
-        matches!(
-            self,
-            Jpg | Jpeg | Webp | Heif | Heic | Avif | Jxl | Tiff | Pdf | Dds
-        )
-    }
-
-    pub fn supports_alpha(&self) -> bool {
-        matches!(
-            self,
-            Png | Webp | Svg | Heif | Heic | Avif | Jxl | Pdf | Ico | Gif
-        )
-    }
-
     pub fn supports_pixbuf(&self) -> bool {
         !matches!(self, Pdf | Dds | Ico)
-    }
-
-    pub fn is_output(&self) -> bool {
-        matches!(
-            self,
-            Png | Jpg | Jpeg | Webp | Heif | Heic | Bmp | Avif | Jxl | Tiff | Pdf | Gif | Ico | Dds
-        )
-    }
-
-    pub fn iterator() -> Iter<'static, Self> {
-        static FILETYPES: [FileType; 15] = [
-            Png, Jpg, Jpeg, Webp, Svg, Heif, Heic, Bmp, Avif, Jxl, Tiff, Pdf, Gif, Ico, Dds,
-        ];
-        FILETYPES.iter()
     }
 
     pub fn input_formats() -> Iter<'static, Self> {
@@ -102,14 +70,6 @@ impl FileType {
             Png, Jpg, Jpeg, Webp, Svg, Heif, Heic, Bmp, Avif, Jxl, Tiff, Pdf, Gif, Ico, Dds,
         ];
         FILETYPES.iter()
-    }
-
-    pub fn output_formats() -> Iter<'static, Self> {
-        static ALL_FILETYPES: [FileType; 13] = [
-            Avif, Bmp, Dds, Gif, Heic, Heif, Ico, Jpg, Jxl, Pdf, Png, Tiff, Webp,
-        ];
-
-        ALL_FILETYPES.iter()
     }
 
     pub fn as_mime(&self) -> &'static str {
@@ -177,91 +137,5 @@ impl FileType {
 
     pub fn as_display_string(&self) -> String {
         self.as_extension().to_uppercase()
-    }
-
-    pub fn from_string(extension: &str) -> Option<Self> {
-        match extension {
-            "png" => Some(Png),
-            "jpg" => Some(Jpg),
-            "jpeg" => Some(Jpg),
-            "webp" => Some(Webp),
-            "svg" => Some(Svg),
-            "heif" => Some(Heif),
-            "heic" => Some(Heic),
-            "bmp" => Some(Bmp),
-            "avif" => Some(Avif),
-            "jxl" => Some(Jxl),
-            "tiff" => Some(Tiff),
-            "pdf" => Some(Pdf),
-            "gif" => Some(Gif),
-            "ico" => Some(Ico),
-            "dds" => Some(Dds),
-            _ => None,
-        }
-    }
-}
-
-#[derive(Clone, Copy, Debug, glib::Enum, PartialEq, Eq, Hash)]
-#[enum_type(name = "MetamorphosisCompressionType")]
-pub enum CompressionType {
-    #[enum_value(name = "ZIP")]
-    Zip,
-    #[enum_value(name = "Directory")]
-    Directory,
-}
-
-use CompressionType::*;
-
-impl CompressionType {
-    pub fn is_compression(&self) -> bool {
-        matches!(self, Zip)
-    }
-
-    pub fn iterator() -> Iter<'static, Self> {
-        static COMPRESSION_TYPES: [CompressionType; 2] = [Zip, Directory];
-        COMPRESSION_TYPES.iter()
-    }
-
-    pub fn compression_formats() -> Iter<'static, Self> {
-        static COMPRESSION_TYPES: [CompressionType; 1] = [Zip];
-        COMPRESSION_TYPES.iter()
-    }
-
-    pub fn possible_output(sandboxed: bool) -> Iter<'static, Self> {
-        static COMPRESSION_TYPES: [CompressionType; 1] = [Zip];
-        static ALL_TYPES: [CompressionType; 2] = [Zip, Directory];
-        match sandboxed {
-            true => COMPRESSION_TYPES.iter(),
-            false => ALL_TYPES.iter(),
-        }
-    }
-
-    pub fn as_mime(&self) -> &'static str {
-        match self {
-            Zip => "application/zip",
-            Directory => "inode/directory",
-        }
-    }
-
-    pub fn as_extension(&self) -> &str {
-        match self {
-            Zip => "zip",
-            Directory => "directory",
-        }
-    }
-
-    pub fn as_display_string(&self) -> String {
-        match self {
-            Directory => "Directory".to_owned(),
-            x => x.as_extension().to_uppercase(),
-        }
-    }
-
-    pub fn from_string(extension: &str) -> Option<Self> {
-        match extension {
-            "zip" => Some(Zip),
-            "directory" => Some(Directory),
-            _ => None,
-        }
     }
 }

@@ -1,19 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <schemalist gettext-domain="metamorphosis">
-	<enum id="dev.deimoshall.Metamorphosis.output">
-		<value nick="Png" value="0"/>
-		<value nick="Jpg" value="1"/>
-		<value nick="Webp" value="2"/>
-		<value nick="Heif" value="3"/>
-		<value nick="Heic" value="4"/>
-		<value nick="Bmp" value="5"/>
-		<value nick="Avif" value="6"/>
-		<value nick="Jxl" value="7"/>
-		<value nick="Tiff" value="8"/>
-		<value nick="Pdf" value="9"/>
-		<value nick="Gif" value="10"/>
-	</enum>
-
 	<schema id="@app-id@" path="/dev/deimoshall/Metamorphosis/" gettext-domain="@gettext-package@">
 		<key name="window-width" type="i">
 			<default>750</default>
