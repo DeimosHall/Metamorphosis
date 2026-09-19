@@ -5,7 +5,6 @@ use crate::components::drag_overlay::DragOverlay;
 use crate::config::APP_ID;
 use crate::dialogs::file_chooser::FileChooser;
 use crate::models::input_file::InputFile;
-use crate::models::job_file::JobFile;
 use crate::runtime;
 use crate::services::exif::ExifService;
 use crate::views::about::AboutView;
@@ -415,23 +414,7 @@ impl AppWindow {
         debug!("Loading clipboard");
         let clipboard = self.clipboard();
         debug!("Formats: {:?}", clipboard.formats().mime_types());
-        if clipboard.formats().contain_mime_type("image/png") {
-            debug!("Image pasted");
-            MainContext::default().spawn_local(clone!(
-                #[weak(rename_to=this)]
-                self,
-                async move {
-                    let t = clipboard.read_texture_future().await;
-                    if let Ok(Some(t)) = t {
-                        let interim = JobFile::from_clipboard();
-                        t.save_to_png(interim.as_filename()).ok();
-                        let file =
-                            InputFile::new(&gio::File::for_path(interim.as_filename())).unwrap();
-                        this.open_success(vec![file]);
-                    }
-                }
-            ));
-        } else if clipboard
+        if clipboard
             .formats()
             .contain_mime_type("application/vnd.portal.files")
         {
@@ -448,13 +431,12 @@ impl AppWindow {
                     if let Some(value) = value
                         && let Ok(file_list) = value.get::<gdk::FileList>()
                     {
-                        let files = file_list
-                            .files()
-                            .iter()
-                            .filter_map(InputFile::new)
-                            .collect();
+                        if file_list.files().is_empty() {
+                            this.show_toast(&gettext("Unable to access copied files"));
+                        }
 
-                        this.open_success(files);
+                        let files = file_list.files().iter().map(InputFile::new).collect_vec();
+                        this.open_files(files);
                     }
                 }
             ));
@@ -462,11 +444,6 @@ impl AppWindow {
     }
 
     fn open_success(&self, mut files: Vec<InputFile>) {
-        if files.is_empty() {
-            self.show_toast(&gettext("Error opening files"));
-            return;
-        }
-
         let prev_files = self.active_files();
         let prev_files_paths = prev_files.iter().map(|f| f.path()).collect_vec();
         files = files
