@@ -85,6 +85,8 @@ mod imp {
 
         fn class_init(klass: &mut Self::Class) {
             Self::bind_template(klass);
+
+            klass.add_binding_action(gdk::Key::v, gdk::ModifierType::CONTROL_MASK, "win.paste");
         }
 
         fn instance_init(obj: &glib::subclass::InitializingObject<Self>) {
