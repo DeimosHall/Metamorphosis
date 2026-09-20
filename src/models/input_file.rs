@@ -5,6 +5,7 @@ use gtk::{
     prelude::*,
     subclass::prelude::*,
 };
+use log::debug;
 use once_cell::sync::Lazy;
 use std::cell::{Cell, Ref, RefCell};
 
@@ -14,14 +15,13 @@ mod imp {
 
     use crate::models::input_file;
 
-    use self::glib::{ParamSpecBoolean, ParamSpecObject};
+    use self::glib::ParamSpecObject;
     use super::*;
 
     pub struct InputFile {
         pub path: RefCell<String>,
         pub kind: Cell<FileType>,
         pub pixbuf: RefCell<Option<Texture>>,
-        pub is_behind_sandbox: Cell<bool>,
         pub width: Cell<Option<usize>>,
         pub height: Cell<Option<usize>>,
     }
@@ -36,7 +36,6 @@ mod imp {
                 path: RefCell::new("/invalid-path".to_string()),
                 kind: Cell::new(FileType::Unknown),
                 pixbuf: RefCell::new(None),
-                is_behind_sandbox: Cell::new(true),
                 width: Cell::new(None),
                 height: Cell::new(None),
             }
@@ -53,9 +52,6 @@ mod imp {
                         .build(),
                     ParamSpecObject::builder::<Pixbuf>("pixbuf")
                         .write_only()
-                        .build(),
-                    ParamSpecBoolean::builder("is-behind-sandbox")
-                        .readwrite()
                         .build(),
                 ]
             });
@@ -76,10 +72,6 @@ mod imp {
                     let p = value.get::<Texture>().expect("Value must be a Pixbuf");
                     self.pixbuf.replace(Some(p));
                 }
-                "is-behind-sandbox" => {
-                    let p = value.get::<bool>().expect("Value must be a boolean");
-                    self.is_behind_sandbox.replace(p);
-                }
                 _ => unimplemented!(),
             }
         }
@@ -88,7 +80,6 @@ mod imp {
             match pspec.name() {
                 "path" => self.path.borrow().to_value(),
                 "kind" => self.kind.get().to_value(),
-                "is-behind-sandbox" => self.is_behind_sandbox.get().to_value(),
                 _ => unimplemented!(),
             }
         }
@@ -99,17 +90,10 @@ glib::wrapper! {
     pub struct InputFile(ObjectSubclass<imp::InputFile>);
 }
 
-impl Default for InputFile {
-    fn default() -> Self {
-        Self::empty()
-    }
-}
-
-// TODO: document methods from this file
 impl InputFile {
     pub fn new(file: &gio::File) -> Option<Self> {
-        let path = file.path().unwrap();
-        let is_behind_sandbox = !path.starts_with("/home");
+        let path = file.path()?;
+        debug!("Path: {:?}", path);
 
         let file_info = file
             .query_info(
@@ -117,23 +101,18 @@ impl InputFile {
                 gio::FileQueryInfoFlags::NONE,
                 gio::Cancellable::NONE,
             )
-            .unwrap();
+            .ok()?;
 
-        let mimetype = file_info.content_type().unwrap().as_str().to_owned();
+        let mimetype = file_info.content_type()?.as_str().to_owned();
 
         let extension = FileType::from_mimetype(&mimetype);
 
         extension.map(|extension| {
             glib::Object::builder::<Self>()
-                .property("path", path.to_str().unwrap())
+                .property("path", path.to_str().expect("Should convert path to str"))
                 .property("kind", extension)
-                .property("is-behind-sandbox", is_behind_sandbox)
                 .build()
         })
-    }
-
-    pub fn empty() -> Self {
-        glib::Object::new()
     }
 
     pub fn pixbuf(&self) -> Ref<'_, Option<Texture>> {
@@ -144,16 +123,8 @@ impl InputFile {
         self.imp().width.get()
     }
 
-    pub fn set_width(&self, f: usize) {
-        self.imp().width.replace(Some(f));
-    }
-
     pub fn height(&self) -> Option<usize> {
         self.imp().height.get()
-    }
-
-    pub fn set_height(&self, f: usize) {
-        self.imp().height.replace(Some(f));
     }
 
     pub fn dimensions(&self) -> Option<(usize, usize)> {
@@ -182,10 +153,6 @@ impl InputFile {
 
     pub fn exists(&self) -> bool {
         std::path::Path::new(&self.path()).exists()
-    }
-
-    pub fn is_behind_sandbox(&self) -> bool {
-        self.imp().is_behind_sandbox.get()
     }
 
     pub fn kind(&self) -> FileType {

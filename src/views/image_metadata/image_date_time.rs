@@ -93,10 +93,6 @@ glib::wrapper! {
 }
 
 impl ImageDateTimeView {
-    pub fn new() -> Self {
-        glib::Object::new()
-    }
-
     pub fn show(&self) {
         self.imp().container.set_visible(true);
     }

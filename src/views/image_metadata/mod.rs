@@ -93,7 +93,9 @@ impl ImageMetadataView {
         let view = self.clone();
         // Hide advanced tab at startup.
         // Comment it to see the height issue at least once.
-        view.imp().image_camera_lens_view.hide();
+        view.hide_all_tabs();
+        // Date & Time is the default tab, show it
+        view.imp().image_date_time_view.show();
 
         self.stack()
             .connect_visible_child_name_notify(move |stack| {
@@ -116,11 +118,8 @@ impl ImageMetadataView {
     fn hide_all_tabs(&self) {
         self.imp().image_camera_lens_view.hide();
         self.imp().image_date_time_view.hide();
+        self.imp().image_details_view.hide();
         self.imp().image_location_view.hide();
-    }
-
-    pub fn current_tab(&self) -> Option<glib::GString> {
-        self.stack().visible_child_name()
     }
 
     pub fn setup_listeners(&self) {

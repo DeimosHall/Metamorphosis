@@ -5,7 +5,6 @@ use crate::components::drag_overlay::DragOverlay;
 use crate::config::APP_ID;
 use crate::dialogs::file_chooser::FileChooser;
 use crate::models::input_file::InputFile;
-use crate::models::job_file::JobFile;
 use crate::runtime;
 use crate::services::exif::ExifService;
 use crate::views::about::AboutView;
@@ -76,7 +75,6 @@ mod imp {
         pub image_width: Cell<Option<u32>>,
         pub image_height: Cell<Option<u32>>,
         pub removed: RefCell<HashSet<u32>>,
-        pub elements: Cell<usize>,
     }
 
     #[::glib::object_subclass]
@@ -87,6 +85,8 @@ mod imp {
 
         fn class_init(klass: &mut Self::Class) {
             Self::bind_template(klass);
+
+            klass.add_binding_action(gdk::Key::v, gdk::ModifierType::CONTROL_MASK, "win.paste");
         }
 
         fn instance_init(obj: &glib::subclass::InitializingObject<Self>) {
@@ -154,7 +154,6 @@ glib::wrapper! {
                     gtk::Accessible, gtk::Buildable, gtk::ConstraintTarget;
 }
 
-#[gtk::template_callbacks]
 impl AppWindow {
     pub fn new<P: glib::prelude::IsA<gtk::Application>>(app: &P) -> Self {
         let win = glib::Object::builder::<AppWindow>()
@@ -416,23 +415,8 @@ impl AppWindow {
     pub fn load_clipboard(&self) {
         debug!("Loading clipboard");
         let clipboard = self.clipboard();
-        if clipboard.formats().contain_mime_type("image/png") {
-            debug!("Image pasted");
-            MainContext::default().spawn_local(clone!(
-                #[weak(rename_to=this)]
-                self,
-                async move {
-                    let t = clipboard.read_texture_future().await;
-                    if let Ok(Some(t)) = t {
-                        let interim = JobFile::from_clipboard();
-                        t.save_to_png(interim.as_filename()).ok();
-                        let file =
-                            InputFile::new(&gio::File::for_path(interim.as_filename())).unwrap();
-                        this.open_success(vec![file]);
-                    }
-                }
-            ));
-        } else if clipboard
+        debug!("Formats: {:?}", clipboard.formats().mime_types());
+        if clipboard
             .formats()
             .contain_mime_type("application/vnd.portal.files")
         {
@@ -441,12 +425,21 @@ impl AppWindow {
                 #[weak(rename_to=this)]
                 self,
                 async move {
-                    let t = clipboard.read_text_future().await.unwrap().unwrap();
-                    let files = t
-                        .lines()
-                        .flat_map(|p| InputFile::new(&gio::File::for_path(p)))
-                        .collect();
-                    this.open_success(files);
+                    let value = clipboard
+                        .read_value_future(gdk::FileList::static_type(), glib::Priority::DEFAULT)
+                        .await
+                        .ok();
+
+                    if let Some(value) = value
+                        && let Ok(file_list) = value.get::<gdk::FileList>()
+                    {
+                        if file_list.files().is_empty() {
+                            this.show_toast(&gettext("Unable to access copied files"));
+                        }
+
+                        let files = file_list.files().iter().map(InputFile::new).collect_vec();
+                        this.open_files(files);
+                    }
                 }
             ));
         }
@@ -464,6 +457,7 @@ impl AppWindow {
 
         // TODO: allow more than one file
         if files.len() > 1 {
+            debug!("Received {} files. Truncating to 1.", files.len());
             files.truncate(1);
         }
 
