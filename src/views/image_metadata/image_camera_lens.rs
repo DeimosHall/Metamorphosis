@@ -6,7 +6,7 @@ use adw::subclass::bin::BinImpl;
 use derivative::Derivative;
 use gtk_macros::CompositeTemplate;
 
-use crate::services::exif::ExifService;
+use crate::services::exiftool::ExifService;
 
 mod imp {
     use super::*;

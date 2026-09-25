@@ -2,7 +2,7 @@ use exiftool::ExifToolError;
 use glib::GString;
 use gtk::{glib, prelude::*, subclass::prelude::*};
 
-use crate::services::exif::ExifService;
+use crate::services::exiftool::ExifService;
 
 mod imp {
     use adw::subclass::bin::BinImpl;

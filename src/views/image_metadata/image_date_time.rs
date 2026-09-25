@@ -11,7 +11,7 @@ use exiftool::ExifToolError;
 use gtk_macros::CompositeTemplate;
 use log::{debug, error};
 
-use crate::{models::timezone::TIMEZONES, services::exif::ExifService};
+use crate::{models::timezone::TIMEZONES, services::exiftool::ExifService};
 
 mod imp {
     use super::*;

@@ -20,5 +20,13 @@ template $ImageLocationView: Adw.Bin {
         title: _("GPS Time Stamp");
       }
     }
+
+    Adw.PreferencesGroup {
+      title: _("Position");
+
+      Adw.EntryRow gps_latitude_entry {
+        title: _("Latitude");
+      }
+    }
   }
 }
