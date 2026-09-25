@@ -12,26 +12,12 @@ template $ImageLocationView: Adw.Bin {
     Adw.PreferencesGroup {
       title: _("Date &amp; Time");
 
-      Adw.ActionRow {
+      Adw.EntryRow gps_date_stamp_entry {
         title: _("GPS Date Stamp");
-        subtitle: _("Date from GPS");
-
-        Entry gps_date_stamp_entry {
-          placeholder-text: _("YYYY:MM:DD");
-          width-chars: 20;
-          valign: center;
-        }
       }
 
-      Adw.ActionRow {
+      Adw.EntryRow gps_time_stamp_entry {
         title: _("GPS Time Stamp");
-        subtitle: _("Time from GPS");
-
-        Entry gps_time_stamp_entry {
-          placeholder-text: _("HH:MM:SS");
-          width-chars: 20;
-          valign: center;
-        }
       }
     }
   }

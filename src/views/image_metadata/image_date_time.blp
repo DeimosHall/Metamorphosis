@@ -42,34 +42,16 @@ template $ImageDateTimeView: Adw.Bin {
           title: _("Modify Date");
           description: _("File Modification Time");
 
-          Adw.ActionRow {
+          Adw.EntryRow modify_date_entry {
             title: _("Date");
-
-            Entry modify_date_entry {
-              placeholder-text: _("YYYY:MM:DD HH:MM:SS");
-              width-chars: 20;
-              valign: center;
-            }
           }
 
-          Adw.ActionRow {
+          Adw.EntryRow sub_sec_time_entry {
             title: _("Fractional Seconds");
-
-            Entry sub_sec_time_entry {
-              placeholder-text: _("");
-              width-chars: 20;
-              valign: center;
-            }
           }
 
-          Adw.ActionRow {
+          Adw.EntryRow offset_time_entry {
             title: _("Offset Time");
-
-            Entry offset_time_entry {
-              placeholder-text: _("HH:MM");
-              width-chars: 20;
-              valign: center;
-            }
           }
         }
 
@@ -77,34 +59,16 @@ template $ImageDateTimeView: Adw.Bin {
           title: _("Date Time Original");
           description: _("Shutter click time");
 
-          Adw.ActionRow {
+          Adw.EntryRow date_time_original_entry {
             title: _("Date");
-
-            Entry date_time_original_entry {
-              placeholder-text: _("YYYY:MM:DD HH:MM:SS");
-              width-chars: 20;
-              valign: center;
-            }
           }
 
-          Adw.ActionRow {
+          Adw.EntryRow sub_sec_time_original_entry {
             title: _("Fractional Seconds");
-
-            Entry sub_sec_time_original_entry {
-              placeholder-text: _("");
-              width-chars: 20;
-              valign: center;
-            }
           }
 
-          Adw.ActionRow {
+          Adw.EntryRow offset_time_original_entry {
             title: _("Offset Time");
-
-            Entry offset_time_original_entry {
-              placeholder-text: _("HH:MM");
-              width-chars: 20;
-              valign: center;
-            }
           }
         }
 
@@ -112,34 +76,16 @@ template $ImageDateTimeView: Adw.Bin {
           title: _("Create Date");
           description: _("Digitization time");
 
-          Adw.ActionRow {
+          Adw.EntryRow create_date_entry {
             title: _("Date");
-
-            Entry create_date_entry {
-              placeholder-text: _("YYYY:MM:DD HH:MM:SS");
-              width-chars: 20;
-              valign: center;
-            }
           }
 
-          Adw.ActionRow {
+          Adw.EntryRow sub_sec_time_digitized_entry {
             title: _("Fractional Seconds");
-
-            Entry sub_sec_time_digitized_entry {
-              placeholder-text: _("");
-              width-chars: 20;
-              valign: center;
-            }
           }
 
-          Adw.ActionRow {
+          Adw.EntryRow offset_time_digitized_entry {
             title: _("Offset Time");
-
-            Entry offset_time_digitized_entry {
-              placeholder-text: _("HH:MM");
-              width-chars: 20;
-              valign: center;
-            }
           }
         }
       }

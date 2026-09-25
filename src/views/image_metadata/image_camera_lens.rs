@@ -19,9 +19,9 @@ mod imp {
         #[template_child]
         pub container: TemplateChild<gtk::Box>,
         #[template_child]
-        pub manufacturer_entry: TemplateChild<gtk::Entry>,
+        pub manufacturer_entry: TemplateChild<adw::EntryRow>,
         #[template_child]
-        pub model_entry: TemplateChild<gtk::Entry>,
+        pub model_entry: TemplateChild<adw::EntryRow>,
     }
 
     #[glib::object_subclass]

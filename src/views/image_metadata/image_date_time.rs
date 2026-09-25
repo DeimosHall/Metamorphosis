@@ -41,29 +41,29 @@ mod imp {
         #[template_child]
         pub advanced_revelear: TemplateChild<gtk::Revealer>,
 
-        // Dates
+        // Modify Date fields
         #[template_child]
-        pub modify_date_entry: TemplateChild<gtk::Entry>,
+        pub modify_date_entry: TemplateChild<adw::EntryRow>,
         #[template_child]
-        pub date_time_original_entry: TemplateChild<gtk::Entry>,
+        pub sub_sec_time_entry: TemplateChild<adw::EntryRow>,
         #[template_child]
-        pub create_date_entry: TemplateChild<gtk::Entry>,
+        pub offset_time_entry: TemplateChild<adw::EntryRow>,
 
-        // Fractional seconds
+        // Date Time Original fields
         #[template_child]
-        pub sub_sec_time_entry: TemplateChild<gtk::Entry>,
+        pub date_time_original_entry: TemplateChild<adw::EntryRow>,
         #[template_child]
-        pub sub_sec_time_original_entry: TemplateChild<gtk::Entry>,
+        pub sub_sec_time_original_entry: TemplateChild<adw::EntryRow>,
         #[template_child]
-        pub sub_sec_time_digitized_entry: TemplateChild<gtk::Entry>,
+        pub offset_time_original_entry: TemplateChild<adw::EntryRow>,
 
-        // Timezone offsets
+        // Create Date fields
         #[template_child]
-        pub offset_time_entry: TemplateChild<gtk::Entry>,
+        pub create_date_entry: TemplateChild<adw::EntryRow>,
         #[template_child]
-        pub offset_time_original_entry: TemplateChild<gtk::Entry>,
+        pub sub_sec_time_digitized_entry: TemplateChild<adw::EntryRow>,
         #[template_child]
-        pub offset_time_digitized_entry: TemplateChild<gtk::Entry>,
+        pub offset_time_digitized_entry: TemplateChild<adw::EntryRow>,
     }
 
     #[glib::object_subclass]
