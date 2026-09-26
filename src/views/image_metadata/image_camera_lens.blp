@@ -12,22 +12,12 @@ template $ImageCameraLensView: Adw.Bin {
     Adw.PreferencesGroup {
       title: _("Device");
 
-      Adw.ActionRow {
+      Adw.EntryRow manufacturer_entry {
         title: _("Manufacturer");
-
-        Entry manufacturer_entry {
-          width-chars: 20;
-          valign: center;
-        }
       }
 
-      Adw.ActionRow {
+      Adw.EntryRow model_entry {
         title: _("Model");
-
-        Entry model_entry {
-          width-chars: 20;
-          valign: center;
-        }
       }
     }
   }

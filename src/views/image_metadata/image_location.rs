@@ -2,7 +2,7 @@ use exiftool::ExifToolError;
 use glib::GString;
 use gtk::{glib, prelude::*, subclass::prelude::*};
 
-use crate::services::exif::ExifService;
+use crate::services::exiftool::ExifService;
 
 mod imp {
     use adw::subclass::bin::BinImpl;
@@ -17,9 +17,16 @@ mod imp {
         #[template_child]
         pub container: TemplateChild<gtk::Box>,
         #[template_child]
-        pub gps_date_stamp_entry: TemplateChild<gtk::Entry>,
+        pub gps_date_stamp_entry: TemplateChild<adw::EntryRow>,
         #[template_child]
-        pub gps_time_stamp_entry: TemplateChild<gtk::Entry>,
+        pub gps_time_stamp_entry: TemplateChild<adw::EntryRow>,
+
+        #[template_child]
+        pub gps_latitude_entry: TemplateChild<adw::EntryRow>,
+        #[template_child]
+        pub gps_longitude_entry: TemplateChild<adw::EntryRow>,
+        #[template_child]
+        pub gps_altitude_entry: TemplateChild<adw::EntryRow>,
     }
 
     #[glib::object_subclass]
@@ -79,13 +86,43 @@ impl ImageLocationView {
         self.imp().gps_time_stamp_entry.set_text(gps_time_stamp);
     }
 
+    pub fn gps_latitude(&self) -> GString {
+        self.imp().gps_latitude_entry.text()
+    }
+
+    pub fn set_gps_latitude(&self, gps_latitude: &str) {
+        self.imp().gps_latitude_entry.set_text(gps_latitude);
+    }
+
+    pub fn gps_longitude(&self) -> GString {
+        self.imp().gps_longitude_entry.text()
+    }
+
+    pub fn set_gps_longitude(&self, gps_longitude: &str) {
+        self.imp().gps_longitude_entry.set_text(gps_longitude);
+    }
+
+    pub fn gps_altitude(&self) -> GString {
+        self.imp().gps_altitude_entry.text()
+    }
+
+    pub fn set_gps_altitude(&self, gps_altitude: &str) {
+        self.imp().gps_altitude_entry.set_text(gps_altitude);
+    }
+
     pub fn load_from_file(&self, path: &str) {
         let exif = ExifService::new(path);
         let gps_date_stamp = exif.gps_date_stamp().unwrap_or_default();
         let gps_time_stamp = exif.gps_time_stamp().unwrap_or_default();
+        let gps_latitude = exif.gps_latitude().unwrap_or_default();
+        let gps_longitude = exif.gps_longitude().unwrap_or_default();
+        let gps_altitude = exif.gps_altitude().unwrap_or_default();
 
         self.set_gps_date_stamp(&gps_date_stamp);
         self.set_gps_time_stamp(&gps_time_stamp);
+        self.set_gps_latitude(&gps_latitude);
+        self.set_gps_longitude(&gps_longitude);
+        self.set_gps_altitude(&gps_altitude);
     }
 
     pub fn save_changes(&self, path: &str) -> Result<(), ExifToolError> {
@@ -93,6 +130,9 @@ impl ImageLocationView {
 
         exif.set_gps_date_stamp(self.gps_date_stamp().as_str())?;
         exif.set_gps_time_stamp(self.gps_time_stamp().as_str())?;
+        exif.set_gps_latitude(self.gps_latitude().as_str())?;
+        exif.set_gps_longitude(self.gps_longitude().as_str())?;
+        exif.set_gps_altitude(self.gps_altitude().as_str())?;
 
         Ok(())
     }

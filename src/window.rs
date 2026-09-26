@@ -6,7 +6,7 @@ use crate::config::APP_ID;
 use crate::dialogs::file_chooser::FileChooser;
 use crate::models::input_file::InputFile;
 use crate::runtime;
-use crate::services::exif::ExifService;
+use crate::services::exiftool::ExifService;
 use crate::views::about::AboutView;
 use adw::prelude::*;
 use futures::future::join_all;

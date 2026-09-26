@@ -7,13 +7,12 @@ template $ImageDetailsView: Adw.Bin {
     spacing: 24;
 
     Adw.PreferencesGroup {
-      Adw.ActionRow {
+      Adw.EntryRow image_description_entry {
         title: _("Description");
+      }
 
-        Entry image_description_entry {
-          width-chars: 20;
-          valign: center;
-        }
+      Adw.EntryRow artist_entry {
+        title: _("Artist");
       }
     }
   }

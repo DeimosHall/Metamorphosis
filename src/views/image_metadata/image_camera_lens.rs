@@ -6,7 +6,7 @@ use adw::subclass::bin::BinImpl;
 use derivative::Derivative;
 use gtk_macros::CompositeTemplate;
 
-use crate::services::exif::ExifService;
+use crate::services::exiftool::ExifService;
 
 mod imp {
     use super::*;
@@ -19,9 +19,9 @@ mod imp {
         #[template_child]
         pub container: TemplateChild<gtk::Box>,
         #[template_child]
-        pub manufacturer_entry: TemplateChild<gtk::Entry>,
+        pub manufacturer_entry: TemplateChild<adw::EntryRow>,
         #[template_child]
-        pub model_entry: TemplateChild<gtk::Entry>,
+        pub model_entry: TemplateChild<adw::EntryRow>,
     }
 
     #[glib::object_subclass]
