@@ -16,6 +16,8 @@ mod imp {
         pub container: TemplateChild<gtk::Box>,
         #[template_child]
         pub image_description_entry: TemplateChild<adw::EntryRow>,
+        #[template_child]
+        pub artist_entry: TemplateChild<adw::EntryRow>,
     }
 
     #[glib::object_subclass]
@@ -68,11 +70,21 @@ impl ImageDetailsView {
         self.imp().image_description_entry.set_text(description);
     }
 
+    pub fn artist(&self) -> GString {
+        self.imp().artist_entry.text()
+    }
+
+    pub fn set_artist(&self, artist: &str) {
+        self.imp().artist_entry.set_text(artist);
+    }
+
     pub fn load_file(&self, path: &str) {
         let exif = ExifService::new(path);
         let description = exif.image_description().unwrap_or_default();
+        let artist = exif.artist().unwrap_or_default();
 
         self.set_description(&description);
+        self.set_artist(&artist);
     }
 
     /// Take the values from the UI fields and apply them to a file
@@ -80,6 +92,7 @@ impl ImageDetailsView {
         let exif = ExifService::new(path);
 
         exif.set_image_description(self.description().as_str())?;
+        exif.set_artist(self.artist().as_str())?;
         // TODO: Let the user configure the software name
         exif.set_software()?;
 
