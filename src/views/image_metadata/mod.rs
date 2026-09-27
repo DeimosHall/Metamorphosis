@@ -192,3 +192,21 @@ impl ImageMetadataView {
         Ok(())
     }
 }
+
+macro_rules! text_field_accesors {
+    ($($field:ident => $child:ident),+ $(,)?) => {
+        pastey::paste! {
+            $(
+                pub fn $field(&self) -> glib::GString {
+                    self.imp().$child.text()
+                }
+
+                pub fn [<set_ $field>](&self, value: &str) {
+                    self.imp().$child.set_text(value);
+                }
+            )+
+        }
+    };
+}
+
+pub(crate) use text_field_accesors;
