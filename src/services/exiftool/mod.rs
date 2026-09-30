@@ -70,3 +70,21 @@ impl<'a> ExifService<'a> {
         println!("Parsed data: \n{:#?}", exif_data);
     }
 }
+
+macro_rules! exif_tag {
+    ($($field:ident => $tag:literal),+ $(,)?) => {
+        pastey::paste! {
+            $(
+                pub fn $field(&self) -> Option<String> {
+                    self.read_tag($tag)
+                }
+
+                pub fn [<set_ $field>](&self, value: &str) -> Result<(), ExifToolError> {
+                    self.write_tag($tag, value)
+                }
+            )+
+        }
+    };
+}
+
+pub(crate) use exif_tag;

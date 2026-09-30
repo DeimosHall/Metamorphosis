@@ -36,6 +36,26 @@ mod imp {
         pub camera_label_entry: TemplateChild<adw::EntryRow>,
         #[template_child]
         pub image_unique_id_entry: TemplateChild<adw::EntryRow>,
+
+        // Exposure Settings
+        #[template_child]
+        pub exposure_time_entry: TemplateChild<adw::EntryRow>,
+        #[template_child]
+        pub fnumber_entry: TemplateChild<adw::EntryRow>,
+        #[template_child]
+        pub exposure_program_entry: TemplateChild<adw::EntryRow>,
+        #[template_child]
+        pub iso_entry: TemplateChild<adw::EntryRow>,
+        #[template_child]
+        pub focal_length_entry: TemplateChild<adw::EntryRow>,
+        #[template_child]
+        pub exposure_compensation_entry: TemplateChild<adw::EntryRow>,
+        #[template_child]
+        pub metering_mode_entry: TemplateChild<adw::EntryRow>,
+        #[template_child]
+        pub flash_entry: TemplateChild<adw::EntryRow>,
+        #[template_child]
+        pub white_balance_entry: TemplateChild<adw::EntryRow>,
     }
 
     #[glib::object_subclass]
@@ -84,6 +104,16 @@ impl ImageCameraLensView {
         camera_firmware => camera_firmware_entry,
         camera_label => camera_label_entry,
         image_unique_id => image_unique_id_entry,
+        // Exposure Settings
+        exposure_time => exposure_time_entry,
+        fnumber => fnumber_entry,
+        exposure_program => exposure_program_entry,
+        iso => iso_entry,
+        focal_length => focal_length_entry,
+        exposure_compensation => exposure_compensation_entry,
+        metering_mode => metering_mode_entry,
+        flash => flash_entry,
+        white_balance => white_balance_entry,
     }
 
     pub fn load_from_file(&self, path: &str) {
@@ -97,6 +127,16 @@ impl ImageCameraLensView {
         self.set_camera_firmware(&exif.camera_firmware().unwrap_or_default());
         self.set_camera_label(&exif.camera_label().unwrap_or_default());
         self.set_image_unique_id(&exif.image_unique_id().unwrap_or_default());
+
+        self.set_exposure_time(&exif.exposure_time().unwrap_or_default());
+        self.set_fnumber(&exif.fnumber().unwrap_or_default());
+        self.set_exposure_program(&exif.exposure_program().unwrap_or_default());
+        self.set_iso(&exif.iso().unwrap_or_default());
+        self.set_focal_length(&exif.focal_length().unwrap_or_default());
+        self.set_exposure_compensation(&exif.exposure_compensation().unwrap_or_default());
+        self.set_metering_mode(&exif.metering_mode().unwrap_or_default());
+        self.set_flash(&exif.flash().unwrap_or_default());
+        self.set_white_balance(&exif.white_balance().unwrap_or_default());
     }
 
     pub fn save_changes(&self, path: &str) -> Result<(), ExifToolError> {
@@ -110,6 +150,16 @@ impl ImageCameraLensView {
         exif.set_camera_firmware(self.camera_firmware().as_str())?;
         exif.set_camera_label(self.camera_label().as_str())?;
         exif.set_image_unique_id(self.image_unique_id().as_str())?;
+
+        exif.set_exposure_time(self.exposure_time().as_str())?;
+        exif.set_fnumber(self.fnumber().as_str())?;
+        exif.set_exposure_program(self.exposure_program().as_str())?;
+        exif.set_iso(self.iso().as_str())?;
+        exif.set_focal_length(self.focal_length().as_str())?;
+        exif.set_exposure_compensation(self.exposure_compensation().as_str())?;
+        exif.set_metering_mode(self.metering_mode().as_str())?;
+        exif.set_flash(self.flash().as_str())?;
+        exif.set_white_balance(self.white_balance().as_str())?;
 
         Ok(())
     }

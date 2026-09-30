@@ -1,5 +1,7 @@
 use exiftool::ExifToolError;
 
+use crate::services::exiftool::exif_tag;
+
 use super::ExifService;
 
 impl<'a> ExifService<'a> {
@@ -88,15 +90,15 @@ impl<'a> ExifService<'a> {
         self.write_tag("ImageUniqueID", image_unique_id)
     }
 
-    // ****************** Exposure Settings ******************
-
-    /// Returns the ExposureTime tag value
-    pub fn exposure_time(&self) -> Option<String> {
-        self.read_tag("ExposureTime")
-    }
-
-    /// Sets the ExposureTime tag value
-    pub fn set_exposure_time(&self, exposure_time: &str) -> Result<(), ExifToolError> {
-        self.write_tag("ExposureTime", exposure_time)
+    exif_tag! {
+        exposure_time => "ExposureTime",
+        fnumber => "FNumber",
+        exposure_program => "ExposureProgram",
+        iso => "ISO",
+        focal_length => "FocalLength",
+        exposure_compensation => "ExposureCompensation",
+        metering_mode => "MeteringMode",
+        flash => "Flash",
+        white_balance => "WhiteBalance",
     }
 }
