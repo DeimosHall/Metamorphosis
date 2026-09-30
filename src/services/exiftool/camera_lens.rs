@@ -91,6 +91,13 @@ impl<'a> ExifService<'a> {
     }
 
     exif_tag! {
+        // Lens
+        lens_make => "LensMake",
+        lens_model => "LensModel",
+        lens_serial_number => "LensSerialNumber",
+        lens_info => "LensInfo",
+        max_aperture_value => "MaxApertureValue",
+        // Exposure Settings
         exposure_time => "ExposureTime",
         fnumber => "FNumber",
         exposure_program => "ExposureProgram",

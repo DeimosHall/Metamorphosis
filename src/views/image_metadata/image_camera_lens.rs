@@ -1,5 +1,4 @@
 use exiftool::ExifToolError;
-use glib::GString;
 use gtk::{glib, prelude::*, subclass::prelude::*};
 
 use adw::subclass::bin::BinImpl;
@@ -36,6 +35,18 @@ mod imp {
         pub camera_label_entry: TemplateChild<adw::EntryRow>,
         #[template_child]
         pub image_unique_id_entry: TemplateChild<adw::EntryRow>,
+
+        // Lens
+        #[template_child]
+        pub lens_make_entry: TemplateChild<adw::EntryRow>,
+        #[template_child]
+        pub lens_model_entry: TemplateChild<adw::EntryRow>,
+        #[template_child]
+        pub lens_serial_number_entry: TemplateChild<adw::EntryRow>,
+        #[template_child]
+        pub lens_info_entry: TemplateChild<adw::EntryRow>,
+        #[template_child]
+        pub max_aperture_value_entry: TemplateChild<adw::EntryRow>,
 
         // Exposure Settings
         #[template_child]
@@ -104,6 +115,12 @@ impl ImageCameraLensView {
         camera_firmware => camera_firmware_entry,
         camera_label => camera_label_entry,
         image_unique_id => image_unique_id_entry,
+        // Lens
+        lens_make => lens_make_entry,
+        lens_model => lens_model_entry,
+        lens_serial_number => lens_serial_number_entry,
+        lens_info => lens_info_entry,
+        max_aperture_value => max_aperture_value_entry,
         // Exposure Settings
         exposure_time => exposure_time_entry,
         fnumber => fnumber_entry,
@@ -128,6 +145,12 @@ impl ImageCameraLensView {
         self.set_camera_label(&exif.camera_label().unwrap_or_default());
         self.set_image_unique_id(&exif.image_unique_id().unwrap_or_default());
 
+        self.set_lens_make(&exif.lens_make().unwrap_or_default());
+        self.set_lens_model(&exif.lens_model().unwrap_or_default());
+        self.set_lens_serial_number(&exif.lens_serial_number().unwrap_or_default());
+        self.set_lens_info(&exif.lens_info().unwrap_or_default());
+        self.set_max_aperture_value(&exif.max_aperture_value().unwrap_or_default());
+
         self.set_exposure_time(&exif.exposure_time().unwrap_or_default());
         self.set_fnumber(&exif.fnumber().unwrap_or_default());
         self.set_exposure_program(&exif.exposure_program().unwrap_or_default());
@@ -150,6 +173,12 @@ impl ImageCameraLensView {
         exif.set_camera_firmware(self.camera_firmware().as_str())?;
         exif.set_camera_label(self.camera_label().as_str())?;
         exif.set_image_unique_id(self.image_unique_id().as_str())?;
+
+        exif.set_lens_make(self.lens_make().as_str())?;
+        exif.set_lens_model(self.lens_model().as_str())?;
+        exif.set_lens_serial_number(self.lens_serial_number().as_str())?;
+        exif.set_lens_info(self.lens_info().as_str())?;
+        exif.set_max_aperture_value(self.max_aperture_value().as_str())?;
 
         exif.set_exposure_time(self.exposure_time().as_str())?;
         exif.set_fnumber(self.fnumber().as_str())?;
