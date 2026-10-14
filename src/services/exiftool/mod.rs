@@ -7,8 +7,14 @@ mod date_time;
 mod details;
 mod location;
 
-static EXIFTOOL: LazyLock<ExifTool> =
-    LazyLock::new(|| ExifTool::with_executable(Path::new("/app/exiftool")).unwrap());
+/// Sandboxed path inside flatpak
+static EXIFTOOL_PATH: &str = "/app/exiftool";
+
+static EXIFTOOL_PATH_ERROR: &str = "Should be able to create an ExifTool path";
+
+static EXIFTOOL: LazyLock<ExifTool> = LazyLock::new(|| {
+    ExifTool::with_executable(Path::new(EXIFTOOL_PATH)).expect(EXIFTOOL_PATH_ERROR)
+});
 
 pub struct ExifService<'a> {
     path: &'a Path,
@@ -68,6 +74,8 @@ impl<'a> ExifService<'a> {
     pub fn read_all(&self) {
         let exif_data: ExifData = EXIFTOOL.read_metadata(self.path, &["-g2"]).unwrap();
         println!("Parsed data: \n{:#?}", exif_data);
+        // let metadata_json = EXIFTOOL.json(self.path, &["-g2"]).unwrap();
+        // println!("{:?}", metadata_json);
     }
 }
 

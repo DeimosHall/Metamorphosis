@@ -1,8 +1,7 @@
 use exiftool::ExifToolError;
-use glib::GString;
 use gtk::{glib, prelude::*, subclass::prelude::*};
 
-use crate::services::exiftool::ExifService;
+use crate::{services::exiftool::ExifService, views::image_metadata::text_field_accesors};
 
 mod imp {
     use adw::subclass::bin::BinImpl;
@@ -70,44 +69,14 @@ impl ImageLocationView {
         self.imp().container.set_visible(false);
     }
 
-    pub fn gps_date_stamp(&self) -> GString {
-        self.imp().gps_date_stamp_entry.text()
-    }
-
-    pub fn set_gps_date_stamp(&self, gps_date_stamp: &str) {
-        self.imp().gps_date_stamp_entry.set_text(gps_date_stamp);
-    }
-
-    pub fn gps_time_stamp(&self) -> GString {
-        self.imp().gps_time_stamp_entry.text()
-    }
-
-    pub fn set_gps_time_stamp(&self, gps_time_stamp: &str) {
-        self.imp().gps_time_stamp_entry.set_text(gps_time_stamp);
-    }
-
-    pub fn gps_latitude(&self) -> GString {
-        self.imp().gps_latitude_entry.text()
-    }
-
-    pub fn set_gps_latitude(&self, gps_latitude: &str) {
-        self.imp().gps_latitude_entry.set_text(gps_latitude);
-    }
-
-    pub fn gps_longitude(&self) -> GString {
-        self.imp().gps_longitude_entry.text()
-    }
-
-    pub fn set_gps_longitude(&self, gps_longitude: &str) {
-        self.imp().gps_longitude_entry.set_text(gps_longitude);
-    }
-
-    pub fn gps_altitude(&self) -> GString {
-        self.imp().gps_altitude_entry.text()
-    }
-
-    pub fn set_gps_altitude(&self, gps_altitude: &str) {
-        self.imp().gps_altitude_entry.set_text(gps_altitude);
+    text_field_accesors! {
+        // Date & Time
+        gps_date_stamp => gps_date_stamp_entry,
+        gps_time_stamp => gps_time_stamp_entry,
+        // Location
+        gps_latitude => gps_latitude_entry,
+        gps_longitude => gps_longitude_entry,
+        gps_altitude => gps_altitude_entry,
     }
 
     pub fn load_from_file(&self, path: &str) {

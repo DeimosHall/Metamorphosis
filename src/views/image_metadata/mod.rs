@@ -193,6 +193,26 @@ impl ImageMetadataView {
     }
 }
 
+/// This macro rule expands to getters and setters for the adw::EntryRow fields
+/// Example:
+///
+/// ```
+/// text_field_accesors! {
+///     create_date => create_date_entry,
+/// }
+/// ```
+///
+/// Expands to:
+///
+/// ```
+/// pub fn create_date(&self) -> GString {
+///     self.imp().create_date_entry.text()
+/// }
+///
+/// pub fn set_create_date(&self, create_date: &str) {
+///     self.imp().create_date_entry.set_text(create_date);
+/// }
+/// ```
 macro_rules! text_field_accesors {
     ($($field:ident => $child:ident),+ $(,)?) => {
         pastey::paste! {

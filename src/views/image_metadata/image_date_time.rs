@@ -11,7 +11,10 @@ use exiftool::ExifToolError;
 use gtk_macros::CompositeTemplate;
 use log::{debug, error};
 
-use crate::{models::timezone::TIMEZONES, services::exiftool::ExifService};
+use crate::{
+    models::timezone::TIMEZONES, services::exiftool::ExifService,
+    views::image_metadata::text_field_accesors,
+};
 
 mod imp {
     use super::*;
@@ -101,6 +104,24 @@ impl ImageDateTimeView {
         self.imp().container.set_visible(false);
     }
 
+    // Getters and setters
+    text_field_accesors! {
+        creation_date => creation_date_entry,
+        creation_time => creation_time_entry,
+        // Modify Date fields
+        modify_date => modify_date_entry,
+        sub_sec_time => sub_sec_time_entry,
+        offset_time => offset_time_entry,
+        // Date Time Original fields
+        date_time_original => date_time_original_entry,
+        sub_sec_time_original => sub_sec_time_entry,
+        offset_time_original => offset_time_original_entry,
+        // Create Date fields
+        create_date => create_date_entry,
+        sub_sec_time_digitized => sub_sec_time_digitized_entry,
+        offset_time_digitized => offset_time_digitized_entry,
+    }
+
     fn timezone_combo(&self) -> &adw::ComboRow {
         &self.imp().timezone_combo
     }
@@ -156,22 +177,6 @@ impl ImageDateTimeView {
         self.setup_timezone_combo();
     }
 
-    pub fn creation_date(&self) -> GString {
-        self.imp().creation_date_entry.text()
-    }
-
-    pub fn set_creation_date(&self, creation_date: &str) {
-        self.imp().creation_date_entry.set_text(creation_date);
-    }
-
-    pub fn creation_time(&self) -> GString {
-        self.imp().creation_time_entry.text()
-    }
-
-    pub fn set_creation_time(&self, creation_time: &str) {
-        self.imp().creation_time_entry.set_text(creation_time);
-    }
-
     /// Returns the timezone value from the list
     /// Should always be a valid value
     pub fn timezone(&self) -> GString {
@@ -216,86 +221,6 @@ impl ImageDateTimeView {
                 .set_subtitle(&gettext("Invalid time zone found"));
             self.timezone_combo().set_selected(invalid_position);
         }
-    }
-
-    pub fn modify_date(&self) -> GString {
-        self.imp().modify_date_entry.text()
-    }
-
-    pub fn set_modify_date(&self, modify_date: &str) {
-        self.imp().modify_date_entry.set_text(modify_date);
-    }
-
-    pub fn date_time_original(&self) -> GString {
-        self.imp().date_time_original_entry.text()
-    }
-
-    pub fn set_date_time_original(&self, date_time: &str) {
-        self.imp().date_time_original_entry.set_text(date_time);
-    }
-
-    pub fn create_date(&self) -> GString {
-        self.imp().create_date_entry.text()
-    }
-
-    pub fn set_create_date(&self, create_date: &str) {
-        self.imp().create_date_entry.set_text(create_date);
-    }
-
-    pub fn sub_sec_time(&self) -> GString {
-        self.imp().sub_sec_time_entry.text()
-    }
-
-    pub fn set_sub_sec_time(&self, sub_sec_time: &str) {
-        self.imp().sub_sec_time_entry.set_text(sub_sec_time);
-    }
-
-    pub fn sub_sec_time_original(&self) -> GString {
-        self.imp().sub_sec_time_original_entry.text()
-    }
-
-    pub fn set_sub_sec_time_original(&self, sub_sec_time_original: &str) {
-        self.imp()
-            .sub_sec_time_original_entry
-            .set_text(sub_sec_time_original);
-    }
-
-    pub fn sub_sec_time_digitized(&self) -> GString {
-        self.imp().sub_sec_time_digitized_entry.text()
-    }
-
-    pub fn set_sub_sec_time_digitized(&self, sub_sec_time_digitized: &str) {
-        self.imp()
-            .sub_sec_time_digitized_entry
-            .set_text(sub_sec_time_digitized);
-    }
-
-    pub fn offset_time(&self) -> GString {
-        self.imp().offset_time_entry.text()
-    }
-
-    pub fn set_offset_time(&self, offset_time: &str) {
-        self.imp().offset_time_entry.set_text(offset_time);
-    }
-
-    pub fn offset_time_original(&self) -> GString {
-        self.imp().offset_time_original_entry.text()
-    }
-
-    pub fn set_offset_time_original(&self, offset_time_original: &str) {
-        self.imp()
-            .offset_time_original_entry
-            .set_text(offset_time_original);
-    }
-
-    pub fn offset_time_digitized(&self) -> GString {
-        self.imp().offset_time_digitized_entry.text()
-    }
-
-    pub fn set_offset_time_digitized(&self, offset_time_digitized: &str) {
-        self.imp()
-            .offset_time_digitized_entry
-            .set_text(offset_time_digitized);
     }
 
     fn split_date_time(date_time: &str) -> Option<(&str, &str)> {

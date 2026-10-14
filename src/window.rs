@@ -293,10 +293,17 @@ impl AppWindow {
 
                 // Disable loading screen by now
                 // TODO: implement it after batch processing
-                if false {
+                if true {
                     win.switch_to_stack_applying();
                     win.set_convert_progress(0, 1);
                 }
+
+                // let (sender, receiver) = async_channel::bounded(1);
+
+                // std::thread::spawn(move || {
+                //     let result = image_metadata_view.save_changes(path.as_str());
+                //     sender.send_blocking(result).ok();
+                // });
 
                 glib::spawn_future_local(clone!(
                     #[weak(rename_to=win)]
@@ -306,11 +313,12 @@ impl AppWindow {
                     #[strong]
                     path,
                     async move {
+                        // let result = receiver.recv().await;
                         let result = image_metadata_view.save_changes(path.as_str());
 
                         match result {
-                            Ok(()) => {
-                                if false {
+                            Ok(_) => {
+                                if true {
                                     win.set_convert_progress(1, 1);
                                     win.switch_to_stack_apply();
                                 }
