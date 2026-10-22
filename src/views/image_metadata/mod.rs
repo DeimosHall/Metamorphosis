@@ -1,7 +1,7 @@
 use exiftool::ExifToolError;
 use glib::{object::ObjectExt, subclass::types::ObjectSubclassIsExt};
 use gtk::{glib, prelude::ButtonExt};
-use log::{error, warn};
+use log::{debug, error, warn};
 
 use crate::{components::image_thumbnail::ImageThumbnail, models::input_file::InputFile};
 
@@ -128,9 +128,11 @@ impl ImageMetadataView {
     }
 
     pub fn update_thumbnail(&self, file: InputFile) {
+        debug!("Updating thumbnail");
         let imp = self.imp();
         let file_type = file.kind();
-        let dimensions = file.dimensions();
+
+        let dimensions = file.metadata().and_then(|m| m.dimensions());
 
         let caption = match dimensions {
             Some((w, h)) => {

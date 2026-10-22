@@ -205,7 +205,7 @@ impl AppWindow {
                     #[weak(rename_to=window)]
                     self,
                     move |_, _, _| {
-                        window.test_exiftool();
+                        window.debug_metadata();
                     }
                 ))
                 .build(),
@@ -480,10 +480,10 @@ impl AppWindow {
 
         let _ = fdlimit::raise_fd_limit();
 
-        self.load_dimensions();
+        self.load_metadata();
     }
 
-    fn load_dimensions(&self) {
+    fn load_metadata(&self) {
         let files = self.files();
         let file_paths = files.iter().map(|f| f.path()).collect_vec();
 
@@ -491,10 +491,10 @@ impl AppWindow {
 
         std::thread::spawn(move || {
             for (i, path) in file_paths.iter().enumerate() {
-                let exif = ExifService::new(path);
+                let metadata = ExifService::new(path).read_all();
                 sender
-                    .send_blocking((i, exif.dimensions()))
-                    .expect("Concurrency issues while loading dimensions");
+                    .send_blocking((i, metadata))
+                    .expect("Concurrency issues while loading metadata");
             }
         });
 
@@ -502,21 +502,19 @@ impl AppWindow {
             #[weak(rename_to=this)]
             self,
             async move {
-                while let Ok((i, dimensions)) = receiver.recv().await {
-                    if let Some(dimensions) = dimensions {
-                        // TODO: should I use input_file_store instead of files()?
-                        if let Some(file) = this
-                            .imp()
-                            .input_file_store
-                            .item(i as u32)
-                            .and_downcast::<InputFile>()
-                        {
-                            file.set_dimensions(dimensions);
-                        } else {
-                            error!("File at index '{}' should exist", i);
+                while let Ok((i, metadata)) = receiver.recv().await {
+                    match metadata {
+                        Ok(metadata) => {
+                            if let Some(file) = this
+                                .imp()
+                                .input_file_store
+                                .item(i as u32)
+                                .and_downcast::<InputFile>()
+                            {
+                                file.set_metadata(Arc::new(metadata));
+                            }
                         }
-                    } else {
-                        warn!("File at index '{}' don't contain dimensions", i);
+                        Err(err) => error!("Error reading metadata: {}", err),
                     }
                 }
                 this.load_pixbuf();
@@ -524,20 +522,10 @@ impl AppWindow {
         ));
     }
 
-    fn test_exiftool(&self) {
-        println!("Testing exiftool");
-        let paths = self.files().iter().map(|f| f.path()).collect_vec();
-
-        glib::spawn_future_local(clone!(
-            #[weak(rename_to=_this)]
-            self,
-            async move {
-                for path in paths {
-                    let exif = ExifService::new(&path);
-                    exif.read_all();
-                }
-            }
-        ));
+    pub fn debug_metadata(&self) {
+        if let Some(metadata) = self.files().first().and_then(InputFile::metadata) {
+            metadata.debug();
+        }
     }
 
     pub fn clear(&self) {
@@ -570,9 +558,11 @@ impl AppWindow {
         let files_dims = self
             .active_files()
             .into_iter()
-            .map(|f| f.dimensions())
+            .map(|f| f.metadata()?.dimensions())
             .unique()
             .collect_vec();
+
+        debug!("Files dimens: {:?}", files_dims);
 
         if let Some((w, h)) = match files_dims[..] {
             [Some(d)] => Some(d),
@@ -602,6 +592,7 @@ impl AppWindow {
         (self.imp().input_file_store.n_items() as usize) - self.imp().removed.borrow().len()
     }
 
+    // TODO: give some love to this. It's difficult to understand.
     fn load_pixbuf(&self) {
         let files = self.active_files();
 
@@ -668,6 +659,8 @@ impl AppWindow {
                             .and_downcast::<InputFile>()
                             .unwrap()
                             .set_pixbuf(p);
+                    } else {
+                        warn!("Error getting texture for: {}", i);
                     }
                     glib::MainContext::default().iteration(true);
                     let c = completed.clone();

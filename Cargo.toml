@@ -30,6 +30,7 @@ exiftool = "0.3.1"
 serde_json = "1.0.149"
 jiff = "0.2.35"
 pastey = "0.2.3"
+serde = "1.0.229"
 
 # These dependencies are false positives for cargo machete
 [package.metadata.cargo-machete]

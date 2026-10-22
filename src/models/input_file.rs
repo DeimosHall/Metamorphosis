@@ -1,29 +1,29 @@
-use glib::{ParamSpec, ParamSpecEnum, ParamSpecString, Value};
+use glib::{ParamSpec, ParamSpecEnum, ParamSpecObject, ParamSpecString, Value};
 use gtk::{
     gdk::{Texture, gdk_pixbuf::Pixbuf},
     gio, glib,
     prelude::*,
     subclass::prelude::*,
 };
+
 use log::debug;
 use once_cell::sync::Lazy;
-use std::cell::{Cell, Ref, RefCell};
+use std::{
+    cell::{Cell, Ref, RefCell},
+    sync::Arc,
+};
 
 use crate::models::filetypes::FileType;
+use crate::models::{input_file, metadata::Metadata};
 
 mod imp {
-
-    use crate::models::input_file;
-
-    use self::glib::ParamSpecObject;
     use super::*;
 
     pub struct InputFile {
         pub path: RefCell<String>,
         pub kind: Cell<FileType>,
         pub pixbuf: RefCell<Option<Texture>>,
-        pub width: Cell<Option<usize>>,
-        pub height: Cell<Option<usize>>,
+        pub metadata: RefCell<Option<Arc<Metadata>>>,
     }
 
     #[::glib::object_subclass]
@@ -36,8 +36,7 @@ mod imp {
                 path: RefCell::new("/invalid-path".to_string()),
                 kind: Cell::new(FileType::Unknown),
                 pixbuf: RefCell::new(None),
-                width: Cell::new(None),
-                height: Cell::new(None),
+                metadata: RefCell::new(None),
             }
         }
     }
@@ -119,32 +118,13 @@ impl InputFile {
         self.imp().pixbuf.borrow()
     }
 
-    pub fn width(&self) -> Option<usize> {
-        self.imp().width.get()
-    }
-
-    pub fn height(&self) -> Option<usize> {
-        self.imp().height.get()
-    }
-
-    pub fn dimensions(&self) -> Option<(usize, usize)> {
-        let (w, h) = (self.width(), self.height());
-        w.zip(h)
-    }
-
-    pub fn set_dimensions(&self, dimensions: (usize, usize)) {
-        let (width, height) = dimensions;
-        self.imp().width.replace(Some(width));
-        self.imp().height.replace(Some(height));
-    }
-
-    pub fn area(&self) -> Option<usize> {
-        let (w, h) = (self.width(), self.height());
-        w.and_then(|w| h.map(|h| w * h))
-    }
-
     pub fn set_pixbuf(&self, p: Texture) {
         self.imp().pixbuf.replace(Some(p));
+    }
+
+    pub fn area(&self) -> Option<u64> {
+        let (width, height) = self.metadata()?.dimensions()?;
+        width.checked_mul(height) // None if overflow
     }
 
     pub fn path(&self) -> String {
@@ -157,5 +137,13 @@ impl InputFile {
 
     pub fn kind(&self) -> FileType {
         self.imp().kind.get()
+    }
+
+    pub fn metadata(&self) -> Option<Arc<Metadata>> {
+        self.imp().metadata.borrow().clone()
+    }
+
+    pub fn set_metadata(&self, metadata: Arc<Metadata>) {
+        self.imp().metadata.replace(Some(metadata));
     }
 }

@@ -1,6 +1,8 @@
 use std::{path::Path, sync::LazyLock};
 
-use exiftool::{ExifTool, ExifToolError, g2::ExifData};
+use exiftool::{ExifTool, ExifToolError};
+
+use crate::models::metadata::Metadata;
 
 mod camera_lens;
 mod date_time;
@@ -16,6 +18,7 @@ static EXIFTOOL: LazyLock<ExifTool> = LazyLock::new(|| {
     ExifTool::with_executable(Path::new(EXIFTOOL_PATH)).expect(EXIFTOOL_PATH_ERROR)
 });
 
+// TODO: maybe refactor to PathBuf
 pub struct ExifService<'a> {
     path: &'a Path,
 }
@@ -58,24 +61,9 @@ impl<'a> ExifService<'a> {
         EXIFTOOL.write_tag(self.path, tag, value, &["-overwrite_original"])
     }
 
-    pub fn width(&self) -> Option<usize> {
-        self.read_tag("ImageWidth").and_then(|w| w.parse().ok())
-    }
-
-    pub fn height(&self) -> Option<usize> {
-        self.read_tag("ImageHeight").and_then(|h| h.parse().ok())
-    }
-
-    pub fn dimensions(&self) -> Option<(usize, usize)> {
-        self.width().zip(self.height())
-    }
-
-    // TODO: used for testing purposes, delete later
-    pub fn read_all(&self) {
-        let exif_data: ExifData = EXIFTOOL.read_metadata(self.path, &["-g2"]).unwrap();
-        println!("Parsed data: \n{:#?}", exif_data);
-        // let metadata_json = EXIFTOOL.json(self.path, &["-g2"]).unwrap();
-        // println!("{:?}", metadata_json);
+    /// Returns all the metadata fields
+    pub fn read_all(&self) -> Result<Metadata, ExifToolError> {
+        EXIFTOOL.read_metadata(self.path, &["-n"])
     }
 }
 
