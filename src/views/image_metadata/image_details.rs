@@ -1,7 +1,10 @@
 use exiftool::ExifToolError;
 use gtk::{glib, prelude::*, subclass::prelude::*};
 
-use crate::{services::exiftool::ExifService, views::image_metadata::text_field_accesors};
+use crate::{
+    models::metadata::Metadata, services::exiftool::ExifService,
+    views::image_metadata::text_field_accesors,
+};
 
 mod imp {
     use adw::subclass::bin::BinImpl;
@@ -66,13 +69,9 @@ impl ImageDetailsView {
         artist => artist_entry,
     }
 
-    pub fn load_file(&self, path: &str) {
-        let exif = ExifService::new(path);
-        let description = exif.image_description().unwrap_or_default();
-        let artist = exif.artist().unwrap_or_default();
-
-        self.set_image_description(&description);
-        self.set_artist(&artist);
+    pub fn load_metadata(&self, metadata: &Metadata) {
+        self.set_image_description(metadata.image_descripton().unwrap_or_default());
+        self.set_artist(metadata.artist().unwrap_or_default());
     }
 
     /// Take the values from the UI fields and apply them to a file

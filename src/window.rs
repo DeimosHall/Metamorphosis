@@ -322,7 +322,15 @@ impl AppWindow {
                                     win.set_convert_progress(1, 1);
                                     win.switch_to_stack_apply();
                                 }
-                                image_metadata_view.load_from_file(path.as_str());
+
+                                win.load_metadata().await;
+
+                                for file in win.files() {
+                                    if let Some(metadata) = file.metadata() {
+                                        image_metadata_view
+                                            .load_from_file(path.as_str(), &metadata);
+                                    }
+                                }
                                 win.show_toast(&gettext("Changes applied"));
                             }
                             Err(error) => {
@@ -480,10 +488,17 @@ impl AppWindow {
 
         let _ = fdlimit::raise_fd_limit();
 
-        self.load_metadata();
+        glib::spawn_future_local(clone!(
+            #[weak(rename_to=this)]
+            self,
+            async move {
+                this.load_metadata().await;
+                this.load_pixbuf();
+            }
+        ));
     }
 
-    fn load_metadata(&self) {
+    async fn load_metadata(&self) {
         let files = self.files();
         let file_paths = files.iter().map(|f| f.path()).collect_vec();
 
@@ -498,28 +513,21 @@ impl AppWindow {
             }
         });
 
-        glib::spawn_future_local(clone!(
-            #[weak(rename_to=this)]
-            self,
-            async move {
-                while let Ok((i, metadata)) = receiver.recv().await {
-                    match metadata {
-                        Ok(metadata) => {
-                            if let Some(file) = this
-                                .imp()
-                                .input_file_store
-                                .item(i as u32)
-                                .and_downcast::<InputFile>()
-                            {
-                                file.set_metadata(Arc::new(metadata));
-                            }
-                        }
-                        Err(err) => error!("Error reading metadata: {}", err),
+        while let Ok((i, metadata)) = receiver.recv().await {
+            match metadata {
+                Ok(metadata) => {
+                    if let Some(file) = self
+                        .imp()
+                        .input_file_store
+                        .item(i as u32)
+                        .and_downcast::<InputFile>()
+                    {
+                        file.set_metadata(Arc::new(metadata));
                     }
                 }
-                this.load_pixbuf();
+                Err(err) => error!("Error reading metadata: {}", err),
             }
-        ));
+        }
     }
 
     pub fn debug_metadata(&self) {
@@ -576,11 +584,16 @@ impl AppWindow {
         }
 
         let file = self.files().first().unwrap().clone();
-        self.imp().image_metadata_view.update_thumbnail(file);
+        self.imp().image_metadata_view.update_thumbnail(&file);
 
         self.switch_back_from_loading();
-        let path = self.files().first().unwrap().path();
-        self.imp().image_metadata_view.load_from_file(path.as_str());
+
+        if let Some(metadata) = file.metadata() {
+            let path = self.files().first().unwrap().path();
+            self.imp()
+                .image_metadata_view
+                .load_from_file(path.as_str(), &metadata);
+        }
 
         if matches!(self.imp().navigation.visible_page().and_then(|x| x.tag()), Some(x) if x == "main")
         {

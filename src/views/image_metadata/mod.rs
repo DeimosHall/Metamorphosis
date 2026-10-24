@@ -3,7 +3,10 @@ use glib::{object::ObjectExt, subclass::types::ObjectSubclassIsExt};
 use gtk::{glib, prelude::ButtonExt};
 use log::{debug, error, warn};
 
-use crate::{components::image_thumbnail::ImageThumbnail, models::input_file::InputFile};
+use crate::{
+    components::image_thumbnail::ImageThumbnail,
+    models::{input_file::InputFile, metadata::Metadata},
+};
 
 mod image_camera_lens;
 mod image_date_time;
@@ -127,7 +130,7 @@ impl ImageMetadataView {
         self.imp().image_date_time_view.setup();
     }
 
-    pub fn update_thumbnail(&self, file: InputFile) {
+    pub fn update_thumbnail(&self, file: &InputFile) {
         debug!("Updating thumbnail");
         let imp = self.imp();
         let file_type = file.kind();
@@ -178,11 +181,11 @@ impl ImageMetadataView {
     }
 
     /// Populate UI fields using exif data from the given file
-    pub fn load_from_file(&self, path: &str) {
+    pub fn load_from_file(&self, path: &str, metadata: &Metadata) {
         self.imp().image_date_time_view.load_from_file(path);
         self.imp().image_location_view.load_from_file(path);
         self.imp().image_camera_lens_view.load_from_file(path);
-        self.imp().image_details_view.load_file(path);
+        self.imp().image_details_view.load_metadata(metadata);
     }
 
     /// Take the values from the UI fields and apply them to a file

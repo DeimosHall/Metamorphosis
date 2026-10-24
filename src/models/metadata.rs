@@ -16,9 +16,21 @@ impl Metadata {
         }
     }
 
+    pub fn get(&self, tag: &str) -> Option<&Value> {
+        self.tags.get(tag)
+    }
+
     pub fn dimensions(&self) -> Option<(u64, u64)> {
-        let width = self.tags.get("ImageWidth")?.as_number()?.as_u64();
-        let height = self.tags.get("ImageHeight")?.as_number()?.as_u64();
+        let width = self.get("ImageWidth")?.as_u64();
+        let height = self.get("ImageHeight")?.as_u64();
         width.zip(height)
+    }
+
+    pub fn image_descripton(&self) -> Option<&str> {
+        self.get("ImageDescription")?.as_str()
+    }
+
+    pub fn artist(&self) -> Option<&str> {
+        self.get("Artist")?.as_str()
     }
 }
