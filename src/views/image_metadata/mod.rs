@@ -183,7 +183,7 @@ impl ImageMetadataView {
     /// Populate UI fields using exif data from the given file
     pub fn load_from_file(&self, path: &str, metadata: &Metadata) {
         self.imp().image_date_time_view.load_from_file(path);
-        self.imp().image_location_view.load_from_file(path);
+        self.imp().image_location_view.load_metadata(metadata);
         self.imp().image_camera_lens_view.load_from_file(path);
         self.imp().image_details_view.load_metadata(metadata);
     }

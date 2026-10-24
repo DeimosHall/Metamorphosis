@@ -49,13 +49,6 @@ impl<'a> ExifService<'a> {
         self.read_tag_with_args(tag, &[])
     }
 
-    /// Returns a tag value in raw format
-    /// Example:
-    ///     - GPSLatitude: 19.7209694444444
-    fn read_raw_tag(&self, tag: &str) -> Option<String> {
-        self.read_tag_with_args(tag, &["-n"])
-    }
-
     /// Writes a value to a tag
     fn write_tag(&self, tag: &str, value: &str) -> Result<(), ExifToolError> {
         EXIFTOOL.write_tag(self.path, tag, value, &["-overwrite_original"])
