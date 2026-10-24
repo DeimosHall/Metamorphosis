@@ -69,7 +69,7 @@ impl ImageDetailsView {
         artist => artist_entry,
     }
 
-    pub fn load_metadata(&self, metadata: &Metadata) {
+    pub fn set_metadata(&self, metadata: &Metadata) {
         self.set_image_description(metadata.image_description().unwrap_or_default());
         self.set_artist(metadata.artist().unwrap_or_default());
     }

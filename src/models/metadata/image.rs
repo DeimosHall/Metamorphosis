@@ -7,6 +7,18 @@ impl Metadata {
         width.zip(height)
     }
 
+    pub fn sub_sec_time(&self) -> Option<u64> {
+        self.get("SubSecTime")?.as_u64()
+    }
+
+    pub fn sub_sec_time_original(&self) -> Option<u64> {
+        self.get("SubSecTimeOriginal")?.as_u64()
+    }
+
+    pub fn sub_sec_time_digitized(&self) -> Option<u64> {
+        self.get("SubSecTimeDigitized")?.as_u64()
+    }
+
     pub fn gps_latitude(&self) -> Option<f64> {
         self.get("GPSLatitude")?.as_f64()
     }
@@ -20,6 +32,13 @@ impl Metadata {
     }
 
     exif_tag! {
+        // Date & Time
+        modify_date => "ModifyDate",
+        offset_time => "OffsetTime",
+        date_time_original => "DateTimeOriginal",
+        offset_time_original => "OffsetTimeOriginal",
+        create_date => "CreateDate",
+        offset_time_digitized => "OffsetTimeDigitized",
         // Location
         gps_date_stamp => "GPSDateStamp",
         gps_time_stamp => "GPSTimeStamp",

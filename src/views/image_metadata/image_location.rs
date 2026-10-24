@@ -82,7 +82,7 @@ impl ImageLocationView {
         gps_altitude => gps_altitude_entry,
     }
 
-    pub fn load_metadata(&self, metadata: &Metadata) {
+    pub fn set_metadata(&self, metadata: &Metadata) {
         self.set_gps_date_stamp(metadata.gps_date_stamp().unwrap_or_default());
         self.set_gps_time_stamp(metadata.gps_time_stamp().unwrap_or_default());
 

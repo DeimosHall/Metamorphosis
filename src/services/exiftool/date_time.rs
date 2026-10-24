@@ -4,14 +4,6 @@ use jiff::{Unit, Zoned};
 use super::ExifService;
 
 impl<'a> ExifService<'a> {
-    // ****************** Dates ******************
-
-    /// Returns the ModifyDate tag value
-    /// Format: "YYYY:MM:DD HH:MM:SS"
-    pub fn modify_date(&self) -> Option<String> {
-        self.read_tag("ModifyDate")
-    }
-
     /// Sets the ModifyDate tag value
     /// Format: "YYYY:MM:DD HH:MM:SS"
     pub fn set_modify_date(&self, modify_date: &str) -> Result<(), ExifToolError> {
@@ -28,22 +20,10 @@ impl<'a> ExifService<'a> {
         self.set_modify_date(date_time.as_str())
     }
 
-    /// Returns the DateTimeOriginal tag value
-    /// Format: "YYYY:MM:DD HH:MM:SS"
-    pub fn date_time_original(&self) -> Option<String> {
-        self.read_tag("DateTimeOriginal")
-    }
-
     /// Sets the DateTimeOriginal tag value
     /// Format: "YYYY:MM:DD HH:MM:SS"
     pub fn set_date_time_original(&self, date_time_original: &str) -> Result<(), ExifToolError> {
         self.write_tag("DateTimeOriginal", date_time_original)
-    }
-
-    /// Returns the CreateDate tag value
-    /// Format: "YYYY:MM:DD HH:MM:SS" (e.g., "2026:03:31 22:02:24")
-    pub fn create_date(&self) -> Option<String> {
-        self.read_tag("CreateDate")
     }
 
     /// Sets the CreateDate tag value
@@ -66,19 +46,9 @@ impl<'a> ExifService<'a> {
 
     // ****************** Fractional seconds ******************
 
-    /// Returns the SubSecTime tag value
-    pub fn sub_sec_time(&self) -> Option<String> {
-        self.read_tag("SubSecTime")
-    }
-
     /// Sets the SubSecTime tag value
     pub fn set_sub_sec_time(&self, sub_sec_time: &str) -> Result<(), ExifToolError> {
         self.write_tag("SubSecTime", sub_sec_time)
-    }
-
-    /// Returns the SubSecTimeOriginal tag value
-    pub fn sub_sec_time_original(&self) -> Option<String> {
-        self.read_tag("SubSecTimeOriginal")
     }
 
     /// Sets the SubSecTimeOriginal tag value
@@ -87,11 +57,6 @@ impl<'a> ExifService<'a> {
         sub_sec_time_original: &str,
     ) -> Result<(), ExifToolError> {
         self.write_tag("SubSecTimeOriginal", sub_sec_time_original)
-    }
-
-    /// Returns the SubSecTimeDigitized tag value
-    pub fn sub_sec_time_digitized(&self) -> Option<String> {
-        self.read_tag("SubSecTimeDigitized")
     }
 
     /// Sets the SubSecTimeDigitized tag value
@@ -104,24 +69,11 @@ impl<'a> ExifService<'a> {
 
     // ****************** Timezone offsets ******************
 
-    /// Returns the OffSetTime tag value (from ModifyDate)
-    /// Format: "HH:MM"
-    pub fn offset_time(&self) -> Option<String> {
-        self.read_tag("OffsetTime")
-    }
-
     /// Sets the OffsetTime tag value (for ModifyDate)
     /// Offset time format: "HH:MM"
     pub fn set_offset_time(&self, offset_time: &str) -> Result<(), ExifToolError> {
         self.write_tag("OffsetTime", offset_time)
     }
-
-    /// Returns the OffsetTimeOriginal tag value (from DateTimeOrginal)
-    /// Format: "HH:MM"
-    pub fn offset_time_original(&self) -> Option<String> {
-        self.read_tag("OffsetTimeOriginal")
-    }
-
     /// Sets the OffsetTimeOriginal tag value (for DateTimeOrginal)
     /// Offset time format: "HH:MM"
     pub fn set_offset_time_original(
@@ -129,12 +81,6 @@ impl<'a> ExifService<'a> {
         offset_time_original: &str,
     ) -> Result<(), ExifToolError> {
         self.write_tag("OffsetTimeOriginal", offset_time_original)
-    }
-
-    /// Returns the OffsetTimeDigitized tag value (from CreateDate)
-    /// Format: "HH:MM"
-    pub fn offset_time_digitized(&self) -> Option<String> {
-        self.read_tag("OffsetTimeDigitized")
     }
 
     /// Sets the OffsetTimeDigitized tag value (for CreateDate)

@@ -12,7 +12,8 @@ use gtk_macros::CompositeTemplate;
 use log::{debug, error};
 
 use crate::{
-    models::timezone::TIMEZONES, services::exiftool::ExifService,
+    models::{metadata::Metadata, timezone::TIMEZONES},
+    services::exiftool::ExifService,
     views::image_metadata::text_field_accesors,
 };
 
@@ -114,7 +115,7 @@ impl ImageDateTimeView {
         offset_time => offset_time_entry,
         // Date Time Original fields
         date_time_original => date_time_original_entry,
-        sub_sec_time_original => sub_sec_time_entry,
+        sub_sec_time_original => sub_sec_time_original_entry,
         offset_time_original => offset_time_original_entry,
         // Create Date fields
         create_date => create_date_entry,
@@ -233,36 +234,34 @@ impl ImageDateTimeView {
 
     // TODO: maybe these methods should go in a trait
     /// Populate UI fields using exif data from the given file
-    pub fn load_from_file(&self, path: &str) {
-        let exif = ExifService::new(path);
+    pub fn set_metadata(&self, metadata: &Metadata) {
+        if let Some((creation_date, creation_time)) =
+            ImageDateTimeView::split_date_time(metadata.date_time_original().unwrap_or_default())
+        {
+            self.set_creation_date(creation_date);
+            self.set_creation_time(creation_time);
+            self.set_timezone(metadata.offset_time_original().unwrap_or_default());
+        }
 
-        let modify_date = exif.modify_date().unwrap_or_default();
-        let date_time_original = exif.date_time_original().unwrap_or_default();
-        let create_date = exif.create_date().unwrap_or_default();
-        let sub_sec_time = exif.sub_sec_time().unwrap_or_default();
-        let sub_sec_time_original = exif.sub_sec_time_original().unwrap_or_default();
-        let sub_sec_time_digitized = exif.sub_sec_time_digitized().unwrap_or_default();
-        let offset_time = exif.offset_time().unwrap_or_default();
-        let offset_time_original = exif.offset_time_original().unwrap_or_default();
-        let offset_time_digitized = exif.offset_time_digitized().unwrap_or_default();
+        self.set_modify_date(metadata.modify_date().unwrap_or_default());
+        self.set_date_time_original(metadata.date_time_original().unwrap_or_default());
+        self.set_create_date(metadata.create_date().unwrap_or_default());
 
-        let (creation_date, creation_time) =
-            ImageDateTimeView::split_date_time(&create_date).unwrap_or_default();
+        if let Some(sub_sec_time) = metadata.sub_sec_time() {
+            self.set_sub_sec_time(&sub_sec_time.to_string());
+        }
 
-        self.set_creation_date(creation_date);
-        self.set_creation_time(creation_time);
-        debug!("Loading offset from file: {}", offset_time_digitized);
-        self.set_timezone(&offset_time_digitized);
+        if let Some(sub_sec_time_original) = metadata.sub_sec_time_original() {
+            self.set_sub_sec_time_original(&sub_sec_time_original.to_string());
+        }
 
-        self.set_modify_date(&modify_date);
-        self.set_date_time_original(&date_time_original);
-        self.set_create_date(&create_date);
-        self.set_sub_sec_time(&sub_sec_time);
-        self.set_sub_sec_time_original(&sub_sec_time_original);
-        self.set_sub_sec_time_digitized(&sub_sec_time_digitized);
-        self.set_offset_time(&offset_time);
-        self.set_offset_time_original(&offset_time_original);
-        self.set_offset_time_digitized(&offset_time_digitized);
+        if let Some(sub_sec_time_digitized) = metadata.sub_sec_time_digitized() {
+            self.set_sub_sec_time_digitized(&sub_sec_time_digitized.to_string());
+        }
+
+        self.set_offset_time(metadata.offset_time().unwrap_or_default());
+        self.set_offset_time_original(metadata.offset_time_original().unwrap_or_default());
+        self.set_offset_time_digitized(metadata.offset_time_digitized().unwrap_or_default());
     }
 
     /// Take the values from the UI fields and apply them to a file
