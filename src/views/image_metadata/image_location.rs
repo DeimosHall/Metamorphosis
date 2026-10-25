@@ -72,6 +72,7 @@ impl ImageLocationView {
         self.imp().container.set_visible(false);
     }
 
+    // Getters and setters
     text_field_accesors! {
         // Date & Time
         gps_date_stamp => gps_date_stamp_entry,

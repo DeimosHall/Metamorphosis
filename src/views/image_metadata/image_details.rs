@@ -64,6 +64,7 @@ impl ImageDetailsView {
         self.imp().container.set_visible(false);
     }
 
+    // Getters and setters
     text_field_accesors! {
         image_description => image_description_entry,
         artist => artist_entry,

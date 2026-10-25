@@ -327,8 +327,7 @@ impl AppWindow {
 
                                 for file in win.files() {
                                     if let Some(metadata) = file.metadata() {
-                                        image_metadata_view
-                                            .load_from_file(path.as_str(), &metadata);
+                                        image_metadata_view.set_metadata(&metadata);
                                     }
                                 }
                                 win.show_toast(&gettext("Changes applied"));
@@ -589,10 +588,7 @@ impl AppWindow {
         self.switch_back_from_loading();
 
         if let Some(metadata) = file.metadata() {
-            let path = self.files().first().unwrap().path();
-            self.imp()
-                .image_metadata_view
-                .load_from_file(path.as_str(), &metadata);
+            self.imp().image_metadata_view.set_metadata(&metadata);
         }
 
         if matches!(self.imp().navigation.visible_page().and_then(|x| x.tag()), Some(x) if x == "main")

@@ -1,7 +1,7 @@
 use exiftool::ExifToolError;
 use glib::{object::ObjectExt, subclass::types::ObjectSubclassIsExt};
 use gtk::{glib, prelude::ButtonExt};
-use log::{debug, error, warn};
+use log::{error, warn};
 
 use crate::{
     components::image_thumbnail::ImageThumbnail,
@@ -131,7 +131,6 @@ impl ImageMetadataView {
     }
 
     pub fn update_thumbnail(&self, file: &InputFile) {
-        debug!("Updating thumbnail");
         let imp = self.imp();
         let file_type = file.kind();
 
@@ -181,10 +180,10 @@ impl ImageMetadataView {
     }
 
     /// Populate UI fields using exif data from the given file
-    pub fn load_from_file(&self, path: &str, metadata: &Metadata) {
+    pub fn set_metadata(&self, metadata: &Metadata) {
         self.imp().image_date_time_view.set_metadata(metadata);
         self.imp().image_location_view.set_metadata(metadata);
-        self.imp().image_camera_lens_view.load_from_file(path);
+        self.imp().image_camera_lens_view.set_metadata(metadata);
         self.imp().image_details_view.set_metadata(metadata);
     }
 

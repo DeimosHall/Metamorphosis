@@ -5,7 +5,10 @@ use adw::subclass::bin::BinImpl;
 use derivative::Derivative;
 use gtk_macros::CompositeTemplate;
 
-use crate::{services::exiftool::ExifService, views::image_metadata::text_field_accesors};
+use crate::{
+    models::metadata::Metadata, services::exiftool::ExifService,
+    views::image_metadata::text_field_accesors,
+};
 
 mod imp {
     use super::*;
@@ -20,7 +23,7 @@ mod imp {
 
         // Device
         #[template_child]
-        pub manufacturer_entry: TemplateChild<adw::EntryRow>,
+        pub make_entry: TemplateChild<adw::EntryRow>,
         #[template_child]
         pub model_entry: TemplateChild<adw::EntryRow>,
         #[template_child]
@@ -107,7 +110,7 @@ impl ImageCameraLensView {
     // Getters and setters
     text_field_accesors! {
         // Device
-        manufacturer => manufacturer_entry,
+        make => make_entry,
         model => model_entry,
         serial_number => serial_number_entry,
         owner_name => owner_name_entry,
@@ -133,39 +136,45 @@ impl ImageCameraLensView {
         white_balance => white_balance_entry,
     }
 
-    pub fn load_from_file(&self, path: &str) {
-        let exif = ExifService::new(path);
+    /// Returns the given value in String format if it is
+    /// Some, returns an empty String otherwise.
+    /// Useful to "clean" the UI fields when the previous
+    /// image contains a field, but the new one doesn't.
+    fn as_text<T: ToString>(value: Option<T>) -> String {
+        value.map(|v| v.to_string()).unwrap_or_default()
+    }
 
-        self.set_manufacturer(&exif.make().unwrap_or_default());
-        self.set_model(&exif.model().unwrap_or_default());
-        self.set_serial_number(&exif.serial_number().unwrap_or_default());
-        self.set_owner_name(&exif.owner_name().unwrap_or_default());
-        self.set_camera_serial_number(&exif.camera_serial_number().unwrap_or_default());
-        self.set_camera_firmware(&exif.camera_firmware().unwrap_or_default());
-        self.set_camera_label(&exif.camera_label().unwrap_or_default());
-        self.set_image_unique_id(&exif.image_unique_id().unwrap_or_default());
+    pub fn set_metadata(&self, metadata: &Metadata) {
+        self.set_make(metadata.make().unwrap_or_default());
+        self.set_model(metadata.model().unwrap_or_default());
+        self.set_serial_number(metadata.serial_number().unwrap_or_default());
+        self.set_owner_name(metadata.owner_name().unwrap_or_default());
+        self.set_camera_serial_number(metadata.camera_serial_number().unwrap_or_default());
+        self.set_camera_firmware(metadata.camera_firmware().unwrap_or_default());
+        self.set_camera_label(metadata.camera_label().unwrap_or_default());
+        self.set_image_unique_id(metadata.image_unique_id().unwrap_or_default());
 
-        self.set_lens_make(&exif.lens_make().unwrap_or_default());
-        self.set_lens_model(&exif.lens_model().unwrap_or_default());
-        self.set_lens_serial_number(&exif.lens_serial_number().unwrap_or_default());
-        self.set_lens_info(&exif.lens_info().unwrap_or_default());
-        self.set_max_aperture_value(&exif.max_aperture_value().unwrap_or_default());
+        self.set_lens_make(metadata.lens_make().unwrap_or_default());
+        self.set_lens_model(metadata.lens_model().unwrap_or_default());
+        self.set_lens_serial_number(metadata.lens_serial_number().unwrap_or_default());
+        self.set_lens_info(metadata.lens_info().unwrap_or_default());
 
-        self.set_exposure_time(&exif.exposure_time().unwrap_or_default());
-        self.set_fnumber(&exif.fnumber().unwrap_or_default());
-        self.set_exposure_program(&exif.exposure_program().unwrap_or_default());
-        self.set_iso(&exif.iso().unwrap_or_default());
-        self.set_focal_length(&exif.focal_length().unwrap_or_default());
-        self.set_exposure_compensation(&exif.exposure_compensation().unwrap_or_default());
-        self.set_metering_mode(&exif.metering_mode().unwrap_or_default());
-        self.set_flash(&exif.flash().unwrap_or_default());
-        self.set_white_balance(&exif.white_balance().unwrap_or_default());
+        self.set_max_aperture_value(&Self::as_text(metadata.max_aperture_value()));
+        self.set_exposure_time(&Self::as_text(metadata.exposure_time()));
+        self.set_fnumber(&Self::as_text(metadata.fnumber()));
+        self.set_exposure_program(&Self::as_text(metadata.exposure_program()));
+        self.set_iso(&Self::as_text(metadata.iso()));
+        self.set_focal_length(&Self::as_text(metadata.focal_length()));
+        self.set_exposure_compensation(&Self::as_text(metadata.exposure_compensation()));
+        self.set_metering_mode(&Self::as_text(metadata.metering_mode()));
+        self.set_flash(&Self::as_text(metadata.flash()));
+        self.set_white_balance(&Self::as_text(metadata.white_balance()));
     }
 
     pub fn save_changes(&self, path: &str) -> Result<(), ExifToolError> {
         let exif = ExifService::new(path);
 
-        exif.set_make(self.manufacturer().as_str())?;
+        exif.set_make(self.make().as_str())?;
         exif.set_model(self.model().as_str())?;
         exif.set_serial_number(self.serial_number().as_str())?;
         exif.set_owner_name(self.owner_name().as_str())?;

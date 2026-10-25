@@ -30,25 +30,6 @@ impl<'a> ExifService<'a> {
         }
     }
 
-    /// Returns a tag value in String format
-    /// Converts numbers and bools to String
-    fn read_tag_with_args(&self, tag: &str, args: &[&str]) -> Option<String> {
-        let value = EXIFTOOL.json_tag(self.path, tag, args).ok()?;
-        match value {
-            serde_json::Value::String(value) => Some(value),
-            serde_json::Value::Number(value) => Some(value.to_string()),
-            serde_json::Value::Bool(value) => Some(value.to_string()),
-            _ => None,
-        }
-    }
-
-    /// Returns a tag value in human-readable format
-    /// Example:
-    ///     - GPSLatitude: 19 deg 43' 15.49" N
-    fn read_tag(&self, tag: &str) -> Option<String> {
-        self.read_tag_with_args(tag, &[])
-    }
-
     /// Writes a value to a tag
     fn write_tag(&self, tag: &str, value: &str) -> Result<(), ExifToolError> {
         EXIFTOOL.write_tag(self.path, tag, value, &["-overwrite_original"])
@@ -64,10 +45,6 @@ macro_rules! exif_tag {
     ($($field:ident => $tag:literal),+ $(,)?) => {
         pastey::paste! {
             $(
-                pub fn $field(&self) -> Option<String> {
-                    self.read_tag($tag)
-                }
-
                 pub fn [<set_ $field>](&self, value: &str) -> Result<(), ExifToolError> {
                     self.write_tag($tag, value)
                 }
