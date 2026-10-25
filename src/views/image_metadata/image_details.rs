@@ -1,8 +1,10 @@
 use exiftool::ExifToolError;
-use glib::GString;
 use gtk::{glib, prelude::*, subclass::prelude::*};
 
-use crate::services::exiftool::ExifService;
+use crate::{
+    models::metadata::Metadata, services::exiftool::ExifService,
+    views::image_metadata::text_field_accesors,
+};
 
 mod imp {
     use adw::subclass::bin::BinImpl;
@@ -62,36 +64,22 @@ impl ImageDetailsView {
         self.imp().container.set_visible(false);
     }
 
-    pub fn description(&self) -> GString {
-        self.imp().image_description_entry.text()
+    // Getters and setters
+    text_field_accesors! {
+        image_description => image_description_entry,
+        artist => artist_entry,
     }
 
-    pub fn set_description(&self, description: &str) {
-        self.imp().image_description_entry.set_text(description);
-    }
-
-    pub fn artist(&self) -> GString {
-        self.imp().artist_entry.text()
-    }
-
-    pub fn set_artist(&self, artist: &str) {
-        self.imp().artist_entry.set_text(artist);
-    }
-
-    pub fn load_file(&self, path: &str) {
-        let exif = ExifService::new(path);
-        let description = exif.image_description().unwrap_or_default();
-        let artist = exif.artist().unwrap_or_default();
-
-        self.set_description(&description);
-        self.set_artist(&artist);
+    pub fn set_metadata(&self, metadata: &Metadata) {
+        self.set_image_description(metadata.image_description().unwrap_or_default());
+        self.set_artist(metadata.artist().unwrap_or_default());
     }
 
     /// Take the values from the UI fields and apply them to a file
     pub fn save_changes(&self, path: &str) -> Result<(), ExifToolError> {
         let exif = ExifService::new(path);
 
-        exif.set_image_description(self.description().as_str())?;
+        exif.set_image_description(self.image_description().as_str())?;
         exif.set_artist(self.artist().as_str())?;
         // TODO: Let the user configure the software name
         exif.set_software()?;

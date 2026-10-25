@@ -11,19 +11,9 @@ impl<'a> ExifService<'a> {
         Ok(())
     }
 
-    /// Returns the ImageDescription tag value
-    pub fn image_description(&self) -> Option<String> {
-        self.read_tag("ImageDescription")
-    }
-
     /// Sets the ImageDescription tag value
     pub fn set_image_description(&self, description: &str) -> Result<(), ExifToolError> {
         self.write_tag("ImageDescription", description)
-    }
-
-    /// Returns the Artist tag value
-    pub fn artist(&self) -> Option<String> {
-        self.read_tag("Artist")
     }
 
     /// Sets the Artist tag value

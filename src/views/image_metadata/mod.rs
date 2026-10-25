@@ -3,7 +3,10 @@ use glib::{object::ObjectExt, subclass::types::ObjectSubclassIsExt};
 use gtk::{glib, prelude::ButtonExt};
 use log::{error, warn};
 
-use crate::{components::image_thumbnail::ImageThumbnail, models::input_file::InputFile};
+use crate::{
+    components::image_thumbnail::ImageThumbnail,
+    models::{input_file::InputFile, metadata::Metadata},
+};
 
 mod image_camera_lens;
 mod image_date_time;
@@ -127,10 +130,11 @@ impl ImageMetadataView {
         self.imp().image_date_time_view.setup();
     }
 
-    pub fn update_thumbnail(&self, file: InputFile) {
+    pub fn update_thumbnail(&self, file: &InputFile) {
         let imp = self.imp();
         let file_type = file.kind();
-        let dimensions = file.dimensions();
+
+        let dimensions = file.metadata().and_then(|m| m.dimensions());
 
         let caption = match dimensions {
             Some((w, h)) => {
@@ -176,11 +180,11 @@ impl ImageMetadataView {
     }
 
     /// Populate UI fields using exif data from the given file
-    pub fn load_from_file(&self, path: &str) {
-        self.imp().image_date_time_view.load_from_file(path);
-        self.imp().image_location_view.load_from_file(path);
-        self.imp().image_camera_lens_view.load_from_file(path);
-        self.imp().image_details_view.load_file(path);
+    pub fn set_metadata(&self, metadata: &Metadata) {
+        self.imp().image_date_time_view.set_metadata(metadata);
+        self.imp().image_location_view.set_metadata(metadata);
+        self.imp().image_camera_lens_view.set_metadata(metadata);
+        self.imp().image_details_view.set_metadata(metadata);
     }
 
     /// Take the values from the UI fields and apply them to a file
@@ -193,6 +197,26 @@ impl ImageMetadataView {
     }
 }
 
+/// This macro rule expands to getters and setters for the adw::EntryRow fields
+/// Example:
+///
+/// ```
+/// text_field_accesors! {
+///     create_date => create_date_entry,
+/// }
+/// ```
+///
+/// Expands to:
+///
+/// ```
+/// pub fn create_date(&self) -> GString {
+///     self.imp().create_date_entry.text()
+/// }
+///
+/// pub fn set_create_date(&self, create_date: &str) {
+///     self.imp().create_date_entry.set_text(create_date);
+/// }
+/// ```
 macro_rules! text_field_accesors {
     ($($field:ident => $child:ident),+ $(,)?) => {
         pastey::paste! {

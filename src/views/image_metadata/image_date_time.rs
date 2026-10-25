@@ -11,7 +11,11 @@ use exiftool::ExifToolError;
 use gtk_macros::CompositeTemplate;
 use log::{debug, error};
 
-use crate::{models::timezone::TIMEZONES, services::exiftool::ExifService};
+use crate::{
+    models::{metadata::Metadata, timezone::TIMEZONES},
+    services::exiftool::ExifService,
+    views::image_metadata::text_field_accesors,
+};
 
 mod imp {
     use super::*;
@@ -101,6 +105,24 @@ impl ImageDateTimeView {
         self.imp().container.set_visible(false);
     }
 
+    // Getters and setters
+    text_field_accesors! {
+        creation_date => creation_date_entry,
+        creation_time => creation_time_entry,
+        // Modify Date fields
+        modify_date => modify_date_entry,
+        sub_sec_time => sub_sec_time_entry,
+        offset_time => offset_time_entry,
+        // Date Time Original fields
+        date_time_original => date_time_original_entry,
+        sub_sec_time_original => sub_sec_time_original_entry,
+        offset_time_original => offset_time_original_entry,
+        // Create Date fields
+        create_date => create_date_entry,
+        sub_sec_time_digitized => sub_sec_time_digitized_entry,
+        offset_time_digitized => offset_time_digitized_entry,
+    }
+
     fn timezone_combo(&self) -> &adw::ComboRow {
         &self.imp().timezone_combo
     }
@@ -156,22 +178,6 @@ impl ImageDateTimeView {
         self.setup_timezone_combo();
     }
 
-    pub fn creation_date(&self) -> GString {
-        self.imp().creation_date_entry.text()
-    }
-
-    pub fn set_creation_date(&self, creation_date: &str) {
-        self.imp().creation_date_entry.set_text(creation_date);
-    }
-
-    pub fn creation_time(&self) -> GString {
-        self.imp().creation_time_entry.text()
-    }
-
-    pub fn set_creation_time(&self, creation_time: &str) {
-        self.imp().creation_time_entry.set_text(creation_time);
-    }
-
     /// Returns the timezone value from the list
     /// Should always be a valid value
     pub fn timezone(&self) -> GString {
@@ -218,86 +224,6 @@ impl ImageDateTimeView {
         }
     }
 
-    pub fn modify_date(&self) -> GString {
-        self.imp().modify_date_entry.text()
-    }
-
-    pub fn set_modify_date(&self, modify_date: &str) {
-        self.imp().modify_date_entry.set_text(modify_date);
-    }
-
-    pub fn date_time_original(&self) -> GString {
-        self.imp().date_time_original_entry.text()
-    }
-
-    pub fn set_date_time_original(&self, date_time: &str) {
-        self.imp().date_time_original_entry.set_text(date_time);
-    }
-
-    pub fn create_date(&self) -> GString {
-        self.imp().create_date_entry.text()
-    }
-
-    pub fn set_create_date(&self, create_date: &str) {
-        self.imp().create_date_entry.set_text(create_date);
-    }
-
-    pub fn sub_sec_time(&self) -> GString {
-        self.imp().sub_sec_time_entry.text()
-    }
-
-    pub fn set_sub_sec_time(&self, sub_sec_time: &str) {
-        self.imp().sub_sec_time_entry.set_text(sub_sec_time);
-    }
-
-    pub fn sub_sec_time_original(&self) -> GString {
-        self.imp().sub_sec_time_original_entry.text()
-    }
-
-    pub fn set_sub_sec_time_original(&self, sub_sec_time_original: &str) {
-        self.imp()
-            .sub_sec_time_original_entry
-            .set_text(sub_sec_time_original);
-    }
-
-    pub fn sub_sec_time_digitized(&self) -> GString {
-        self.imp().sub_sec_time_digitized_entry.text()
-    }
-
-    pub fn set_sub_sec_time_digitized(&self, sub_sec_time_digitized: &str) {
-        self.imp()
-            .sub_sec_time_digitized_entry
-            .set_text(sub_sec_time_digitized);
-    }
-
-    pub fn offset_time(&self) -> GString {
-        self.imp().offset_time_entry.text()
-    }
-
-    pub fn set_offset_time(&self, offset_time: &str) {
-        self.imp().offset_time_entry.set_text(offset_time);
-    }
-
-    pub fn offset_time_original(&self) -> GString {
-        self.imp().offset_time_original_entry.text()
-    }
-
-    pub fn set_offset_time_original(&self, offset_time_original: &str) {
-        self.imp()
-            .offset_time_original_entry
-            .set_text(offset_time_original);
-    }
-
-    pub fn offset_time_digitized(&self) -> GString {
-        self.imp().offset_time_digitized_entry.text()
-    }
-
-    pub fn set_offset_time_digitized(&self, offset_time_digitized: &str) {
-        self.imp()
-            .offset_time_digitized_entry
-            .set_text(offset_time_digitized);
-    }
-
     fn split_date_time(date_time: &str) -> Option<(&str, &str)> {
         date_time.split_once(' ')
     }
@@ -308,36 +234,34 @@ impl ImageDateTimeView {
 
     // TODO: maybe these methods should go in a trait
     /// Populate UI fields using exif data from the given file
-    pub fn load_from_file(&self, path: &str) {
-        let exif = ExifService::new(path);
+    pub fn set_metadata(&self, metadata: &Metadata) {
+        if let Some((creation_date, creation_time)) =
+            ImageDateTimeView::split_date_time(metadata.date_time_original().unwrap_or_default())
+        {
+            self.set_creation_date(creation_date);
+            self.set_creation_time(creation_time);
+            self.set_timezone(metadata.offset_time_original().unwrap_or_default());
+        }
 
-        let modify_date = exif.modify_date().unwrap_or_default();
-        let date_time_original = exif.date_time_original().unwrap_or_default();
-        let create_date = exif.create_date().unwrap_or_default();
-        let sub_sec_time = exif.sub_sec_time().unwrap_or_default();
-        let sub_sec_time_original = exif.sub_sec_time_original().unwrap_or_default();
-        let sub_sec_time_digitized = exif.sub_sec_time_digitized().unwrap_or_default();
-        let offset_time = exif.offset_time().unwrap_or_default();
-        let offset_time_original = exif.offset_time_original().unwrap_or_default();
-        let offset_time_digitized = exif.offset_time_digitized().unwrap_or_default();
+        self.set_modify_date(metadata.modify_date().unwrap_or_default());
+        self.set_date_time_original(metadata.date_time_original().unwrap_or_default());
+        self.set_create_date(metadata.create_date().unwrap_or_default());
 
-        let (creation_date, creation_time) =
-            ImageDateTimeView::split_date_time(&create_date).unwrap_or_default();
+        if let Some(sub_sec_time) = metadata.sub_sec_time() {
+            self.set_sub_sec_time(&sub_sec_time.to_string());
+        }
 
-        self.set_creation_date(creation_date);
-        self.set_creation_time(creation_time);
-        debug!("Loading offset from file: {}", offset_time_digitized);
-        self.set_timezone(&offset_time_digitized);
+        if let Some(sub_sec_time_original) = metadata.sub_sec_time_original() {
+            self.set_sub_sec_time_original(&sub_sec_time_original.to_string());
+        }
 
-        self.set_modify_date(&modify_date);
-        self.set_date_time_original(&date_time_original);
-        self.set_create_date(&create_date);
-        self.set_sub_sec_time(&sub_sec_time);
-        self.set_sub_sec_time_original(&sub_sec_time_original);
-        self.set_sub_sec_time_digitized(&sub_sec_time_digitized);
-        self.set_offset_time(&offset_time);
-        self.set_offset_time_original(&offset_time_original);
-        self.set_offset_time_digitized(&offset_time_digitized);
+        if let Some(sub_sec_time_digitized) = metadata.sub_sec_time_digitized() {
+            self.set_sub_sec_time_digitized(&sub_sec_time_digitized.to_string());
+        }
+
+        self.set_offset_time(metadata.offset_time().unwrap_or_default());
+        self.set_offset_time_original(metadata.offset_time_original().unwrap_or_default());
+        self.set_offset_time_digitized(metadata.offset_time_digitized().unwrap_or_default());
     }
 
     /// Take the values from the UI fields and apply them to a file

@@ -205,7 +205,7 @@ impl AppWindow {
                     #[weak(rename_to=window)]
                     self,
                     move |_, _, _| {
-                        window.test_exiftool();
+                        window.debug_metadata();
                     }
                 ))
                 .build(),
@@ -293,10 +293,17 @@ impl AppWindow {
 
                 // Disable loading screen by now
                 // TODO: implement it after batch processing
-                if false {
+                if true {
                     win.switch_to_stack_applying();
                     win.set_convert_progress(0, 1);
                 }
+
+                // let (sender, receiver) = async_channel::bounded(1);
+
+                // std::thread::spawn(move || {
+                //     let result = image_metadata_view.save_changes(path.as_str());
+                //     sender.send_blocking(result).ok();
+                // });
 
                 glib::spawn_future_local(clone!(
                     #[weak(rename_to=win)]
@@ -306,15 +313,23 @@ impl AppWindow {
                     #[strong]
                     path,
                     async move {
+                        // let result = receiver.recv().await;
                         let result = image_metadata_view.save_changes(path.as_str());
 
                         match result {
-                            Ok(()) => {
-                                if false {
+                            Ok(_) => {
+                                if true {
                                     win.set_convert_progress(1, 1);
                                     win.switch_to_stack_apply();
                                 }
-                                image_metadata_view.load_from_file(path.as_str());
+
+                                win.load_metadata().await;
+
+                                for file in win.files() {
+                                    if let Some(metadata) = file.metadata() {
+                                        image_metadata_view.set_metadata(&metadata);
+                                    }
+                                }
                                 win.show_toast(&gettext("Changes applied"));
                             }
                             Err(error) => {
@@ -472,10 +487,17 @@ impl AppWindow {
 
         let _ = fdlimit::raise_fd_limit();
 
-        self.load_dimensions();
+        glib::spawn_future_local(clone!(
+            #[weak(rename_to=this)]
+            self,
+            async move {
+                this.load_metadata().await;
+                this.load_pixbuf();
+            }
+        ));
     }
 
-    fn load_dimensions(&self) {
+    async fn load_metadata(&self) {
         let files = self.files();
         let file_paths = files.iter().map(|f| f.path()).collect_vec();
 
@@ -483,53 +505,34 @@ impl AppWindow {
 
         std::thread::spawn(move || {
             for (i, path) in file_paths.iter().enumerate() {
-                let exif = ExifService::new(path);
+                let metadata = ExifService::new(path).read_all();
                 sender
-                    .send_blocking((i, exif.dimensions()))
-                    .expect("Concurrency issues while loading dimensions");
+                    .send_blocking((i, metadata))
+                    .expect("Concurrency issues while loading metadata");
             }
         });
 
-        glib::spawn_future_local(clone!(
-            #[weak(rename_to=this)]
-            self,
-            async move {
-                while let Ok((i, dimensions)) = receiver.recv().await {
-                    if let Some(dimensions) = dimensions {
-                        // TODO: should I use input_file_store instead of files()?
-                        if let Some(file) = this
-                            .imp()
-                            .input_file_store
-                            .item(i as u32)
-                            .and_downcast::<InputFile>()
-                        {
-                            file.set_dimensions(dimensions);
-                        } else {
-                            error!("File at index '{}' should exist", i);
-                        }
-                    } else {
-                        warn!("File at index '{}' don't contain dimensions", i);
+        while let Ok((i, metadata)) = receiver.recv().await {
+            match metadata {
+                Ok(metadata) => {
+                    if let Some(file) = self
+                        .imp()
+                        .input_file_store
+                        .item(i as u32)
+                        .and_downcast::<InputFile>()
+                    {
+                        file.set_metadata(Arc::new(metadata));
                     }
                 }
-                this.load_pixbuf();
+                Err(err) => error!("Error reading metadata: {}", err),
             }
-        ));
+        }
     }
 
-    fn test_exiftool(&self) {
-        println!("Testing exiftool");
-        let paths = self.files().iter().map(|f| f.path()).collect_vec();
-
-        glib::spawn_future_local(clone!(
-            #[weak(rename_to=_this)]
-            self,
-            async move {
-                for path in paths {
-                    let exif = ExifService::new(&path);
-                    exif.read_all();
-                }
-            }
-        ));
+    pub fn debug_metadata(&self) {
+        if let Some(metadata) = self.files().first().and_then(InputFile::metadata) {
+            metadata.debug();
+        }
     }
 
     pub fn clear(&self) {
@@ -562,9 +565,11 @@ impl AppWindow {
         let files_dims = self
             .active_files()
             .into_iter()
-            .map(|f| f.dimensions())
+            .map(|f| f.metadata()?.dimensions())
             .unique()
             .collect_vec();
+
+        debug!("Files dimens: {:?}", files_dims);
 
         if let Some((w, h)) = match files_dims[..] {
             [Some(d)] => Some(d),
@@ -578,11 +583,13 @@ impl AppWindow {
         }
 
         let file = self.files().first().unwrap().clone();
-        self.imp().image_metadata_view.update_thumbnail(file);
+        self.imp().image_metadata_view.update_thumbnail(&file);
 
         self.switch_back_from_loading();
-        let path = self.files().first().unwrap().path();
-        self.imp().image_metadata_view.load_from_file(path.as_str());
+
+        if let Some(metadata) = file.metadata() {
+            self.imp().image_metadata_view.set_metadata(&metadata);
+        }
 
         if matches!(self.imp().navigation.visible_page().and_then(|x| x.tag()), Some(x) if x == "main")
         {
@@ -594,6 +601,7 @@ impl AppWindow {
         (self.imp().input_file_store.n_items() as usize) - self.imp().removed.borrow().len()
     }
 
+    // TODO: give some love to this. It's difficult to understand.
     fn load_pixbuf(&self) {
         let files = self.active_files();
 
@@ -660,6 +668,8 @@ impl AppWindow {
                             .and_downcast::<InputFile>()
                             .unwrap()
                             .set_pixbuf(p);
+                    } else {
+                        warn!("Error getting texture for: {}", i);
                     }
                     glib::MainContext::default().iteration(true);
                     let c = completed.clone();

@@ -1,8 +1,10 @@
 use exiftool::ExifToolError;
-use glib::GString;
 use gtk::{glib, prelude::*, subclass::prelude::*};
 
-use crate::services::exiftool::ExifService;
+use crate::{
+    models::metadata::Metadata, services::exiftool::ExifService,
+    views::image_metadata::text_field_accesors,
+};
 
 mod imp {
     use adw::subclass::bin::BinImpl;
@@ -70,59 +72,32 @@ impl ImageLocationView {
         self.imp().container.set_visible(false);
     }
 
-    pub fn gps_date_stamp(&self) -> GString {
-        self.imp().gps_date_stamp_entry.text()
+    // Getters and setters
+    text_field_accesors! {
+        // Date & Time
+        gps_date_stamp => gps_date_stamp_entry,
+        gps_time_stamp => gps_time_stamp_entry,
+        // Location
+        gps_latitude => gps_latitude_entry,
+        gps_longitude => gps_longitude_entry,
+        gps_altitude => gps_altitude_entry,
     }
 
-    pub fn set_gps_date_stamp(&self, gps_date_stamp: &str) {
-        self.imp().gps_date_stamp_entry.set_text(gps_date_stamp);
-    }
+    pub fn set_metadata(&self, metadata: &Metadata) {
+        self.set_gps_date_stamp(metadata.gps_date_stamp().unwrap_or_default());
+        self.set_gps_time_stamp(metadata.gps_time_stamp().unwrap_or_default());
 
-    pub fn gps_time_stamp(&self) -> GString {
-        self.imp().gps_time_stamp_entry.text()
-    }
+        if let Some(gps_latitude) = metadata.gps_latitude() {
+            self.set_gps_latitude(&gps_latitude.to_string());
+        }
 
-    pub fn set_gps_time_stamp(&self, gps_time_stamp: &str) {
-        self.imp().gps_time_stamp_entry.set_text(gps_time_stamp);
-    }
+        if let Some(gps_longitude) = metadata.gps_longitude() {
+            self.set_gps_longitude(&gps_longitude.to_string());
+        }
 
-    pub fn gps_latitude(&self) -> GString {
-        self.imp().gps_latitude_entry.text()
-    }
-
-    pub fn set_gps_latitude(&self, gps_latitude: &str) {
-        self.imp().gps_latitude_entry.set_text(gps_latitude);
-    }
-
-    pub fn gps_longitude(&self) -> GString {
-        self.imp().gps_longitude_entry.text()
-    }
-
-    pub fn set_gps_longitude(&self, gps_longitude: &str) {
-        self.imp().gps_longitude_entry.set_text(gps_longitude);
-    }
-
-    pub fn gps_altitude(&self) -> GString {
-        self.imp().gps_altitude_entry.text()
-    }
-
-    pub fn set_gps_altitude(&self, gps_altitude: &str) {
-        self.imp().gps_altitude_entry.set_text(gps_altitude);
-    }
-
-    pub fn load_from_file(&self, path: &str) {
-        let exif = ExifService::new(path);
-        let gps_date_stamp = exif.gps_date_stamp().unwrap_or_default();
-        let gps_time_stamp = exif.gps_time_stamp().unwrap_or_default();
-        let gps_latitude = exif.gps_latitude().unwrap_or_default();
-        let gps_longitude = exif.gps_longitude().unwrap_or_default();
-        let gps_altitude = exif.gps_altitude().unwrap_or_default();
-
-        self.set_gps_date_stamp(&gps_date_stamp);
-        self.set_gps_time_stamp(&gps_time_stamp);
-        self.set_gps_latitude(&gps_latitude);
-        self.set_gps_longitude(&gps_longitude);
-        self.set_gps_altitude(&gps_altitude);
+        if let Some(gps_altitude) = metadata.gps_altitude() {
+            self.set_gps_altitude(&gps_altitude.to_string());
+        }
     }
 
     pub fn save_changes(&self, path: &str) -> Result<(), ExifToolError> {
