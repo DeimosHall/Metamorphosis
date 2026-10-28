@@ -769,7 +769,8 @@ impl SettingsStore for AppWindow {
     fn save_window_size(&self) -> Result<(), glib::BoolError> {
         let imp = self.imp();
 
-        let (width, height) = self.default_size();
+        let (width, height) = self.default_size(); // From GTKWindowExt
+        debug!("Saving window state of {}x{}", width, height);
 
         imp.settings.set_int("window-width", width)?;
         imp.settings.set_int("window-height", height)?;
@@ -787,9 +788,11 @@ impl SettingsStore for AppWindow {
         let height = imp.settings.int("window-height");
         let is_maximized = imp.settings.boolean("is-maximized");
 
+        debug!("Loading the window with {}x{}", width, height);
         self.set_default_size(width, height);
 
         if is_maximized {
+            debug!("Loading the window in maximized state");
             self.maximize();
         }
     }
