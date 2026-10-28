@@ -5,7 +5,7 @@
 		xmlns:gnome="http://api.gnome.org/doap-extensions#">
 
 	<name xml:lang="en">Metamorphosis</name>
-	<shortdesc xml:lang="en">Edit exif metadata of images and videos</shortdesc>
+	<shortdesc xml:lang="en">Edit metadata</shortdesc>
 
 	<homepage rdf:resource="https://github.com/DeimosHall/Metamorphosis"/>
 	<download-page rdf:resource="https://flathub.org/apps/details/dev.deimoshall.Metamorphosis"/>
