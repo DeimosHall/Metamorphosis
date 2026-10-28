@@ -61,27 +61,32 @@
     <screenshots>
         <screenshot type="default">
             <image>
-                https://raw.githubusercontent.com/DeimosHall/Metamorphosis/main/data/resources/screenshots/1.png</image>
+                https://raw.githubusercontent.com/DeimosHall/Metamorphosis/main/data/resources/screenshots/date-and-time-1.png
+            </image>
             <caption>Date &amp; Time</caption>
         </screenshot>
         <screenshot>
             <image>
-                https://raw.githubusercontent.com/DeimosHall/Metamorphosis/main/data/resources/screenshots/2.png</image>
+                https://raw.githubusercontent.com/DeimosHall/Metamorphosis/main/data/resources/screenshots/date-and-time-2.png
+            </image>
             <caption>Date &amp; Time Advanced</caption>
         </screenshot>
         <screenshot>
             <image>
-                https://raw.githubusercontent.com/DeimosHall/Metamorphosis/main/data/resources/screenshots/3.png</image>
+                https://raw.githubusercontent.com/DeimosHall/Metamorphosis/main/data/resources/screenshots/location.png
+            </image>
             <caption>Location</caption>
         </screenshot>
         <screenshot>
             <image>
-                https://raw.githubusercontent.com/DeimosHall/Metamorphosis/main/data/resources/screenshots/4.png</image>
+                https://raw.githubusercontent.com/DeimosHall/Metamorphosis/main/data/resources/screenshots/camera-and-lens.png
+            </image>
             <caption>Camera &amp; Lens</caption>
         </screenshot>
         <screenshot>
             <image>
-                https://raw.githubusercontent.com/DeimosHall/Metamorphosis/main/data/resources/screenshots/5.png</image>
+                https://raw.githubusercontent.com/DeimosHall/Metamorphosis/main/data/resources/screenshots/details.png
+            </image>
             <caption>Details</caption>
         </screenshot>
     </screenshots>
