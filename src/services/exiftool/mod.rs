@@ -37,7 +37,8 @@ impl<'a> ExifService<'a> {
 
     /// Returns all the metadata fields
     pub fn read_all(&self) -> Result<Metadata, ExifToolError> {
-        EXIFTOOL.read_metadata(self.path, &["-n"])
+        // EXIFTOOL.read_metadata(self.path, &["-n"])
+        EXIFTOOL.read_metadata(self.path, &[])
     }
 }
 

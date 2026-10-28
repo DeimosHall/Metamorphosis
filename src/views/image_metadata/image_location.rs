@@ -88,15 +88,15 @@ impl ImageLocationView {
         self.set_gps_time_stamp(metadata.gps_time_stamp().unwrap_or_default());
 
         if let Some(gps_latitude) = metadata.gps_latitude() {
-            self.set_gps_latitude(&gps_latitude.to_string());
+            self.set_gps_latitude(gps_latitude);
         }
 
         if let Some(gps_longitude) = metadata.gps_longitude() {
-            self.set_gps_longitude(&gps_longitude.to_string());
+            self.set_gps_longitude(gps_longitude);
         }
 
         if let Some(gps_altitude) = metadata.gps_altitude() {
-            self.set_gps_altitude(&gps_altitude.to_string());
+            self.set_gps_altitude(gps_altitude);
         }
     }
 
