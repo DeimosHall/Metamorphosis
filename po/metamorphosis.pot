@@ -3,15 +3,12 @@
 # This file is distributed under the same license as the metamorphosis package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-#: src/views/image_metadata/image_date_time.blp:59
-#: src/views/image_metadata/image_date_time.blp:94
-#: src/views/image_metadata/image_date_time.blp:129
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: metamorphosis\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-15 11:27-0600\n"
+"POT-Creation-Date: 2026-10-28 14:10-0600\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -43,15 +40,15 @@ msgstr ""
 msgid "New Window"
 msgstr ""
 
-#: data/dev.deimoshall.Metamorphosis.gschema.xml.in:20
+#: data/dev.deimoshall.Metamorphosis.gschema.xml.in:6
 msgid "Window width"
 msgstr ""
 
-#: data/dev.deimoshall.Metamorphosis.gschema.xml.in:24
+#: data/dev.deimoshall.Metamorphosis.gschema.xml.in:10
 msgid "Window height"
 msgstr ""
 
-#: data/dev.deimoshall.Metamorphosis.gschema.xml.in:28
+#: data/dev.deimoshall.Metamorphosis.gschema.xml.in:14
 msgid "Window maximized state"
 msgstr ""
 
@@ -111,139 +108,159 @@ msgstr ""
 msgid "pdf"
 msgstr ""
 
-#: data/dev.deimoshall.Metamorphosis.metainfo.xml.in.in:65
+#: data/dev.deimoshall.Metamorphosis.metainfo.xml.in.in:66
 #: src/views/image_metadata/mod.blp:27
 msgid "Date & Time"
 msgstr ""
 
-#: data/dev.deimoshall.Metamorphosis.metainfo.xml.in.in:70
+#: data/dev.deimoshall.Metamorphosis.metainfo.xml.in.in:72
 msgid "Date & Time Advanced"
 msgstr ""
 
-#: data/dev.deimoshall.Metamorphosis.metainfo.xml.in.in:75
+#: data/dev.deimoshall.Metamorphosis.metainfo.xml.in.in:78
 #: src/views/image_metadata/mod.blp:35
 msgid "Location"
 msgstr ""
 
-#: data/dev.deimoshall.Metamorphosis.metainfo.xml.in.in:80
+#: data/dev.deimoshall.Metamorphosis.metainfo.xml.in.in:84
 #: src/views/image_metadata/mod.blp:43
 msgid "Camera & Lens"
 msgstr ""
 
-#: data/dev.deimoshall.Metamorphosis.metainfo.xml.in.in:85
+#: data/dev.deimoshall.Metamorphosis.metainfo.xml.in.in:90
 #: src/views/image_metadata/mod.blp:51
 msgid "Details"
 msgstr ""
 
-#: data/dev.deimoshall.Metamorphosis.metainfo.xml.in.in:107
+#: data/dev.deimoshall.Metamorphosis.metainfo.xml.in.in:112
+msgid "Performance improvements and new fields to edit"
+msgstr ""
+
+#: data/dev.deimoshall.Metamorphosis.metainfo.xml.in.in:114
+msgid "Fix application stops responding when loading an image"
+msgstr ""
+
+#: data/dev.deimoshall.Metamorphosis.metainfo.xml.in.in:115
+msgid "Add more fields to edit in Location, Camera & Lens, and Details"
+msgstr ""
+
+#: data/dev.deimoshall.Metamorphosis.metainfo.xml.in.in:116
+msgid "Migrate simple gtk entry fields to libadwaita"
+msgstr ""
+
+#: data/dev.deimoshall.Metamorphosis.metainfo.xml.in.in:117
+msgid "Ctrl + V now works"
+msgstr ""
+
+#: data/dev.deimoshall.Metamorphosis.metainfo.xml.in.in:123
 msgid ""
 "Fix release. The save button now applies the changes from all the tabs, not "
 "only from the selected one"
 msgstr ""
 
-#: data/dev.deimoshall.Metamorphosis.metainfo.xml.in.in:112
+#: data/dev.deimoshall.Metamorphosis.metainfo.xml.in.in:128
 msgid "Separation of concerns"
 msgstr ""
 
-#: data/dev.deimoshall.Metamorphosis.metainfo.xml.in.in:113
+#: data/dev.deimoshall.Metamorphosis.metainfo.xml.in.in:129
 msgid ""
 "This version focuses on improving the user experience with the following "
 "changes:"
 msgstr ""
 
-#: data/dev.deimoshall.Metamorphosis.metainfo.xml.in.in:115
+#: data/dev.deimoshall.Metamorphosis.metainfo.xml.in.in:131
 msgid "Add four categories; Date & Time, Location, Camera & Lens, and Details"
 msgstr ""
 
-#: data/dev.deimoshall.Metamorphosis.metainfo.xml.in.in:116
+#: data/dev.deimoshall.Metamorphosis.metainfo.xml.in.in:132
 msgid "Add new app icon by Hylke Bons"
 msgstr ""
 
-#: data/dev.deimoshall.Metamorphosis.metainfo.xml.in.in:117
+#: data/dev.deimoshall.Metamorphosis.metainfo.xml.in.in:133
 msgid "Floating save button"
 msgstr ""
 
-#: data/dev.deimoshall.Metamorphosis.metainfo.xml.in.in:118
+#: data/dev.deimoshall.Metamorphosis.metainfo.xml.in.in:134
 msgid "Separate general and advanced sections in Date & Time"
 msgstr ""
 
-#: data/dev.deimoshall.Metamorphosis.metainfo.xml.in.in:124
+#: data/dev.deimoshall.Metamorphosis.metainfo.xml.in.in:140
 msgid "Enhancements and bug fixes"
 msgstr ""
 
-#: data/dev.deimoshall.Metamorphosis.metainfo.xml.in.in:126
+#: data/dev.deimoshall.Metamorphosis.metainfo.xml.in.in:142
 msgid "Fix not realoading fields after applying changes"
 msgstr ""
 
-#: data/dev.deimoshall.Metamorphosis.metainfo.xml.in.in:127
+#: data/dev.deimoshall.Metamorphosis.metainfo.xml.in.in:143
 msgid "Show offset time from create date instead of the one from modify date"
 msgstr ""
 
-#: data/dev.deimoshall.Metamorphosis.metainfo.xml.in.in:128
+#: data/dev.deimoshall.Metamorphosis.metainfo.xml.in.in:144
 msgid "Set modify date as today when applying from the general tab"
 msgstr ""
 
-#: data/dev.deimoshall.Metamorphosis.metainfo.xml.in.in:129
+#: data/dev.deimoshall.Metamorphosis.metainfo.xml.in.in:145
 msgid "Remove unused dependencies and add CI to the project"
 msgstr ""
 
-#: data/dev.deimoshall.Metamorphosis.metainfo.xml.in.in:135
+#: data/dev.deimoshall.Metamorphosis.metainfo.xml.in.in:151
 msgid "Add new General and Advanced tabs"
 msgstr ""
 
-#: data/dev.deimoshall.Metamorphosis.metainfo.xml.in.in:137
+#: data/dev.deimoshall.Metamorphosis.metainfo.xml.in.in:153
 msgid "General tab for most common tags"
 msgstr ""
 
-#: data/dev.deimoshall.Metamorphosis.metainfo.xml.in.in:138
+#: data/dev.deimoshall.Metamorphosis.metainfo.xml.in.in:154
 msgid "Advanced tab for raw tags and more granular editing"
 msgstr ""
 
-#: data/dev.deimoshall.Metamorphosis.metainfo.xml.in.in:139
+#: data/dev.deimoshall.Metamorphosis.metainfo.xml.in.in:155
 msgid "Add more dates, fractional seconds, and timezone offsets fields"
 msgstr ""
 
-#: data/dev.deimoshall.Metamorphosis.metainfo.xml.in.in:140
+#: data/dev.deimoshall.Metamorphosis.metainfo.xml.in.in:156
 msgid "Fix remove button stopped working"
 msgstr ""
 
-#: data/dev.deimoshall.Metamorphosis.metainfo.xml.in.in:146
+#: data/dev.deimoshall.Metamorphosis.metainfo.xml.in.in:162
 msgid "Add manufacturer and model fields"
 msgstr ""
 
-#: data/dev.deimoshall.Metamorphosis.metainfo.xml.in.in:151
+#: data/dev.deimoshall.Metamorphosis.metainfo.xml.in.in:167
 msgid "Add description field"
 msgstr ""
 
-#: data/dev.deimoshall.Metamorphosis.metainfo.xml.in.in:156
+#: data/dev.deimoshall.Metamorphosis.metainfo.xml.in.in:172
 msgid "Update runtime to GNOME 50"
 msgstr ""
 
-#: data/dev.deimoshall.Metamorphosis.metainfo.xml.in.in:161
+#: data/dev.deimoshall.Metamorphosis.metainfo.xml.in.in:177
 msgid "Fix ExifTool execution fail due to Perl interpreter not available"
 msgstr ""
 
-#: data/dev.deimoshall.Metamorphosis.metainfo.xml.in.in:166
+#: data/dev.deimoshall.Metamorphosis.metainfo.xml.in.in:182
 msgid "Initial release with core features:"
 msgstr ""
 
-#: data/dev.deimoshall.Metamorphosis.metainfo.xml.in.in:168
+#: data/dev.deimoshall.Metamorphosis.metainfo.xml.in.in:184
 msgid "Edit EXIF metadata in images"
 msgstr ""
 
-#: data/dev.deimoshall.Metamorphosis.metainfo.xml.in.in:169
+#: data/dev.deimoshall.Metamorphosis.metainfo.xml.in.in:185
 msgid "Support for images (only JPEG tested)"
 msgstr ""
 
-#: data/dev.deimoshall.Metamorphosis.metainfo.xml.in.in:170
+#: data/dev.deimoshall.Metamorphosis.metainfo.xml.in.in:186
 msgid "View and modify create date"
 msgstr ""
 
-#: data/dev.deimoshall.Metamorphosis.metainfo.xml.in.in:171
+#: data/dev.deimoshall.Metamorphosis.metainfo.xml.in.in:187
 msgid "Set offset time for date values"
 msgstr ""
 
-#: data/dev.deimoshall.Metamorphosis.metainfo.xml.in.in:172
+#: data/dev.deimoshall.Metamorphosis.metainfo.xml.in.in:188
 msgid "Write processing software tag"
 msgstr ""
 
@@ -256,11 +273,103 @@ msgid "Device"
 msgstr ""
 
 #: src/views/image_metadata/image_camera_lens.blp:16
-msgid "Manufacturer"
+msgid "Make"
 msgstr ""
 
-#: src/views/image_metadata/image_camera_lens.blp:25
+#: src/views/image_metadata/image_camera_lens.blp:20
 msgid "Model"
+msgstr ""
+
+#: src/views/image_metadata/image_camera_lens.blp:24
+msgid "Serial Number"
+msgstr ""
+
+#: src/views/image_metadata/image_camera_lens.blp:28
+msgid "Owner Name"
+msgstr ""
+
+#: src/views/image_metadata/image_camera_lens.blp:32
+msgid "Camera Serial Number"
+msgstr ""
+
+#: src/views/image_metadata/image_camera_lens.blp:36
+msgid "Camera Firmware"
+msgstr ""
+
+#: src/views/image_metadata/image_camera_lens.blp:40
+msgid "Camera Label"
+msgstr ""
+
+#: src/views/image_metadata/image_camera_lens.blp:44
+msgid "Localized Camera Model"
+msgstr ""
+
+#: src/views/image_metadata/image_camera_lens.blp:48
+msgid "Image Unique ID"
+msgstr ""
+
+#: src/views/image_metadata/image_camera_lens.blp:53
+msgid "Lens"
+msgstr ""
+
+#: src/views/image_metadata/image_camera_lens.blp:56
+msgid "Lens Make"
+msgstr ""
+
+#: src/views/image_metadata/image_camera_lens.blp:60
+msgid "Lens Model"
+msgstr ""
+
+#: src/views/image_metadata/image_camera_lens.blp:64
+msgid "Lens Serial Number"
+msgstr ""
+
+#: src/views/image_metadata/image_camera_lens.blp:68
+msgid "Lens Info"
+msgstr ""
+
+#: src/views/image_metadata/image_camera_lens.blp:72
+msgid "Max Aperture Value"
+msgstr ""
+
+#: src/views/image_metadata/image_camera_lens.blp:77
+msgid "Exposure Settings"
+msgstr ""
+
+#: src/views/image_metadata/image_camera_lens.blp:80
+msgid "Exposure Time"
+msgstr ""
+
+#: src/views/image_metadata/image_camera_lens.blp:84
+msgid "F-Number"
+msgstr ""
+
+#: src/views/image_metadata/image_camera_lens.blp:88
+msgid "Exposure Program"
+msgstr ""
+
+#: src/views/image_metadata/image_camera_lens.blp:92
+msgid "ISO"
+msgstr ""
+
+#: src/views/image_metadata/image_camera_lens.blp:96
+msgid "Focal Length"
+msgstr ""
+
+#: src/views/image_metadata/image_camera_lens.blp:100
+msgid "Exposure Compensation"
+msgstr ""
+
+#: src/views/image_metadata/image_camera_lens.blp:104
+msgid "Metering Mode"
+msgstr ""
+
+#: src/views/image_metadata/image_camera_lens.blp:108
+msgid "Flash"
+msgstr ""
+
+#: src/views/image_metadata/image_camera_lens.blp:112
+msgid "White Balance"
 msgstr ""
 
 #: src/views/image_metadata/image_date_time.blp:14
@@ -283,58 +392,50 @@ msgstr ""
 msgid "Modify Date"
 msgstr ""
 
-#: src/views/image_metadata/image_date_time.blp:45
-#: src/views/image_metadata/image_date_time.blp:80
-#: src/views/image_metadata/image_date_time.blp:115
-msgid "Date"
+#: src/views/image_metadata/image_date_time.blp:43
+msgid "File Modification Time"
 msgstr ""
 
 #: src/views/image_metadata/image_date_time.blp:46
-msgid "File modification time"
+#: src/views/image_metadata/image_date_time.blp:63
+#: src/views/image_metadata/image_date_time.blp:80
+msgid "Date"
 msgstr ""
 
-#: src/views/image_metadata/image_date_time.blp:49
+#: src/views/image_metadata/image_date_time.blp:50
+#: src/views/image_metadata/image_date_time.blp:67
 #: src/views/image_metadata/image_date_time.blp:84
-#: src/views/image_metadata/image_date_time.blp:119
-msgid "YYYY:MM:DD HH:MM:SS"
-msgstr ""
-
-#: src/views/image_metadata/image_date_time.blp:56
-#: src/views/image_metadata/image_date_time.blp:91
-#: src/views/image_metadata/image_date_time.blp:126
 msgid "Fractional Seconds"
 msgstr ""
 
-#: src/views/image_metadata/image_date_time.blp:66
-#: src/views/image_metadata/image_date_time.blp:101
-#: src/views/image_metadata/image_date_time.blp:136
+#: src/views/image_metadata/image_date_time.blp:54
+#: src/views/image_metadata/image_date_time.blp:71
+#: src/views/image_metadata/image_date_time.blp:88
 msgid "Offset Time"
 msgstr ""
 
-#: src/views/image_metadata/image_date_time.blp:69
-#: src/views/image_metadata/image_date_time.blp:104
-#: src/views/image_metadata/image_date_time.blp:139
-msgid "HH:MM"
-msgstr ""
-
-#: src/views/image_metadata/image_date_time.blp:77
+#: src/views/image_metadata/image_date_time.blp:59
 msgid "Date Time Original"
 msgstr ""
 
-#: src/views/image_metadata/image_date_time.blp:81
+#: src/views/image_metadata/image_date_time.blp:60
 msgid "Shutter click time"
 msgstr ""
 
-#: src/views/image_metadata/image_date_time.blp:112
+#: src/views/image_metadata/image_date_time.blp:76
 msgid "Create Date"
 msgstr ""
 
-#: src/views/image_metadata/image_date_time.blp:116
+#: src/views/image_metadata/image_date_time.blp:77
 msgid "Digitization time"
 msgstr ""
 
 #: src/views/image_metadata/image_details.blp:11
 msgid "Description"
+msgstr ""
+
+#: src/views/image_metadata/image_details.blp:15
+msgid "Artist"
 msgstr ""
 
 #: src/views/image_metadata/image_location.blp:13
@@ -345,24 +446,24 @@ msgstr ""
 msgid "GPS Date Stamp"
 msgstr ""
 
-#: src/views/image_metadata/image_location.blp:17
-msgid "Date from GPS"
-msgstr ""
-
 #: src/views/image_metadata/image_location.blp:20
-msgid "YYYY:MM:DD"
-msgstr ""
-
-#: src/views/image_metadata/image_location.blp:27
 msgid "GPS Time Stamp"
 msgstr ""
 
-#: src/views/image_metadata/image_location.blp:28
-msgid "Time from GPS"
+#: src/views/image_metadata/image_location.blp:25
+msgid "Position"
 msgstr ""
 
-#: src/views/image_metadata/image_location.blp:31
-msgid "HH:MM:SS"
+#: src/views/image_metadata/image_location.blp:28
+msgid "Latitude"
+msgstr ""
+
+#: src/views/image_metadata/image_location.blp:32
+msgid "Longitude"
+msgstr ""
+
+#: src/views/image_metadata/image_location.blp:36
+msgid "Altitude"
 msgstr ""
 
 #: src/views/image_metadata/mod.blp:63
@@ -386,7 +487,7 @@ msgid "Drag and drop images here"
 msgstr ""
 
 #: src/window.blp:88
-msgid "_Open Images…"
+msgid "_Open Files"
 msgstr ""
 
 #: src/window.blp:128
@@ -409,7 +510,7 @@ msgstr ""
 msgid "Loading…"
 msgstr ""
 
-#: src/window.blp:156 src/window.rs:376
+#: src/window.blp:156 src/window.rs:390
 msgid "_Cancel"
 msgstr ""
 
@@ -468,7 +569,7 @@ msgstr ""
 msgid "Open a new window"
 msgstr ""
 
-#: src/dialogs/file_chooser.rs:39 src/window.rs:798
+#: src/dialogs/file_chooser.rs:39 src/window.rs:805
 msgid "Unsupported filetype"
 msgstr ""
 
@@ -478,10 +579,6 @@ msgstr ""
 
 #: src/dialogs/file_chooser.rs:91
 msgid "_Select Files"
-msgstr ""
-
-#: src/models/job_file.rs:20
-msgid "Pasted Image"
 msgstr ""
 
 #: src/views/about/mod.rs:23
@@ -502,34 +599,38 @@ msgstr ""
 
 #. / after it
 
-#: src/views/image_metadata/image_date_time.rs:148
+#: src/views/image_metadata/image_date_time.rs:166
 msgid "None"
 msgstr ""
 
-#: src/views/image_metadata/image_date_time.rs:217
+#: src/views/image_metadata/image_date_time.rs:219
 msgid "Invalid"
 msgstr ""
 
-#: src/views/image_metadata/image_date_time.rs:220
+#: src/views/image_metadata/image_date_time.rs:222
 msgid "Invalid time zone found"
 msgstr ""
 
-#: src/window.rs:319
+#: src/window.rs:333
 msgid "Changes applied"
 msgstr ""
 
-#: src/window.rs:346
+#: src/window.rs:360
 msgid "Unable to access dropped files"
 msgstr ""
 
-#: src/window.rs:372
+#: src/window.rs:386
 msgid "Stop converting?"
 msgstr ""
 
-#: src/window.rs:373
+#: src/window.rs:387
 msgid "You will lose all progress."
 msgstr ""
 
-#: src/window.rs:377
+#: src/window.rs:391
 msgid "_Stop"
+msgstr ""
+
+#: src/window.rs:452
+msgid "Unable to access copied files"
 msgstr ""

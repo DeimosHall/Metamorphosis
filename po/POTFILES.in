@@ -19,7 +19,6 @@ src/components/image_thumbnail.rs
 src/dialogs/file_chooser.rs
 src/main.rs
 src/models/input_file.rs
-src/models/job_file.rs
 src/views/about/mod.rs
 src/views/image_metadata/image_date_time.rs
 src/window.rs
