@@ -25,8 +25,8 @@ impl Metadata {
         self.get("MaxApertureValue")?.as_f64()
     }
 
-    pub fn exposure_time(&self) -> Option<f64> {
-        self.get("ExposureTime")?.as_f64()
+    pub fn exposure_time(&self) -> Option<&str> {
+        self.get("ExposureTime")?.as_str()
     }
 
     pub fn fnumber(&self) -> Option<f64> {
@@ -43,41 +43,41 @@ impl Metadata {
     }
 
     // TODO: add conversion rules
-    pub fn focal_length(&self) -> Option<f64> {
-        self.get("FocalLength")?.as_f64()
+    pub fn focal_length(&self) -> Option<&str> {
+        self.get("FocalLength")?.as_str()
     }
 
-    pub fn exposure_compensation(&self) -> Option<u64> {
-        self.get("ExposureCompensation")?.as_u64()
+    pub fn exposure_compensation(&self) -> Option<&str> {
+        self.get("ExposureCompensation")?.as_str()
     }
 
     // TODO: add conversion rules
-    pub fn metering_mode(&self) -> Option<u64> {
-        self.get("MeteringMode")?.as_u64()
+    pub fn metering_mode(&self) -> Option<&str> {
+        self.get("MeteringMode")?.as_str()
     }
 
     // TODO: Add conversion rules
-    pub fn flash(&self) -> Option<u64> {
-        self.get("Flash")?.as_u64()
+    pub fn flash(&self) -> Option<&str> {
+        self.get("Flash")?.as_str()
     }
 
     // TODO: add conversion rules
-    pub fn white_balance(&self) -> Option<u64> {
-        self.get("WhiteBalance")?.as_u64()
+    pub fn white_balance(&self) -> Option<&str> {
+        self.get("WhiteBalance")?.as_str()
     }
 
     // Location
 
-    pub fn gps_latitude(&self) -> Option<f64> {
-        self.get("GPSLatitude")?.as_f64()
+    pub fn gps_latitude(&self) -> Option<&str> {
+        self.get("GPSLatitude")?.as_str()
     }
 
-    pub fn gps_longitude(&self) -> Option<f64> {
-        self.get("GPSLongitude")?.as_f64()
+    pub fn gps_longitude(&self) -> Option<&str> {
+        self.get("GPSLongitude")?.as_str()
     }
 
-    pub fn gps_altitude(&self) -> Option<f64> {
-        self.get("GPSAltitude")?.as_f64()
+    pub fn gps_altitude(&self) -> Option<&str> {
+        self.get("GPSAltitude")?.as_str()
     }
 
     exif_tag! {
