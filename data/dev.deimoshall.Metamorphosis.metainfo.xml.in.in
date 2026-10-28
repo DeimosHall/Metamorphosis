@@ -102,6 +102,17 @@
     <content_rating type="oars-1.1" />
 
   <releases>
+      <release version="0.7.0" date="2026-10-28">
+          <description>
+              <p>Performance improvements and new fields to edit</p>
+              <ul>
+                  <li>Fix application stops responding when loading an image</li>
+                  <li>Add more fields to edit in Location, Camera &amp; Lens, and Details</li>
+                  <li>Migrate simple gtk entry fields to libadwaita</li>
+                  <li>Ctrl + V now works</li>
+              </ul>
+          </description>
+      </release>
       <release version="0.6.1" date="2026-09-15">
           <description>
               <p>Fix release. The save button now applies the changes from all the tabs, not only from the selected one</p>
